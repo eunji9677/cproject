@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script language="javascript">
+        function showPopup() { window.open("https://google.com", "a", "width=400, height=300, left=500, top=400"); }
+    </script>
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    
+    <script>
+        $(function() {
+            //input을 datepicker로 선언
+            $(".datepicker").datepicker({
+                dateFormat: 'yy-mm-dd' //달력 날짜 형태
+                ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+                ,changeYear: true //option값 년 선택 가능
+                ,changeMonth: true //option값  월 선택 가능                
+                ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+                ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+                ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+                ,buttonText: "선택" //버튼 호버 텍스트              
+                ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+                ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+                ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+                ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+                ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+                ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
+            });                    
+            
+            //초기값을 오늘 날짜로 설정해줘야 합니다.
+            $('.datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+        });
+     </script>
+    <title>반품처리</title>
+    
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;         
+        }
+        #wrap{
+            margin: 0 auto;
+            border: 1px solid black;
+            width: 1400px;
+            height: 1000px;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /*임의로추가됨*/
+        }
+        #header{
+            margin: 0px;
+            position: relative;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            border: 1px solid black;
+        }
+        #nav{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            border: 1px solid black;
+        }
+        #sidemenu{
+            position: absolute;
+            top: 15%;
+            height: 80%;
+            width: 15%;
+            border: 1px solid black;
+        }
+        #contents{
+            position: absolute;
+            right: 0;
+            width: 85%;
+            height: 80%;
+            border: 1px solid black;
+        }
+        #footer{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 5%;
+            border: 1px solid black;
+        }
+        /* end default */
+
+        a { text-decoration: none; }
+        ul {
+            list-style: none;
+        }
+        input {
+            width: 130px;
+        }
+        td {
+            border: 2px solid white;
+        }
+        
+        
+
+        .searcher {
+            padding: 40px;
+            background-color: rgb(205, 215, 223);
+            height: 20%;
+            border-bottom: 1px solid black;
+        }
+
+        .registerFrame{                     
+            background: beige;
+            height: 40%;        
+            border-bottom: 1px solid black;
+            overflow: scroll;
+        }
+        .registerTable {           
+            
+            width: 100%;
+            table-layout: fixed;  
+            border-collapse: collapse;
+                        
+        }
+        .registerList {
+            width: 100%;
+            
+            table-layout: fixed;  
+        }
+
+        
+        .printerFrame{        
+            background: blanchedalmond;
+            height: 40%;
+            overflow: scroll;
+            
+        }
+        .printerTable {           
+            width: 100%;           
+            table-layout: fixed; 
+            border-collapse: collapse;
+        }
+        .printerList {
+            
+            column-width: 100%;
+            
+        }
+
+         
+
+    </style>
+</head>
+<body>
+    <div id=wrap>
+        <header id = header>
+            header<br>
+            <h3>반품처리(미완성)</h3>
+            <nav id = nav>
+                navigation
+            </nav>
+        </header>
+        <aside id = sidemenu>
+            sidemenu
+        </aside>
+        <container id = contents>
+            
+            <div class = searcher>
+                
+                <ul>
+                    
+                    
+
+                    <li>회사 <input type=text> <a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+
+                        &nbsp&nbsp&nbsp&nbsp
+                        부서 <input type=text> <a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        
+                        &nbsp&nbsp&nbsp&nbsp
+                        사원 <input type=text> <a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><br><br></li> 
+                        
+                    
+                    <li>마감기간 <input type="text"  class="datepicker" style="width: 100px;"> ~ <input type="text"  class="datepicker" style="width: 100px;">
+                        
+                        &nbsp&nbsp&nbsp&nbsp 
+                        입고기간 <input type="text" class="datepicker" style="width: 100px;">
+                         
+                        &nbsp&nbsp
+                        <input type="submit" value=" 입고적용 " style="padding: 3px; width: 80px;">
+                    </li>
+                    
+                </ul>
+
+                
+            </div>
+            <div class=registerFrame>
+                <table class=registerTable > 
+                    <tr class=registerTitle>
+                        <td style="width: 30px;">
+                            <i class="fas fa-check-square"></i>
+                        </td>
+                        <td style="width: 15%;">
+                            마감번호
+                        </td>
+                        <td>
+                            마감일자
+                        </td>
+                        <td>
+                            거래처
+                        </td>
+                        <td>
+                            마감구분
+                        </td>
+                        <td>
+                            수량
+                        </td>
+                        <td>
+                            단가
+                        </td>
+                        <td>
+                            합계액 <!--수량 x 단가로 자동설정 -->
+                        </td>
+                    </tr>
+                    <tr class=registerList>
+                        <td>
+                            <input type="checkbox" checked style="width: 30px;">
+                        </td>
+                        <td>
+                            <input type="text" style="width: 110px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                            <!-- 텍스트박스와 팝업의 연결성 만들어야합니다 -->
+                        </td>
+                        <td>
+                            <input type="text"  class="datepicker" style="width: 100px;">
+                        </td>
+                        <td>
+                            <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        </td>
+                        <td>
+                            <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        </td>
+                        <td>
+                            <input type="text">
+                        </td>
+                        <td>
+                            <input type="text">
+                        </td>
+                        <td>
+                            <input type="text">
+                        </td>
+                        
+                        
+                    </tr>
+                    
+
+                </table>
+            </div>
+            <div class=printerFrame>
+                <table class=printerTable>
+                    <tr class=printerTitle>
+                        <td style="width: 30px;">
+                            <i class="fas fa-check-square"></i>
+                        </td>
+                        <td>
+                            입고번호
+                        </td>
+                        <td>
+                            입고일자
+                        </td>
+                        <td>
+                            거래처
+                        </td>
+                        <td>
+                            거래구분
+                        </td>
+                        <td>
+                            과세구분
+                        </td>
+                        <td>
+                            품번
+                        </td>
+                        <td>
+                            품명
+                        </td>
+                        <td>
+                            입고
+                        </td>
+                        <td>
+                            미마감수량
+                        </td>
+                    </tr>
+                    <tr class=printerList>
+                        <td>
+                            <input type="checkbox" checked style="width: 30px;">   
+                        </td>
+
+                        <td>
+                            <input type="text" style="width: 100px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        </td>
+                        <td>
+                            <input type="text" class="datepicker" style="width: 100px;">
+                        </td>
+                        <td>
+                            <input type="text" style="width: 90px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        </td>
+                        <td>
+                            <input type="text" style="width: 90px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        </td>
+                        <td>
+                            <input type="text" style="width: 90px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        </td>
+                        <td>
+                            <input type="text" style="width: 90px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        </td>
+                        <td>
+                            <input type="text" style="width: 90px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        </td>
+                        <td>
+                            <input type="text" style="width: 90px;">
+                        </td>
+                        <td>
+                            <input type="text" style="width: 90px;">
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+            </div>
+
+            <!-- @@@ README @@@ -->
+            
+            
+
+            <!-- · "물품 납품(입고)"또는 "반품 처리" 시 등록(추가)하는 기능
+                · 회사,부서,사원,입고기간,입고창고를 입력하여 입고적용을 조회 시키는 기능
+                · 입고적용 시 입고기간   및 거래처를 입력받아 입고적용List를 받아 선택적용함
+                · 반품(입고)처리가 적용된 데이터값에 반품(입고)일자,마감구분,수량을 입력하여
+                저장하는 기능
+                ·검색 데이터:
+                회사,부서,사원,입고창고,거래처(varchar2),입고기간(date)
+                ·등록 데이터:
+                입고일자(date),마감(varchar2),발주수량(int),단가,합계액(int)
+                ·조회 데이터:
+                입고번호(varchar2),no(int),입고일자(date),거래처,과세구분,품번,품명(varchar2)
+                입고수량(int),장소(varchar2),재고단위수량 및 현재고,관리단위 현재고(int) -->
+
+            
+            <!-- 참고 (1) 예외입고tab은 발주등록없이 입고처리할 경우에 사용하는 기능이다. 예를 들어 견본용 또는
+            샘플용으로 입고처리 등에 사용할 수 잇다. 또는 납품한 물품에 하자 발생시 입고처리 정보를 근거로 반품 처리시에도 사용한다
+                 (2) 입고처리하면 선택한 창고/장소의 재고가 증가하고 반품처리하면 재고가 감소한다
+                 (3) 반품처리 후 반품을 적용받아 매입마감을 수행한 경우에는 반품내역을 수정 및 삭제할 수 없다 -->
+            
+        </container>
+        <footer id= footer>
+            footer
+        </footer>
+    </div>
+</body>
+</html>
