@@ -41,7 +41,7 @@
             $('.datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
         });
      </script>
-    <title>재고이동등록(ㅊ)</title>
+    <title>재고이동등록(사업장)</title>
     
     <style>
         *{
@@ -258,10 +258,10 @@
                         <td style="width: 30px;">
                             <i class="fas fa-check-square"></i>
                         </td>
-                        <td style="width: 150px;">
+                        <td style="width: 130px;">
                             이동번호
                         </td>
-                        <td style="width: 150px;">
+                        <td style="width: 130px;">
                             이동일자
                         </td>
                         <td>
@@ -274,13 +274,16 @@
                             출고장소
                         </td>
                         <td>
+                            입고사업장
+                        </td>
+                        <td>
                             입고창고
                         </td>
                         <td>
                             입고장소
                         </td>
                         <td>
-                            품번
+                            담당자
                         </td>
                         
                     </tr>   
@@ -296,19 +299,25 @@
                             <input type="text"  class="datepicker" style="width: 100px;">
                         </td>
                         <td>
-                            <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                            <input type="text"></input>
                         </td>
                         <td>
-                            <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                            <input type="text">
                         </td>
                         <td>
-                            <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                            <input type="text">
                         </td>
                         <td>
-                            <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                            <input type="text">
                         </td>
                         <td>
-                            <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                            <input type="text">
+                        </td>
+                        <td>
+                            <input type="text">
+                        </td>
+                        <td>
+                            <input type="text">
                         </td>
                         
                         
@@ -333,11 +342,12 @@
                             규격
                         </td>
                         <td>
-                            단위
+                            단위(재고)
                         </td>
                         <td>
                             이동수량
                         </td>
+                        <!-- +이동단가,공급가,부가세,합계액 -->
                         
                     </tr>
                     <tr class=printerList>
@@ -349,16 +359,16 @@
                             <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
                         </td>
                         <td>
-                            <input type="text" class="datepicker"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
-                        </td>
-                        <td>
                             <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
                         </td>
                         <td>
                             <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
                         </td>
                         <td>
-                            <input type="text"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                            <input type="text">
+                        </td>
+                        <td>
+                            <input type="text">
                         </td>
                         
                         
