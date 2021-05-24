@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script language="javascript">
+        function showPopup() { window.open("https://google.com", "a", "width=400, height=300, left=500, top=400"); }
+    </script>
+    <title>생산계획등록</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #wrap{
+            margin: 0 auto;
+            border: 1px solid black;
+            width: 1400px;
+            height: 1000px;
+            position: relative;
+        }
+        #header{
+            margin: 0px;
+            position: relative;
+            left: 0;
+            width: 100%;
+            height: 10%;
+            border: 1px solid black;
+        }
+        #nav1{
+            position: absolute;
+            text-align: center;
+            left: 0;
+            top: 10%;
+            width: 60%;
+            height: 5%;
+            border: 1px solid black;
+        }
+        #nav2{
+            position: absolute;
+            left: 60%;
+            width: 40%;
+            height: 5%;
+            border: 1px solid black;
+        }
+        #sidemenu{
+            position: absolute;
+            top: 15%;
+            height: 80%;
+            width: 15%;
+            border: 1px solid black;
+        }
+        #contents1{
+            position: absolute;
+            left: 15%;
+            top: 15%;
+            width: 85%;
+            height: 10%;
+            border: 1px solid black;
+            z-index: 1;
+        }
+        #contents2{
+            position: absolute;
+            left: 15%;
+            top: 25%;
+            width: 85%;
+            height: 70%;
+            border: 1px solid black;
+            z-index: 1;
+        }
+        #footer{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 5%;
+            border: 1px solid black;
+        }
+        .logo{
+            position: absolute;
+            display: inline-block;
+            height: 100%;
+            width: 100px;
+            left: 20px;
+        }
+        #info{
+            position: absolute;
+            left: 160px;
+            display: inline-block;
+            top: 8px;
+            font-size: 15px;
+
+        }
+        #search{
+            display: inline-block;
+            position: absolute;
+            font-size: 24px;
+            color: gray;
+            top: 40px;
+            left: 160px;
+            width: 80%;
+            height: 35px;
+            margin-bottom: 10px;
+        }
+        .search_button{
+            position: absolute;
+            width: 50px;
+            height: 35px;
+            top: 40px;
+            right: 4%;
+        }
+        #nav1 ul{
+            width: 100%; 
+            margin: auto 0;
+            z-index: 2;
+            list-style: none;
+            /* overflow: hidden; */
+        }
+        #nav1 #gnb>li{
+            float: left;
+            width: 209.2px;
+            height: 50px;
+            text-align: center;
+            border: 1px solid black;
+            position: relative;
+
+        }
+        #nav1 #gnb>li:hover #sub{
+            display: block;
+        }
+        #nav1 #gnb>li a{
+            display: inline-block;
+            padding-top: 10px;
+            width: 100%;
+            height: 50px;
+            border: 1px solid black;
+            background-color: white;
+        }
+        #nav1 #gnb>li a:hover{
+            display: block;
+        }
+        #nav1 #gnb #sub{
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            display: none;
+        }
+        #s_nav #lnb li{
+            list-style: none;
+        }
+        #s_nav #lnb li #side1,#side2,#side3,#side4{
+            display: block;
+            border: 1px solid black;
+        }
+        #s_nav #lnb #l_sub1,#l_sub2,#l_sub3,#l_sub4{
+            border-style: none;
+            display: none;
+        }
+        #nav2 button{
+            background-color: white;
+            width: 24%;
+            height: 48px;
+            margin: 0;
+            padding: 0;
+        }
+        #nav2 button:hover{
+            background-color: gray;
+        }
+        #etc_menu{
+            position: absolute;
+            right: 10px;
+            top: 0;
+        }
+        #etc_menu li{
+            list-style: none;
+            display: inline-block;
+            font-size: 5px;
+            padding: 0;
+        }
+        #etc_menu li a{
+            text-decoration: none;
+        }
+
+        /* 컨텐츠부 css */
+        #searchForm {
+            height: 100%;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        /* 테이블 css */
+        #pdcTable,#pdcDetailTable{
+            width: 100%;
+            text-align: center;
+            border: 1px solid black;
+        }
+        
+        /* 컨테이너 파트 */
+        #pdcInfo {
+            float: left;
+            width: 60%;
+            height: 94%;
+            overflow: scroll;
+        }
+        
+        #pdcDetail{
+            float: left;
+            width: 40%;
+            height: 94%;
+            overflow: scroll;
+        }
+
+        #pdcInfo::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        /* 컨테이너 파트 종료 */
+        /* 컨테이너 네비 파트 */
+        
+        #navtabli {
+            display: inline-block;
+            border: 1px solid black;
+            width: 80px;
+            height: 27px;
+            margin: 0.5% 0 0 0;
+            border-radius: 65% 0 0 0;
+        }
+
+        #navtabli>a {
+            position: relative;
+            left: 20px;
+            text-decoration: none;
+        }
+
+        #navtab {
+            position: relative;
+            width: 100%;
+            height: 4.5%;
+        }
+        /* 컨텐츠부 css 종료 */
+    </style>    
+</head>
+<body>
+    <div id=wrap>
+        <header id = header>
+            <img src="img/ani_spade.png" class="logo"/>
+            <p id=info>회사정보:데이터 받아오기 사원:데이터 받아오기</p>
+            <ul id="etc_menu">
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">기타메뉴1</a></li>
+                <li><a href="#">기타메뉴2</a></li>
+                <li><a href="#">기타메뉴3</a></li>
+            </ul>
+            <input type="text" value=" 메뉴 검색" id="search"/>
+            <input type="button" value="검색" class="search_button"/>
+        </header>
+        <nav id = nav1>
+            <ul id="gnb">
+                <li><a href="#">물류1</a>
+                    <ul id="sub">
+                        <li><a href="#">물류1-1</a></li>
+                        <li><a href="#">물류1-2</a></li>
+                        <li><a href="#">물류1-3</a></li>
+                        <li><a href="#">물류1-4</a></li>
+                    </ul></li>
+                <li><a href="#">물류2</a>
+                    <ul id="sub">
+                        <li><a href="#">물류1-1</a></li>
+                        <li><a href="#">물류1-2</a></li>
+                        <li><a href="#">물류1-3</a></li>
+                        <li><a href="#">물류1-4</a></li>
+                    </ul></li>
+                <li><a href="#">생산1</a>
+                    <ul id="sub">
+                        <li><a href="#">물류1-1</a></li>
+                        <li><a href="#">물류1-2</a></li>
+                        <li><a href="#">물류1-3</a></li>
+                        <li><a href="#">물류1-4</a></li>
+                    </ul></li>
+                <li><a href="#">생산2</a>
+                    <ul id="sub">
+                        <li><a href="#">물류1-1</a></li>
+                        <li><a href="#">물류1-2</a></li>
+                        <li><a href="#">물류1-3</a></li>
+                        <li><a href="#">물류1-4</a></li>
+                    </ul></li>
+            </ul>
+        </nav>
+        <nav id="nav2">
+            <button name="delete">삭제</button>
+            <button name="lookup">조회</button>
+            <button name="lookup">조회</button>
+            <button name="lookup">조회</button>
+        </nav>
+        <aside id = sidemenu>
+            <div id="s_nav">
+                <ul id="lnb">
+                    <li><a href="#"  id="side1">물류1</a>
+                        <ul id="l_sub1">
+                            <li><a href="#">물류1-1</a></li>
+                            <li><a href="#">물류1-2</a></li>
+                            <li><a href="#">물류1-3</a></li>
+                            <li><a href="#">물류1-4</a></li>
+                        </ul></li>
+                    <li><a href="#" id="side2">물류2</a>
+                        <ul id="l_sub2">
+                            <li><a href="#">물류1-1</a></li>
+                            <li><a href="#">물류1-2</a></li>
+                            <li><a href="#">물류1-3</a></li>
+                            <li><a href="#">물류1-4</a></li>
+                        </ul></li>
+                    <li><a href="#" id="side3">생산1</a>
+                        <ul id="l_sub3">
+                            <li><a href="#">물류1-1</a></li>
+                            <li><a href="#">물류1-2</a></li>
+                            <li><a href="#">물류1-3</a></li>
+                            <li><a href="#">물류1-4</a></li>
+                        </ul></li>
+                    <li><a href="#" id="side4">생산2</a>
+                        <ul id="l_sub4">
+                            <li><a href="#">물류1-1</a></li>
+                            <li><a href="#">물류1-2</a></li>
+                            <li><a href="#">물류1-3</a></li>
+                            <li><a href="#">물류1-4</a></li>
+                        </ul></li>
+                </ul>
+            </div>
+        </aside>
+        
+        <container1 id = contents1>
+            <!-- 조회검색 폼 -->
+                <form id="searchForm">
+                    사업장 <input type="text" name="factory" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                    부서 <input type="text" name="department" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                    사원 <input type="text" name="employee" style="width: 75px;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled><Br>
+                    품번범위 <input type="date" name="articleNo1" style="width: 130px;"> ~ <input type="date" name="articleNo2" style="width: 130px;">
+                    품목군 <input type="text" name="item"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckitem" disabled>
+                    <input type="checkbox">생산 계획 등록 품목만 조회<br>
+                    작업예정일 <input type="date" name="workDate1" style="width: 130px;"> ~ <input type="date" name="workDate2" style="width: 130px;">
+                 <!-- get 방식 추후 post 필요시 button방식 후 자바 스크립트 작성 -->
+                </form>
+        </container1>
+        <container2 id= contents2>
+              <!-- 컨테이너 네비 -->
+              <div id="navtab">
+                <ul>
+                    <li id="navtabli"><a href="#">품목별</a></li>
+                    <li id="navtabli"><a href="#">날짜별</a></li>
+                </ul>
+            </div>
+            <!-- 컨테이너 네비 종료 -->
+            <!-- 컨테이너 출력 -->
+            <div id="pdcInfo">
+                <table id="pdcTable">
+                    <thead>
+                        <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                        <td>품번</td>
+                        <td>품명</td>
+                        <td>규격</td>
+                        <td>단위</td>
+                        <td>일생산량</td>
+                    </thead>
+                    <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
+                    <tbody>
+                        <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 컨테이너 출력 종료 -->
+            <!-- 컨테이너 2 출력 -->
+            <div id="pdcDetail">
+                <table id="pdcDetailTable">
+                    <thead>
+                        <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                        <td>순서</td>
+                        <td>작업예정일</td>
+                        <td>수량</td>
+                        <td>비고</td>
+                        <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
+                    </thead>
+                    <tbody>
+                        <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="date"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 컨테이너 2 출력 종료 -->
+        </container2>
+        <footer id= footer>
+            footer
+        </footer>
+    </div>
+    <script>
+        var side_button1 = document.getElementById('side1');
+        var side_button2 = document.getElementById('side2');
+        var side_button3 = document.getElementById('side3');
+        var side_button4 = document.getElementById('side4');
+        var search_box = document.getElementById('search');
+        side_button1.onclick = function(){
+            var l_sub1 = document.getElementById('l_sub1');
+            if(l_sub1.style.display == 'none' || l_sub1.style.display==''){
+            l_sub1.style.display = "block";
+            l_sub1.style.position = "relative";
+            l_sub1.style.marginLeft = "10px";
+            }
+            else{
+                l_sub1.style.display = "none";
+            }
+        }
+        side_button2.onclick = function(){
+            var l_sub2 = document.getElementById('l_sub2');
+            if(l_sub2.style.display == 'none' || l_sub2.style.display==''){
+            l_sub2.style.display = "block";
+            l_sub2.style.position = "relative";
+            l_sub2.style.marginLeft = "10px";
+            }
+            else{
+                l_sub2.style.display = "none";
+            }
+        }
+        side_button3.onclick = function(){
+            var l_sub3 = document.getElementById('l_sub3');
+            if(l_sub3.style.display == 'none' || l_sub3.style.display==''){
+            l_sub3.style.display = "block";
+            l_sub3.style.position = "relative";
+            l_sub3.style.marginLeft = "10px";
+            }
+            else{
+                l_sub3.style.display = "none";
+            }
+        }
+        side_button4.onclick = function(){
+            var l_sub = document.getElementById('l_sub4');
+            if(l_sub4.style.display == 'none' || l_sub4.style.display==''){
+            l_sub4.style.display = "block";
+            l_sub4.style.position = "relative";
+            l_sub4.style.marginLeft = "10px";
+            }
+            else{
+                l_sub4.style.display = "none";
+            }
+        }
+        search_box.onfocus = function(){
+            document.getElementById("search").value = '';
+        }
+        search_box.onblur = function(){
+            document.getElementById("search").value = ' 메뉴 검색';
+        }
+        function selectAll(selectAll){
+            const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+
+        
+    </script>
+</body>
+</html>
