@@ -335,13 +335,41 @@
         <container1 id = contents1>
             <!-- 조회검색 폼 -->
                 <form id="searchForm">
-                    사업장 <input type="text" name="factory" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
-                    부서 <input type="text" name="department" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                    사원 <input type="text" name="employee" style="width: 75px;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled><Br>
-                    품번범위 <input type="date" name="articleNo1" style="width: 130px;"> ~ <input type="date" name="articleNo2" style="width: 130px;">
-                    품목군 <input type="text" name="item"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckitem" disabled>
-                    <input type="checkbox">생산 계획 등록 품목만 조회<br>
-                    작업예정일 <input type="date" name="workDate1" style="width: 130px;"> ~ <input type="date" name="workDate2" style="width: 130px;">
+                    <table>
+                            <tr>
+                                <td>
+                                    사업장
+                                </td>
+                                <td>
+                                    <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                                </td>
+                                <td style="text-align: right;">
+                                    품목군 
+                                </td>
+                                <td>
+                                    <input type="text" name="item"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckitem" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    부서 
+                                </td>
+                                <td>
+                                    <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                                </td>
+                                <td>
+                                    <input type="checkbox" style="text-align: center;">생산 계획 등록 품목만 조회
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    사원
+                                </Td>
+                                <td>
+                                    <input type="text" name="employee" style="width: 75px; background-color: yellow;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled><Br>                    
+                                </td>
+                            </tr>
+                    </table>
                  <!-- get 방식 추후 post 필요시 button방식 후 자바 스크립트 작성 -->
                 </form>
         </container1>
@@ -381,7 +409,7 @@
             <div id="pdcDetail">
                 <table id="pdcDetailTable">
                     <thead>
-                        <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                        <td><input type="checkbox" name="content2" onclick="selectAll2(this)"/></td>
                         <td>순서</td>
                         <td>작업예정일</td>
                         <td>수량</td>
@@ -389,7 +417,7 @@
                         <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                     </thead>
                     <tbody>
-                        <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                        <td><input type="checkbox" value = "check1" id="check" name="content2"/></td>
                         <td><input type="text"/></td>
                         <td><input type="date"/></td>
                         <td><input type="text"/></td>
@@ -466,6 +494,12 @@
             })
         }
 
+        function selectAll2(selectAll){
+            const checkbox = document.getElementsByName('content2');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
         
     </script>
 </body>

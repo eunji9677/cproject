@@ -307,27 +307,42 @@
         </aside>
         <container1 id = contents1>
             <form id="searchForm">
-                사업장 <input type="text" name="factory" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
-                부서 <input type="text" name="department" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                사원 <input type="text" name="employee" style="width: 75px;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled><br>
-                지시일 <input type="date" name="workDate1" style="width: 130px;"> ~ <input type="date" name="workDate2" style="width: 130px;">
-                <select>
-                    <option>품번</option>
-                    <option>품명</option>
-                    <option>규격</option>
-                </select>
-                <input type="text" name="selectmenu">
-                공정<select>
-                    <option>선택전체</option>
-                </select>
-                <a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><br>
-                지시상태 <select>
-                    <option>계획</option>
-                    <option>확정</option>
-                    <option>마감</option>
-                </select>
-                <input type="button" name="confirm" value="마감처리">
-                <input type="button" name="cancel" value="마감취소"> 
+                <table>
+                    <tr>
+                        <td>
+                            사업장 
+                        </td>
+                        <td>
+                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                        </td>
+                        <td style="text-align: right;">
+                            지시일
+                        </td>
+                        <Td>
+                            <input type="date" name="workDate1" style="width: 130px;"> ~ <input type="date" name="workDate2" style="width: 130px;">
+                        </Td>
+                    </tr>
+                    <tr>
+                        <td>
+                            부서 
+                        </td>
+                        <td>
+                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                        </td>
+                        <td>
+                            <input type="button" name="confirm" value="마감처리">
+                            <input type="button" name="cancel" value="마감취소"> 
+                        </td>
+                    </tr>
+                    <Tr>
+                        <Td>
+                            사원 
+                        </Td>
+                        <Td>
+                            <input type="text" name="employee" style="width: 75px; background-color: yellow;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled><br>
+                        </Td>
+                    </Tr>
+                </table>
                 </form>
         </container1>
         <container2 id="contents2">

@@ -308,28 +308,46 @@
         </aside>
         <container1 id = contents1>
             <form id="searchForm">
-                사업장 <input type="text" name="factory" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
-                부서 <input type="text" name="department" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                사원 <input type="text" name="employee" style="width: 75px;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled>
-                품번범위 <input type="text" name="articleNo1" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a> ~ <input type="text" name="articleNo2" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><br>
-                출고기간 <input type="date" name="workDate1" style="width: 130px;"> ~ <input type="date" name="workDate2" style="width: 130px;">
-                <select>
-                    <option>품번</option>
-                    <option>품명</option>
-                    <option>규격</option>
-                </select>
-                <input type="text" name="selectmenu">
-                LOT NO <input type="text" name="lotNo"><br>
-                상태 <select>
-                    <option>전체</option>
-                    <option>계획</option>
-                    <option>확정</option>
-                    <option>마감</option>
-                </select>
-                <input type="button" name="inquiry" value="조회">
-                <input type="button" name="materialDelivery" value="자재출고">
-                <input type="button" name="cancel" value="취소">
-                <input type="button" name="confirm" value="확정">
+                <table>
+                    <tr>
+                        <td>
+                            사업장 
+                        </td>
+                        <Td>
+                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                        </Td>
+                        <td style="text-align: right;">
+                            LOT NO 
+                        </td>
+                        <Td>
+                            <input type="text" name="lotNo"><br>
+                        </Td>
+                    </tr>
+                    <tr>
+                        <td>
+                            부서 
+                        </td>
+                        <Td>
+                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                        </Td>
+                        <td>
+                            <input type="button" name="inquiry" value="조회">
+                            <input type="button" name="materialDelivery" value="자재출고">
+                        </td>
+                        <td>
+                            <input type="button" name="cancel" value="취소">
+                            <input type="button" name="confirm" value="확정">
+                        </td>
+                    </tr>
+                    <tr>
+                        <Td>
+                            사원 
+                        </Td>
+                        <td>
+                            <input type="text" name="employee" style="width: 75px; background-color: yellow;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled>
+                        </td>
+                    </tr>
+                </table>
                 </form>
             </table>
         </container1>

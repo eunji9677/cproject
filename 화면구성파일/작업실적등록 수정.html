@@ -310,25 +310,43 @@
         </aside>
         <container1 id = contents1>
             <form id="searchForm">
-                사업장 <input type="text" name="factory" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
-                부서 <input type="text" name="department" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                사원 <input type="text" name="employee" style="width: 75px;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled>
-                품번범위 <input type="text" name="articleNo1" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a> ~ <input type="text" name="articleNo2" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><br>
-                지시일 <input type="date" name="workDate1" style="width: 130px;"> ~ <input type="date" name="workDate2" style="width: 130px;">
-                상태 <select>
-                    <option>선택전체</option>
-                    <option>확정</option>
-                    <option>마감</option>
-                </select><br>
-                <select>
-                    <option>품번</option>
-                    <option>품명</option>
-                    <option>규격</option>
-                </select>
-                <input type="text" name="searchCondition">
-                <input type="button" name="materialUse" value="자재사용">
-                <input type="button" name="pdcmaterialResist" value="생산자원등록">
-                <input type="button" name="searchDetail" value="검색상세">
+                <table>
+                    <tr>
+                        <Td>
+                            사업장 
+                        </Td>
+                        <td>
+                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                        </td>
+                        <td style="text-align: right;">
+                            지시일 
+                        </td>
+                        <td>
+                            <input type="date" name="workDate1" style="width: 130px;"> ~ <input type="date" name="workDate2" style="width: 130px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            부서 
+                        </td>
+                        <td>
+                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                        </td>
+                        <td>
+                            <input type="button" name="materialUse" value="자재사용">
+                            <input type="button" name="pdcmaterialResist" value="생산자원등록">
+                            <input type="button" name="searchDetail" value="검색상세">
+                        </td>
+                    </tr>
+                    <Tr>
+                        <td>
+                            사원 
+                        </td>
+                        <td>
+                            <input type="text" name="employee" style="width: 75px; background-color: yellow;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled>
+                        </td>
+                    </Tr>
+                </table>
                  <!-- get 방식 추후 post 필요시 button방식 후 자바 스크립트 작성 -->
                 </form>
         </container1>

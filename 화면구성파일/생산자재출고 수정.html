@@ -336,23 +336,42 @@
         <container1 id = contents1>
             <!-- 조회검색 폼 -->
             <form id="searchForm">
-                사업장 <input type="text" name="factory" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
-                부서 <input type="text" name="department" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                사원 <input type="text" name="employee" style="width: 75px;" ><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckemployee" style="width: 75px;" disabled>
-                품번범위 <input type="text" name="articleNo1" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a> ~ <input type="text" name="articleNo2" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><br>
-                출고기간 <input type="date" name="MDDate1" style="width: 130px;"> ~ <input type="date" name="MDDate2" style="width: 130px;">
-                출고창고 <input type="text" name="MDcargo" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckMDcargo" style="width: 75px;" disabled >
-                담당자 <input type="text" name="manager" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckmanager" style="width: 75px;" disabled ><br>
-                <select>
-                    <option>품번</option>
-                    <option>품명</option>
-                    <option>규격</option>
-                </select>
-                <input type="text" name="searchCondition">
-                관리구분 <input type="text" name="selectmenu" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                <!-- get 방식 추후 post 필요시 button방식 후 자바 스크립트 작성 -->
-                <input type="button" name="requestMD" value="출고요청">
-                <input type="button" name="stockCheck" value="재고확인">
+                <table>
+                    <tr>
+                        <td>
+                            사업장 
+                        </td>
+                        <td>
+                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                        </td>
+                        <td>
+                            출고기간
+                        </td>
+                        <td>
+                            <input type="date" name="MDDate1" style="width: 130px; background-color: yellow;"> ~ <input type="date" name="MDDate2" style="width: 130px; background-color: yellow;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            부서
+                        </td>
+                        <td>
+                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                        </td>
+                        <td>
+                            <input type="button" name="requestMD" value="출고요청">
+                            <input type="button" name="stockCheck" value="재고확인">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            사원 
+                        </td>
+                        <td>
+                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled ><br>
+                        </td>
+                    </tr>
+                </table>
             </form>
             </table>
         </container1>
