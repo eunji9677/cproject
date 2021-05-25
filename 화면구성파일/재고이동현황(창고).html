@@ -385,13 +385,19 @@
             <table id="view1">
                 <thead>
                     <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>조정번호</td>
-                    <td>조정일자</td>
-                    <td>SET모품목</td>
-                    <td>품명</td>
-                    <td>입고조정수</td>
-                    <td>단가</td>
-                    <td>금액</td>                 
+                    <td>이동번호</td>
+                    <td>이동일자</td>
+                    <td>출고창고</td>
+                    <td>출고장소</td>
+                    <td>입고창고</td>
+                    <td>입고장소</td>
+                    <td>담당자</td>                 
+                    <td>담당자</td>
+                    <td>품 번</td>
+                    <td>품 명</td>
+                    <td>단 위</td>
+                    <td>이동수량</td>
+                    <td>LOT</td>
                 </thead>
                 <tbody id="table1">
                     <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
@@ -401,7 +407,13 @@
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
-                    <td><input type="text"/></td>                    
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>    
+                    <td><input type="text"/></td>    
+                    <td><input type="text"/></td>    
+                    <td><input type="text"/></td>    
+                    <td><input type="text"/></td>    
+                    <td><input type="text"/></td>                        
                 </tbody>
             </table>
         </container2>
@@ -498,7 +510,8 @@
             })
         }
     </script>
-    <!-- hwp 요구사항 "SET품수불조정등록"
+    
+    <!-- hwp 요구사항 "재고이동현황(창고)"
             · 재고이동등록(창고)에서 등록한 내용들을 사업장, 부서 등으로 검색조건 설정
             · 출력된 데이터를 클릭시 재고이동등록(창고)의 해당건으로 이동
             · 조회시 필수입력 : 이동기간
