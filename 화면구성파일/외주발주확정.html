@@ -9,7 +9,7 @@
     <script language="javascript">
         function showPopup() { window.open("https://google.com", "a", "width=400, height=300, left=500, top=400"); }
     </script>
-    <title>생산자재출고</title>
+    <title>외주발주확정</title>
     <style>
         *{
             margin: 0;
@@ -224,7 +224,7 @@
         
         #MDInfo{
             width: 100%;
-            height: 80%;
+            height: 95%;
             overflow: scroll;
         }
 
@@ -234,16 +234,12 @@
             clear: both;
         }
 
-        /* 출력부 스타일*/
-        #detailPrint1{
-            border: 1px solid;
+        /* 합계 출력부 */
+        #resultWindow{
+            height: 5%;
+            background-color: gray;
+            line-height: 5%;
         }
-
-        #detailPrint2{
-            border: 1px solid;
-            height: 9%;
-        }
-        /* 출력부 스타일 종료 */
         /* 컨테이너 파트 종료 */
     </style>    
 </head>
@@ -339,16 +335,16 @@
                 <table>
                     <tr>
                         <td>
-                            사업장 
+                            사업장
                         </td>
                         <td>
-                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
                         </td>
                         <td>
-                            출고기간
+                            외주처
                         </td>
                         <td>
-                            <input type="date" name="MDDate1" style="width: 130px; background-color: yellow;"> ~ <input type="date" name="MDDate2" style="width: 130px; background-color: yellow;">
+                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
                         </td>
                     </tr>
                     <tr>
@@ -356,19 +352,20 @@
                             부서
                         </td>
                         <td>
-                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
                         </td>
                         <td>
-                            <input type="button" name="requestMD" value="출고요청">
-                            <input type="button" name="stockCheck" value="재고확인">
+                            <input type="button" name="requestMD" value="자자출고" onclick="showPopup()">
+                            <input type="button" name="requestMD" value="확정" onclick="showPopup()">
+                            <input type="button" name="requestMD" value="취소" onclick="showPopup()">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            사원 
+                            사원
                         </td>
                         <td>
-                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled ><br>
+                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
                         </td>
                     </tr>
                 </table>
@@ -381,18 +378,38 @@
                 <table id="MDDetailTable">
                     <thead>
                         <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                        <td>출고번호</td>
-                        <td>출고일자</td>
-                        <td>출고창고</td>
-                        <td>출고장소</td>
-                        <td>담당자</td>
+                        <td>생산지시번호</td>
+                        <td>자재출고상태</td>
+                        <td>지시일</td>
+                        <td>납기일</td>
+                        <td>품번</td>
+                        <td>품명</td>
+                        <td>규격</td>
+                        <td>단위</td>
+                        <td>지시수량</td>
+                        <td>단가</td>
+                        <td>금액</td>
+                        <td>상태</td>
+                        <td>LOT 번호</td>
+                        <td>검사</td>
+                        <td>고객</td>
                         <td>비고</td>
                     </thead>
                     <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                     <tbody>
                         <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
                         <td><input type="text"/></td>
+                        <td><input type="text"/></td>
                         <td><input type="date"/></td>
+                        <td><input type="date"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
@@ -407,19 +424,23 @@
                     <table id="MDTable">
                         <thead>
                             <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                            <td>NO.</td>
+                            <td>청구일</td>
                             <td>품번</td>
                             <td>품명</td>
                             <td>규격</td>
                             <td>단위</td>
-                            <td>요청수량</td>
-                            <td>출고수량</td>
-                            <td>LOT No.</td>
+                            <td>정미수량</td>
+                            <td>확정수량</td>
+                            <td>구분</td>
+                            <td>외주단가</td>
+                            <td>금액</td>
                             <td>비고</td>
                         </thead>
                         <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                         <tbody>
                             <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                            <td><input type="date"/></td>
+                            <td><input type="text"/></td>
                             <td><input type="text"/></td>
                             <td><input type="text"/></td>
                             <td><input type="text"/></td>
@@ -433,19 +454,11 @@
                     </table>
                     <!-- 출력부 1 -->
                 </div>
-                    <div id="detailPrint1">
-                        관리구분 <input type="text" name="controlCondition" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
-                        지시수량 <input type="text" name="printQuantity" disabled><br>
-                        모품목 <input type="text" name="parentItem" disabled><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
-                        모품목명 <input type="text" name="parentItemName" disabled> 지시번호 <input type="text" name="num" disabled>
-                    </div>
-                    <!-- 출력부 1 종료 -->
-                    <!-- 출력부 2 -->
-            <div id="detailPrint2">
-                재고    사업장별 현재고 <input type="text" name="stockPerFactory">
-                창고/장소별 현재고 <input type="text" name="stockPerCargo">
-            </div>
-            <!-- 출력부 2 종료 -->
+                 <!-- 합계 출력부 -->
+                <div id="resultWindow">
+                    합 계 <span style="margin-left: 100px;">정미수량 <input type="text"></span><span style="margin-left: 100px;">확정수량 <input type="text"></span><span style="margin-left: 100px;">금액 <input type="text"></span>
+                </div>
+                    <!-- 합계 출력부 종료 -->
         </container3>
         <footer id= footer>
             footer
