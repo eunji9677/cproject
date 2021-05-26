@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>재고이동등록(사업장)</title>
+    <title>입고처리(국내발주)</title>
     <style>
         *{
             margin: 0;
@@ -55,27 +55,28 @@
             right: 0;
             top: 15%;
             width: 85%;
-            height: 10%;
+            height: 20%; /*10에서 20으로수정*/
             border: 1px solid black;
             z-index: 1;
         }
         #contents2{
             position: absolute;
             right: 0;
-            top: 25%;
+            top: 35%; /*25에서 35%로 수정*/
             width: 85%;
-            height: 35%;
+            height: 35%; /*35에서 45로수정*/
             border: 1px solid black;
             z-index: 1;
         }
         #contents3{
             position: absolute;
             right: 0;
-            top:60%;
+            top:70%; /*60에서 70으로수정*/
             width: 85%;
-            height: 35%;
+            height: 25%; /*35에서 25로수정*/
             border: 1px solid black;
             z-index: 1;
+            
         }
         #footer{
             position: absolute;
@@ -202,18 +203,48 @@
             border: 1px solid black;
             
         }
-        /* end default 밑으로 css 추가함*/
+        /* end default */
+
         .con1_search {
             margin: 10px;
             
             
-        }        
-        #contents1, #contents2, #contents3{
-            overflow: scroll;
         }
         
-        
-        
+        #contents2, #contents3{
+            overflow: scroll;
+        }
+
+        /*탭구현 css임*/  
+        #tabContent1, #tabContent2, #tabContent3, #tabContent4{
+            display: none;          
+            }
+ 
+        #tab1, #tab2, #tab3, #tab4 {
+              display: none;}
+ 
+        label {
+            display: inline-block;
+            padding: 5px;          
+            color: #bbb;
+            border: 1px solid transparent;}
+ 
+        label:hover {
+            color: #2e9cdf;
+            cursor: pointer;}
+ 
+        /*input 클릭시, label 스타일*/
+        input:checked + label {
+              color: #555;
+              border: 1px solid black;
+              border-top: 1px solid white;
+              border-bottom: 1px solid black;}
+ 
+        #tab1:checked ~ #tabContent1,
+        #tab2:checked ~ #tabContent2,
+        #tab3:checked ~ #tabContent3,
+        #tab4:checked ~ #tabContent4 {
+            display: block;}
         
         
     
@@ -313,12 +344,12 @@
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
                     <td><button>검</button></td>
 
-                    <td colspan="5" style="width: 70px;">부서</td>
+                    <td colspan="5" style="width: 50px;">부서</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td ><button>검</button></td>
 
-                    <td colspan="5" style="width: 70px;">사원</td>
+                    <td colspan="5" style="width: 50px;">사원</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td><button>검</button></td>
@@ -326,82 +357,69 @@
                 </tr>
                 
                 <tr>
-                    <td>이동기간</td>
+                    <td>입고기간</td>
                     <td colspan="2" style="width: 80px;"><input type="date" style="width: 100%;"/></td>
                     <td>~</td>
                     <td><input type="date" style="width: 100%;"/></td>
                     <td><button>검</button></td>
 
-                    <td colspan="5" style="width: 50px;">담당자</td>
+                    <td colspan="5" style="width: 50px;">입고창고</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td ><button>검</button></td>
-                                        
-                    <td colspan="5" style="width: 50px;"></td>
-                    <td style="width: 80px;"></td>
-                    <td></td>
-                    <td ></td>
+                                    
+                    <td colspan="5" style="width: 50px;">거래처</td>
+                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
+                    <td><input type="text" name="" disabled/></td>
+                    <td ><button>검</button></td>
                 </tr>
 
                 <tr>
-                    <td>출고사업장</td>
+                    <td>담당자</td>
                     <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
                     <td><button>검</button></td>
 
-                    <td colspan="5" style="width: 50px;">출고창고</td>
+                    <td colspan="5" style="width: 50px;">관리구분</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td ><button>검</button></td>
-
-                    <td colspan="5" style="width: 50px;">출고장소</td>
-                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
-                    <td><input type="text" name="" disabled/></td>
-                    <td><button>검</button></td>
-                    
                 </tr>
 
                 <tr>
-                    <td>관리구분</td>
+                    <td>품번</td>
                     <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
                     <td><button>검</button></td>
 
-                    <td colspan="5" style="width: 50px;">프로젝트</td>
+                    <td colspan="5" style="width: 50px;">입고번호</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td ><button>검</button></td>
 
-                    <td colspan="5" style="width: 50px;">품번</td>
-                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
-                    <td><input type="text" name="" disabled/></td>
-                    <td><button>검</button></td>
-                    
+                    <td colspan="5"><button>입고적용</button></td>
                 </tr>
             </table>
         </container1>
         <container2 id="contents2">
             <table id="view1">
+                <input id="tab1" type="radio" name="tabs" checked> 
+                    <label for="tab1">예외입고</label>
+                
+                    <input id="tab2" type="radio" name="tabs">
+                    <label for="tab2">발주입고</label>
                 <thead>
                     <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>이동번호</td>
-                    <td>이동일자</td>
-                    <td>출고사업장</td>
-                    <td>출고창고</td>
-                    <td>출고장소</td>
-                    <td>입고사업장</td>
-                    <td>입고창고</td>
-                    <td>입고장소</td>
-                    <td>담당자</td>                 
+                    <td>입고번호</td>                  
+                    <td>입고일자</td>
+                    <td>거래처</td>
+                    <td>마감</td>
+                    <td>담당자</td>
                 </thead>
                 <tbody id="table1">
                     <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
                     <td><input type="text"/></td>
                     <td><input type="date"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
@@ -412,16 +430,14 @@
             <table id="view2">
                 <tr>
                     <td>no</td>
-                    <td>품 번</td>
-                    <td>품 명</td>
-                    <td>규 격</td>
-                    <td>단 위</td>
-                    <td>이동수량</td>
-                    <td>이동단가</td>
+                    <td>품번</td>
+                    <td>품명</td>
+                    <td>규격</td>
+                    <td>발주수량</td>
+                    <td>단가</td>
                     <td>공급가</td>
                     <td>합계액</td>
                     
-            
                 </tr>
                 <tr>
                     <td id="num"></td>
@@ -432,8 +448,6 @@
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    
                     
                 </tr>
             </table>
@@ -531,17 +545,29 @@
             })
         }
     </script>
-    <!-- hwp 요구사항 "재고이동등록(사업장)"
-            · 사업장간 재고이동 등록 및 조회
-            · 이동기간을 입력 후 상세정보 등록   
-            · 사업장, 기간, 창고 등으로 검색조건 설정
-            · 조회시 필수입력 : 사업장, 부서, 사원, 이동기간
-            · 조회시 검색이 필요한 데이터 : 사업장, 부서, 사원, 담당자, 출고사업장, 출고창고, 출고장소, 관리구분, 프로젝트
-            · 등록시 필수입력 : 이동일자, 출고사업장, 출고창고, 출고장소, 입고사업장, 입고창고, 입고장소, 품번
-            · 등록시 검색이 필요한 데이터 : 출고사업장, 출고창고, 출고장소, 입고사업장, 입고창고, 입고장소, 담당자, 품번 -->
-          
-    <!-- 작업방법 : 1. 이동기간을 입력하고 [조회]아이콘을 클릭한다
-                2. 이동일자, 출고창고, 출고장소, 입고창고,, 입고장소, 품번, 요청수량, 출고수량을 입력한
-                다음, [조회] 아이콘을 클릭하여 "이동번호"를 자동으로 부여하고 저장한다. -->
+    <!-- hwp 요구사항 "입고처리(국내발주)"
+            · 거래처에서 물품 납품(입고)또는 반품처리 시 등록하는 기능
+            · 발주내역을 적용받아 입고처리   하는 기능
+            · 발주없이 수행, 반품처리 하는 경우 입고처리 하는 기능
+            · 검색 필요 데이터:
+            회사,부서,사원,입고창고(varchar2), 입고기간,검사기간,의뢰기간(date)
+            · 등록 데이터:
+            입고번호(varchar2),입고일자(date),마감(varchar2),no(int),품번,품명(varchar2),발주수량,단가,합계액(int)
+            · 조회 데이터:
+            검사번호(varchar2),검사일자(date),거래처,과세구분,입고창고(varchar2)   <<검사적용시
+            의뢰번호(varchar2),no(int),의뢰일자(date),거래처,과세구분,의뢰창고,품명,품번(varchar2),의뢰잔량(int)<<의뢰적용시
+            재고단위,관리단위 현재고(Int) -->
+
+        <!-- 발주내역을 적용받아 입고처리를 수행할 경우에는 [발주입고탭]에서,
+            발주없이 입고처리를 수행할 경우와 반품처리를 하는경우에는 [예외입고]TAB에서 처리한다.-->
+
+        <!-- 작업방법 : 1. [발주입고]에서 창고, 장소, 입고기간을 입력하고 [조회]아이콘을 클릭후
+                        [검사적용]버튼을 클릭한다
+                        2. 검사기간을 입력후 [조회]버튼을 클릭하고 해당 기간내의 발주내역이 조회되면
+                        검사일자, 거래처, 발주구분, 과세구분, 품번을 선택한 후 [선택정용]버튼을 클릭한다.
+                        부분적으로 적용되는 품목은 NO항목 앞의 체크박스를 선택한 품목만 적용된다.
+                        3. 검사내역을 적용받고 입고일자를 입력한 후 거래처, 입고구분, 과세구분, 품번,
+                        수량, 단가 등을 확인한다.-->
+
 </body>
 </html>

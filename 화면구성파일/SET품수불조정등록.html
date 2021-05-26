@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>재고이동등록(사업장)</title>
+    <title>SET품수불조정등록</title>
     <style>
         *{
             margin: 0;
@@ -307,6 +307,7 @@
         </aside>
         <container1 id = contents1>
             <table class="con1_search">
+                
                 <tr>
                     <td>사업장</td>
                     <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
@@ -326,48 +327,30 @@
                 </tr>
                 
                 <tr>
-                    <td>이동기간</td>
+                    <td>조정기간</td>
                     <td colspan="2" style="width: 80px;"><input type="date" style="width: 100%;"/></td>
                     <td>~</td>
                     <td><input type="date" style="width: 100%;"/></td>
                     <td><button>검</button></td>
 
-                    <td colspan="5" style="width: 50px;">담당자</td>
+                    <td colspan="5" style="width: 50px;">입고창고</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
-                    <td ><button>검</button></td>
+                    <td><button>검</button></td>
                                         
-                    <td colspan="5" style="width: 50px;"></td>
-                    <td style="width: 80px;"></td>
-                    <td></td>
-                    <td ></td>
+                    <td colspan="5" style="width: 50px;">입고장소</td>
+                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
+                    <td><input type="text" name="" disabled/></td>
+                    <td><button>검</button></td>
                 </tr>
 
                 <tr>
-                    <td>출고사업장</td>
+                    <td>출고창고</td>
                     <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
                     <td><button>검</button></td>
-
-                    <td colspan="5" style="width: 50px;">출고창고</td>
-                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
-                    <td><input type="text" name="" disabled/></td>
-                    <td ><button>검</button></td>
 
                     <td colspan="5" style="width: 50px;">출고장소</td>
-                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
-                    <td><input type="text" name="" disabled/></td>
-                    <td><button>검</button></td>
-                    
-                </tr>
-
-                <tr>
-                    <td>관리구분</td>
-                    <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
-                    <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
-                    <td><button>검</button></td>
-
-                    <td colspan="5" style="width: 50px;">프로젝트</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td ><button>검</button></td>
@@ -378,21 +361,27 @@
                     <td><button>검</button></td>
                     
                 </tr>
+                <tr>
+                    <td colspan="100%">
+                        <br>
+                        <input type="button" value="SET 적용" style="float: right; padding: 5px;">
+                    </td>
+                </tr>
+
+                
             </table>
         </container1>
         <container2 id="contents2">
             <table id="view1">
                 <thead>
                     <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>이동번호</td>
-                    <td>이동일자</td>
-                    <td>출고사업장</td>
-                    <td>출고창고</td>
-                    <td>출고장소</td>
-                    <td>입고사업장</td>
-                    <td>입고창고</td>
-                    <td>입고장소</td>
-                    <td>담당자</td>                 
+                    <td>조정번호</td>
+                    <td>조정일자</td>
+                    <td>SET모품목</td>
+                    <td>품명</td>
+                    <td>입고조정수</td>
+                    <td>단가</td>
+                    <td>금액</td>                 
                 </thead>
                 <tbody id="table1">
                     <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
@@ -402,9 +391,7 @@
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>                    
                 </tbody>
             </table>
         </container2>
@@ -412,29 +399,17 @@
             <table id="view2">
                 <tr>
                     <td>no</td>
-                    <td>품 번</td>
+                    <td>조정번호</td>
+                    <td>구성품번</td>
                     <td>품 명</td>
-                    <td>규 격</td>
-                    <td>단 위</td>
-                    <td>이동수량</td>
-                    <td>이동단가</td>
-                    <td>공급가</td>
-                    <td>합계액</td>
-                    
-            
+                    <td>출고조정수량</td>
                 </tr>
                 <tr>
                     <td id="num"></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    
-                    
+                    <td><input type="text"/></td>   
                 </tr>
             </table>
             
@@ -531,17 +506,48 @@
             })
         }
     </script>
-    <!-- hwp 요구사항 "재고이동등록(사업장)"
-            · 사업장간 재고이동 등록 및 조회
-            · 이동기간을 입력 후 상세정보 등록   
-            · 사업장, 기간, 창고 등으로 검색조건 설정
-            · 조회시 필수입력 : 사업장, 부서, 사원, 이동기간
-            · 조회시 검색이 필요한 데이터 : 사업장, 부서, 사원, 담당자, 출고사업장, 출고창고, 출고장소, 관리구분, 프로젝트
-            · 등록시 필수입력 : 이동일자, 출고사업장, 출고창고, 출고장소, 입고사업장, 입고창고, 입고장소, 품번
-            · 등록시 검색이 필요한 데이터 : 출고사업장, 출고창고, 출고장소, 입고사업장, 입고창고, 입고장소, 담당자, 품번 -->
+    <!-- hwp 요구사항 "SET품수불조정등록"
+            · 상품, 제품, 반제품을 SET품으로   구성
+            · 설정한 패키지 만큼의   하위 구성품 재고가 감소되어야함   
+            ->출고처리
+            · 조회시 필수입력 : 사업장, 부서, 사원, 조정기간, 입고창고, 입고장소, 출고창고, 출고장소 
+            · 조회시 검색이 필요한   데이터 : 사업장, 부서, 사원, 입고창고, 입고장소, 출고창고, 출고장소, 프로젝트
+            · 등록시 필수입력 : 조정일자, SET모품목, 구성품번  
+            · 검색이 필요한 데이터 : SET모품목, 구성품번
+            · 등록완료시 조정번호 자동부여 -->
           
-    <!-- 작업방법 : 1. 이동기간을 입력하고 [조회]아이콘을 클릭한다
-                2. 이동일자, 출고창고, 출고장소, 입고창고,, 입고장소, 품번, 요청수량, 출고수량을 입력한
-                다음, [조회] 아이콘을 클릭하여 "이동번호"를 자동으로 부여하고 저장한다. -->
+    <!-- 작업방법 : 1.입고창고, 입고장소, 출고창고, 출고장소, 조정일자, 입고조정수량을 입력한 후 [SET적용]
+    버튼을 이용하여 set구성품을 조회한후 적용하면 자동으로 저장된다.
+
+    입고창고 : 사업장에 속한 창고로서 헤더의 SET품이 재고를 입고할 창고를 의미한다
+
+    입고장소 : 창고에 속한 장소로서 헤더의 SET품이 재고를 입고할 장소를 의미한다.
+
+    출고창고 : 사업장에 속한 창고로서 디테일의 SET자품목의 재고를 감소할 창고를 의미한다.
+
+    출고장소 : 사업장에 속한 창고로서 디테일의 SET자품목의 재고를 감소할 창고를 의미한다.
+
+    조정일자 : 재고를 증가 또는 감소시키는 일자를 등록한다.
+
+    입고조정수량 : 헤더에 등록할 SET품의 재고에 대하여 입고할 조정수량을 등록한다.
+
+    단가 : SET품입고시 재고평가의 입고단가에 자동으로 반영된다.
+
+    LOTno : 품목등록 항목중 LOT여부가 '여'인 품목에 대하여 출고 시 코드도움을 통하여
+
+        출고또는 마이너스 입고할 LOT재고를 조회한 선택하여 적용하여 출입고를 처리한다.
+    
+    출고조정수량 : 디테일에 등록할 SET구성품의 재고에 대하여 출고할 조정 수량을 등록한다.
+
+    -->
+
+    <!-- SET적용 : 헤더의 데이터를 입력한 후 커서의 위치를 디테일 구성품번에 이동한 후 [SET 적용]
+    
+    버튼을 클릭하면 도움창이 나타난다. SET구성품등록에 등록된 내용을 기준으로 SET구성품과
+    
+    입고수량을 곱하여 산출한 적용 수량이 자동을 산출되며, 산출된 수량을 적용코자 할 경우
+
+    왼쪽에있는 체크박스를 선택한 후 [확인]을 클릭하면 디테일에 구성품목과 조정수량이 자동으로 반영된다 -->
+    
 </body>
 </html>
