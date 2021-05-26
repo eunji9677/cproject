@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <style>
+        
+
+
+		
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			color: black;
+			display: inline-block;
+			padding: 5px 5px;
+			cursor: pointer;
+		}
+
+		ul.tabs li.current{
+			border: 1px solid black;
+			border-top: 1px solid white;
+		}
+
+		.tab-content{
+			display: none;	
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <ul class="tabs">
+            <li class="tab-link current" data-tab="tab-1">메뉴_하나</li>
+            <li class="tab-link" data-tab="tab-2">메뉴_둘</li>
+            <li class="tab-link" data-tab="tab-3">메뉴_셋</li>
+        </ul>
+    
+        <div id="tab-1" class="tab-content current">
+    ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ----
+        </div>
+        <div id="tab-2" class="tab-content">
+    ---- ---- ★------ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ★-- ---- ---- ------★ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- ★------ ---- ---- ---- ----
+        </div>
+        <div id="tab-3" class="tab-content">
+    ---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
+        </div>
+    
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+	
+	$('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+
+})
+</script>
+</html>
