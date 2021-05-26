@@ -51,8 +51,7 @@
         }
         #contents1{
             position: absolute;
-            padding: 10px;
-            right: 0;
+            left: 15%;
             top: 15%;
             width: 85%;
             height: 10%;
@@ -61,19 +60,10 @@
         }
         #contents2{
             position: absolute;
-            right: 0;
+            left: 15%;
             top: 25%;
             width: 85%;
-            height: 35%;
-            border: 1px solid black;
-            z-index: 1;
-        }
-        #contents3{
-            position: absolute;
-            right: 0;
-            top:60%;
-            width: 85%;
-            height: 35%;
+            height: 70%;
             border: 1px solid black;
             z-index: 1;
         }
@@ -196,22 +186,34 @@
             top: 25%;
             left: 18%;
         }
-        #view1,#view2,#t_total{
+        #view1{
             width: 100%;
             text-align: center;
             border: 1px solid black;
-            
         }
         #total{
-            width: 100%;
             position: absolute;
             bottom: 0;
-        }
-        #view2 td{
-            width: 5%;
-        }
-        #view2 td input{
+            left: 0;
             width: 100%;
+            text-align: center;
+        }
+        #total input{
+
+            width: 7.7%;
+            text-align: justify;
+            border-style: none;
+            background-color: rgb(223, 223, 223);
+            
+        }
+        #total td{
+            margin: 0;
+            padding: 0;
+        }
+        #contents1 div{
+            position: absolute;
+            right: 20px;
+            top: 10px;
         }
     </style>    
 </head>
@@ -262,10 +264,10 @@
             </ul>
         </nav>
         <nav id="nav2">
-            <button id="delete" onclick="deletefunc()">삭제</button>
-            <button id="lookup">조회</button>
-            <button id="save">저장</button>
-            <button id="lookup">조회</button>
+            <button name="delete">삭제</button>
+            <button name="lookup">조회</button>
+            <button name="lookup">조회</button>
+            <button name="lookup">조회</button>
         </nav>
         <aside id = sidemenu>
             <div id="s_nav">
@@ -305,98 +307,50 @@
             <table class="con1_search">
                 <tr>
                     <td>사업장</td>
-                    <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
-
-                    <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
+                    <td style="width: 70px;"><input type="text" style="width: 100%;"/></td>
                     <td><button>검</button></td>
-                    <td colspan="5" style="width: 50px;">부서</td>
-                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
-                    <td><input type="text" name="" disabled/></td>
-                    <td ><button>검</button></td>
-                    
+                    <td><input type="text" disabled/></td>
+                    <td>품번</td>
+                    <td style="width: 70px;"><input type="text" style="width: 100%;"/></td>
+                    <td><button>검</button></td>
+                    <td><input type="text" disabled/></td>
                 </tr>
-                
                 <tr>
-                    <td>출고기간</td>
-                    <td colspan="2" style="width: 80px;"><input type="date" style="width: 100%;"/></td>
-                    <td>~</td>
-                    <td><input type="date" style="width: 100%;"/></td>
-                    <td><button>검</button></td>
-                    <td colspan="5">사원</td>
-                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
-                    <td><input type="text" name="" disabled/></td>
-                    <td><button>검</button></td>
+                    <td>전개구분</td>
+                    <td colspan="3"><select name="division" style="width: 80%;">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4" selected>4</option>
+                    </select>
+                    <td>계정구분</td>
+                    <td colspan="3"><select name="division" style="width: 80%;">
+                        <option value="">원재료</option>
+                        <option value="">반제품</option>
+                        <option value="">제품</option>
+                    </select></td>
+                    </td>
                 </tr>
             </table>
+            <div>
+                <button>소요량전개</button>
+            </div>
         </container1>
-        <container2 id="contents2">
+        <container2 id= contents2>
             <table id="view1">
                 <thead>
-                    <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>출고번호</td>
-                    <td>출고일자</td>
-                    <td>고   객</td>
-                    <td>창   고</td>
-                </thead>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="date"/></td>
-                    <td><input type="text"/><button>검</button></td>
-                    <td><input type="text"/></td>
-                </tbody>
-            </table>
-        </container2>
-        <container3 id="contents3">
-            <table id="view2">
-                <tr>
-                    <td>no</td>
+                    <td><input type="checkbox" name="content"/></td>
                     <td>품번</td>
                     <td>품명</td>
-                    <td>규격</td>
-                    <td>출고수량</td>
+                    <td>소요일자</td>
+                    <td>순번</td>
+                    <td>예정발주일</td>
+                    <td>예정수량</td>
                     <td>단위</td>
-                    <td>단가</td>
-                    <td>공급가</td>
-                    <td>부가세</td>
-                    <td>합계액</td>
-                    <td>재고단위수량</td>
-                </tr>
-                <tr>
-                    <td id="num"></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                </tr> 
-            </table> 
-            <div id="total">
-                <table id="t_total">
-                <tr>
-                    <td>총계</td>
-                    <td>출고수량합</td>
-                    <td>총공급가</td>
-                    <td>총부가세</td>
-                    <td>총합계액</td>
-                    <td>총재고단위수량</td>
-                </tr>
-                <tr>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                </tr>
+                    <td>계정구분</td>
+                </thead>
             </table>
-            </div>
-        </container3>
+        </container2>
         <footer id= footer>
             footer
         </footer>
@@ -407,9 +361,6 @@
         var side_button3 = document.getElementById('side3');
         var side_button4 = document.getElementById('side4');
         var search_box = document.getElementById('search');
-        var num_box = document.getElementById('num');
-        var save_button = document.getElementById('save');
-        var delete_button = document.getElementById('delete');
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
             if(l_sub1.style.display == 'none' || l_sub1.style.display==''){
@@ -459,34 +410,6 @@
         }
         search_box.onblur = function(){
             document.getElementById("search").value = ' 메뉴 검색';
-        }
-        save_button.onclick = function(){
-            // dao에서 저장
-            var view1 = document.getElementById('table1');
-            var view2 = document.getElementById('view2');
-            focus = document.activeElement;
-            if(view1 == focus){
-            var row = view1.insertRow( view1.rows.length ); 
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
-            cell1.innerHTML = "<input type='checkbox' name='content'/>";;
-            cell2.innerHTML = "<input type='text'/>";
-            cell4.innerHTML = "<input type='text' />";
-            cell5.innerHTML = "<input type='text' />";
-            cell3.innerHTML =  "<input type='date' />";
-            }
-        }
-        delete_button.onclick = function(){
-            //dao에서 체크항목 삭제
-        }
-        function selectAll(selectAll){
-            const checkbox = document.getElementsByName('content');
-            checkbox.forEach((checkbox) => {
-                checkbox.checked = selectAll.checked;
-            })
         }
     </script>
 </body>
