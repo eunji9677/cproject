@@ -308,7 +308,7 @@
             <table class="con1_search">
                 <tr>
                     <td>회사</td>
-                    <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
+                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
                     <td><button>검</button></td>
 
@@ -338,7 +338,7 @@
                     
                     
                     <td colspan="5"></td>
-                    <td><input type="submit" value="입고적용"></td>
+                    <td><input type="submit" value="입고적용" style="padding: 5px; margin-top: 5px;"></td>
                 </tr>
             </table>
         </container1>
@@ -369,7 +369,7 @@
         <container3 id="contents3">
             <table id="view2">
                 <tr>
-                    <td>no</td>
+                    <td><input type="checkbox" name="content2" onclick="selectAll2(this)"/></td>
                     <td>입고번호</td>
                     <td>입고일자</td>
                     <td>거래처</td>
@@ -378,11 +378,9 @@
                     <td>품명</td>
                     <td>입고</td>
                     <td>미마감수량</td>
-                    <!-- 
-                    입고번호,입고일자,거래처,거래구분,과세구분,품명,입고,미마감수량 -->
                 </tr>
                 <tr>
-                    <td id="num"></td>
+                    <td><input type="checkbox" value = "check1" id="check" name="content2"/></td>
                     <td><input type="text"/></td>
                     <td><input type="date"/></td>
                     <td><input type="text"/></td>
@@ -482,6 +480,12 @@
         }
         function selectAll(selectAll){
             const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+        function selectAll2(selectAll){
+            const checkbox = document.getElementsByName('content2');
             checkbox.forEach((checkbox) => {
                 checkbox.checked = selectAll.checked;
             })
