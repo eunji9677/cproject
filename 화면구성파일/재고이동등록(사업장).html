@@ -208,7 +208,7 @@
             
             
         }        
-        #contents1, #contents2, #contents3{
+        #contents2, #contents3{
             overflow: scroll;
         }
         
@@ -318,7 +318,7 @@
                     <td><input type="text" name="" disabled/></td>
                     <td ><button>검</button></td>
 
-                    <td colspan="5" style="width: 70px;">사원</td>
+                    <td colspan="5" style="width: 70px;">출고창고</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td><button>검</button></td>
@@ -343,7 +343,7 @@
                     <td ></td>
                 </tr>
 
-                <tr>
+                <!-- <tr>
                     <td>출고사업장</td>
                     <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
@@ -377,7 +377,7 @@
                     <td><input type="text" name="" disabled/></td>
                     <td><button>검</button></td>
                     
-                </tr>
+                </tr> -->
             </table>
         </container1>
         <container2 id="contents2">
@@ -411,7 +411,7 @@
         <container3 id="contents3">
             <table id="view2">
                 <tr>
-                    <td>no</td>
+                    <td><input type="checkbox" name="content2" onclick="selectAll2(this)"/></td>
                     <td>품 번</td>
                     <td>품 명</td>
                     <td>규 격</td>
@@ -424,7 +424,7 @@
             
                 </tr>
                 <tr>
-                    <td id="num"></td>
+                    <td><input type="checkbox" value = "check1" id="check" name="content2"/></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
                     <td><input type="text"/></td>
@@ -526,6 +526,12 @@
         }
         function selectAll(selectAll){
             const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+        function selectAll2(selectAll){
+            const checkbox = document.getElementsByName('content2');
             checkbox.forEach((checkbox) => {
                 checkbox.checked = selectAll.checked;
             })
