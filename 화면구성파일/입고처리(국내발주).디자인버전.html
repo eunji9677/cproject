@@ -307,9 +307,29 @@
 
 		.tab-content.current{
 			display: inherit;
-		}       
-        
-    
+		}    
+
+        /*버튼 css임*/
+        .button {
+             transition-duration: 0.2s;
+             position: absolute;
+             right: 25%;
+             bottom: 35%;
+             padding: 7px;
+             width: 80px;
+             font-family: 'Hanna';
+             background-color: #e2b027;
+             border-radius: 5px;
+        }
+
+        .button:hover {
+             background-color: black; 
+             color: #e2b027;
+             
+
+        }
+
+
     </style>    
 </head>
 <body>
@@ -434,12 +454,10 @@
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td ><button>검</button></td> -->
-
-                    <td>
-                        <input type="button" value="입고적용" style="padding: 7px;
-                        border-radius: 5px; margin-left: 15px;"></input>
-                    </td>
+                                                         
                 </tr>
+               <!-- Hover #3 -->
+                
 
                 <!-- <tr>
                     <td>담당자</td>
@@ -468,6 +486,10 @@
                 </tr> -->
                 
             </table>
+
+            <a><button class="button">입고적용</button></a>
+            
+
             <ul class="tabs" style="left: 0px; bottom: 0px; position: absolute;">
                 <li class="tab-link current" data-tab="tab-1">예외입고</li>
                 <li class="tab-link" data-tab="tab-2">발주입고</li>
