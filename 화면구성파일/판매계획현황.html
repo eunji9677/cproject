@@ -208,7 +208,9 @@
             bottom: 0;
         }
         #view2 td:not(.ch){
-            width: 13%;
+            width: 8%;
+            font-size: 15px;
+            font-weight: bold;
         }
         #view2 td input{
             width: 100%;
@@ -340,14 +342,14 @@
         </container1>
         <container2 id="contents2">
             <div>
-                <select name="division" id="div">
+                <select name="division" id="div" onchange="select_value(this)">
                     <option value="thing">품목별</option>
                     <option value="set">품목군별</option>
                     <option value="month">월별</option>
                 </select>
             </div>
             <table id="view1">
-                <thead>
+                <thead id="month" style="display: none;">
                     <!-- 월별 -->
                     <th id="non"><input type="checkbox" name="content" onclick="selectAll(this)"/></th>
                     <th>해당월</th>
@@ -358,7 +360,7 @@
                     <th>수정원화금액</th>
                     <th>차이원화금액</th>
                 </thead>
-                <thead>
+                <thead id="things">
                     <!-- 품목별 -->
                     <th id="non"><input type="checkbox" name="content"  onclick="selectAll(this)"/></th>
                     <th>품번</th>
@@ -372,7 +374,7 @@
                     <th>수정원화금액</th>
                     <th>차이원화금액</th>
                 </thead> 
-                <thead> 
+                <thead id="set" style="display: none;"> 
                     <!-- 품목군별 -->
                     <th id="non"><input type="checkbox" name="content"  onclick="selectAll(this)"/></th>
                     <th>품목군코드</th>
@@ -421,30 +423,49 @@
         </container2>
         <container3 id="contents3">
             <table id="view2">
-                <tr>
-                    <th><input type="checkbox" name="content"/></th>
-                    <th>품번</th>
-                    <th>품명</th>
-                    <th>규격</th>
-                    <th>단위</th>
-                    <th>연초수량</th>
-                    <th>수정수량</th>
-                    <th>차이수량</th>
+                <tr id="set2">
+                    <td style="width: 3%;"><input type="checkbox" name="content" /></td>
+                    <td>해당월</td>
+                    <td>연초수량</td>
+                    <td>수정수량</td>
+                    <td>차이수량</td>
+                    <td>연초원화단가</td>
+                    <td>수정원화단가</td>
+                    <td>연초원화금액</td>
+                    <td>수정원화금액</td>
+                    <td>차이원화금액</td>
                 </tr>
-                <tr>
-                    <td  class="ch"><input type="checkbox" name="content" /></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
+                <tr id="month2" style="display: none;">
+                    <td style="width: 3%;"><input type="checkbox" name="content" /></td>
+                    <td>품번</td>
+                    <td>품명</td>
+                    <td>규격</td>
+                    <td>단위</td>
+                    <td>연초수량</td>
+                    <td>수정수량</td>
+                    <td>차이수량</td>
+                    <td>연초원화단가</td>
+                    <td>수정원화단가</td>
+                    <td>연초원화금액</td>
+                    <td>수정원화금액</td>
+                    <td>차이원화금액</td>
                 </tr>
+                <!-- <tr>
+                    <td  class="ch" style="width: 5%;"><input type="checkbox" name="content"/></td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                    <td><input type="text"/></td>
+                </tr> -->
             </table>
             <div id="total1">
                 <table id="v_total1">
-                    <tr>
+                    <tr >
                         <td>연초수량합계</td>
                         <td>수정수량합계</td>
                         <td>차이수량합계</td>
@@ -452,6 +473,7 @@
                         <td>수정원화금액</td>
                         <td>차이원화금액</td>
                     </tr>
+                    
                     <tr>
                         <td><input type="text" disabled/></td>
                         <td><input type="text" disabled/></td>
@@ -563,6 +585,37 @@
         minus_button.onclick = function(){
             var year = document.getElementById('year');
             year.value =Number(year.value) - 1;
+        }
+        var select_value = function(select_obj){
+            var month = document.getElementById('month');
+            var things = document.getElementById('things');
+            var set = document.getElementById('set');
+            var month2 = document.getElementById('month2');
+            var set2 = document.getElementById('set2');
+            var contents3 = document.getElementById('contents3');
+            var select_index = select_obj.selectedIndex;
+            console.log(select_index);
+            if(select_index == 0){
+                month.style.display = "none";
+                set.style.display = "none";
+                things.style.display = "block";
+                month2.style.display = "none";
+                set2.style.display = "block";
+            }
+            else if(select_index == 1){
+                month.style.display = "none";
+                things.style.display = "none";
+                set.style.display = "block";
+                month2.style.display = "none";
+                set2.style.display = "block";
+            }
+            else if(select_index == 2){
+                set.style.display = "none";
+                things.style.display = "none";
+                month.style.display = "block";
+                month2.style.display = "block";
+                set2.style.display = "none";
+            }
         }
     </script>
 </body>
