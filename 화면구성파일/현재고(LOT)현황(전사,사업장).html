@@ -55,16 +55,17 @@
             right: 0;
             top: 15%;
             width: 85%;
-            height: 15%; /*10에서 15로 수정함*/
+            height: 12%; 
             border: 1px solid black;
             z-index: 1;
         }
+        
         #contents2{
             position: absolute;
             right: 0;
-            top: 30%; /*25에서으로 3으로수정함 */
+            top: 27%; 
             width: 85%;
-            height: 65%; /*35에서 65으로 수정함*/
+            height: 68%; 
             border: 1px solid black;
             z-index: 1;
         }
@@ -210,36 +211,38 @@
             overflow: scroll;
         }
 
-        /*탭구현 css임*/
-        #tabContent1, #tabContent2, #tabContent3, #tabContent4{
-            display: none;          
-            }
- 
-        #tab1, #tab2, #tab3, #tab4 {
-              display: none;}
- 
-        label {
-            display: inline-block;
-            padding: 5px;          
-            color: #bbb;
-            border: 1px solid transparent;}
- 
-        label:hover {
-            color: #2e9cdf;
-            cursor: pointer;}
- 
-        /*input 클릭시, label 스타일*/
-        input:checked + label {
-              color: #555;
-              border: 1px solid black;
-              border-top: 1px solid white;
-              border-bottom: 1px solid black;}
- 
-        #tab1:checked ~ #tabContent1,
-        #tab2:checked ~ #tabContent2,
-        #tab3:checked ~ #tabContent3,
-        #tab4:checked ~ #tabContent4 {
-            display: block;}
+        /*탭구현 css임*/		
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			color: black;
+			display: inline-block;
+			padding: 5px 5px;
+			cursor: pointer;
+            width: 80px;
+            text-align: center;
+		}
+
+
+		ul.tabs li.current{
+			border-top: 2px solid skyblue;			
+            background-color: #ddd;        
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+		}
+
+		.tab-content{
+			display: none;	
+			
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
         
         
 
@@ -348,14 +351,12 @@
                     <td><button>검</button></td>
 
                     <td colspan="5" style="width: 70px;">해당년도</td>
-                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
-                    <td><input type="text" name="" disabled/></td>
-                    <td ><button>검</button></td>
+                    <td style="width: 80px;"><input type="number" style="width: 100%; text-align: right;" value="2021" /></td>
 
-                    <td colspan="5" style="width: 50px;">계정조달</td>
+                    <!-- <td colspan="5" style="width: 50px;">계정조달</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
-                    <td><button>검</button></td>
+                    <td><button>검</button></td> -->
 
                     
                     
@@ -372,36 +373,34 @@
                     <td><input type="text" name="" disabled/></td>
                     <td><button>검</button></td>
                                         
-                    <td colspan="5" style="width: 50px;">품목군</td>
+                    <!-- <td colspan="5" style="width: 50px;">품목군</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
-                    <td><button>검</button></td>
+                    <td><button>검</button></td> -->
                 </tr>
 
-                <tr>
+                <!-- <tr>
                     <td>재고수량유무</td>
                     <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
                     <td><button>검</button></td>   
-                </tr>
+                </tr> -->
                 
 
-                
+                <ul class="tabs" style="left: 0px; bottom: 0px; position: absolute;">
+                    <li class="tab-link current" data-tab="tab-1">전 사</li>
+                    <li class="tab-link" data-tab="tab-2">사업장</li>
+                </ul>
             </table>
         </container1>
         <container2 id="contents2">
             <table id="view1">
                 <thead>
-                    <input id="tab1" type="radio" name="tabs" checked> 
-                    <label for="tab1">전 사</label>
-                
-                    <input id="tab2" type="radio" name="tabs">
-                    <label for="tab2">사업장</label>
                     <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>품번</td>
-                    <td>품명</td>
-                    <td>규격</td>
-                    <td>단위</td>
+                    <td>품 번</td>
+                    <td>품 명</td>
+                    <td>규 격</td>
+                    <td>단 위</td>
                     <td>LOTno</td>
                     <td>기초수량</td>
                     <td>입고수량</td>
@@ -519,6 +518,23 @@
                 checkbox.checked = selectAll.checked;
             })
         }
+    </script>
+    <!-- 탭구현 제이쿼리임 -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script> <!--제이쿼리최신버젼가져옴-->
+    <script>
+        $(document).ready(function(){
+        
+        $('ul.tabs li').click(function(){
+            var tab_id = $(this).attr('data-tab');
+    
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+    
+            $(this).addClass('current');
+            $("#"+tab_id).addClass('current');
+        })
+    
+    })
     </script>
     
     <!-- hwp 요구사항  "현재고(LOT)현황(전사,사업장)"

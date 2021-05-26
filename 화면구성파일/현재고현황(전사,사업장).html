@@ -55,7 +55,7 @@
             right: 0;
             top: 15%;
             width: 85%;
-            height: 10%; 
+            height: 12%; 
             border: 1px solid black;
             z-index: 1;
         }
@@ -63,9 +63,9 @@
         #contents2{
             position: absolute;
             right: 0;
-            top: 25%; 
+            top: 27%; 
             width: 85%;
-            height: 70%; 
+            height: 68%; 
             border: 1px solid black;
             z-index: 1;
         }
@@ -210,6 +210,7 @@
         #contents2 {
             overflow: scroll;
         }
+        
 
         /*탭구현 css임*/		
 		ul.tabs{
@@ -223,13 +224,16 @@
 			display: inline-block;
 			padding: 5px 5px;
 			cursor: pointer;
+            width: 80px;
+            text-align: center;
 		}
 
 
 		ul.tabs li.current{
-			border: 1px solid black;
-			border-top: 1px solid white;
-            background-color: #ddd;
+			border-top: 2px solid skyblue;			
+            background-color: #ddd;        
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
 		}
 
 		.tab-content{
@@ -340,12 +344,8 @@
                     <td><button>검</button></td>
 
                     <td colspan="5" style="width: 70px;">해당년도</td>
-                    <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
-                    <td><input type="text" name="" disabled/></td>
-                    <td ><button>검</button></td>
-
-                    
-                    
+                    <td style="width: 80px;"><input type="number" style="width: 100%; text-align: right;" value="2021" /></td>
+                   
                 </tr>
                 
                 <tr>
@@ -383,24 +383,22 @@
                     
                 </tr> -->
                 
-
+                <ul class="tabs" style="left: 0px; bottom: 0px; position: absolute;">
+                    <li class="tab-link current" data-tab="tab-1">전 사</li>
+                    <li class="tab-link" data-tab="tab-2">사업장</li>
+                </ul>
                 
             </table>
         </container1>
         <container2 id="contents2">
-            <ul class="tabs">
-                <li class="tab-link current" data-tab="tab-1">전 사</li>
-                <li class="tab-link" data-tab="tab-2">사업장</li>
-            </ul>
-
             <div id="tab-1" class="tab-content current">
             <table id="view1">
                 <thead>
                     <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>품번</td>
-                    <td>품명</td>
-                    <td>규격</td>
-                    <td>단위</td>
+                    <td>품 번</td>
+                    <td>품 명</td>
+                    <td>규 격</td>
+                    <td>단 위</td>
                     <td>기초수량</td>
                     <td>입고수량</td>
                     <td>출고수량</td>
@@ -429,7 +427,7 @@
 
     </div>
 
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script> <!--제이쿼리최신버젼가져옴-->
     <script>
         var side_button1 = document.getElementById('side1');
         var side_button2 = document.getElementById('side2');
