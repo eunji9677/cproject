@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>입고처리(국내발주)</title>
     <style>
+        @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
         *{
             margin: 0;
             padding: 0;
@@ -206,11 +207,12 @@
         }
         /* end default */
         
+
         .con1_search {
             margin: 10px;   
         }
         #contents1 {
-            background: linear-gradient(to bottom, rgb(223, 233, 240), white);
+            background-color: rgb(202, 202, 202);
             border-bottom: none;
         }
         #contents2 {
@@ -222,29 +224,55 @@
         }
         
         #contents1 td {
-            text-align: justify;
-        }
-        #contents2,#contents3 {
-            border: 1px solid white;
-        }
-        
-        #contents1, #contents2, #contents3 td{
-            font-weight: bold;
+            text-align: right;
+            letter-spacing: 1px;
+            padding: 1px;
+            font-family: 'Hanna';
         }
         #contents2 td {
             border: 1px solid white;
             border-collapse: collapse;
+            padding: 3px;
         }
         #contents3 td {
             border: 1px solid white;
             border-collapse: collapse;
+            padding: 3px;
         }
-        * {
-            font-family: Verdana, sans-serif;
+
+        #contents2,#contents3 {
+            border: none;
         }
+        #contents2, #contents3 td{
+            border-collapse: collapse;    
+        }
+        #contents2 thead {
+            background-color: rgb(128, 156, 153);
+            color: white;
+        }
+        #contents3 thead {
+            background-color: rgb(128, 156, 153);
+            color: white;
+        }
+        #contents1 input[type="text"] {
+            border: none;
+        }
+        #contents1 input[disabled] {
+            border: 2px inset rgb(148, 147, 150);
+        }
+        #contents2 input {
+            border: none;
+        }
+        #contents3 input {
+            border: none;
+        }        
         #contents2, #contents3 {
             overflow: scroll;   
         }
+        #contents1, #contents2, #contents3 {
+            font-family: 'Hanna';
+        }
+
         
 
         /*탭구현 css임*/		
@@ -408,7 +436,7 @@
                     <td ><button>검</button></td> -->
 
                     <td>
-                        <input type="button" value="입고적용" style="padding: 5px;
+                        <input type="button" value="입고적용" style="padding: 7px;
                         border-radius: 5px; margin-left: 15px;"></input>
                     </td>
                 </tr>
@@ -468,7 +496,7 @@
         </container2>
         <container3 id="contents3">
             <table id="view2">
-                <tr>
+                <thead>
                     <td><input type="checkbox" name="content2" onclick="selectAll2(this)"/></td>
                     <td>품 번</td>
                     <td>품 명</td>
@@ -476,9 +504,8 @@
                     <td>발주수량</td>
                     <td>단 가</td>
                     <td>공급가</td>
-                    <td>합계액</td>
-                    
-                </tr>
+                    <td>합계액</td>             
+                </thead>
                 <tr>
                     <td><input type="checkbox" value = "check1" id="check" name="content2"/></td>
                     <td><input type="text"/></td>
