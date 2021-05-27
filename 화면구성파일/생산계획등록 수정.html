@@ -67,6 +67,15 @@
             border: 1px solid black;
             z-index: 1;
         }
+        #contents3{
+            position: absolute;
+            left: 15%;
+            top: 25%;
+            width: 85%;
+            height: 70%;
+            border: 1px solid black;
+            z-index: 1;
+        }
         #footer{
             position: absolute;
             bottom: 0;
@@ -251,6 +260,12 @@
             display: block;
             clear: both;
         }
+
+        #pdcDateInfo{
+            width: 100%;
+            height: 100%;
+            overflow: scroll;
+        }
         /* 컨테이너 파트 종료 */
     </style>    
 </head>
@@ -369,11 +384,12 @@
                         </tr>
                     </table>
                     <ul class="tabs" style="left: 0px; bottom: 0px; position: absolute;">
-                        <li class="tab-link current" data-tab="tab-1">예외입고</li>
-                        <li class="tab-link" data-tab="tab-2">발주입고</li>
+                        <li class="tab-link current" data-tab="tab-1">품목별</li>
+                        <li class="tab-link" data-tab="tab-2">날짜별</li>
                     </ul>
                 </form>
         </container1>
+        <div id="tab-1" class="tab-content current">
         <container2 id= contents2>
             <!-- 컨테이너 출력 -->
             <div id="pdcInfo">
@@ -420,6 +436,33 @@
             </div>
             <!-- 컨테이너 2 출력 종료 -->
         </container2>
+    </div>
+    <div id="tab-2" class="tab-content">
+        <container id= contents3>
+            <!-- 컨테이너 출력 -->
+            <div id="pdcDateInfo">
+                <table id="pdcDateTable">
+                    <thead>
+                        <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                        <td>품번</td>
+                        <td>품명</td>
+                        <td>규격</td>
+                        <td>단위</td>
+                        <td>일생산량</td>
+                    </thead>
+                    <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
+                    <tbody>
+                        <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                    </tbody>
+                </table>
+            </div>
+        </container>
+    </div>
         <footer id= footer>
             footer
         </footer>
