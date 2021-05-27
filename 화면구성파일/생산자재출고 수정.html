@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <script language="javascript">
-        function showPopup() { window.open("https://google.com", "a", "width=400, height=300, left=500, top=400"); }
-    </script>
     <title>생산자재출고</title>
     <style>
         *{
@@ -198,14 +193,13 @@
             padding:0;
             text-align: center;
             position: absolute;
-            top: 25%;
-            left: 18%;
         }
     /* 컨텐츠부 css */
         #searchForm {
             height: 100%;
-            margin-left: 10px;
-            margin-top: 5px;
+            margin: 10px 20px;
+            padding:0;
+            text-align: center;
         }
 
         /* 테이블 css */
@@ -302,33 +296,30 @@
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#"  id="side1">물류1</a>
+                    <li><a href="#"  id="side1">생산관리</a>
                         <ul id="l_sub1">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">생산계획등록</a></li>
+                            <li><a href="#">작업지시등록</a></li>
+                            <li><a href="#">작업지시확정</a></li>
+                            <li><a href="#">생산자재출고</a></li>
+                            <li><a href="#">작업실적등록</a></li>
+                            <li><a href="#">작업지시마감처리</a></li>
                         </ul></li>
-                    <li><a href="#" id="side2">물류2</a>
+                    <li><a href="#" id="side2">외주관리</a>
                         <ul id="l_sub2">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">외주발주등록</a></li>
+                            <li><a href="#">외주발주확정</a></li>
+                            <li><a href="#">외주자재출고</a></li>
+                            <li><a href="#">외주실적등록</a></li>
+                            <li><a href="#">외주마감</a></li>
                         </ul></li>
-                    <li><a href="#" id="side3">생산1</a>
+                    <li><a href="#" id="side3">기초정보관리</a>
                         <ul id="l_sub3">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
-                    <li><a href="#" id="side4">생산2</a>
-                        <ul id="l_sub4">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">BOM등록</a></li>
+                            <li><a href="#">BOM정전개</a></li>
+                            <li><a href="#">BOM역전개</a></li>
+                            <li><a href="#">외주단가등록</a></li>
+                            <li><a href="#">불량유형등록</a></li>
                         </ul></li>
                 </ul>
             </div>
@@ -336,39 +327,40 @@
         <container1 id = contents1>
             <!-- 조회검색 폼 -->
             <form id="searchForm">
-                <table>
+                <table class="con1_search">
                     <tr>
-                        <td>
-                            사업장 
-                        </td>
-                        <td>
-                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
-                        </td>
-                        <td>
-                            출고기간
-                        </td>
-                        <td>
-                            <input type="date" name="MDDate1" style="width: 130px; background-color: yellow;"> ~ <input type="date" name="MDDate2" style="width: 130px; background-color: yellow;">
-                        </td>
+                        <td>사업장</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
+                        <td><button>검</button></td> 
+    
+                        <td colspan="5" style="width: 80px;">부서</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td><button>검</button></td>
+                        
                     </tr>
+                    
                     <tr>
+                        <td>출고기간</td>
+                        <td colspan="2" style="width: 50px;"><input type="date" style="width: 100%; background-color: yellow;"/></td>
+                        <td>~</td>
+                        <td ><input type="date" style="width: 100%; background-color: yellow;"/></td>
+                        <td><button>검</button></td>
+    
+                        <td colspan="5" style="width: 80px;">사원</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td ><button>검</button></td>
+
                         <td>
-                            부서
+                            <input type="button" value="출고요청" style="padding: 5px; margin-left: 30px;"></input>
                         </td>
                         <td>
-                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                            <input type="button" value="일괄적용" style="padding: 5px;"></input>
                         </td>
                         <td>
-                            <input type="button" name="requestMD" value="출고요청">
-                            <input type="button" name="stockCheck" value="재고확인">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            사원 
-                        </td>
-                        <td>
-                            <input type="text" name="department" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled ><br>
+                            <input type="button" value="재고확인" style="padding: 5px;"></input>
                         </td>
                     </tr>
                 </table>
@@ -406,7 +398,7 @@
                 <div id="MDInfo">
                     <table id="MDTable">
                         <thead>
-                            <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                            <td><input type="checkbox" name="content2" onclick="selectAll2(this)"/></td>
                             <td>NO.</td>
                             <td>품번</td>
                             <td>품명</td>
@@ -419,7 +411,7 @@
                         </thead>
                         <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                         <tbody>
-                            <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                            <td><input type="checkbox" value = "check1" id="check" name="content2"/></td>
                             <td><input type="text"/></td>
                             <td><input type="text"/></td>
                             <td><input type="text"/></td>
@@ -434,9 +426,9 @@
                     <!-- 출력부 1 -->
                 </div>
                     <div id="detailPrint1">
-                        관리구분 <input type="text" name="controlCondition" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                        관리구분 <input type="text" name="controlCondition" style="width: 75px;"><button>검</button><input type="text" name="ckfactory" style="width: 75px;" disabled>
                         지시수량 <input type="text" name="printQuantity" disabled><br>
-                        모품목 <input type="text" name="parentItem" disabled><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a>
+                        모품목 <input type="text" name="parentItem" disabled><button>검</button>
                         모품목명 <input type="text" name="parentItemName" disabled> 지시번호 <input type="text" name="num" disabled>
                     </div>
                     <!-- 출력부 1 종료 -->
@@ -534,6 +526,13 @@
         }
         function selectAll(selectAll){
             const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+
+        function selectAll2(selectAll){
+            const checkbox = document.getElementsByName('content2');
             checkbox.forEach((checkbox) => {
                 checkbox.checked = selectAll.checked;
             })
