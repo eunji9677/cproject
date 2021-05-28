@@ -188,6 +188,10 @@
             width: 100%; padding-top: 20px; padding-left: 50px; text-align: left;
             border-collapse: separate; border-spacing: 0 15px; 
         }
+        #reqInput {
+            background-color: rgba(61, 218, 139, 0.164);
+            text-align: center;
+        }
     </style>    
 </head>
 <body>
@@ -312,32 +316,22 @@
                     <td align="center">회계연도</td>
                     <td>
                         제
-                        <input type="text" name="fiscalYear"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 60px;
-                        text-align: center;" pattern="[0-9]{3}" maxlength="3"/>
+                        <input type="text" name="fiscalYear" id="reqInput"
+                        style="width: 60px" pattern="[0-9]{3}" maxlength="3"/>
                         기
                     </td>
                     <td>
-                        <input type="date" name="startDate"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none;
-                        text-align: center;" />
+                        <input type="date" name="startDate" id="reqInput">
                         ~
-                        <input type="date" name="endDate"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none;
-                        text-align: center;" />
+                        <input type="date" name="endDate" id="reqInput"/>
                         <button>필독</button>
                     </td>
                 </tr>
                 <tr>
                     <td align="center">사업자등록번호</td>
                     <td colspan="2">
-                        <input type="text" name="registrationNumber"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;" pattern="[0-9]{10}" maxlength="10"/>
+                        <input type="text" name="registrationNumber" id="reqInput"
+                        style="width: 240px;" pattern="[0-9]{10}" maxlength="10"/>
                     </td>
                 </tr>
                 <tr>
@@ -353,10 +347,8 @@
                 <tr>
                     <td align="center">대표자성명</td>
                     <td colspan="2">
-                        <input type="text" name="ceoName"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none;  width: 240px;
-                        text-align: center;"/>
+                        <input type="text" name="ceoName" id="reqInput"
+                        style="width: 240px;"/>
                     </td>
                 </tr>
                 <tr>
@@ -383,10 +375,8 @@
                 <tr>
                     <td align="center">본점주소</td>
                     <td colspan="2">
-                        <input type="text" name="headAddress"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;"/>
+                        <input type="text" name="headAddress" id="reqInput"
+                        style="width: 240px;"/>
                     </td>
                 </tr>
                 <tr>
@@ -410,19 +400,15 @@
                 <tr>
                     <td align="center">업태</td>
                     <td colspan="2">
-                        <input type="text" name="business" 
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;"/>
+                        <input type="text" name="business" id="reqInput"
+                        style="width: 240px;"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="center">종목</td>
                     <td colspan="2">
-                        <input type="text" name="specific" 
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;"/>
+                        <input type="text" name="specific" id="reqInput"
+                        style="width: 240px;"/>
                     </td>
                 </tr>
                 <tr>
@@ -435,21 +421,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="center">개업연월일</td>
-                    <td colspan="2">
-                        <input type="date" name="openingYear"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none;
-                        text-align: center;"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">폐업연월일</td>
-                    <td colspan="2">
-                        <input type="date" name="closingYear" 
-                        style="background-color: rgb(235,235,235);
-                        border-style: none;
-                        text-align: center;"/>
+                    <td align="center">사용여부</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="1">1.사용</option>
+                            <option value="0">0.미사용</option>
+                        </select>
                     </td>
                 </tr>
             </table>
