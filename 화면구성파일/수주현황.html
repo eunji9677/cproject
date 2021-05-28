@@ -253,7 +253,7 @@
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#" id="side1">영업관리</a>
+                    <li><a href="#"  id="side1" >영업관리</a>
                         <ul id="l_sub1">
                             <li><a href="#">판매계획등록</a></li>
                             <li><a href="#">견적등록</a></li>
@@ -363,28 +363,7 @@
                 l_sub2.style.display = "none";
             }
         }
-        side_button3.onclick = function(){
-            var l_sub3 = document.getElementById('l_sub3');
-            if(l_sub3.style.display == 'none' || l_sub3.style.display==''){
-            l_sub3.style.display = "block";
-            l_sub3.style.position = "relative";
-            l_sub3.style.marginLeft = "10px";
-            }
-            else{
-                l_sub3.style.display = "none";
-            }
-        }
-        side_button4.onclick = function(){
-            var l_sub = document.getElementById('l_sub4');
-            if(l_sub4.style.display == 'none' || l_sub4.style.display==''){
-            l_sub4.style.display = "block";
-            l_sub4.style.position = "relative";
-            l_sub4.style.marginLeft = "10px";
-            }
-            else{
-                l_sub4.style.display = "none";
-            }
-        }
+        
         search_box.onfocus = function(){
             document.getElementById("search").value = '';
         }

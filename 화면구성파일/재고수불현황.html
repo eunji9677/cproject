@@ -212,6 +212,37 @@
             right: 20px;
             top: 10px;
         }
+        ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			color: black;
+			display: inline-block;
+			padding: 5px 5px;
+			cursor: pointer;
+            width: 80px;
+            text-align: center;
+		}
+
+
+		ul.tabs li.current{
+			border-top: 2px solid skyblue;			
+            background-color: #ddd;        
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+		}
+
+		.tab-content{
+			display: none;	
+			
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}       
     </style>    
 </head>
 <body>
@@ -269,7 +300,7 @@
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#" id="side1">구매관리</a>
+                    <li><a href="#"  id="side1">구매관리</a>
                         <ul id="l_sub1">
                             <li><a href="#">주계획작성</a></li>
                             <li><a href="#">소요량전개</a></li>
@@ -328,14 +359,15 @@
                     <td><button>검</button></td>
                 </tr>
             </table>
+            
+                <ul class="tabs" style="left: 0px; bottom: 0px; position: absolute;">
+                    <li class="tab-link current" data-tab="tab-1" id="date_button">일자별</li>
+                    <li class="tab-link" data-tab="tab-2" id="type_button">유형별</li>
+                </ul>
+            
         </container1>
         <container2 id= contents2>
-            <div>
-                <select name="division" onchange="select_value(this)">
-                    <option value="storage">일자별</option>
-                    <option value="storage">유형별</option>
-                </select>
-            </div>
+            
             <table id="view1">
                 <thead id="day">
                     <td style="width: 1%;"><input type="checkbox" name="content"/></td>
@@ -417,6 +449,8 @@
         var side_button3 = document.getElementById('side3');
         var side_button4 = document.getElementById('side4');
         var search_box = document.getElementById('search');
+        var date_button = document.getElementById('date_button');
+        var type_button = document.getElementById('type_button');
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
             if(l_sub1.style.display == 'none' || l_sub1.style.display==''){
@@ -467,27 +501,43 @@
         search_box.onblur = function(){
             document.getElementById("search").value = ' 메뉴 검색';
         }
-        var select_value = function(select_obj){
-            var type = document.getElementById('type');
+        date_button.onclick = function(){
             var day = document.getElementById('day');
+            var type = document.getElementById('type');
             var d_total = document.getElementById('d_total');
             var t_total = document.getElementById('t_total');
-            var view1 = document.getElementById('view1');
-            var select_index = select_obj.selectedIndex;
-            console.log(select_index);
-            if(select_index == 0){
-                type.style.display = "none";
-                t_total.style.display = "none";
-                day.style.display = "block";
-                d_total.style.display = "block";
-            }
-            else if(select_index == 1){
-                day.style.display = "none";
-                d_total.style.display = "none";
-                type.style.display = "block";
-                t_total.style.display = "block";
-            }
+            day.style.display = "block";
+            d_total.style.display = "block";
+            type.style.display = "none";
+            t_total.style.display = "none";
+            
         }
+        type_button.onclick = function(){
+            var day = document.getElementById('day');
+            var type = document.getElementById('type');
+            var d_total = document.getElementById('d_total');
+            var t_total = document.getElementById('t_total');
+            day.style.display = "none";
+            d_total.style.display = "none";
+            type.style.display = "block";
+            t_total.style.display = "block";
+        }
+    </script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script> <!--제이쿼리최신버젼가져옴-->
+    <script>
+        $(document).ready(function(){
+        
+        $('ul.tabs li').click(function(){
+            var tab_id = $(this).attr('data-tab');
+    
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+    
+            $(this).addClass('current');
+            $("#"+tab_id).addClass('current');
+        })
+    
+    })
     </script>
 </body>
 </html>

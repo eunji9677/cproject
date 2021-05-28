@@ -58,9 +58,11 @@
             height: 10%;
             border: 1px solid black;
             z-index: 1;
+
         }
         #contents2{
             position: absolute;
+            text-align: center;
             right: 0;
             top: 25%;
             width: 85%;
@@ -165,6 +167,9 @@
             border-style: none;
             display: none;
         }
+        #s_nav a{
+            text-decoration: none;
+        }
         #nav2 button{
             background-color: white;
             width: 24%;
@@ -191,10 +196,10 @@
         }
         .con1_search{
             padding:0;
-            text-align: center;
             position: absolute;
             top: 25%;
-            left: 18%;
+            text-align: center;
+            left: 17%;
         }
         #view1,#view2,#t_total{
             width: 100%;
@@ -270,7 +275,7 @@
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#" id="side1">영업관리</a>
+                    <li><a href="#"  id="side1" >영업관리</a>
                         <ul id="l_sub1">
                             <li><a href="#">판매계획등록</a></li>
                             <li><a href="#">견적등록</a></li>
@@ -290,6 +295,7 @@
                             <li><a href="#">출고현황</a></li>
                             <li><a href="#">출고반품현황</a></li>
                         </ul></li>
+                    
                 </ul>
             </div>
         </aside>
@@ -301,7 +307,7 @@
 
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
                     <td><button>검</button></td>
-                    <td colspan="5" style="width: 50px;">부서</td>
+                    <td style="width: 50px;">부서</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td ><button>검</button></td>
@@ -314,12 +320,13 @@
                     <td>~</td>
                     <td><input type="date" style="width: 100%;"/></td>
                     <td><button>검</button></td>
-                    <td colspan="5">사원</td>
+                    <td>사원</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
                     <td><button>검</button></td>
                 </tr>
             </table>
+            
         </container1>
         <container2 id="contents2">
             <table id="view1">
@@ -424,28 +431,7 @@
                 l_sub2.style.display = "none";
             }
         }
-        side_button3.onclick = function(){
-            var l_sub3 = document.getElementById('l_sub3');
-            if(l_sub3.style.display == 'none' || l_sub3.style.display==''){
-            l_sub3.style.display = "block";
-            l_sub3.style.position = "relative";
-            l_sub3.style.marginLeft = "10px";
-            }
-            else{
-                l_sub3.style.display = "none";
-            }
-        }
-        side_button4.onclick = function(){
-            var l_sub = document.getElementById('l_sub4');
-            if(l_sub4.style.display == 'none' || l_sub4.style.display==''){
-            l_sub4.style.display = "block";
-            l_sub4.style.position = "relative";
-            l_sub4.style.marginLeft = "10px";
-            }
-            else{
-                l_sub4.style.display = "none";
-            }
-        }
+        
         search_box.onfocus = function(){
             document.getElementById("search").value = '';
         }
