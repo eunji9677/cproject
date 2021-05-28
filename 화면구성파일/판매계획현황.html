@@ -224,6 +224,59 @@
         #view1 th{
             width: 4%;
         }
+
+        #tab_div ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+            
+		}
+		#tab_div ul.tabs li{
+			background: none;
+			color: black;
+			display: inline-block;
+			padding: 0;
+			cursor: pointer;
+            width: 60px;
+            text-align: center;
+            font-size: 13px;
+		}
+
+
+		#tab_div ul.tabs{
+            
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		#tab_div ul.tabs li{
+            
+			background: none;
+			color: black;
+			display: inline-block;
+			padding: 5px 5px;
+			cursor: pointer;
+            width: 80px;
+            text-align: center;
+            font-size: 12px;
+		}
+
+
+		#tab_div ul.tabs li.current{
+			border-top: 2px solid skyblue;			
+            background-color: #ddd;        
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+		}
+
+		#tab_div .tab-content{
+			display: none;	
+			
+		}
+
+		#tab_div .tab-content.current{
+			display: inherit;
+		}       
     </style>    
 </head>
 <body>
@@ -281,34 +334,28 @@
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#"  id="side1">물류1</a>
+                    <li><a href="#"  id="side1" >영업관리</a>
                         <ul id="l_sub1">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">판매계획등록</a></li>
+                            <li><a href="#">견적등록</a></li>
+                            <li><a href="#">수주등록</a></li>
+                            <li><a href="#">출고의뢰등록</a></li>
+                            <li><a href="#">출고처리</a></li>
+                            <li><a href="#">거래명세서발행</a></li>
                         </ul></li>
-                    <li><a href="#" id="side2">물류2</a>
+                    <li><a href="#" id="side2">영업현황</a>
                         <ul id="l_sub2">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">견적현황</a></li>
+                            <li><a href="#">판매계획현황</a></li>
+                            <li><a href="#">판매계획대비출고현황</a></li>
+                            <li><a href="#">견적대비수주현황</a></li>
+                            <li><a href="#">수주현황</a></li>
+                            <li><a href="#">수주대비출고현황</a></li>
+                            <li><a href="#">출고현황</a></li>
+                            <li><a href="#">출고반품현황</a></li>
                         </ul></li>
-                    <li><a href="#" id="side3">생산1</a>
-                        <ul id="l_sub3">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
-                    <li><a href="#" id="side4">생산2</a>
-                        <ul id="l_sub4">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
+                    
+                   
                 </ul>
             </div>
         </aside>
@@ -339,15 +386,16 @@
                     <td><button>검</button></td>
                 </tr>
             </table>
+            <div id="tab_div">
+                <ul class="tabs" style="left: 0px; bottom: 0px; position: absolute;">
+                    <li class="tab-link current" data-tab="tab-1" id="things_button">품목별</li>
+                    <li class="tab-link" data-tab="tab-2" id="set_button">품목군별</li>
+                    <li class="tab-link" data-tab="tab-3" id="month_button">월별</li>
+                </ul>
+            </div>
         </container1>
         <container2 id="contents2">
-            <div>
-                <select name="division" id="div" onchange="select_value(this)">
-                    <option value="thing">품목별</option>
-                    <option value="set">품목군별</option>
-                    <option value="month">월별</option>
-                </select>
-            </div>
+            
             <table id="view1">
                 <thead id="month" style="display: none;">
                     <!-- 월별 -->
@@ -492,14 +540,16 @@
     <script>
         var side_button1 = document.getElementById('side1');
         var side_button2 = document.getElementById('side2');
-        var side_button3 = document.getElementById('side3');
-        var side_button4 = document.getElementById('side4');
+
         var search_box = document.getElementById('search');
         var num_box = document.getElementById('num');
         var save_button = document.getElementById('save');
         var delete_button = document.getElementById('delete');
         var plus_button = document.getElementById('plus');
         var minus_button = document.getElementById('minus');
+        var month_button = document.getElementById('month_button');
+        var things_button = document.getElementById('things_button');
+        var set_button = document.getElementById('set_button');
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
             if(l_sub1.style.display == 'none' || l_sub1.style.display==''){
@@ -522,28 +572,7 @@
                 l_sub2.style.display = "none";
             }
         }
-        side_button3.onclick = function(){
-            var l_sub3 = document.getElementById('l_sub3');
-            if(l_sub3.style.display == 'none' || l_sub3.style.display==''){
-            l_sub3.style.display = "block";
-            l_sub3.style.position = "relative";
-            l_sub3.style.marginLeft = "10px";
-            }
-            else{
-                l_sub3.style.display = "none";
-            }
-        }
-        side_button4.onclick = function(){
-            var l_sub = document.getElementById('l_sub4');
-            if(l_sub4.style.display == 'none' || l_sub4.style.display==''){
-            l_sub4.style.display = "block";
-            l_sub4.style.position = "relative";
-            l_sub4.style.marginLeft = "10px";
-            }
-            else{
-                l_sub4.style.display = "none";
-            }
-        }
+        
         search_box.onfocus = function(){
             document.getElementById("search").value = '';
         }
@@ -586,37 +615,63 @@
             var year = document.getElementById('year');
             year.value =Number(year.value) - 1;
         }
-        var select_value = function(select_obj){
+
+        month_button.onclick = function(){
             var month = document.getElementById('month');
             var things = document.getElementById('things');
             var set = document.getElementById('set');
             var month2 = document.getElementById('month2');
             var set2 = document.getElementById('set2');
-            var contents3 = document.getElementById('contents3');
-            var select_index = select_obj.selectedIndex;
-            console.log(select_index);
-            if(select_index == 0){
-                month.style.display = "none";
-                set.style.display = "none";
-                things.style.display = "block";
-                month2.style.display = "none";
-                set2.style.display = "block";
-            }
-            else if(select_index == 1){
-                month.style.display = "none";
-                things.style.display = "none";
-                set.style.display = "block";
-                month2.style.display = "none";
-                set2.style.display = "block";
-            }
-            else if(select_index == 2){
-                set.style.display = "none";
-                things.style.display = "none";
-                month.style.display = "block";
-                month2.style.display = "block";
-                set2.style.display = "none";
-            }
+            month.style.display = "block";
+            set.style.display = "none";
+            things.style.display = "none";
+            month2.style.display = "block";
+            set2.style.display = "none";
+            
         }
+        things_button.onclick = function(){
+            var month = document.getElementById('month');
+            var things = document.getElementById('things');
+            var set = document.getElementById('set');
+            var month2 = document.getElementById('month2');
+            var set2 = document.getElementById('set2');
+            month.style.display = "none";
+            set.style.display = "none";
+            things.style.display = "block";
+            month2.style.display = "none";
+            set2.style.display = "block";
+            
+        }
+        set_button.onclick = function(){
+            var month = document.getElementById('month');
+            var things = document.getElementById('things');
+            var set = document.getElementById('set');
+            var month2 = document.getElementById('month2');
+            var set2 = document.getElementById('set2');
+            month.style.display = "none";
+            set.style.display = "block";
+            things.style.display = "none";
+            month2.style.display = "none";
+            set2.style.display = "block";
+            
+        }
+        
     </script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script> <!--제이쿼리최신버젼가져옴-->
+    <script>
+        $(document).ready(function(){
+        
+        $('ul.tabs li').click(function(){
+            var tab_id = $(this).attr('data-tab');
+    
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+    
+            $(this).addClass('current');
+            $("#"+tab_id).addClass('current');
+        })
+    
+    })
+</script>
 </body>
 </html>

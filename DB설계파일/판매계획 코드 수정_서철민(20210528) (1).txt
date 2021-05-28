@@ -78,7 +78,7 @@ DROP SEQUENCE SEQ_seq;
 CREATE SEQUENCE NO_seq START WITH 1 INCREMENT BY 1 MAXVALUE 10000 CYCLE NOCACHE;
 -- 예시 INSERT INTO tmp values(tmp_seq.NEXTVAL, 'tmptmp');
 --순번 sequence 자동생성 시퀀스
-CREATE SEQUENCE SEQ_seq INCREMENT BY 1 START WITH 1 MINVALUE 1  MAXVALUE 1000 CYCLE NOCACHE;
+CREATE SEQUENCE SEQ_seq START WITH 1 INCREMENT BY 1 MAXVALUE 1000 CYCLE NOCACHE;
 
 
 
@@ -606,7 +606,7 @@ insert into SM_BIM_Out_Item_Cus_IN values ('00007', '(주)삼화INC' , 'PR01' , 
 -------------------------------------------------------------------
 --판매계획등록
 create table SM_BIM_Sal_Pla_Reg (
-Plan_Item_Code varchar2(12) NOT NULL, --품번 
+Plan_Item_Code varchar2(12) PRIMARY KEY, --품번 
 Plan_Item_Name varchar2(50) NOT NULL, --품명
 Plan_Item_Standard varchar2(20), --규격
 Plan_Item_Unit varchar2(5) DEFAULT 'EA', --단위
@@ -691,7 +691,7 @@ tax varchar2(20) not null,
 note varchar2(1000),
 
 --FK 
-CONSTRAINT FKCSMSMESTREG_Customer_Name FOREIGN KEY (customerCode) 
+CONSTRAINT FKCSMSMESTREG_BUYER FOREIGN KEY (customerCode) 
 REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE
 );
 
@@ -743,7 +743,7 @@ Note varchar2(1000),
 --FK
 
 --고객
-CONSTRAINT FK_CSMSMORDREG_Customer_Name FOREIGN KEY (customerCode) 
+CONSTRAINT FK_CSMSMORDREG_BUYER FOREIGN KEY (customerCode) 
 REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE
 );
 
@@ -803,7 +803,7 @@ note varchar2(1000),
 --FK
 
 --고객
-CONSTRAINT FK_CSMSMREQREG_Customer_Name FOREIGN KEY (customerCode) 
+CONSTRAINT FK_CSMSMREQREG_BUYER FOREIGN KEY (customerCode) 
 REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE,
 
 
@@ -864,7 +864,7 @@ note varchar2(10),
 --FK
 
 --고객
-CONSTRAINT FK_CSMSMRELREG_Customer_Name FOREIGN KEY (customerCode) 
+CONSTRAINT FK_CSMSMRELREG_BUYER FOREIGN KEY (customerCode) 
 REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE
 );
 
@@ -989,49 +989,51 @@ VALUES ('POWER01' , '시소닉 A12 STD',null,'EA','20210526','80.00','700000.00'
 --주계획서작성(판매,주문)
 create table PMM_PM_MPS(
 plandate date primary key,--계획일
-Item_Code varchar2(10) not null,--품번
-Item_Name varchar2(50) not null,--품명
+Itemnumber varchar2(10) not null,--품번
+Itemname varchar2(50) not null,--품명
 standard varchar2(20),--규격
 unit varchar2(3) not null,--단위
 sequence number(5),--순서
 expected_Date date,--출하예정일
 Due_date date,--납기일
 plan_Quantity number(5)unique,--계획수량
-Customer_Name varchar2(20) not null, --회사명
+buyer varchar2(20) not null, --회사명
 note varchar2(1000) not null, --비고
-constraint fk_PMMPMMPS_Item_Code foreign key (Item_Code) references SM_BIM_Ite_Reg(Item_Code),
-constraint fk_PMMPMMPS_Item_Name foreign key (Item_Name) references SM_BIM_Ite_Reg(Item_Name),
-constraint fk_PMMPMMPS_Customer_Name foreign key (Customer_Name) references SM_BIM_Gen_Cus_Reg(General_Customer_Name)
+constraint fk_PMMPMMPS_Itemnumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code),
+constraint fk_PMMPMMPS_Itemname foreign key (Itemname) references SM_BIM_Ite_Reg(Item_Name),
+constraint fk_PMMPMMPS_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name)
+--constraint fk_PMMPMMPS_Due_date foreign key (Due_date) references CSM_SM_COR_Reg(dueDate),
+--constraint fk_PMMPMMPS_expected_Date foreign key (expected_Date) references CSM_SM_COR_Reg(expectedDate)
 );
 ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
 SELECT SEQ_seq.NEXTVAL FROM DUAL;
 ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
-INSERT INTO PMM_PM_MPS(PLANDATE,Item_Code,Item_Name,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
-    Customer_Name,NOTE)
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
 VALUES('20210301','PR01','레이저프린터',NULL,'EA',SEQ_seq.NEXTVAL,'20210306','20210306',20,'(주)삼화INC','이상없음');
-INSERT INTO PMM_PM_MPS(PLANDATE,Item_Code,Item_Name,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
-    Customer_Name,NOTE)
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
 VALUES('20211101','CPU05','AMD 라이젠3 Pro',NULL,'EA',SEQ_seq.NEXTVAL,'20211102','20211102',10,'(주)디비컴퓨터','이상없음');
-INSERT INTO PMM_PM_MPS(PLANDATE,Item_Code,Item_Name,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
-    Customer_Name,NOTE)
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
 VALUES('20210901','RAM03','삼성 DDR4-3200',NULL,'EA',SEQ_seq.NEXTVAL,'20210901','20210901',30,'더지글로직스','이상없음');
-INSERT INTO PMM_PM_MPS(PLANDATE,Item_Code,Item_Name,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
-    Customer_Name,NOTE)
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
 VALUES('20210902','POWER01','시소닉 A12 STD',NULL,'EA',SEQ_seq.NEXTVAL,'20210902','20210902',50,'(주)삼도전자','이상없음');
-INSERT INTO PMM_PM_MPS(PLANDATE,Item_Code,Item_Name,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
-    Customer_Name,NOTE)
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
 VALUES('20210201','SSD01','삼성전자 980 PRO',NULL,'EA',SEQ_seq.NEXTVAL,'20210202','20210202',80,'(주)삼도전자','이상없음');
 
 --주계획서작성(판매,주문계획)
 create table PMM_PM_MPS_OS(
-ordersNum varchar2(12),--주문번호
+orderno varchar2(12),--주문번호
 sequence number(5),--순서
 orderdate date,--주문일자
 okeydate date,--승인일자
-Customer_Name varchar2(20) not null,--회사명
-Item_Code varchar2(10) not null,--품번
-Item_Name varchar2(50) not null,--품명
+buyer varchar2(20) not null,--회사명
+Itemnumber varchar2(10) not null,--품번
+ItemName varchar2(50) not null,--품명
 standard varchar2(20),--규격
 unit varchar2(3) not null,--단위
 Order_quantity number(5),--주문수량
@@ -1042,41 +1044,44 @@ note varchar2(1000) not null,--비고
 supportd varchar2(7) not null,--조달구분
 account varchar2(7) not null,--계정구분
 plan_Quantity number(10) unique,--계획수량
-constraint fk_PMMPMMPSOS_Item_Code foreign key (Item_Code) references SM_BIM_Ite_Reg(Item_Code),
-constraint fk_PMMPMMPSOS_Item_Name foreign key (Item_Name) references SM_BIM_Ite_Reg(Item_Name),
-constraint fk_PMMPMMPSOS_Customer_Name foreign key (Customer_Name) references SM_BIM_Gen_Cus_Reg(General_Customer_Name),
-constraint fk_PMMPMMPSOS_ordersNum foreign key (ordersNum) references CSM_SM_Ord_Reg(ordersNum)
+constraint fk_PMMPMMPSOS_Itemnumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code),
+constraint fk_PMMPMMPSOS_ItemName foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name),
+constraint fk_PMMPMMPSOS_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name),
+--constraint fk_PMMPMMPSOS_expected_Date foreign key (expected_Date) references CSM_SM_COR_Reg(expectedDate),
+constraint fk_PMMPMMPSOS_orderno foreign key (orderno) references CSM_SM_Ord_Reg(ordersNum)
+--constraint fk_PMMPMMPSOS_orderdate foreign key (orderdate) references CSM_SM_Ord_Reg(ordersdate),
+--constraint fk_PMMPMMPSOS_Order_quantity foreign key (Order_quantity) references CSM_SM_COR_Reg(ordersQuantity)
 );
 ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
 SELECT SEQ_seq.NEXTVAL FROM DUAL;
 ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
-INSERT INTO PMM_PM_MPS_OS(ordersNum,SEQUENCE,ORDERDATE,OKEYDATE,Customer_Name,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
-VALUES('S0210300000'||SEQ_seq.NEXTVAL,SEQ_seq.NEXTVAL,'20210201','20210201','(주)삼도전자','SSD01','삼성전자 980 PRO',NULL,'EA',80.00,80,0,'20210202','이상없음'
+VALUES('S02103000001',SEQ_seq.NEXTVAL,'20210201','20210201','(주)삼도전자','SSD01','삼성전자 980 PRO',NULL,'EA',80.00,80,0,'20210202','이상없음'
     ,'구매','상품',80);
-INSERT INTO PMM_PM_MPS_OS(ordersNum,SEQUENCE,ORDERDATE,OKEYDATE,Customer_Name,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
-VALUES('S0210300000'||SEQ_seq.NEXTVAL,SEQ_seq.NEXTVAL,'20210901','20210901','(주)삼도전자','POWER01','시소닉 A12 STD',NULL,'EA',50.00,50,0,'20210902','이상없음'
+VALUES('S02103000002',SEQ_seq.NEXTVAL,'20210901','20210901','(주)삼도전자','POWER01','시소닉 A12 STD',NULL,'EA',50.00,50,0,'20210902','이상없음'
     ,'구매','상품',50);
-INSERT INTO PMM_PM_MPS_OS(ordersNum,SEQUENCE,ORDERDATE,OKEYDATE,Customer_Name,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
-VALUES('S0210300000'||SEQ_seq.NEXTVAL,SEQ_seq.NEXTVAL,'20210901','20210901','더지글로직스','RAM03','삼성 DDR4-3200',NULL,'EA',30.00,30,0,'20210901','이상없음'
+VALUES('S02103000003',SEQ_seq.NEXTVAL,'20210901','20210901','더지글로직스','RAM03','삼성 DDR4-3200',NULL,'EA',30.00,30,0,'20210901','이상없음'
     ,'구매','상품',30);
-INSERT INTO PMM_PM_MPS_OS(ordersNum,SEQUENCE,ORDERDATE,OKEYDATE,Customer_Name,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
-VALUES('S0210300000'||SEQ_seq.NEXTVAL,SEQ_seq.NEXTVAL,'20211101','20211101','(주)디비컴퓨터','CPU05','AMD 라이젠3 Pro',NULL,'EA',10.00,10,0,'20211102','이상없음'
+VALUES('S02103000004',SEQ_seq.NEXTVAL,'20211101','20211101','(주)디비컴퓨터','CPU05','AMD 라이젠3 Pro',NULL,'EA',10.00,10,0,'20211102','이상없음'
     ,'구매','상품',10);
-INSERT INTO PMM_PM_MPS_OS(ordersNum,SEQUENCE,ORDERDATE,OKEYDATE,Customer_Name,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
-VALUES('S0210300000'||SEQ_seq.NEXTVAL,SEQ_seq.NEXTVAL,'20210305','20210305','(주)삼화INC','PR01','레이저프린터',NULL,'EA',20.00,20,0,'20210306','이상없음'
+VALUES('S02103000005',SEQ_seq.NEXTVAL,'20210305','20210305','(주)삼화INC','PR01','레이저프린터',NULL,'EA',20.00,20,0,'20210306','이상없음'
     ,'구매','상품',20);
 
 --입고검사등록(리스트)
 create table PMM_PM_RIP_LIST(
 sequence number(5),--순서
-Item_Code varchar2(10) not null,   --품번
-Item_Name varchar2(30) not null,      --품명
+Itemnumber varchar2(10) not null,   --품번
+ItemName varchar2(30) not null,      --품명
 Standard varchar2(20) ,      --규격
 Unit varchar2(3),   --단위
 check_Quantity number(5),--검사수량
@@ -1085,27 +1090,27 @@ check_division varchar2(15) not null,--검사구분
 pass_Whether varchar2(10) not null,--합격여뷰
 pass number(5),--합격수량
 fail number(5),--불합격수량
-constraint fk_PMMPMRIPLIST_Item_Code foreign key (Item_Code) references SM_BIM_Ite_Reg(Item_Code),
-constraint fk_PMMPMRIPLIST_Item_Name foreign key (Item_Name) references SM_BIM_Ite_Reg(Item_Name)
+constraint fk_PMMPMRIPLIST_Item_Code foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code),
+constraint fk_PMMPMRIPLIST_Item_Name foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name)
 );
 ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
 SELECT SEQ_seq.NEXTVAL FROM DUAL;
 ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
 
-INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
     PASS_WHETHER,PASS,FAIL)
 VALUES(SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,'EA',80,'외관검사','샘플검사','합격',80,0);
-INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
     PASS_WHETHER,PASS,FAIL)
 VALUES(SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,'EA',50,'외관검사','샘플검사','합격',50,0);
-INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
     PASS_WHETHER,PASS,FAIL)
 VALUES(SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,'EA',30,'외관검사','샘플검사','합격',30,0);
-INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
     PASS_WHETHER,PASS,FAIL)
 VALUES(SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,'EA',10,'외관검사','샘플검사','합격',10,0);
-INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
     PASS_WHETHER,PASS,FAIL)
 VALUES(SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,'EA',20,'외관검사','샘플검사','합격',20,0);
 
@@ -1114,10 +1119,10 @@ create table PMM_PM_ORDER(
 order_no varchar2(12)primary key,--발주번호
 order_date date unique,--발주일자
 code number(5),  --코드
-Customer_Name varchar2(20) not null,--회사명
+buyer varchar2(20) not null,--회사명
 sequence number(5),--순서
-Item_Code varchar2(10) not null,--품번   
-Item_Name varchar2(30) not null,   --품명
+Itemnumber varchar2(10) not null,--품번   
+ItemName varchar2(30) not null,   --품명
 Standard varchar2(20),   --규격
 Unit varchar2(3)not null,      --단위
 Order_quantity number(5),--발주수량
@@ -1125,34 +1130,35 @@ order_Balance number(5),--발주잔량
 deadline varchar2(10) not null,--마감
 note varchar2(1000) not null, --비고
 constraint fk_PMMPMORDER_Order_quantity foreign key (Order_quantity) references PMM_PM_MPS(plan_Quantity),
-constraint fk_PMMPMORDER_Item_Code foreign key (Item_Code) references SM_BIM_Ite_Reg(Item_Code),
-constraint fk_PMMPMORDER_Item_Name foreign key (Item_Name) references SM_BIM_Ite_Reg(Item_Name),
-constraint fk_PMMPMORDER_Customer_Name foreign key (Customer_Name) references SM_BIM_Gen_Cus_Reg(General_Customer_Name)
+--constraint fk_PMMPMORDER_order_Balance foreign key (order_Balance) references PMM_PM_RIP_LIST(fail),
+constraint fk_PMMPMORDER_Item_Code foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code),
+constraint fk_PMMPMORDER_Item_Name foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name),
+constraint fk_PMMPMORDER_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name)
 );
 ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
 SELECT SEQ_seq.NEXTVAL FROM DUAL;
 ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
-INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,Customer_Name,SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     ORDER_BALANCE,DEADLINE,NOTE)
-VALUES('R0210300000'||SEQ_seq.NEXTVAL,'20210305',001,'(주)삼화INC',SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,'EA',20,0,'마감','이상없음');
-INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,Customer_Name,SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+VALUES('R02103000005','20210305',001,'(주)삼화INC',SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,'EA',20,0,'마감','이상없음');
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     ORDER_BALANCE,DEADLINE,NOTE)
-VALUES('R0210300000'||SEQ_seq.NEXTVAL,'20211101',002,'(주)디비컴퓨터',SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,'EA',10,0,'마감','이상없음');
-INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,Customer_Name,SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+VALUES('R02103000004','20211101',002,'(주)디비컴퓨터',SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,'EA',10,0,'마감','이상없음');
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     ORDER_BALANCE,DEADLINE,NOTE)
-VALUES('R0210300000'||SEQ_seq.NEXTVAL,'20210901',003,'더지글로직스',SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,'EA',30,0,'마감','이상없음');
-INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,Customer_Name,SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+VALUES('R02103000003','20210901',003,'더지글로직스',SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,'EA',30,0,'마감','이상없음');
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     ORDER_BALANCE,DEADLINE,NOTE)
-VALUES('R0210300000'||SEQ_seq.NEXTVAL,'20210902',004,'(주)삼도전자',SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,'EA',50,0,'마감','이상없음');
-INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,Customer_Name,SEQUENCE,Item_Code,Item_Name,STANDARD,UNIT,ORDER_QUANTITY,
+VALUES('R02103000002','20210902',004,'(주)삼도전자',SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,'EA',50,0,'마감','이상없음');
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
     ORDER_BALANCE,DEADLINE,NOTE)
-VALUES('R0210300000'||SEQ_seq.NEXTVAL,'20210201',005,'(주)삼도전자',SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,'EA',80,0,'마감','이상없음');
+VALUES('R02103000001','20210201',005,'(주)삼도전자',SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,'EA',80,0,'마감','이상없음');
 
 --소요량전개(주문,판매,생산)
 create table PMM_PM_MRP(
-Item_Code varchar2(10) not null,--품번
-Item_Name varchar2(50) not null,--품명
+Itemnumber varchar2(10) not null,--품번
+ItemName varchar2(50) not null,--품명
 standard varchar2(20),--규격
 need_date date,--소요일자
 sequence number(5),--순서
@@ -1161,22 +1167,23 @@ Expected_Quantity number(5),--예정수량
 unit varchar2(3)not null, --단위
 constraint fk_PMMPMMRP_need_date foreign key (need_date) references PMM_PM_MPS(plandate),
 constraint fk_PMMPMMRP_Expected_Quantity foreign key (Expected_Quantity) references PMM_PM_MPS(plan_Quantity),
-constraint fk_PMMPMMRP_Item_Code foreign key (Item_Code) references SM_BIM_Ite_Reg(Item_Code),
-constraint fk_PMMPMMRP_Item_Name foreign key (Item_Name) references SM_BIM_Ite_Reg(Item_Name)
+--constraint fk_PMMPMORDER_Expected_order foreign key (Expected_order) references PMM_PM_ORDER(order_date),
+constraint fk_PMMPMMRP_Itemnumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code),
+constraint fk_PMMPMMRP_ItemName foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name)
 );
 ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
 SELECT SEQ_seq.NEXTVAL FROM DUAL;
 ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
-INSERT INTO PMM_PM_MRP(Item_Code,Item_Name,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
 VALUES('PR01','레이저프린터',NULL,'20210301',SEQ_seq.NEXTVAL,'20210305',20,'EA');
-INSERT INTO PMM_PM_MRP(Item_Code,Item_Name,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
 VALUES('CPU05','AMD 라이젠3 Pro',NULL,'20211101',SEQ_seq.NEXTVAL,'20211101',10,'EA');
-INSERT INTO PMM_PM_MRP(Item_Code,Item_Name,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
 VALUES('RAM03','삼성 DDR4-3200',NULL,'20210901',SEQ_seq.NEXTVAL,'20210901',30,'EA');
-INSERT INTO PMM_PM_MRP(Item_Code,Item_Name,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
 VALUES('POWER01','시소닉 A12 STD',NULL,'20210902',SEQ_seq.NEXTVAL,'20210901',50,'EA');
-INSERT INTO PMM_PM_MRP(Item_Code,Item_Name,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
 VALUES('SSD01','삼성전자 980 PRO',NULL,'20210201',SEQ_seq.NEXTVAL,'20210201',80,'EA');
 
 --3 청구등록
@@ -1186,95 +1193,92 @@ claim_date date,--청구일자
 claim_division varchar2(7)not null,--청구구분
 note varchar2(1000) not null--비고
 );
-ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
-SELECT SEQ_seq.NEXTVAL FROM DUAL;
-ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
 
 INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
-VALUES('C0210300000'||SEQ_seq.NEXTVAL,'20210301','구매','이상없음');
+VALUES('C02103000001','20210301','구매','이상없음');
 INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
-VALUES('C0210300000'||SEQ_seq.NEXTVAL,'20211101','구매','이상없음');
+VALUES('C02103000002','20211101','구매','이상없음');
 INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
-VALUES('C0210300000'||SEQ_seq.NEXTVAL,'20210901','구매','이상없음');
+VALUES('C02103000003','20210901','구매','이상없음');
 INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
-VALUES('C0210300000'||SEQ_seq.NEXTVAL,'20210902','구매','이상없음');
+VALUES('C02103000004','20210902','구매','이상없음');
 INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
-VALUES('C0210300000'||SEQ_seq.NEXTVAL,'20210201','구매','이상없음');
+VALUES('C02103000005','20210201','구매','이상없음');
 --청구등록(리스트)
 create table PMM_PM_CM_LIST(
 sequence number(5),--순서
-Item_Code varchar2(10) not null,--품번
-Item_Name varchar2(50) not null,--품명
+itemNumber varchar2(10) not null,--품번
+ItemName varchar2(50) not null,--품명
 standard varchar2(20),--규격
 requestdate date,--요청일
 Inventory_Unit varchar2(3)not null,--재고단위
-Inventory_qty number(5)not null,--재고단위수량
+Inventory_qy number(5)not null,--재고단위수량
 claim_unit varchar2(3)not null,--청구단위
 claim_Quantity number(5),--청구단위수량
 Due_date date,--납기일
 receiving_date date,--입고예정일
-receiving_qty number(5),--의뢰수량
+receiving_qy number(5),--의뢰수량
 inspection varchar2(10) not null,--검사
 constraint fk_PMMPMCMLIST_requestdate foreign key (requestdate) references PMM_PM_MPS(plandate),
-constraint fk_PMMPMCMLIST_Inventory_qty foreign key (Inventory_qty) references PMM_PM_MPS(plan_Quantity),
+constraint fk_PMMPMCMLIST_Inventory_qy foreign key (Inventory_qy) references PMM_PM_MPS(plan_Quantity),
 constraint fk_PMMPMCMLIST_claim_Quantity foreign key (claim_Quantity) references PMM_PM_MPS(plan_Quantity),
-constraint fk_PMMPMCMLIST_Item_Code foreign key (Item_Code) references SM_BIM_Ite_Reg(Item_Code),
-constraint fk_PMMPMCMLIST_Item_Name foreign key (Item_Name) references SM_BIM_Ite_Reg(Item_Name),
-constraint fk_PMMPMCMLIST_receiving_qty foreign key (receiving_qty) references PMM_PM_MPS(plan_Quantity)
+--constraint fk_PMMPMCMLIST_Due_date foreign key (Due_date) references CSM_SM_COR_Reg(dueDate),
+constraint fk_PMMPMCMLIST_itemNumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code),
+constraint fk_PMMPMCMLIST_ItemName foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name),
+constraint fk_PMMPMCMLIST_receiving_qy foreign key (receiving_qy) references PMM_PM_MPS(plan_Quantity)
 );
 ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
 SELECT SEQ_seq.NEXTVAL FROM DUAL;
 ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
 
-INSERT INTO PMM_PM_CM_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_QTY,
-    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_QTY,INSPECTION)
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
 VALUES(SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,'20210301','EA',20,'EA',20,'20210306','20210306',20,'검사');
-INSERT INTO PMM_PM_CM_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_QTY,
-    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_QTY,INSPECTION)
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
 VALUES(SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,'20211101','EA',10,'EA',10,'20211102','20211102',10,'검사');
-INSERT INTO PMM_PM_CM_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_QTY,
-    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_QTY,INSPECTION)
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
 VALUES(SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,'20210901','EA',30,'EA',30,'20210901','20210901',30,'검사');
-INSERT INTO PMM_PM_CM_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_QTY,
-    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_QTY,INSPECTION)
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
 VALUES(SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,'20210902','EA',50,'EA',50,'20210902','20210902',50,'검사');
-INSERT INTO PMM_PM_CM_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_QTY,
-    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_QTY,INSPECTION)
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
 VALUES(SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,'20210201','EA',80,'EA',80,'20210202','20210202',80,'검사');
 
 --입고처리
 create table PMM_PM_RP(
 receiving_no varchar2(12)PRIMARY key,--입고번호
 receiving_date date unique,  --입고일자
-Customer_Name varchar2(20) not null,--거래처
+buyer varchar2(20) not null,--거래처
 deadline varchar2(7) not null,--마감
 note varchar2(1000) not null,--비고
 deadline_no varchar2(12) unique, --마감번호
 deadline_date date unique,--마감일자
-constraint fk_PMMPMRP_Customer_Name foreign key (Customer_Name) references SM_BIM_Gen_Cus_Reg(General_Customer_Name)
+constraint fk_PMMPMRP_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name)
 );
-ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
-SELECT SEQ_seq.NEXTVAL FROM DUAL;
-ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
-INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,Customer_Name,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
-VALUES('Q0210300000'||SEQ_seq.NEXTVAL,'20210902','(주)삼도전자','마감','이상없음','D0210300000'||SEQ_seq.NEXTVAL,'20210902');
-INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,Customer_Name,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
-VALUES('Q0210300000'||SEQ_seq.NEXTVAL,'20210306','(주)삼화INC','마감','이상없음','D0210300000'||SEQ_seq.NEXTVAL,'20210306');
-INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,Customer_Name,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
-VALUES('Q0210300000'||SEQ_seq.NEXTVAL,'20211102','(주)디비컴퓨터','마감','이상없음','D0210300000'||SEQ_seq.NEXTVAL,'20211102');
-INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,Customer_Name,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
-VALUES('Q0210300000'||SEQ_seq.NEXTVAL,'20210901','더지글로직스','마감','이상없음','D0210300000'||SEQ_seq.NEXTVAL,'20210901');
-INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,Customer_Name,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
-VALUES('Q0210300000'||SEQ_seq.NEXTVAL,'20210202','(주)삼도전자','마감','이상없음','D0210300000'||SEQ_seq.NEXTVAL,'20210202');
+
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000005','20210902','(주)삼도전자','마감','이상없음','D02103000005','20210902');
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000004','20210306','(주)삼화INC','마감','이상없음','D02103000004','20210306');
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000003','20211102','(주)디비컴퓨터','마감','이상없음','D02103000003','20211102');
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000002','20210901','더지글로직스','마감','이상없음','D02103000002','20210901');
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000001','20210202','(주)삼도전자','마감','이상없음','D02103000001','20210202');
 
 
 --입고처리(리스트)
 create table PMM_PM_RP_LIST(
 sequence number(5),--순서
-Item_Code varchar2(10) not null, --품번   
-Item_Name varchar2(30) not null,   --품명   
+Itemnumber varchar2(10) not null, --품번   
+ItemName varchar2(30) not null,   --품명   
 Standard varchar2(20),--규격
 order_Quantity number(5),--발주수량
 Unit varchar2(3)not null,--단위
@@ -1282,60 +1286,59 @@ product_price Number(15),--단가
 Due_date date,--납기일
 receiving_date date,--입고예정일
 inspection varchar2(10) not null,--검사
-deadline_qty number(5),--마감수량
+deadline_qy number(5),--마감수량
 constraint fk_PMMPMRPLIST_Order_quantity foreign key (Order_quantity) references PMM_PM_MPS(plan_Quantity),
-constraint fk_PMMPMRPLIST_deadline_qty foreign key (deadline_qty) references PMM_PM_MPS(plan_Quantity),
-constraint fk_PMMPMRPLIST_Item_Code foreign key (Item_Code) references SM_BIM_Ite_Reg(Item_Code),
-constraint fk_PMMPMRPLIST_Item_Name foreign key (Item_Name) references SM_BIM_Ite_Reg(Item_Name)
+constraint fk_PMMPMRPLIST_deadline_qy foreign key (deadline_qy) references PMM_PM_MPS(plan_Quantity),
+constraint fk_PMMPMRPLIST_Itemnumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code),
+constraint fk_PMMPMRPLIST_ItemName foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name)
+--constraint fk_PMMPMRPLIST_receiving_date foreign key (receiving_date) references CSM_SM_COR_Reg(expectedDate),
+--constraint fk_PMMPMRPLIST_Due_date foreign key (Due_date) references CSM_SM_COR_Reg(dueDate)
 );
 ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
 SELECT SEQ_seq.NEXTVAL FROM DUAL;
 ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
-INSERT INTO PMM_PM_RP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
-DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QTY)
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
 VALUES(SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,20,'EA',300000.00,'20210306','20210306','검사',20);
-INSERT INTO PMM_PM_RP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
-DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QTY)
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
 VALUES(SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,10,'EA',1000000.00,'20211102','20211102','검사',10);
-INSERT INTO PMM_PM_RP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
-DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QTY)
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
 VALUES(SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,30,'EA',800000.00,'20210901','20210901','검사',30);
-INSERT INTO PMM_PM_RP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
-DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QTY)
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
 VALUES(SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,50,'EA',300000.00,'20210902','20210902','검사',50);
-INSERT INTO PMM_PM_RP_LIST(SEQUENCE,Item_Code,Item_Name,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
-DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QTY)
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
 VALUES(SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,80,'EA',400000.00,'20210202','20210202','검사',80);
 
 --입고의뢰등록
 create table PMM_PM_RRR(
 request_no varchar2(12) primary key,--의뢰번호
 request_date date unique,--의뢰일자
-Customer_Name varchar2(20)not null,--회사명
+buyer varchar2(20)not null,--회사명
 request_house varchar2(15)not null,--의뢰창고
 note varchar2(1000) not null,--비고
 check_no varchar2(12) unique,--검사번호
 check_date date unique,--검사일자
 receiving_house varchar2(15) not null,--입고창고
-constraint fk_PMMPMRRR_Customer_Name foreign key (Customer_Name) references SM_BIM_Gen_Cus_Reg(General_Customer_Name),
+constraint fk_PMMPMRRR_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name),
 constraint fk_PMMPMRRR_request_house foreign key (request_house) references SM_BIM_Hou_Reg(House_Name),
 constraint fk_PMMPMRRR_receiving_house foreign key (receiving_house) references SM_BIM_Hou_Reg(House_Name)
 );
-ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
-SELECT SEQ_seq.NEXTVAL FROM DUAL;
-ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
 
-INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,Customer_Name,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
-VALUES('V0210300000'||SEQ_seq.NEXTVAL,'20210306','(주)삼화INC','제품창고','이상없음','C0210300000'||SEQ_seq.NEXTVAL,'20210306','부품창고');
-INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,Customer_Name,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
-VALUES('V0210300000'||SEQ_seq.NEXTVAL,'20211102','(주)디비컴퓨터','제품창고','이상없음','C0210300000'||SEQ_seq.NEXTVAL,'20211102','부품창고');
-INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,Customer_Name,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
-VALUES('V0210300000'||SEQ_seq.NEXTVAL,'20210901','더지글로직스','제품창고','이상없음','C0210300000'||SEQ_seq.NEXTVAL,'20210901','부품창고');
-INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,Customer_Name,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
-VALUES('V0210300000'||SEQ_seq.NEXTVAL,'20210902','(주)삼도전자','제품창고','이상없음','C0210300000'||SEQ_seq.NEXTVAL,'20210902','부품창고');
-INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,Customer_Name,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
-VALUES('V0210300000'||SEQ_seq.NEXTVAL,'20200202','(주)삼도전자','제품창고','이상없음','C0210300000'||SEQ_seq.NEXTVAL,'20200202','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000001','20210306','(주)삼화INC','제품창고','이상없음','C02103000001','20210306','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000002','20211102','(주)디비컴퓨터','제품창고','이상없음','C02103000002','20211102','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000003','20210901','더지글로직스','제품창고','이상없음','C02103000003','20210901','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000004','20210902','(주)삼도전자','제품창고','이상없음','C02103000004','20210902','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000005','20200202','(주)삼도전자','제품창고','이상없음','C02103000005','20200202','부품창고');
 
 ---------------------------------------------------------------------------------------------------------------------
 
@@ -1581,9 +1584,9 @@ create table CPM_PM_Pro_Pla_Reg(
     --NO
     NO NUMBER(4) NOT NULL,
     --품번(FK)
-    Item_Code varchar2(10) not null,
+    itemNumber varchar2(10) not null,
     --품명(FK)
-    Item_Name varchar2(50) not null,
+    itemName varchar2(50) not null,
     --규격
     standard varchar2(20),
     --단위
@@ -1598,8 +1601,8 @@ create table CPM_PM_Pro_Pla_Reg(
     Quantity number(5),
     --비고
     note varchar2(1000) ,
-    CONSTRAINT CPMPMPROPLAREG_Item_Code_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMPMPROPLAREG_Item_Name_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMPMPROPLAREG_ITEMNUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMPMPROPLAREG_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
 );
 
 --생산계획등록 데이터
@@ -1724,9 +1727,9 @@ create table CPM_PM_Pro_Mat_For_Det(
     --순번(PK)
     NO number(4) NOT NULL,
     --품번(FK)
-    Item_Code varchar2(10) not null,
+    itemNumber varchar2(10) not null,
     --품명(FK)
-    Item_Name varchar2(50) not null,
+    itemName varchar2(50) not null,
     --규격
     standard varchar2(20),
     --단위
@@ -1741,8 +1744,8 @@ create table CPM_PM_Pro_Mat_For_Det(
     note varchar2(1000),
     JOINID VARCHAR2(12) NOT NULL,
     
-    CONSTRAINT CPMPMPROMATFORDET_INUMBER_FK  FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMPMPROPLAFORDET_Item_Name_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name),
+    CONSTRAINT CPMPMPROMATFORDET_INUMBER_FK  FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMPMPROPLAFORDET_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name),
     --CONSTRAINT CPMPMPROPLAREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMPMPROPLAREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
      CONSTRAINT CPMPMPROMATFORDET_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)
@@ -1857,9 +1860,9 @@ create table CPM_PM_Ope_Per_Reg(
     --납기일
     dueDate date not null,
     --품번(FK)
-    Item_Code varchar2(10) not null,
+    itemNumber varchar2(10) not null,
     --품명(FK)
-    Item_Name varchar2(50) not null,
+    itemName varchar2(50) not null,
     --규격
     standard varchar2(20),
     --단위
@@ -1879,8 +1882,8 @@ create table CPM_PM_Ope_Per_Reg(
     --조인 데이터
     JOINID VARCHAR(12) NOT NULL,
     CONSTRAINT CPMPMOPEPERREG_placeCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code),--테이블 추가 후 입력
-    CONSTRAINT CPMPMOPEPERREG_Item_Code_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMPMOPEPERREG_Item_Name_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name),
+    CONSTRAINT CPMPMOPEPERREG_ITEMNUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMPMOPEPERREG_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name),
     --CONSTRAINT CPMPMOPEPERREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMPMOPEPERREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
     --CONSTRAINT CPMPMOPEPERREG_Quantity_FK FOREIGN KEY(performanceQuantity) REFERENCES CPM_PM_Ope_Per_Reg_Det(performanceQuantity),
@@ -1965,9 +1968,9 @@ create table CPM_OM_Out_Mat_For_Det(
     --순번(PK)
     NO number(4) PRIMARY KEY,
     --품번(FK)
-    Item_Code varchar2(10) not null,
+    itemNumber varchar2(10) not null,
     --품명(FK)
-    Item_Name varchar2(50) not null,
+    itemName varchar2(50) not null,
     --규격
     standard varchar2(20),
     --단위
@@ -1980,8 +1983,8 @@ create table CPM_OM_Out_Mat_For_Det(
     forwardingQuantity number(5),
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMOMOUTMATFORDET_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMOMOUTMATFORDET_Item_Name_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMOMOUTMATFORDET_INUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMOMOUTMATFORDET_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
     --CONSTRAINT CPMOMOUTMATFORDET_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMOMOUTMATFORDET_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
 );
@@ -2093,9 +2096,9 @@ create table CPM_OM_Out_Per_Reg(
     --완료일
     dueDate date not null,
     --품번(FK)
-    Item_Code varchar2(10) not null,
+    itemNumber varchar2(10) not null,
     --품명(FK)
-    Item_Name varchar2(50) not null,
+    itemName varchar2(50) not null,
     --규격
     standard varchar2(20),
     --단위
@@ -2111,8 +2114,8 @@ create table CPM_OM_Out_Per_Reg(
     --비고
     note varchar2(1000),
     CONSTRAINT CPMOMOUTPERREG_wpCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code),--테이블 추가 후 입력
-    CONSTRAINT CPMOMOUTPERREG_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMOMOUTPERREG_Item_Name_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMOMOUTPERREG_INUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMOMOUTPERREG_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
     --CONSTRAINT CPMOMOUTPERREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMOMOUTPERREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
     --CONSTRAINT CPMOMOUTPERREG_Quantity_FK FOREIGN KEY(performanceQuantity) REFERENCES CPM_OM_Out_Per_Reg_Det(performanceQuantity),
@@ -2186,9 +2189,9 @@ create table CPM_OM_Out_Fin_Det(
     --순번(PK)
     NO number(4) PRIMARY KEY,
     --품번(FK)
-    Item_Code varchar2(10) not null,
+    itemNumber varchar2(10) not null,
     --품명(FK)
-    Item_Name varchar2(50) not null,
+    itemName varchar2(50) not null,
     --규격
     standard varchar2(20),
     --단위
@@ -2199,8 +2202,8 @@ create table CPM_OM_Out_Fin_Det(
     unitPrice number(15) not null,
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMOMOUTFINDET_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMOMOUTFINDET_Item_Name_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMOMOUTFINDET_INUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMOMOUTFINDET_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
     --CONSTRAINT CPMOMOUTFINDET_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMOMOUTFINDET_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
     --CONSTRAINT CPMOMOUTFINDET_quantity_FK FOREIGN KEY(quantity) REFERENCES CPM_OM_Out_Per_Reg_Det(performanceQuantity)
@@ -2239,9 +2242,9 @@ create table CPM_BIM_BOM_Reg(
     --순번(PK)
     NO number(4) PRIMARY KEY,
     --품번(FK)
-    Item_Code varchar2(10) not null,
+    itemNumber varchar2(10) not null,
     --품명(FK)
-    Item_Name varchar2(50) not null,
+    itemName varchar2(50) not null,
     --규격
     standard varchar2(20),
     --단위
@@ -2260,8 +2263,8 @@ create table CPM_BIM_BOM_Reg(
     endDate date not null,
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMBIMBOMREG_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMBIMBOMREG_Item_Name_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMBIMBOMREG_INUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMBIMBOMREG_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
     --CONSTRAINT CPMBIMBOMREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMBIMBOMREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
      --CONSTRAINT CPMBIMBOMREG_actualCost_FK FOREIGN KEY(actualCost) REFERENCES SM_BIM_Ite_Reg(Cost)
