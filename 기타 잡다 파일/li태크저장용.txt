@@ -36,8 +36,8 @@
                             <li><a href="#">출고현황</a></li>
                             <li><a href="#">출고반품현황</a></li>
                         </ul></li>
-                    <li><a href="#" id="side5">구매관리</a>
-                        <ul id="l_sub5">
+                    <li><a href="#" id="side1">구매관리</a>
+                        <ul id="l_sub1">
                             <li><a href="#">주계획작성</a></li>
                             <li><a href="#">소요량전개</a></li>
                             <li><a href="#">청구등록</a></li>
@@ -48,26 +48,26 @@
                             <li><a href="#">발주마감처리</a></li>
                             <li><a href="#">매입마감</a></li>
                         </ul></li>
-                    <li><a href="#" id="side6">재고관리</a>
-                        <ul id="l_sub6">
+                    <li><a href="#" id="side2">재고관리</a>
+                        <ul id="l_sub2">
                             <li><a href="#">재고이동등록(창고)</a></li>
                             <li><a href="#">재고이동등록(사업장)</a></li>
                             <li><a href="#">기초재고/재고조정등록</a></li>
                             <li><a href="#">SET품수불조정등록</a></li>
                             <li><a href="#">기초재고/재고조정현황</a></li>
                         </ul></li>
-                    <li><a href="#" id="side7">재고수불현황</a>
-                        <ul id="l_sub7">
+                    <li><a href="#" id="side3">재고수불현황</a>
+                        <ul id="l_sub3">
                             <li><a href="#">현재고현황</a></li>
                             <li><a href="#">재고수불현황(일자,유형별)</a></li>
                             <li><a href="#">현재고(LOT)현황</a></li>
                         </ul></li>
-                    <li><a href="#" id="side8">기초정보관리</a>
-                        <ul id="l_sub8">
+                    <li><a href="#" id="side4">기초정보관리</a>
+                        <ul id="l_sub4">
                             <li><a href="#">품목단가등록</a></li>
                         </ul></li>
-                    <li><a href="#" id="side9">생산관리</a>
-                        <ul id="l_sub9">
+                    <li><a href="#" id="side1">생산관리</a>
+                        <ul id="l_sub1">
                             <li><a href="#">생산계획등록</a></li>
                             <li><a href="#">작업지시등록</a></li>
                             <li><a href="#">작업지시확정</a></li>
@@ -75,11 +75,19 @@
                             <li><a href="#">작업실적등록</a></li>
                             <li><a href="#">작업지시마감처리</a></li>
                         </ul></li>
-                    <li><a href="#" id="side10">외주관리</a>
-                        <ul id="l_sub10">
+                    <li><a href="#" id="side2">외주관리</a>
+                        <ul id="l_sub2">
                             <li><a href="#">외주발주등록</a></li>
                             <li><a href="#">외주발주확정</a></li>
                             <li><a href="#">외주자재출고</a></li>
                             <li><a href="#">외주실적등록</a></li>
                             <li><a href="#">외주마감</a></li>
+                        </ul></li>
+	        <li><a href="#" id="side3">기초정보관리</a>
+                        <ul id="l_sub3">
+                            <li><a href="#">BOM등록</a></li>
+                            <li><a href="#">BOM정전개</a></li>
+                            <li><a href="#">BOM역전개</a></li>
+                            <li><a href="#">외주단가등록</a></li>
+                            <li><a href="#">불량유형등록</a></li>
                         </ul></li>
