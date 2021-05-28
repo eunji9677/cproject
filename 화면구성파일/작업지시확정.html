@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>작업지시확정</title>
     <style>
         *{
             margin: 0;
@@ -51,7 +51,8 @@
         }
         #contents1{
             position: absolute;
-            left: 15%;
+            padding: 10px;
+            right: 0;
             top: 15%;
             width: 85%;
             height: 10%;
@@ -60,10 +61,19 @@
         }
         #contents2{
             position: absolute;
-            left: 15%;
+            right: 0;
             top: 25%;
             width: 85%;
-            height: 70%;
+            height: 35%;
+            border: 1px solid black;
+            z-index: 1;
+        }
+        #contents3{
+            position: absolute;
+            right: 0;
+            top:60%;
+            width: 85%;
+            height: 35%;
             border: 1px solid black;
             z-index: 1;
         }
@@ -179,99 +189,24 @@
         #etc_menu li a{
             text-decoration: none;
         }
-        /* ------------------------------------------------- */
-
-        .con1_search {
-            margin: 10px;   
-        }
-        #contents1 {
-            /* background-color: rgb(202, 202, 202); */
-            border-bottom: none;
-            
-        }
-        #contents2 {
-            /* background: linear-gradient(to bottom, #ccc, white); */
-            border-bottom: none;
-            
-        }
-        /* #contents3 {
-            background: linear-gradient(to bottom, #ccc, white);
-        } */
-        
-        #contents1 td {
-            text-align: center;
-            letter-spacing: 1px;
-            padding: 1px;
-            font-family: 'Hanna';
-        }
-        #contents2 td {
-            /* border: 1px solid white; */
-            border-collapse: collapse;
-            padding: 3px;
+        .con1_search{
+            height: 100%;
+            margin: 10px 20px;
+            padding:0;
             text-align: center;
         }
-        #contents3 td {
-            /* border: 1px solid white; */
-            border-collapse: collapse;
-            padding: 3px;
+ 
+        /* 컨텐츠부 css */
+        #workOrderDetail{
+            height: 100%;
+            overflow: scroll;
         }
-
-        /* #contents2,#contents3 {
-            border: none;
-        } */
-        /* #contents2, #contents3 td{
-            border-collapse: collapse;    
-        } */
-        /* #contents2 thead {
-            background-color: rgb(128, 156, 153);
-            color: white;
-        } */
-        /* #contents3 thead {
-            background-color: rgb(128, 156, 153);
-            color: white;
-        } */
-        #contents1 input[type="text"] {
-            text-align: center;
-            /* border: none; */
-        }
-        #contents1 input[disabled] {
-            border: 2px inset rgb(148, 147, 150);
-        }
-        #contents2 input {
-            text-align: center;
-            /* border: none; */
-        }
-        #contents3 input {
-            text-align: center;
-            /* border: none; */
-        }        
-        /* #contents2, #contents3 {
-            overflow: scroll;   
-        } */
-        /* #contents1, #contents2, #contents3 {
-            font-family: 'Hanna';
-        } */
-        #table1 {
-            width: 70%;
-            padding-top: 15px;
-            padding-left: 25px;
-            text-align: center;
-        }
-        #table2 {
-            width: 60%;
-        }
-        /* --------------------------------- */
-        /* #table1 {
+        #workOrderInfo {
+            height: 100%;
             width: 100%;
-            height: 25px;
-            padding-top: 20px;
-            padding-left: 40px;
+            overflow: scroll;
         }
-        #table2 {
-            width: 100%;
-            height: 25px;
-            padding-left: px;
-        } */
+    
     </style>    
 </head>
 <body>
@@ -321,100 +256,156 @@
             </ul>
         </nav>
         <nav id="nav2">
-            <button name="delete">삭제</button>
-            <button name="lookup">조회</button>
-            <button name="lookup">조회</button>
-            <button name="lookup">조회</button>
+            <button id="delete" onclick="deletefunc()">삭제</button>
+            <button id="lookup">조회</button>
+            <button id="save">저장</button>
+            <button id="lookup">조회</button>
         </nav>
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#"  id="side1">물류1</a>
+                    <li><a href="#"  id="side1">생산관리</a>
                         <ul id="l_sub1">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">생산계획등록</a></li>
+                            <li><a href="#">작업지시등록</a></li>
+                            <li><a href="#">작업지시확정</a></li>
+                            <li><a href="#">생산자재출고</a></li>
+                            <li><a href="#">작업실적등록</a></li>
+                            <li><a href="#">작업지시마감처리</a></li>
                         </ul></li>
-                    <li><a href="#" id="side2">물류2</a>
+                    <li><a href="#" id="side2">외주관리</a>
                         <ul id="l_sub2">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">외주발주등록</a></li>
+                            <li><a href="#">외주발주확정</a></li>
+                            <li><a href="#">외주자재출고</a></li>
+                            <li><a href="#">외주실적등록</a></li>
+                            <li><a href="#">외주마감</a></li>
                         </ul></li>
-                    <li><a href="#" id="side3">생산1</a>
+                    <li><a href="#" id="side3">기초정보관리</a>
                         <ul id="l_sub3">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
-                    <li><a href="#" id="side4">생산2</a>
-                        <ul id="l_sub4">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">BOM등록</a></li>
+                            <li><a href="#">BOM정전개</a></li>
+                            <li><a href="#">BOM역전개</a></li>
+                            <li><a href="#">외주단가등록</a></li>
+                            <li><a href="#">불량유형등록</a></li>
                         </ul></li>
                 </ul>
             </div>
         </aside>
         <container1 id = contents1>
-            <table id="table1" align="center">
-                <tr>
-                    <p><td colspan = "6" span style="color:black" align="center">품목군등록</td></p>
-                </tr>
-                <tr>
-                    <td align="center">검색조건</td>
-                    <td>
-                        <select name="searchCondition">
-                        <option value="0">0. 시작문자열</option>
-                        <option value="1">1. 포함문자열</option>
-                    </td>
-                    <td align="center">품목군코드</td>
-                    <td>
-                        <input type=text name="rangeCode">
-                    </td>
-                    <td align="center">품목군명</td>
-                    <td>
-                        <input type=text name="rangeName">
-                    </td>
-                </tr>
+            <form id="searchForm">
+                <table class="con1_search">
+                    <tr>
+                        <td>사업장</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
+                        <td><button>검</button></td> 
+    
+                        <td colspan="5" style="width: 80px;">부서</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td><button>검</button></td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td>지시기간</td>
+                        <td colspan="2" style="width: 50px;"><input type="date" style="width: 100%;"/></td>
+                        <td>~</td>
+                        <td ><input type="date" style="width: 100%;"/></td>
+                        <td><button>검</button></td>
+    
+                        <td colspan="5" style="width: 80px;">사원</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td ><button>검</button></td>
+
+                        <td>
+                            <input type="button" value="자재출고" style="padding: 5px; margin-left: 30px;"></input>
+                        </td>
+                        <td>
+                            <input type="button" value="취소" style="padding: 5px;"></input>
+                        </td>
+                        <td>
+                            <input type="button" value="확정" style="padding: 5px;"></input>
+                        </td>
+                    </tr>
+                </table>
+                </form>
             </table>
         </container1>
-        <container2 id= contents2>
-            <table id="table2" align="center">
-                <tr>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>품목군코드</td>
-                    <td>품목군명</td>
-                    <td>사용여부</td>
-                    <td>품목군설명</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>
-                        <input type=text name="rangeCode">
-                    </td>
-                    <td>
-                        <input type=text name="rangeName">
-                    </td>
-                    <td>
-                        <select name="usable">
-                        <option value="0">사용</option>
-                        <option value="1">미사용</option>
-                    </td>
-                    <td>
-                        <input type=text name="explain">
-                    </td>
-                </tr>
-            </table>
+        <container2 id="contents2">
+            <div id="workOrderDetail">
+                <table id="workOrderDetailTable">
+                    <thead>
+                        <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                        <td>작업지시번호</td>
+                        <td>자재출고상태</td>
+                        <td>지시일</td>
+                        <td>납기일</td>
+                        <td>품번</td>
+                        <td>품명</td>
+                        <td>규격</td>
+                        <td>단위</td>
+                        <td>지시수량</td>
+                        <td>상태</td>
+                        <td>LOT번호</td>
+                        <td>검사</td>
+                        <td>고객</td>
+                        <td>비고</td>
+                    </thead>
+                    <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
+                    <tbody>
+                        <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="date"/></td>
+                        <td><input type="date"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                    </tbody>
+                </table>
+            </div>
         </container2>
+        <container3 id="contents3">
+            <div id="workOrderInfo">
+                <table id="workOrderTable">
+                    <thead>
+                        <td><input type="checkbox" name="content2" onclick="selectAll2(this)"/></td>
+                        <td>청구일</td>
+                        <td>품번</td>
+                        <td>품명</td>
+                        <td>규격</td>
+                        <td>단위</td>
+                        <td>정미수량</td>
+                        <td>확정수량</td>
+                        <td>관리구분</td>
+                        <td>비고</td>
+                    </thead>
+                    <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
+                    <tbody>
+                        <td><input type="checkbox" value = "check" id="check" name="content2"/></td>
+                        <td><input type="date"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                    </tbody>
+                </table>
+            </div>
+        </container3>
         <footer id= footer>
             footer
         </footer>
@@ -425,6 +416,9 @@
         var side_button3 = document.getElementById('side3');
         var side_button4 = document.getElementById('side4');
         var search_box = document.getElementById('search');
+        var num_box = document.getElementById('num');
+        var save_button = document.getElementById('save');
+        var delete_button = document.getElementById('delete');
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
             if(l_sub1.style.display == 'none' || l_sub1.style.display==''){
@@ -474,6 +468,40 @@
         }
         search_box.onblur = function(){
             document.getElementById("search").value = ' 메뉴 검색';
+        }
+        save_button.onclick = function(){
+            // dao에서 저장
+            var view1 = document.getElementById('table1');
+            var view2 = document.getElementById('view2');
+            focus = document.activeElement;
+            if(view1 == focus){
+            var row = view1.insertRow( view1.rows.length ); 
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            cell1.innerHTML = "<input type='checkbox' name='content'/>";;
+            cell2.innerHTML = "<input type='text'/>";
+            cell4.innerHTML = "<input type='text' />";
+            cell5.innerHTML = "<input type='text' />";
+            cell3.innerHTML =  "<input type='date' />";
+            }
+        }
+        delete_button.onclick = function(){
+            //dao에서 체크항목 삭제
+        }
+        function selectAll(selectAll){
+            const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+        function selectAll2(selectAll){
+            const checkbox = document.getElementsByName('content2');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
         }
     </script>
 </body>

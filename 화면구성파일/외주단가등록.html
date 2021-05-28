@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <script language="javascript">
-        function showPopup() { window.open("https://google.com", "a", "width=400, height=300, left=500, top=400"); }
-    </script>
     <title>외주단가등록</title>
     <style>
         *{
@@ -188,7 +183,9 @@
         /* 조회부 */
         #searchForm {
             height: 100%;
-            margin: 10px 10px;
+            margin: 20px 20px;
+            padding:0;
+            text-align: center;
         }
         /* 컨테이너 스타일부 */
         #workOrderInfo {
@@ -255,72 +252,66 @@
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#"  id="side1">물류1</a>
+                    <li><a href="#"  id="side1">생산관리</a>
                         <ul id="l_sub1">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">생산계획등록</a></li>
+                            <li><a href="#">작업지시등록</a></li>
+                            <li><a href="#">작업지시확정</a></li>
+                            <li><a href="#">생산자재출고</a></li>
+                            <li><a href="#">작업실적등록</a></li>
+                            <li><a href="#">작업지시마감처리</a></li>
                         </ul></li>
-                    <li><a href="#" id="side2">물류2</a>
+                    <li><a href="#" id="side2">외주관리</a>
                         <ul id="l_sub2">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">외주발주등록</a></li>
+                            <li><a href="#">외주발주확정</a></li>
+                            <li><a href="#">외주자재출고</a></li>
+                            <li><a href="#">외주실적등록</a></li>
+                            <li><a href="#">외주마감</a></li>
                         </ul></li>
-                    <li><a href="#" id="side3">생산1</a>
+                    <li><a href="#" id="side3">기초정보관리</a>
                         <ul id="l_sub3">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
-                    <li><a href="#" id="side4">생산2</a>
-                        <ul id="l_sub4">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">BOM등록</a></li>
+                            <li><a href="#">BOM정전개</a></li>
+                            <li><a href="#">BOM역전개</a></li>
+                            <li><a href="#">외주단가등록</a></li>
+                            <li><a href="#">불량유형등록</a></li>
                         </ul></li>
                 </ul>
             </div>
         </aside>
         <container1 id = contents1>
             <form id="searchForm">
-                <table>
+                <table class="con1_search">
                     <tr>
-                        <td>
-                            사업장
-                        </td>
-                        <td>
-                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                        </td>
-                        <td>
-                            품목군
-                        </td>
-                        <td>
-                            <input type="text" name="factory" style="width: 75px;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                        </td>
+                        <td>사업장</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
+                        <td><button>검</button></td> 
+    
+                        <td colspan="5" style="width: 80px;">부서</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td><button>검</button></td>
+                        
                     </tr>
+                    
                     <tr>
+                        <td>품목군</td>
+                        <td style="width: 80px;" colspan="3"><input type="text" style="width: 100%;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td><button>검</button></td>
+    
+                        <td colspan="5" style="width: 80px;">사원</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td ><button>검</button></td>
+
                         <td>
-                            부서
+                            <input type="button" value="품목전개" style="padding: 5px; margin-left: 30px;"></input>
                         </td>
                         <td>
-                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
-                        </td>
-                        <td>
-                            <input type="button" name="requestMD" value="품목전개" onclick="showPopup()">
-                            <input type="button" name="requestMD" value="품목복사" onclick="showPopup()">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            사원
-                        </td>
-                        <td>
-                            <input type="text" name="factory" style="width: 75px; background-color: yellow;"><a href="#" onclick="showPopup();"> <i class="fas fa-search"></i></a><input type="text" name="ckdepartment" style="width: 75px;" disabled >
+                            <input type="button" value="품목복사" style="padding: 5px;"></input>
                         </td>
                     </tr>
                 </table>

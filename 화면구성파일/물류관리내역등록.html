@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>물류관리내역등록</title>
     <style>
         *{
             margin: 0;
@@ -51,31 +51,21 @@
         }
         #contents1{
             position: absolute;
-            padding: 10px;
-            right: 0;
+            left: 15%;
             top: 15%;
-            width: 85%;
-            height: 10%;
+            width: 25%;
+            height: 80%;
             border: 1px solid black;
             z-index: 1;
         }
         #contents2{
             position: absolute;
-            right: 0;
-            top: 25%;
-            width: 85%;
-            height: 35%;
-            border: 1px solid black;
+            left: 40%;
+            top: 15%;
+            width: 60%;
+            height: 80%;
             z-index: 1;
-        }
-        #contents3{
-            position: absolute;
-            right: 0;
-            top:60%;
-            width: 85%;
-            height: 35%;
             border: 1px solid black;
-            z-index: 1;
         }
         #footer{
             position: absolute;
@@ -189,31 +179,24 @@
         #etc_menu li a{
             text-decoration: none;
         }
-        .con1_search{
-            padding:0;
-            text-align: center;
-            position: absolute;
-            top: 25%;
-            left: 18%;
+
+        /* ------------------------- */
+
+        #table1 {
+            text-align: center; width: 100%; padding-top: 10px;
+            padding-right: 10%; padding-left: 2px;
         }
-        #view1,#view2{
-            width: 100%;
-            text-align: center;
+        #table2 {
+            width: 100%; padding-top: 10px; padding-left: 10px; text-align: center;
+            border-collapse: separate; border-spacing: 0 15px; border: 1px solid black;
+        }
+        #table3 {
+            width: 100%; padding-top: 10px; padding-left: 10px; text-align: center;
+            border-collapse: separate; border-spacing: 0 15px;
+        }
+        #table1 td{
             border: 1px solid black;
-/* ------------------------------------------------------------------ */
-        }
-        #view{
-            width: 100%;
-            text-align: center;
-            border: 1px solid black;
-        }
-        #view td:not(#no){
-            width: 8%;
-        }
-        #view td input{
-            width: 100%;
-        }
-        
+        }      
     </style>    
 </head>
 <body>
@@ -263,169 +246,190 @@
             </ul>
         </nav>
         <nav id="nav2">
-            <button id="delete" onclick="deletefunc()">삭제</button>
-            <button id="lookup">조회</button>
-            <button id="save">저장</button>
-            <button id="lookup">조회</button>
+            <button name="delete">삭제</button>
+            <button name="lookup">조회</button>
+            <button name="lookup">조회</button>
+            <button name="lookup">조회</button>
         </nav>
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#"  id="side1">물류1</a>
+                    <li><a href="#"  id="side1">회사등록정보</a>
                         <ul id="l_sub1">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">회사등록</a></li>
+                            <li><a href="#">사업장등록</a></li>
+                            <li><a href="#">부서등록</a></li>
+                            
                         </ul></li>
-                    <li><a href="#" id="side2">물류2</a>
+                    <li><a href="#" id="side2">기초정보관리</a>
                         <ul id="l_sub2">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
-                    <li><a href="#" id="side3">생산1</a>
-                        <ul id="l_sub3">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
-                    <li><a href="#" id="side4">생산2</a>
-                        <ul id="l_sub4">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">일반거래처등록</a></li>
+                            <li><a href="#">품목군등록</a></li>
+                            <li><a href="#">품목등록</a></li>
+                            <li><a href="#">창고/공정/외주공정등록</a></li>
+                            <li><a href="#">물류관리내역등록</a></li>
+                            <li><a href="#">물류실적담당자등록</a></li>
+                            <li><a href="#">검사유형등록</a></li>
+                            <li><a href="#">SET구성품등록</a></li>
                         </ul></li>
                 </ul>
             </div>
         </aside>
-        <container1 id = contents1>
-            <table class="con1_search">
+        <container id = contents1>
+            <table id="table1">
                 <tr>
-                    <td>셋트품</td>
-                    <td>
-                        <select name="" id="">
-                            <option value="0">0.품번</option>
-                            <option value="1">1.품명</option>
-                            <option value="2">2.규격</option>
-                        </select>
-                    </td>
-                    <td><input type="text" name="" id=""></td>
-                    <td>품목군</td>
-                    <td><input type="text"></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td>계정구분</td>
-                    <td>
-                        <select name="" id="">
-                            <option value="7">전체</option>
-                            <option value="0">0.원재료</option>
-                            <option value="1">1.부재료</option>
-                            <option value="2">2.제품</option>
-                            <option value="4">4.반제품</option>
-                            <option value="5">5.상품</option>
-                            <option value="6">6.저장품</option>
-                        </select>
-                    </td>
+                    <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                    <td>코드</td>
+                    <td>관리항목명</td>
                 </tr>
                 <tr>
-                    <td>셋트품</td>
-                    <td>
-                        <select name="" id="">
-                            <option value="0">0.품번</option>
-                            <option value="1">1.품명</option>
-                            <option value="2">2.규격</option>
-                        </select>
-                    </td>
-                    <td><input type="text" name="" id=""></td>
-                    <td>품목군</td>
-                    <td><input type="text"></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td>계정구분</td>
-                    <td>
-                        <select name="" id="">
-                            <option value="7">전체</option>
-                            <option value="0">0.원재료</option>
-                            <option value="1">1.부재료</option>
-                            <option value="2">2.제품</option>
-                            <option value="4">4.반제품</option>
-                            <option value="5">5.상품</option>
-                            <option value="6">6.저장품</option>
-                        </select>
-                    </td>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>AG</td>
+                    <td>지역그룹구분</td>
                 </tr>
                 <tr>
-                    <td>구성품유무</td>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>AM</td>
+                    <td>지역관리구분</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>LA</td>
+                    <td>재고조정구분</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>LP</td>
+                    <td>구매자재구분</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>LQ</td>
+                    <td>품질검사구분</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>LS</td>
+                    <td>영업관리구분</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>P1</td>
+                    <td>생산설비</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>P2</td>
+                    <td>작업팀</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>P3</td>
+                    <td>작업SHIFT</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>PC</td>
+                    <td>결재조건</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>PU</td>
+                    <td>구매단가유형</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>SU</td>
+                    <td>영업단가유형</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>TM</td>
+                    <td>거래처분류</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>TS</td>
+                    <td>배송방법</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>V1</td>
+                    <td>고객성향구분</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>V2</td>
+                    <td>고객등급구분</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>WD</td>
+                    <td>대여구분</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>WE</td>
+                    <td>위탁적재장소</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td>Z1</td>
+                    <td>품목대분류</td>
+                </tr>
+            </table>
+        </container>
+
+        <container id="contents2">
+            <table id="table2">
+                <tr>
+                    <td align="center">코드</td>
+                    <td>
+                        <input type="text">
+                    </td>    
+                    <td align="center">관리내역명</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                    <td align="center">사용여부</td>
                     <td>
                         <select name="" id="">
                             <option value="2">전체</option>
-                            <option value="0">0.구성품 없는 세트 품목</option>
-                            <option value="1">1.구성품 있는 세트 품목</option>
+                            <option value="0">0.미사용</option>
+                            <option value="1">1.사용</option>
                         </select>
                     </td>
-                    <td>기준일자</td>
-                    <td colspan="4"><input type="date"></td>
+                    <td>
+                        <button>재조회</button>
+                    </td>
                 </tr>
             </table>
-        </container1>
-        <container2 id="contents2">
-           <table id="view">
+            <table id="table3">
                 <thead>
-                    <td colspan="5">셋트품 등록</td>
-                </thead>
-                <thead>
-                    <td><input type="checkbox" id="check" name="content" onclick="selectAll(this)"/></td>
-                    <td>품번</td>
-                    <td>품명</td>
-                    <td>규격</td>
-                    <td>단위(관리)</td>
+                    <td align="center">관리내역코드</td>
+                    <td align="center">관리항목명</td>
+                    <td align="center">비고</td>
+                    <td align="center">사용여부</td>
                 </thead>
                 <tbody>
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                </tbody>
-           </table>
-        </container2>
-        <container3 id="contents3">
-            <table id="view">
-                <thead>
-                    <td colspan="12">구성품 등록</td>
-                </thead>
-                <thead>
-                    <td style="width: 5%;"><input type="checkbox" name="content" onclick="selectAll(this)"></td>
-                    <td>순번</td>
-                    <td>품번</td>
-                    <td>품명</td>
-                    <td>규격</td>
-                    <td>단위(재고)</td>
-                    <td>수량(재고)</td>
-                    <td>단위(관리)</td>
-                    <td>수량(관리)</td>
-                    <td>시작일</td>
-                    <td>종료일</td>
-                    <td>비고</td>
-                </thead>
-                <tbody>
-                    <td style="width: 5%;"><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td><input type="text" name="" id=""></td>
-                    <td><input type="date"></td>
-                    <td><input type="date"></td>
-                    <td><input type="text" name="" id=""></td>
+                    <td>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <select name="" id="">
+                            <option value="1">사용</option>
+                            <option value="0">미사용</option>
+                        </select>
+                    </td>
                 </tbody>
             </table>
-        </container3>
+        </container>
         <footer id= footer>
             footer
         </footer>
@@ -436,9 +440,6 @@
         var side_button3 = document.getElementById('side3');
         var side_button4 = document.getElementById('side4');
         var search_box = document.getElementById('search');
-        var num_box = document.getElementById('num');
-        var save_button = document.getElementById('save');
-        var delete_button = document.getElementById('delete');
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
             if(l_sub1.style.display == 'none' || l_sub1.style.display==''){
@@ -488,34 +489,6 @@
         }
         search_box.onblur = function(){
             document.getElementById("search").value = ' 메뉴 검색';
-        }
-        save_button.onclick = function(){
-            // dao에서 저장
-            var view1 = document.getElementById('table1');
-            var view2 = document.getElementById('view2');
-            focus = document.activeElement;
-            if(view1 == focus){
-            var row = view1.insertRow( view1.rows.length ); 
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
-            cell1.innerHTML = "<input type='checkbox' name='content'/>";;
-            cell2.innerHTML = "<input type='text'/>";
-            cell4.innerHTML = "<input type='text' />";
-            cell5.innerHTML = "<input type='text' />";
-            cell3.innerHTML =  "<input type='date' />";
-            }
-        }
-        delete_button.onclick = function(){
-            //dao에서 체크항목 삭제
-        }
-        function selectAll(selectAll){
-            const checkbox = document.getElementsByName('content');
-            checkbox.forEach((checkbox) => {
-                checkbox.checked = selectAll.checked;
-            })
         }
     </script>
 </body>

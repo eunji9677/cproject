@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>물류실적담당자등록_거래처</title>
     <style>
         *{
             margin: 0;
@@ -53,19 +53,20 @@
             position: absolute;
             left: 15%;
             top: 15%;
-            width: 25%;
-            height: 80%;
+            width: 85%;
+            height: 10%;
             border: 1px solid black;
             z-index: 1;
         }
         #contents2{
             position: absolute;
-            left: 40%;
-            top: 15%;
-            width: 60%;
-            height: 80%;
-            z-index: 1;
+            left: 15%;
+            top: 25%;
+            width: 85%;
+            height: 70%;
             border: 1px solid black;
+            z-index: 1;
+            overflow: scroll;
         }
         #footer{
             position: absolute;
@@ -179,6 +180,85 @@
         #etc_menu li a{
             text-decoration: none;
         }
+
+        /* ------------------------------------------------- */
+
+        .con1_search {
+            margin: 10px;   
+        }
+        #contents1 {
+            /* background-color: rgb(202, 202, 202); */
+            border-bottom: none;
+            
+        }
+        #contents2 {
+            /* background: linear-gradient(to bottom, #ccc, white); */
+            border-bottom: none;
+            
+        }
+        /* #contents3 {
+            background: linear-gradient(to bottom, #ccc, white);
+        } */
+        
+        #contents1 td {
+            text-align: center;
+            letter-spacing: 1px;
+            padding: 1px;
+            font-family: 'Hanna';
+        }
+        #contents2 td {
+            /* border: 1px solid white; */
+            border-collapse: collapse;
+            padding: 3px;
+        }
+        #contents3 td {
+            /* border: 1px solid white; */
+            border-collapse: collapse;
+            padding: 3px;
+        }
+
+        /* #contents2,#contents3 {
+            border: none;
+        } */
+        /* #contents2, #contents3 td{
+            border-collapse: collapse;    
+        } */
+        /* #contents2 thead {
+            background-color: rgb(128, 156, 153);
+            color: white;
+        } */
+        /* #contents3 thead {
+            background-color: rgb(128, 156, 153);
+            color: white;
+        } */
+        #contents1 input[type="text"] {
+            text-align: center;
+            /* border: none; */
+        }
+        #contents1 input[disabled] {
+            border: 2px inset rgb(148, 147, 150);
+        }
+        #contents2 input {
+            text-align: center;
+            /* border: none; */
+        }
+        #contents3 input {
+            text-align: center;
+            /* border: none; */
+        }        
+        /* #contents2, #contents3 {
+            overflow: scroll;   
+        } */
+        /* #contents1, #contents2, #contents3 {
+            font-family: 'Hanna';
+        } */
+        #table1 {
+            padding-top: 15px;
+            padding-left: 50px;
+        }
+        #table2 {
+            width: 100%;
+        }
     </style>    
 </head>
 <body>
@@ -236,192 +316,96 @@
         <aside id = sidemenu>
             <div id="s_nav">
                 <ul id="lnb">
-                    <li><a href="#"  id="side1">물류1</a>
+                    <li><a href="#"  id="side1">회사등록정보</a>
                         <ul id="l_sub1">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">회사등록</a></li>
+                            <li><a href="#">사업장등록</a></li>
+                            <li><a href="#">부서등록</a></li>
+                            
                         </ul></li>
-                    <li><a href="#" id="side2">물류2</a>
+                    <li><a href="#" id="side2">기초정보관리</a>
                         <ul id="l_sub2">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
-                    <li><a href="#" id="side3">생산1</a>
-                        <ul id="l_sub3">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
-                        </ul></li>
-                    <li><a href="#" id="side4">생산2</a>
-                        <ul id="l_sub4">
-                            <li><a href="#">물류1-1</a></li>
-                            <li><a href="#">물류1-2</a></li>
-                            <li><a href="#">물류1-3</a></li>
-                            <li><a href="#">물류1-4</a></li>
+                            <li><a href="#">일반거래처등록</a></li>
+                            <li><a href="#">품목군등록</a></li>
+                            <li><a href="#">품목등록</a></li>
+                            <li><a href="#">창고/공정/외주공정등록</a></li>
+                            <li><a href="#">물류관리내역등록</a></li>
+                            <li><a href="#">물류실적담당자등록</a></li>
+                            <li><a href="#">검사유형등록</a></li>
+                            <li><a href="#">SET구성품등록</a></li>
                         </ul></li>
                 </ul>
             </div>
         </aside>
-        <container id = contents1>
-            <table id="view1">
-                <thead>
-                    <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>코드</td>
-                    <td>관리항목명</td>
-                </thead>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>AG</td>
-                    <td>지역그룹구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>AM</td>
-                    <td>지역관리구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>LA</td>
-                    <td>재고조정구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>LP</td>
-                    <td>구매자재구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>LQ</td>
-                    <td>품질검사구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>LS</td>
-                    <td>영업관리구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>P1</td>
-                    <td>생산설비</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>P2</td>
-                    <td>작업팀</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>P3</td>
-                    <td>작업SHIFT</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>PC</td>
-                    <td>결재조건</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>PU</td>
-                    <td>구매단가유형</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>SU</td>
-                    <td>영업단가유형</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>TM</td>
-                    <td>거래처분류</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>TS</td>
-                    <td>배송방법</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>V1</td>
-                    <td>고객성향구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>V2</td>
-                    <td>고객등급구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>WD</td>
-                    <td>대여구분</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>WE</td>
-                    <td>위탁적재장소</td>
-                </tbody>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td>Z1</td>
-                    <td>품목대분류</td>
-                </tbody>
-            </table>
-        </container>
-
-        <container id="contents2">
-            <table>
+        <container1 id = contents1>
+            <table id="table1">
                 <tr>
-                    <td>코드</td>
+                    <td align="center">거래처</td>
                     <td>
                         <input type="text">
-                    </td>    
-                    <td>관리내역명</td>
+                        <button >+</button>
+                    </td>
+                    <td>
+                        <input type="text">
+                        ~
+                    </td>
+                    <td>
+                        <input type="text">
+                        <button>+</button>
+                    </td>
                     <td>
                         <input type="text">
                     </td>
-                    <td>사용여부</td>
+                </tr>
+                <tr>
                     <td>
                         <select name="" id="">
-                            <option value="2">전체</option>
-                            <option value="0">0.미사용</option>
-                            <option value="1">1.사용</option>
+                            <option value="0">0.전체</option>
+                            <option value="1">1.영업</option>
+                            <option value="2">2.구매</option>
+                            <option value="3">3.외주</option>
                         </select>
                     </td>
+                    <td align="center" >
+                        담당자
+                        <input type="text" style="width: 115px;">
+                        <button>+</button>
                     <td>
-                        <button>재조회</button>
+                        <input type="text" disabled >
                     </td>
                 </tr>
             </table>
-            <table>
+        </container1>
+        <container2 id= contents2>
+            <table id="table2">
                 <thead>
-                    <td>관리내역코드</td>
-                    <td>관리항목명</td>
-                    <td>비고</td>
-                    <td>사용여부</td>
+                    <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                    <td align="center">코드</td>
+                    <td align="center">거래처명</td>
+                    <td align="center">영업담당자</td>
+                    <td align="center">구매담당자</td>
+                    <td align="center">외주담당자</td>
+                    <td align="center">지역</td>
+                    <td align="center">거래처분류</td>
+                    <td align="center">기본납품처</td>
+                    <td align="center">영업기본단가유형</td>
+                    <td align="center">구매기본단가유형</td>
                 </thead>
                 <tbody>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <select name="" id="">
-                            <option value="1">사용</option>
-                            <option value="0">미사용</option>
-                        </select>
-                    </td>
+                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
                 </tbody>
             </table>
-        </container>
+        </container2>
         <footer id= footer>
             footer
         </footer>
