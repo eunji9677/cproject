@@ -11,6 +11,9 @@
             padding: 0;
             box-sizing: border-box;
         }
+        a{
+            text-decoration: none;
+        }
         #wrap{
             margin: 0 auto;
             border: 1px solid black;
@@ -25,6 +28,7 @@
             width: 100%;
             height: 10%;
             border: 1px solid black;
+            
         }
         #nav1{
             position: absolute;
@@ -33,7 +37,7 @@
             top: 10%;
             width: 60%;
             height: 5%;
-            border: 1px solid black;
+            
         }
         #nav2{
             position: absolute;
@@ -41,13 +45,16 @@
             width: 40%;
             height: 5%;
             border: 1px solid black;
+           
         }
         #sidemenu{
             position: absolute;
             top: 15%;
             height: 80%;
             width: 15%;
-            border: 1px solid black;
+            /* border: 1px solid black; */
+            background-color: #f5f5f5;
+            
         }
         #contents1{
             position: absolute;
@@ -56,8 +63,10 @@
             top: 15%;
             width: 85%;
             height: 10%;
-            border: 1px solid black;
+            border: 1px solid #cccccc;
             z-index: 1;
+            
+            /* background-color: rgb(228, 228, 248); */
 
         }
         #contents2{
@@ -67,7 +76,7 @@
             top: 25%;
             width: 85%;
             height: 35%;
-            border: 1px solid black;
+            /* border: 1px solid black; */
             z-index: 1;
         }
         #contents3{
@@ -76,7 +85,7 @@
             top:60%;
             width: 85%;
             height: 35%;
-            border: 1px solid black;
+            /* border: 1px solid black; */
             z-index: 1;
         }
         #footer{
@@ -84,7 +93,7 @@
             bottom: 0;
             width: 100%;
             height: 5%;
-            border: 1px solid black;
+            /* border: 1px solid black; */
         }
         .logo{
             position: absolute;
@@ -131,7 +140,7 @@
             width: 209.2px;
             height: 50px;
             text-align: center;
-            border: 1px solid black;
+           
             position: relative;
 
         }
@@ -143,8 +152,8 @@
             padding-top: 10px;
             width: 100%;
             height: 50px;
-            border: 1px solid black;
-            background-color: white;
+            background-color: #f5f5f5;
+            border: 1px solid #cccccc;
         }
         #nav1 #gnb>li a:hover{
             display: block;
@@ -155,27 +164,36 @@
             left: 0;
             width: 100%;
             display: none;
+            
         }
         #s_nav #lnb li{
             list-style: none;
         }
         #s_nav #lnb li #side1,#side2,#side3,#side4{
             display: block;
-            border: 1px solid black;
+            border: 1px solid #cccccc;
+            background-color: #f5f5f5;
         }
         #s_nav #lnb #l_sub1,#l_sub2,#l_sub3,#l_sub4{
             border-style: none;
             display: none;
+            
         }
         #s_nav a{
             text-decoration: none;
         }
+        #nav2{
+            background-color: #f5f5f5;
+            border: #ccc;
+        }
         #nav2 button{
-            background-color: white;
+            background-color: #f5f5f5;
             width: 24%;
-            height: 48px;
-            margin: 0;
+            height: 50px;
+
+            margin-left: 1px;
             padding: 0;
+            border: 1px solid #ccc;
         }
         #nav2 button:hover{
             background-color: gray;
@@ -204,7 +222,7 @@
         #view1,#view2,#t_total{
             width: 100%;
             text-align: center;
-            border: 1px solid black;
+            border: 1px solid #ccc;
             
         }
         #total{
@@ -218,11 +236,15 @@
         #view2 td input{
             width: 100%;
         }
+        #header li a, p{
+            color: white;
+        }
+
     </style>    
 </head>
 <body>
     <div id=wrap>
-        <header id = header>
+        <header id = header style="background-color:rgb(7, 71, 166);">
             <img src="img/ani_spade.png" class="logo"/>
             <p id=info>회사정보:데이터 받아오기 사원:데이터 받아오기</p>
             <ul id="etc_menu">
@@ -235,10 +257,10 @@
             <input type="button" value="검색" class="search_button"/>
         </header>
         <nav id = nav1>
-            <ul id="gnb">
-                <li><a href="#">물류1</a>
-                    <ul id="sub">
-                        <li><a href="#">물류1-1</a></li>
+            <ul id="gnb" >
+                <li ><a href="#">물류1</a>
+                    <ul id="sub" >
+                        <li ><a href="#">물류1-1</a></li>
                         <li><a href="#">물류1-2</a></li>
                         <li><a href="#">물류1-3</a></li>
                         <li><a href="#">물류1-4</a></li>
@@ -274,8 +296,8 @@
         </nav>
         <aside id = sidemenu>
             <div id="s_nav">
-                <ul id="lnb">
-                    <li><a href="#"  id="side1" >영업관리</a>
+                <ul id="lnb" style="margin-top: 30px;">
+                    <li><a href="#"  id="side1"  >영업관리</a>
                         <ul id="l_sub1">
                             <li><a href="#">판매계획등록</a></li>
                             <li><a href="#">견적등록</a></li>
@@ -299,7 +321,7 @@
                 </ul>
             </div>
         </aside>
-        <container1 id = contents1>
+        <container1 id = contents1 >
             <table class="con1_search">
                 <tr>
                     <td>사업장</td>
@@ -328,9 +350,9 @@
             </table>
             
         </container1>
-        <container2 id="contents2">
+        <container2 id="contents2" >
             <table id="view1">
-                <thead>
+                <thead style="background-color: #f5f5f5;">
                     <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
                     <td>출고번호</td>
                     <td>출고일자</td>
@@ -348,7 +370,7 @@
         </container2>
         <container3 id="contents3">
             <table id="view2">
-                <tr>
+                <tr style="background-color: #f5f5f5;">
                     <td>no</td>
                     <td>품번</td>
                     <td>품명</td>
@@ -377,7 +399,7 @@
             </table> 
             <div id="total">
                 <table id="t_total">
-                <tr>
+                <tr style="background-color: #f5f5f5;">
                     <td>총계</td>
                     <td>출고수량합</td>
                     <td>총공급가</td>
