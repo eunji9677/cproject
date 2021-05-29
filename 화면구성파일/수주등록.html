@@ -300,7 +300,7 @@
                     <td>사업장</td>
                     <td><input type="text" name="" id=""></td>
                     <td><button>+</button></td>
-                    <td><input type="text"></td>
+                    <td><input type="text" disabled></td>
                     <td>주문기간</td>
                     <td><input type="date"></td>
                     <td>~</td>
@@ -310,7 +310,7 @@
                     <td>고객</td>
                     <td><input type="text"></td>
                     <td><button>+</button></td>
-                    <td><input type="text"></td>>
+                    <td><input type="text" disabled></td>
                 </tr>
             </table>
         </container1>
@@ -341,7 +341,7 @@
         <container3 id="contents3">
             <table id="view">
                 <thead>
-                    <td style="width: 5%;"><input type="checkbox" name="content" onclick="selectAll(this)"></td>
+                    <td style="width: 5%;"><input type="checkbox" name="content1" onclick="selectAll1(this)"></td>
                     <td>품번</td>
                     <td>품명</td>
                     <td>규격</td>
@@ -355,7 +355,7 @@
                     <td>검사</td>
                 </thead>
                 <tbody>
-                    <td style="width: 5%;"><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td style="width: 5%;"><input type="checkbox" value = "check1" id="check" name="content1"/></td>
                     <td><input type="text" name="" id=""></td>
                     <td><input type="text" name="" id=""></td>
                     <td><input type="text" name="" id=""></td>
@@ -377,8 +377,6 @@
     <script>
         var side_button1 = document.getElementById('side1');
         var side_button2 = document.getElementById('side2');
-        var side_button3 = document.getElementById('side3');
-        var side_button4 = document.getElementById('side4');
         var search_box = document.getElementById('search');
         var num_box = document.getElementById('num');
         var save_button = document.getElementById('save');
@@ -403,28 +401,6 @@
             }
             else{
                 l_sub2.style.display = "none";
-            }
-        }
-        side_button3.onclick = function(){
-            var l_sub3 = document.getElementById('l_sub3');
-            if(l_sub3.style.display == 'none' || l_sub3.style.display==''){
-            l_sub3.style.display = "block";
-            l_sub3.style.position = "relative";
-            l_sub3.style.marginLeft = "10px";
-            }
-            else{
-                l_sub3.style.display = "none";
-            }
-        }
-        side_button4.onclick = function(){
-            var l_sub = document.getElementById('l_sub4');
-            if(l_sub4.style.display == 'none' || l_sub4.style.display==''){
-            l_sub4.style.display = "block";
-            l_sub4.style.position = "relative";
-            l_sub4.style.marginLeft = "10px";
-            }
-            else{
-                l_sub4.style.display = "none";
             }
         }
         search_box.onfocus = function(){
@@ -459,6 +435,12 @@
             const checkbox = document.getElementsByName('content');
             checkbox.forEach((checkbox) => {
                 checkbox.checked = selectAll.checked;
+            })
+        }
+        function selectAll1(selectAll1){
+            const checkbox = document.getElementsByName('content1');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll1.checked;
             })
         }
     </script>

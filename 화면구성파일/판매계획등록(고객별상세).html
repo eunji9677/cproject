@@ -310,9 +310,9 @@
                     <td><input type="text" disabled></td>
                     <td align="right" colspan="2">대상년월</td>
                     <td colspan="2">
-                        <button><<</button>
-                        <input type="text" value="2021" style="width: 60px; text-align: center;">
-                        <button>>></button>
+                        <button id="minus"><<</button>
+                        <input type="text" value="2021" id="year" style="width: 60px; text-align: center;">
+                        <button id="plus">>></button>
                         <select name="" id="">
                             <option value="1">1월</option>
                             <option value="2">2월</option>
@@ -396,6 +396,9 @@
         var num_box = document.getElementById('num');
         var save_button = document.getElementById('save');
         var delete_button = document.getElementById('delete');
+        var plus_button = document.getElementById('plus');
+        var minus_button = document.getElementById('minus');
+        
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
             if(l_sub1.style.display == 'none' || l_sub1.style.display==''){
@@ -457,6 +460,14 @@
             checkbox.forEach((checkbox) => {
                 checkbox.checked = selectAll1.checked;
             })
+        }
+        plus_button.onclick = function(){
+            var year = document.getElementById('year');
+            year.value =Number(year.value) + 1;
+        }
+        minus_button.onclick = function(){
+            var year = document.getElementById('year');
+            year.value =Number(year.value) - 1;
         }
     </script>
 </body>
