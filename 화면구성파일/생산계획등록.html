@@ -443,7 +443,7 @@
             <div id="pdcDateInfo">
                 <table id="pdcDateTable">
                     <thead>
-                        <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                        <td><input type="checkbox" name="content3" onclick="selectAll3(this)"/></td>
                         <td>품번</td>
                         <td>품명</td>
                         <td>규격</td>
@@ -452,7 +452,7 @@
                     </thead>
                     <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                     <tbody>
-                        <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                        <td><input type="checkbox" value = "check1" id="check" name="content3"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
@@ -556,6 +556,12 @@
         }
         function selectAll2(selectAll){
             const checkbox = document.getElementsByName('content2');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+        function selectAll3(selectAll){
+            const checkbox = document.getElementsByName('content3');
             checkbox.forEach((checkbox) => {
                 checkbox.checked = selectAll.checked;
             })
