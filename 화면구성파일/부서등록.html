@@ -253,10 +253,12 @@
         } */
         #table1 {
             padding-top: 20px;
-            padding-left: 25px;
+            padding-left: 15px;
         }
         #table2 {
             width: 100%;
+            overflow: hidden;
+            
         }
     </style>    
 </head>
@@ -340,26 +342,30 @@
             <table id="table1" align="center">
                 <tr>
                     <p><td colspan="3" span style="color:black" align="center">부서등록</td></p>
-                    <p><td colspan="6" span style="color:black" align="center">부문등록</td></p>
+                    <p><td colspan="7" span style="color:black" align="center">부문등록</td></p>
                 </tr>
                 <tr>
                     <td align="center">사업장</td>
                     <td>
-                        <select name="workSpace" style="width: 150px;">
+                        <select name="workSpace" style="width: 120px;">
                         <button>+</button>
                     </td>
                     <td align="center">조회기준일 적용</td>
                     <td>
                         <input type="checkbox">
-                        <input type="date" disabled text-align: center;" />
+                        <input type="date" disabled text-align: center; style="width: 130px;"/>
                     </td>                  
                     <td align="center" colspan="3" style="width:150px; text-align: right;">부문코드&nbsp;</td>
                     <td>
-                        <input type=text name="sectorCode" style=" width: 100px;"/>
+                        <input type=text name="sectorCode" style=" width: 80px;"/>
                     </td>
                     <td align="center">부문명</td>
                     <td>
                         <input type=text name="sectorName" style="width: 150px;"/>
+                    </td>
+                    <td align="center">사용기간 시작</td>
+                    <td>
+                        <input type="date" style="width: 130px;">
                     </td>
                 </tr>
             </table>
@@ -373,25 +379,30 @@
                     <td align="center">사업장명</td>
                     <td align="center">부문코드</td>
                     <td align="center">부문명</td>
+                    <td align="center">사용기간 시작</td>
                 </thead>
                 <tbody>
                     <td align="center">
-                        <input type=text name="divCode">
+                        <input type=text name="divCode" style="width: 100px;">
                     </td>
                     <td align="center">
                         <input type=text name="divName">
                     </td>
                     <td align="center">
-                        <input type=text name="workSpaceCode">
+                        <input type=text name="workSpaceCode" style="width: 100px;">
                     </td>
                     <td align="center">
                         <input type=text name="workSpaceName">
                     </td>
                     <td align="center">
-                        <input type=text name="sectorCode">
+                        <input type=text name="sectorCode" style="width: 100px;">
                     </td>
                     <td align="center">
                         <input type=text name="sectorName">
+                    </td>
+                    <td align="center">
+                        <input type="date">
+                    </td>
                     </tbody>
                 </tr>
             </table>

@@ -183,10 +183,15 @@
         #table1 {
             text-align: center; width: 100%; padding-top: 20px;
             padding-right: 10%; padding-left: 2px;
+            overflow: hidden;
         }
         #table2 {
             width: 100%; padding-top: 20px; padding-left: 50px; text-align: left;
             border-collapse: separate; border-spacing: 0 15px;
+        }
+        #reqInput {
+            background-color: rgba(61, 218, 139, 0.164);
+            text-align: center;
         }
     </style>    
 </head>
@@ -298,10 +303,8 @@
                 <tr>
                     <td align="center">사업자등록번호</td>
                     <td colspan="2">
-                        <input type="text" name="registrationNumber"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;" pattern="[0-9]{10}" maxlength="10"/>
+                        <input type="text" name="registrationNumber" id="reqInput" 
+                        style="width: 240px;" pattern="[0-9]{10}" maxlength="10"/>
                     </td>
                 </tr>
                 <tr>
@@ -316,10 +319,8 @@
                 <tr>
                     <td align="center">대표자명</td>
                     <td colspan="2">
-                        <input type="text" name="ceoName"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;"/>
+                        <input type="text" name="ceoName" id="reqInput"
+                        style="width: 240px;"/>
                     </td>
                 </tr>
                 <tr>
@@ -335,10 +336,8 @@
                 <tr>
                     <td align="center">사업장주소</td>
                     <td colspan="2">
-                        <input type="text" name="workSpaceAddress"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;"/>
+                        <input type="text" name="workSpaceAddress" id="reqInput"
+                        style="width: 240px;"/>
                     </td>
                 </tr>
                 <tr>
@@ -362,37 +361,15 @@
                 <tr>
                     <td align="center">업태</td>
                     <td colspan="2">
-                        <input type="text" name="business" 
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;"/>
+                        <input type="text" name="business" id="reqInput" 
+                        style="width: 240px;"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="center">종목</td>
                     <td colspan="2">
-                        <input type="text" name="specific" 
-                        style="background-color: rgb(235,235,235);
-                        border-style: none; width: 240px;
-                        text-align: center;"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">개업연월일</td>
-                    <td colspan="2">
-                        <input type="date" name="openingYear"
-                        style="background-color: rgb(235,235,235);
-                        border-style: none;
-                        text-align: center;"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">폐업연월일</td>
-                    <td colspan="2">
-                        <input type="date" name="closingYear" 
-                        style="background-color: rgb(235,235,235);
-                        border-style: none;
-                        text-align: center;"/>
+                        <input type="text" name="specific" id="reqInput"
+                        style="width: 240px;"/>
                     </td>
                 </tr>
                 <tr>
