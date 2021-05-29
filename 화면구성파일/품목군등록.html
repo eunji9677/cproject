@@ -377,7 +377,7 @@
             <table id="table2" align="center">
                 <tr>
                     <td>
-                        <input type="checkbox">
+                        <input type="checkbox" name="content" onclick="selectAll(this)"/>
                     </td>
                     <td>품목군코드</td>
                     <td>품목군명</td>
@@ -386,7 +386,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox">
+                        <input type="checkbox" name="content" onclick="selectAll(this)"/>
                     </td>
                     <td>
                         <input type=text name="rangeCode">
@@ -464,6 +464,12 @@
         }
         search_box.onblur = function(){
             document.getElementById("search").value = ' 메뉴 검색';
+        }
+        function selectAll(selectAll){
+            const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
         }
     </script>
 </body>

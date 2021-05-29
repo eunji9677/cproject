@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>일반거래처등록</title>
+    <title>Document</title>
     <style>
         *{
             margin: 0;
@@ -281,6 +281,10 @@
             background-color: rgb(128, 156, 153);
             color: white;
         } */
+        #reqInput {
+            background-color: rgba(61, 218, 139, 0.164);
+            text-align: center;
+        }
     </style>    
 </head>
 <body>
@@ -412,15 +416,10 @@
                     <p><td colspan = "4" span style="color:black" align="center">기본등록사항</td></p>
                 </tr>
                 <tr>
-                    <td align="center">거래처약칭</td>
-                    <td colspan="3">
-                        <input type="text" name="customerNickname">
-                    </td>
-                </tr>
-                <tr>
                     <td align="center">사업자등록번호</td>
                     <td colspan="3">
-                        <input type="text" name="registrationNumber" pattern="[0-9]{10}" maxlength="10"/>
+                        <input type="text" name="registrationNumber" id="reqInput"
+                        pattern="[0-9]{10}" maxlength="10"/>
                     </td>
                 </tr>
                 <tr>
@@ -461,43 +460,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="center">사업장번지</td>
-                    <td colspan="3">
-                        <input type="text" name="workStreetAddress">
-                    </td>
-                </tr>
-                <tr>
                     <td align="center">전화번호</td>
                     <td colspan="3">
                         <input type="text" name="phoneNumber" pattern="[0-9]{10}" maxlength="10"/>
                     </td>
                 </tr>
                 <tr>
-                    <td align="center">메일주소</td>
-                    <td colspan="3">
-                        <input type="text" name="emailAddress">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">국가코드</td>
-                    <td colspan="1">
-                        <input type="text" name="countryCode" pattern="[0-9]{5}" maxlength="5"/>
-                        <button>검색</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">거래시작일</td>
-                    <td>
-                        <input type="date" name="openingDate">
-                        &nbsp;&nbsp;거래종료일&nbsp;&nbsp;
-                        <input type="date" name="closingDate"/>
-                    </td>
-                </tr>
-                <tr>
-                    <p><td colspan = "10" span style="color:black" align="center">추가등록사항</td>
-                </tr>
-                <tr>
-                    <td align="center">관리담당자</td>
+                    <td align="center">주류코드</td>
                     <td>
                         <input type="text" name="inchargeManager">
                     </td>
