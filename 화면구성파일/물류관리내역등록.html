@@ -391,7 +391,7 @@
                     <td>
                         <input type="text">
                     </td>
-                    <td align="center">사용여부</td>
+                    <!-- <td align="center">사용여부</td>
                     <td>
                         <select name="" id="">
                             <option value="2">전체</option>
@@ -401,15 +401,15 @@
                     </td>
                     <td>
                         <button>재조회</button>
-                    </td>
+                    </td> -->
                 </tr>
             </table>
             <table id="table3">
                 <thead>
                     <td align="center">관리내역코드</td>
                     <td align="center">관리항목명</td>
+                    <td align="center">품목군설명</td>
                     <td align="center">비고</td>
-                    <td align="center">사용여부</td>
                 </thead>
                 <tbody>
                     <td>
@@ -422,11 +422,14 @@
                         <input type="text">
                     </td>
                     <td>
+                        <input type="text">
+                    </td>
+                    <!-- <td>
                         <select name="" id="">
                             <option value="1">사용</option>
                             <option value="0">미사용</option>
                         </select>
-                    </td>
+                    </td> -->
                 </tbody>
             </table>
         </container>
@@ -465,6 +468,12 @@
         }
         search_box.onblur = function(){
             document.getElementById("search").value = ' 메뉴 검색';
+        }
+        function selectAll(selectAll){
+            const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
         }
     </script>
 </body>
