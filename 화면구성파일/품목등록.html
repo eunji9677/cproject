@@ -270,6 +270,8 @@
             text-align: center;
         }
         #table3 {
+            padding-left: 30px;
+            padding-top: 15px;
             width: 100%; 
         }
         #bottom1 {
@@ -426,9 +428,6 @@
         <container3 id="contents3">
             <table id="table3">
                 <tr>
-                    <td align="center" colspan="6">MASTER/SPEC</td>
-                </tr>
-                <tr>
                     <td align="center">품번</td>
                     <td>
                         <input type="text">
@@ -441,36 +440,25 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="center">계정구분</td>
+                    <td align="center">규격</td>
                     <td>
-                        <select name="" id="">
-                            <option value="0">0.원재료</option>
-                            <option value="1">1.부재료</option>
-                            <option value="2">2.제품</option>
-                            <option value="4">4.반제품</option>
-                            <option value="5">5.상품</option>
-                            <option value="6">6.저장품</option>
-                            <option value="7">7.비용</option>
-                            <option value="8">8.수익</option>
-                        </select>
-                    </td>
-                    <td align="center">조달구분</td>
-                    <td>
-                        <select name="" id="">
-                            <option value="0">0.구매</option>
-                            <option value="1">1.생산</option>
-                            <option value="8">2.phantom</option>
-                        </select>
+                        <input type="text">
                     </td>
                 </tr>
                 <tr>
+                    <td align="center">재고단위</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <!-- <tr>
                     <td align="center">품목군</td>
                     <td>
                         <input type="text" style="width: 70px;">
                         <button>+</button>
                         <input type="text" style="width: 100px;">
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td align="center">LOT여부</td>
                     <td>
@@ -479,6 +467,8 @@
                             <option value="1">1.미사용</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
                     <td align="center">SET품목</td>
                     <td>
                         <select name="" id="">
@@ -497,78 +487,58 @@
                     </td>
                 </tr>
                 <tr>
+                    <td align="center">사용여부</td>
+                    <td>
+                        <select>
+                            <option value="0.">0.부</option>
+                            <option value="1">1.여</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td align="center">LOT수량</td>
                     <td>
                         <input type="text">
                     </td>
-                    <td align="center">BATCH수량</td>
+                </tr>
+                <tr>
+                    <td align="center">도면번호</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">HS CODE</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">폭</td>
+                    <td>
+                        <input type="text"  style="width: 150px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">길이</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">높이</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">원가</td>
                     <td>
                         <input type="text">
                     </td>
                 </tr>
                 <tr>
                     <td align="center">비고</td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center" colspan="6">ORDER/COST</td>
-                </tr>
-                <tr>
-                    <td align="center">LEAD TIME</td>
-                    <td>
-                        <input type="text"  style="width: 150px;">DAYS
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">안전재고량</td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">주거래처</td>
-                    <td>
-                        <input type="text">
-                        <button>+</button>
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">보조거래처1</td>
-                    <td>
-                        <input type="text">
-                        <button>+</button>
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">보조거래처2</td>
-                    <td>
-                        <input type="text">
-                        <button>+</button>
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">표준원가</td>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td align="center">실제원가</td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">최저판매단가</td>
                     <td>
                         <input type="text">
                     </td>
@@ -655,6 +625,12 @@
         }
         search_box3.onblur = function(){
             document.getElementById("search3").value = ' 규격 검색';
+        }
+        function selectAll(selectAll){
+            const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
         }
     </script>
 </body>
