@@ -202,7 +202,14 @@
             border: 1px solid black;
             
         }
-    
+
+/* ------------------------------------------------- */
+
+        #con1_search {
+            width: 30%;
+            padding-top: 10px;
+            left: 5%;
+        }
     </style>    
 </head>
 <body>
@@ -283,9 +290,9 @@
             </div>
         </aside>
         <container1 id = contents1>
-            <table class="con1_search">
+            <table class="con1_search" id="con1_search">
                 <tr>
-                    <td>검사구분</td>
+                    <td align="center">검사구분</td>
                     <td>
                         <select name="" id="">
                             <option value="11">11.구매검사</option>
@@ -294,7 +301,7 @@
                             <option value="51">51.출하검사</option>
                         </select>
                     </td>
-                    <td>사용여부</td>
+                    <td align="center">사용여부</td>
                     <td>
                         <select name="" id="">
                             <option value="0">0.미사용</option>
@@ -308,35 +315,37 @@
             <table id="view1">
                 <thead>
                     <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>no</td>
-                    <td>코드</td>
-                    <td>검사유형명</td>
-                    <td>비고</td>
-                    <td>사용여부</td>
+                    <td align="center">no</td>
+                    <td align="center">코드</td>
+                    <td align="center">검사유형명</td>
+                    <td align="center">비고</td>
+                    <!-- <td align="center">사용여부</td> -->
                 </thead>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
+                <tbody id="table1" align="center">
+                    <td align="center"><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                    <td align="center"><input type="text"/></td>
+                    <td align="center"><input type="text"/></td>
+                    <td align="center"><input type="text"/></td>
+                    <td align="center"><input type="text"/></td>
+                    <!-- <td align="center"><input type="text"/></td> -->
                 </tbody>
             </table>
         </container2>
         <container3 id="contents3">
             <table id="view2">
                 <thead>
-                    <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>no</td>
-                    <td>검사유형질문</td>
-                    <td>비고</td>
+                    <td><input type="checkbox" name="content1" onclick="selectAll1(this)"/></td>
+                    <td align="center">no</td>
+                    <td align="center">검사유형질문</td>
+                    <td align="center">비고</td>
                 </thead>
-                <tbody id="table1">
-                    <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
+                <tbody id="table1" align="center">
+                    <td>
+                        <input type="checkbox" value = "check1" id="check" name="content1"/>
+                    </td>
+                    <td align="center"><input type="text"/></td>
+                    <td align="center"><input type="text"/></td>
+                    <td align="center"><input type="text"/></td>
                 </tbody>
             </table>
         </container3>
@@ -347,8 +356,6 @@
     <script>
         var side_button1 = document.getElementById('side1');
         var side_button2 = document.getElementById('side2');
-        var side_button3 = document.getElementById('side3');
-        var side_button4 = document.getElementById('side4');
         var search_box = document.getElementById('search');
         var num_box = document.getElementById('num');
         var save_button = document.getElementById('save');
@@ -373,28 +380,6 @@
             }
             else{
                 l_sub2.style.display = "none";
-            }
-        }
-        side_button3.onclick = function(){
-            var l_sub3 = document.getElementById('l_sub3');
-            if(l_sub3.style.display == 'none' || l_sub3.style.display==''){
-            l_sub3.style.display = "block";
-            l_sub3.style.position = "relative";
-            l_sub3.style.marginLeft = "10px";
-            }
-            else{
-                l_sub3.style.display = "none";
-            }
-        }
-        side_button4.onclick = function(){
-            var l_sub = document.getElementById('l_sub4');
-            if(l_sub4.style.display == 'none' || l_sub4.style.display==''){
-            l_sub4.style.display = "block";
-            l_sub4.style.position = "relative";
-            l_sub4.style.marginLeft = "10px";
-            }
-            else{
-                l_sub4.style.display = "none";
             }
         }
         search_box.onfocus = function(){
@@ -429,6 +414,12 @@
             const checkbox = document.getElementsByName('content');
             checkbox.forEach((checkbox) => {
                 checkbox.checked = selectAll.checked;
+            })
+        }
+        function selectAll1(selectAll1){
+            const checkbox = document.getElementsByName('content1');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll1.checked;
             })
         }
     </script>
