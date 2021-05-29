@@ -439,8 +439,6 @@
     <script>
         var side_button1 = document.getElementById('side1');
         var side_button2 = document.getElementById('side2');
-        var side_button3 = document.getElementById('side3');
-        var side_button4 = document.getElementById('side4');
         var search_box = document.getElementById('search');
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
@@ -462,28 +460,6 @@
             }
             else{
                 l_sub2.style.display = "none";
-            }
-        }
-        side_button3.onclick = function(){
-            var l_sub3 = document.getElementById('l_sub3');
-            if(l_sub3.style.display == 'none' || l_sub3.style.display==''){
-            l_sub3.style.display = "block";
-            l_sub3.style.position = "relative";
-            l_sub3.style.marginLeft = "10px";
-            }
-            else{
-                l_sub3.style.display = "none";
-            }
-        }
-        side_button4.onclick = function(){
-            var l_sub = document.getElementById('l_sub4');
-            if(l_sub4.style.display == 'none' || l_sub4.style.display==''){
-            l_sub4.style.display = "block";
-            l_sub4.style.position = "relative";
-            l_sub4.style.marginLeft = "10px";
-            }
-            else{
-                l_sub4.style.display = "none";
             }
         }
         search_box.onfocus = function(){
