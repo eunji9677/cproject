@@ -96,7 +96,6 @@ hs_err_pid*
 ### Java-Web ###
 ## ignoring target file
 target/
-m2e-wtp/
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
