@@ -6,7 +6,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style>
-#contents1{
+		#contents1{
             position: absolute;
             left: 15%;
             top: 15%;
@@ -250,7 +250,7 @@
                 <tr>
                     <td align="center">폭</td>
                     <td>
-                        <input type="text"  style="width: 150px;">
+                        <input type="text">
                     </td>
                 </tr>
                 <tr>
@@ -279,5 +279,29 @@
                 </tr>
             </table>
         </container3>
+        <script>
+        	var search_box1 = document.getElementById('search1');
+        	var search_box2 = document.getElementById('search2');
+        	var search_box3 = document.getElementById('search3');
+        	search_box1.onfocus = function(){
+                document.getElementById("search1").value = '';
+            }
+            search_box1.onblur = function(){
+                document.getElementById("search1").value = ' 품번 검색';
+            }
+            search_box2.onfocus = function(){
+                document.getElementById("search2").value = '';
+            }
+            search_box2.onblur = function(){
+                document.getElementById("search2").value = ' 품명 검색';
+            }
+            search_box3.onfocus = function(){
+                document.getElementById("search3").value = '';
+            }
+            search_box3.onblur = function(){
+                document.getElementById("search3").value = ' 규격 검색';
+            }
+        </script>
+        
 </body>
 </html>

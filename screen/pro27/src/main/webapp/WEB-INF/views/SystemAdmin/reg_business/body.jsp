@@ -100,7 +100,7 @@
                         style="background-color: rgb(235,235,235);
                         border-style: none; width: 205px;
                         text-align: center;" pattern="[0-9]{5}" maxlength="5"/>
-                        <button>°Ë»ö</button>
+                        <i class="fas fa-search" style="color: blue;"></i> 
                     </td>
                 </tr>
                 <tr>
