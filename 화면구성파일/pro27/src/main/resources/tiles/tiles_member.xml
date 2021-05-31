@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="" />
+   </definition>
+   <definition name="baseLayout2"  template="/WEB-INF/views/purchase_manage/reg_receive_inspection/layout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="" />
+   </definition>
+   
+
+   <definition name="main" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/SystemAdmin/reg_company/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+   </definition>
+
+
+   <definition name="/member/listMembers" extends="baseLayout">
+      <put-attribute name="title" value="회원목록창" />
+      <put-attribute name="body" value="/WEB-INF/views/common/body.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+   </definition>
+   <definition name="/member/systemmain" extends="baseLayout">
+      <put-attribute name="title" value="시스템관리메인" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/businessmain" extends="baseLayout">
+      <put-attribute name="title" value="영엽관리메인" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/purchasemain" extends="baseLayout">
+      <put-attribute name="title" value="구매/자재관리메인" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+   <definition name="/member/productionmain" extends="baseLayout">
+      <put-attribute name="title" value="생산메인" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+   
+
+    
+   <definition name="/member/regcompany" extends="baseLayout">
+      <put-attribute name="title" value="회사등록" />
+      <put-attribute name="body" value="/WEB-INF/views/SystemAdmin/reg_company/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   
+  <definition name="/member/regbusiness" extends="baseLayout">
+      <put-attribute name="title" value="사업장등록" />
+      <put-attribute name="body" value="/WEB-INF/views/SystemAdmin/reg_business/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   
+   <definition name="/member/regdepartment" extends="baseLayout">
+      <put-attribute name="title" value="부서등록" />
+      <put-attribute name="body" value="/WEB-INF/views/SystemAdmin/reg_department/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   
+   <definition name="/member/regbasicacc" extends="baseLayout">
+      <put-attribute name="title" value="일반거래처등록" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/reg_gen_account/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/regitemgroup" extends="baseLayout">
+      <put-attribute name="title" value="품목군등록" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/reg_item_group/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/regitem" extends="baseLayout">
+      <put-attribute name="title" value="품목등록" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/reg_item/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/outware" extends="baseLayout">
+      <put-attribute name="title" value="창고/외주등록" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/out_ware/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/logistics_manage" extends="baseLayout">
+      <put-attribute name="title" value="물류관리내역등록" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/logistics_manage/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/logperbusi" extends="baseLayout">
+      <put-attribute name="title" value="물류실적담당자등록(거래처)" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/logi_performance_manager_business/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/logperitem" extends="baseLayout">
+      <put-attribute name="title" value="물류실적담당자등록(품목)" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/logi_performance_manager_item/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/reginspection" extends="baseLayout">
+      <put-attribute name="title" value="검사유형등록" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/reg_inspection_type/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/regsetcom" extends="baseLayout">
+      <put-attribute name="title" value="SET품등록" />
+      <put-attribute name="body" value="/WEB-INF/views/basic_info_manage/reg_setcomponent/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
+   </definition>
+   <definition name="/member/regsalesplan" extends="baseLayout">
+      <put-attribute name="title" value="판매계획등록" />
+      <put-attribute name="body" value="/WEB-INF/views/sales_manage/reg_salesplan/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/regestimate" extends="baseLayout">
+      <put-attribute name="title" value="견적등록" />
+      <put-attribute name="body" value="/WEB-INF/views/sales_manage/reg_estimate/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/regorder" extends="baseLayout">
+      <put-attribute name="title" value="수주등록" />
+      <put-attribute name="body" value="/WEB-INF/views/sales_manage/reg_order/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/regforreq" extends="baseLayout">
+      <put-attribute name="title" value="출고의뢰등록" />
+      <put-attribute name="body" value="/WEB-INF/views/sales_manage/reg_forwarding_request/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/forwarding" extends="baseLayout">
+      <put-attribute name="title" value="출고처리" />
+      <put-attribute name="body" value="/WEB-INF/views/sales_manage/forwarding/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/transactionissue" extends="baseLayout">
+      <put-attribute name="title" value="거래명세서발행" />
+      <put-attribute name="body" value="/WEB-INF/views/sales_manage/transaction_issue/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/quotationstatus" extends="baseLayout">
+      <put-attribute name="title" value="견적현황" />
+      <put-attribute name="body" value="/WEB-INF/views/business_status/quotation_status/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/salesplanstat" extends="baseLayout">
+      <put-attribute name="title" value="판매계획현황" />
+      <put-attribute name="body" value="/WEB-INF/views/business_status/salesplan_status/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/salesplancont" extends="baseLayout">
+      <put-attribute name="title" value="판매계획대비출고현황" />
+      <put-attribute name="body" value="/WEB-INF/views/business_status/salesplancontrast/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/quotationcont" extends="baseLayout">
+      <put-attribute name="title" value="견적대비수주현황" />
+      <put-attribute name="body" value="/WEB-INF/views/business_status/quotation_contrast/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/orderstat" extends="baseLayout">
+      <put-attribute name="title" value="수주현황" />
+      <put-attribute name="body" value="/WEB-INF/views/business_status/orderstatus/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/ordercontrast" extends="baseLayout">
+      <put-attribute name="title" value="수주대비출고현황" />
+      <put-attribute name="body" value="/WEB-INF/views/business_status/order_contrast/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/releasestat" extends="baseLayout">
+      <put-attribute name="title" value="출고현황" />
+      <put-attribute name="body" value="/WEB-INF/views/business_status/release_status/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/relreturnstat" extends="baseLayout">
+      <put-attribute name="title" value="출고반품현황" />
+      <put-attribute name="body" value="/WEB-INF/views/business_status/rel_return_status/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
+   </definition>
+   <definition name="/member/mainplan" extends="baseLayout">
+      <put-attribute name="title" value="주계획작성" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/reg_mainplan/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+   <definition name="/member/requiredamount" extends="baseLayout">
+      <put-attribute name="title" value="소요량전개" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/required_amount/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+   <definition name="/member/regbilling" extends="baseLayout">
+      <put-attribute name="title" value="청구등록" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/reg_billing/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+   <definition name="/member/regordering" extends="baseLayout">
+      <put-attribute name="title" value="발주등록" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/reg_ordering/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+   <definition name="/member/regreceivereq" extends="baseLayout">
+      <put-attribute name="title" value="입고의뢰등록" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/reg_receive_request/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+   <definition name="/member/regreceiveins" extends="baseLayout2">
+      <put-attribute name="title" value="입고검사등록" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/reg_receive_inspection/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/reg_receive_inspection/side.jsp" />
+   </definition>
+	<definition name="/member/receiveprocess" extends="baseLayout">
+      <put-attribute name="title" value="입고처리" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/receive_process/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/orderclosing" extends="baseLayout">
+      <put-attribute name="title" value="발주마감처리" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/order_closing/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/purchaseclosing" extends="baseLayout">
+      <put-attribute name="title" value="매입마감" />
+      <put-attribute name="body" value="/WEB-INF/views/purchase_manage/purchase_closing/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/moveware" extends="baseLayout">
+      <put-attribute name="title" value="재고이름등록(창고)" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_manage/reg_inventory_move_ware/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/movebusiness" extends="baseLayout">
+      <put-attribute name="title" value="재고이동등록(사업장)" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_manage/reg_inventory_move_business/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/baseinventory" extends="baseLayout">
+      <put-attribute name="title" value="기초재고/재고조정등록" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_manage/reg_base_inventory/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/supplyadj" extends="baseLayout">
+      <put-attribute name="title" value="SET품수불조정등록" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_manage/set_supply_adjustment/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/supplyadjstat" extends="baseLayout">
+      <put-attribute name="title" value="SET품수불조정현황" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_manage/supply_adj_status/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/baseinventorystat" extends="baseLayout">
+      <put-attribute name="title" value="기초재고/재고조정현황" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_manage/status_base_inventory/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/curinvenstat" extends="baseLayout">
+      <put-attribute name="title" value="현재고현황" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_collection_status/current_inventory_status/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/supplystat" extends="baseLayout">
+      <put-attribute name="title" value="재고수불현황" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_collection_status/supply_status/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/lotbusiness" extends="baseLayout">
+      <put-attribute name="title" value="현재고(LOT)현황(전사,사업장)" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_collection_status/cur_inven_lot_busi/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/lotware" extends="baseLayout">
+      <put-attribute name="title" value="현재고(LOT)현황(창고,장소)" />
+      <put-attribute name="body" value="/WEB-INF/views/inventory_collection_status/cur_inven_lot_ware/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/itemunitprice" extends="baseLayout">
+      <put-attribute name="title" value="품목단가등록" />
+      <put-attribute name="body" value="/WEB-INF/views/inven_basic_info/reg_item_unit_price/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/purchase_manage/side.jsp" />
+   </definition>
+	<definition name="/member/proplanreg" extends="baseLayout">
+      <put-attribute name="title" value="생산계획등록" />
+      <put-attribute name="body" value="/WEB-INF/views/production_manage/reg_productionplan/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/regoperins" extends="baseLayout">
+      <put-attribute name="title" value="작업지시등록" />
+      <put-attribute name="body" value="/WEB-INF/views/production_manage/reg_operation_instruction/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/comoperins" extends="baseLayout">
+      <put-attribute name="title" value="작업지시확정" />
+      <put-attribute name="body" value="/WEB-INF/views/production_manage/commit_operation_instruction/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/prometfor" extends="baseLayout">
+      <put-attribute name="title" value="생산자재출고" />
+      <put-attribute name="body" value="/WEB-INF/views/production_manage/production_meterial_forwarding/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/regoperperf" extends="baseLayout">
+      <put-attribute name="title" value="작업실적등록" />
+      <put-attribute name="body" value="/WEB-INF/views/production_manage/reg_operation_performance/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/operinsclo" extends="baseLayout">
+      <put-attribute name="title" value="작업지시마감처리" />
+      <put-attribute name="body" value="/WEB-INF/views/production_manage/operation_ins_closing/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/regoutsourcing" extends="baseLayout">
+      <put-attribute name="title" value="외주발주등록" />
+      <put-attribute name="body" value="/WEB-INF/views/outsourcing_manage/reg_outsourcing/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/comoutsourcing" extends="baseLayout">
+      <put-attribute name="title" value="외주발주확정" />
+      <put-attribute name="body" value="/WEB-INF/views/outsourcing_manage/commit_outsourcing/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/outrelease" extends="baseLayout">
+      <put-attribute name="title" value="외주자재출고" />
+      <put-attribute name="body" value="/WEB-INF/views/outsourcing_manage/outsourcing_release/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/regoutper" extends="baseLayout">
+      <put-attribute name="title" value="외주실적등록" />
+      <put-attribute name="body" value="/WEB-INF/views/outsourcing_manage/reg_outsourcing_performance/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/outclosing" extends="baseLayout">
+      <put-attribute name="title" value="외주마감" />
+      <put-attribute name="body" value="/WEB-INF/views/outsourcing_manage/outsourcing_closing/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/regbom" extends="baseLayout">
+      <put-attribute name="title" value="BOM등록" />
+      <put-attribute name="body" value="/WEB-INF/views/production_basic_info/reg_BOM/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/rightbom" extends="baseLayout">
+      <put-attribute name="title" value="BOM정전개" />
+      <put-attribute name="body" value="/WEB-INF/views/production_basic_info/right_BOM/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/reservebom" extends="baseLayout">
+      <put-attribute name="title" value="BOM역전개" />
+      <put-attribute name="body" value="/WEB-INF/views/production_basic_info/reserve_BOM/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/outprice" extends="baseLayout">
+      <put-attribute name="title" value="외주단가등록" />
+      <put-attribute name="body" value="/WEB-INF/views/production_basic_info/reg_outsourcing_price/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+	<definition name="/member/deftype" extends="baseLayout">
+      <put-attribute name="title" value="불량유형등록" />
+      <put-attribute name="body" value="/WEB-INF/views/production_basic_info/reg_defective_type/body.jsp" />
+	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
+   </definition>
+<!-- 
+   <definition name="/member/memberForm" extends="baseLayout">
+      <put-attribute name="title" value="회원등록창" />
+      <put-attribute name="body" value="/WEB-INF/views/member/memberForm.jsp" />
+   </definition>
+
+   <definition name="/member/viewDetail" extends="baseLayout">
+      <put-attribute name="title" value="회원상세창" />
+      <put-attribute name="body" value="/WEB-INF/views/member/viewDetail.jsp" />
+   </definition> -->
+</tiles-definitions>
