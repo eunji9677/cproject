@@ -68,11 +68,11 @@
                 <tr>
                     <td>사업장</td>
                     <td style="width: 70px;"><input type="text" style="width: 100%;"/></td>
-                    <td><button>검</button></td>
+                    <td><i class="fas fa-search" style="color: blue;"></td>
                     <td><input type="text" disabled/></td>
                     <td>품번</td>
                     <td style="width: 70px;"><input type="text" style="width: 100%;"/></td>
-                    <td><button>검</button></td>
+                    <td><i class="fas fa-search" style="color: blue;"></td>
                     <td><input type="text" disabled/></td>
                 </tr>
                 <tr>

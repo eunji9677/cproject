@@ -36,33 +36,35 @@
                 <ul id="lnb">
                     <li><a href="#"  id="side1">구매관리</a>
                         <ul id="l_sub1">
-                            <li><a href="#">주계획작성</a></li>
-                            <li><a href="#">소요량전개</a></li>
-                            <li><a href="#">청구등록</a></li>
-                            <li><a href="#">발주등록</a></li>
-                            <li><a href="#">입고의뢰등록</a></li>
-                            <li><a href="#">입고검사등록</a></li>
-                            <li><a href="#">입고처리</a></li>
-                            <li><a href="#">발주마감처리</a></li>
-                            <li><a href="#">매입마감</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/mainplan.do#">주계획작성</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/requiredamount.do#">소요량전개</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/regbilling.do#">청구등록</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/regordering.do#">발주등록</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/regreceivereq.do#">입고의뢰등록</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/regreceiveins.do#">입고검사등록</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/receiveprocess.do#">입고처리</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/orderclosing.do#">발주마감처리</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/purchaseclosing.do#">매입마감</a></li>
                         </ul></li>
                     <li><a href="#" id="side2">재고관리</a>
                         <ul id="l_sub2">
-                            <li><a href="#">재고이동등록(창고)</a></li>
-                            <li><a href="#">재고이동등록(사업장)</a></li>
-                            <li><a href="#">기초재고/재고조정등록</a></li>
-                            <li><a href="#">SET품수불조정등록</a></li>
-                            <li><a href="#">기초재고/재고조정현황</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/moveware.do#">재고이동등록(창고)</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/movebusiness.do#">재고이동등록(사업장)</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/baseinventory.do#">기초재고/재고조정등록</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/baseinventorystat.do#">기초재고/재고조정현황</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/supplyadj.do#">SET품수불조정등록</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/supplyadjstat.do#">SET품수불조정현황</a></li>
                         </ul></li>
                     <li><a href="#" id="side3">재고수불현황</a>
                         <ul id="l_sub3">
-                            <li><a href="#">현재고현황</a></li>
-                            <li><a href="#">재고수불현황(일자,유형별)</a></li>
-                            <li><a href="#">현재고(LOT)현황</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/curinvenstat.do#">현재고현황</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/supplystat.do#">재고수불현황(일자,유형별)</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/lotbusiness.do#">현재고(LOT)현황(전사,사업장)</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/lotware.do#">현재고(LOT)현황(창고,장소)</a></li>
                         </ul></li>
                     <li><a href="#" id="side4">기초정보관리</a>
                         <ul id="l_sub4">
-                            <li><a href="#">품목단가등록</a></li>
+                            <li><a href="http://localhost:8090/pro27/member/itemunitprice.do#">품목단가등록</a></li>
                         </ul></li>
                 </ul>
             </div>

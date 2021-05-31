@@ -61,6 +61,10 @@
         #view1 td input{
             width: 100%;
         }
+        #reqInput {
+            background-color: rgb(255, 255, 149);
+            text-align: center;
+        }
 </style>
 </head>
 <body>
@@ -68,27 +72,26 @@
             <table class="con1_search">
                 <tr>
                     <td>사업장</td>
-                    <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
+                    <td style="width: 50px;"><input type="text" id="reqInput" style="width: 100%;"/></td>
 
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
-                    <td><button>검</button></td>
+                    <td><i class="fas fa-search" style="color: blue;"></td>
                     <td colspan="5" style="width: 50px;">부서</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
-                    <td ><button>검</button></td>
+                    <td ><i class="fas fa-search" style="color: blue;"></td>
                     
                 </tr> 
                 <tr>
                     <td>견적기간</td>
-                    <td colspan="2" style="width: 80px;"><input type="date" style="width: 100%;"/></td>
+                    <td colspan="2" style="width: 80px;"><input type="date" id="reqInput" style="width: 100%;"/></td>
                     <td>~</td>
-                    <td><input type="date" style="width: 100%;"/></td>
-                    <td><button>검
-                    </button></td>
+                    <td><input type="date" id="reqInput" style="width: 100%;"/></td>
+                    <td></td>
                     <td colspan="5">사원</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
-                    <td><button>검</button></td>
+                    <td><i class="fas fa-search" style="color: blue;"></td>
                 </tr>
             </table>
         </container1>
@@ -96,8 +99,8 @@
             <table id="view1">
                 <thead>
                     <td id="non"><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                    <td>견적일</td>
                     <td>견적번호</td>
+                    <td>견적일자</td>
                     <td>고객명</td>
                     <td>No</td>
                     <td>품번</td>
@@ -109,21 +112,7 @@
                     <td>부가세</td>
                     <td>합계액</td>
                 </thead>
-                <tbody>
-                    <td id="non"><input type="checkbox" name="content"/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                    <td><input type="text" disabled/></td>
-                </tbody>
+               
             </table>
             <div id="total">
                 <td>견적합계:</td>
