@@ -74,6 +74,10 @@
             top: 10px;
             right: 20px;
         }
+        #reqInput {
+            background-color: rgb(255, 255, 149);
+            text-align: center;
+        }
 </style>
 </head>
 <body>
@@ -81,14 +85,14 @@
             <table class="con1_search">
                 <tr>
                     <td>사업장</td>
-                    <td style="width: 50px;"><input type="text" style="width: 100%;"/></td>
+                    <td style="width: 50px;"><input type="text" id="reqInput" style="width: 100%;"/></td>
 
                     <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
-                    <td><button>검</button></td>
+                    <td><i class="fas fa-search" style="color: blue;"></td>
                     <td colspan="5" style="width: 50px;">부서</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
-                    <td ><button>검</button></td>
+                    <td ><i class="fas fa-search" style="color: blue;"></td>
                     
                 </tr> 
                 <tr>
@@ -96,11 +100,11 @@
                     <td colspan="2" style="width: 80px;"><input type="date" style="width: 100%;"/></td>
                     <td>~</td>
                     <td><input type="date" style="width: 100%;"/></td>
-                    <td><button>검</button></td>
+                    <td></td>
                     <td colspan="5">사원</td>
                     <td style="width: 80px;"><input type="text" style="width: 100%;"/></td>
                     <td><input type="text" name="" disabled/></td>
-                    <td><button>검</button></td>
+                    <td><i class="fas fa-search" style="color: blue;"></td>
                 </tr>
             </table>
             <div id="button">
