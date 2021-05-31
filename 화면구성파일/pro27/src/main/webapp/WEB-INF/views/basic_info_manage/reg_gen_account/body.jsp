@@ -87,10 +87,9 @@
             background-color: rgb(255, 255, 149);
             text-align: center;
         }
-	 #table1 {
-            text-align: center; width: 100%; 
-
-            overflow: hidden;
+	 	#table1 {
+            text-align: center; 
+			overflow: hidden;
         }
         #table2 {
             width: 100%;  text-align: left;
@@ -188,7 +187,8 @@
                 <tr>
                     <td align="center">우편번호</td>
                     <td>
-                        <input type="text" name="zipCode" pattern="[0-9]{5}" maxlength="5"/>
+                        <input type="text" name="zipCode" pattern="[0-9]{5}" maxlength="5" 
+                        style="width:150px;"/>
                         <i class="fas fa-search" style="color: blue;"></i>
                     </td>
                 </tr>

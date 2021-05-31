@@ -76,32 +76,17 @@
             background: none;
             color: black;
             display: inline-block;
-            padding: 0;
+            padding: 5px 5px;
             cursor: pointer;
-            width: 60px;
+            width: 80px;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
         }
-        ul.tabs #month_button{
-            border-top: 3px solid rgb(255,0,0);
-            background-color: rgb(120,145,100);
+        ul.tabs li.current{
+            border-top: 2px solid skyblue;			
+            background-color: #ddd;        
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
-            color: white;
-        }
-        ul.tabs #things_button{
-            border-top: 3px solid rgb(255,0,0);
-            background-color: rgb(120,145,100);
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            color: white;
-        }
-        ul.tabs #set_button{
-            border-top: 3px solid rgb(255,0,0);
-            background-color: rgb(120,145,100);
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            color: white;
         }
         .tab-content{
             display: none;
@@ -135,9 +120,9 @@
             </table>
             <div>
                 <ul class="tabs" style="left:0px; bottom:0px; position: absolute;">
-                    <li id="month_button" class="month">창고/장소</li>
-                    <li id="things_button" class="thing">생산공정/작업장</li>
-                    <li id="set_button" class="set">외주공정/작업장</li>
+                    <li class="tab-link current" data-tab="tab-1" id="month_button">창고/장소</li>
+                    <li class="tab-link" data-tab="tab-2" id="things_button">생산공정/작업장</li>
+                    <li class="tab-link2" data-tab="tab-3" id="set_button">외주공정/작업장</li>
                 </ul>
             </div>
         </container1>
@@ -262,5 +247,21 @@
             month_button.removeAttribute('id');
         }
         </script>
+        <script src="http://code.jquery.com/jquery-latest.js"></script> <!--제이쿼리최신버젼가져옴-->
+    	<script>
+        	$(document).ready(function(){
+        
+        	$('ul.tabs li').click(function(){
+            	var tab_id = $(this).attr('data-tab');
+    
+            	$('ul.tabs li').removeClass('current');
+            	$('.tab-content').removeClass('current');
+    
+            	$(this).addClass('current');
+            	$("#"+tab_id).addClass('current');
+       	 	})
+    
+    		})
+    </script>
 </body>
 </html>
