@@ -120,12 +120,12 @@
                             <td>사업장</td>
                             <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
                             <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
-                            <td><button>검</button></td> 
+                            <td> <i class="fas fa-search" style="color: blue;"></i></td> 
         
                             <td colspan="5" style="width: 80px;">부서</td>
                             <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
                             <td><input type="text" name="" disabled/></td>
-                            <td><button>검</button></td>
+                            <td> <i class="fas fa-search" style="color: blue;"></i></td>
                             
                         </tr>
                         
@@ -134,12 +134,12 @@
                             <td colspan="2" style="width: 50px;"><input type="date" style="width: 100%;"/></td>
                             <td>~</td>
                             <td ><input type="date" style="width: 100%;"/></td>
-                            <td><button>검</button></td>
+                            <td></td>
         
                             <td colspan="5" style="width: 80px;">사원</td>
                             <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
                             <td><input type="text" name="" disabled/></td>
-                            <td ><button>검</button></td>
+                            <td> <i class="fas fa-search" style="color: blue;"></i></td>
                         </tr>
                     </table>
                     <ul class="tabs" style="left: 0px; bottom: 0px; position: absolute;">

@@ -70,7 +70,7 @@
                             <input type="text" name="department" style="width: 130px;">
                         </td>
                         <td>
-                            <input type="button" value="°Ë">
+                             <i class="fas fa-search" style="color: blue;"></i>
                         </td>
                         <td>
                             <input type="text" name="ckdepartment" style="width: 130px;" disabled >

@@ -61,12 +61,12 @@
                         <td>사업장</td>
                         <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
                         <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
-                        <td><button>검</button></td> 
+                        <td> <i class="fas fa-search" style="color: blue;"></i></td> 
     
                         <td colspan="4" style="width: 80px;">부서</td>
                         <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
                         <td><input type="text" name="" disabled/></td>
-                        <td><button>검</button></td>
+                        <td> <i class="fas fa-search" style="color: blue;"></i></td>
                         
                     </tr>
                     
@@ -74,12 +74,12 @@
                         <td>외주처</td>
                         <td style="width: 50px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
                         <td colspan="3"><input type="text" style="width: 100%;"/></td>
-                        <td><button>검</button></td>
+                        <td> <i class="fas fa-search" style="color: blue;"></i></td>
     
                         <td colspan="4" style="width: 80px;">사원</td>
                         <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
                         <td><input type="text" name="" disabled/></td>
-                        <td ><button>검</button></td>
+                        <td > <i class="fas fa-search" style="color: blue;"></i></td>
 
                         <td>
                             <input type="button" value="청구조회" style="padding: 5px; margin-left: 30px;"></input>
