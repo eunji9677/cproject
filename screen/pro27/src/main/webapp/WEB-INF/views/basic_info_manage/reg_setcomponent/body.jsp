@@ -161,5 +161,19 @@
                 </tbody>
             </table>
         </container3>
+        <script>
+        function selectAll(selectAll){
+            const checkbox = document.getElementsByName('content');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+        function selectAll1(selectAll1){
+            const checkbox = document.getElementsByName('content1');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll1.checked;
+            })
+        }
+        </script>
 </body>
 </html>

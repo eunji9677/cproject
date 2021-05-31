@@ -103,7 +103,7 @@
                     <td>사업장</td>
                     <td>
                         <input type="text">
-                        <button>+</button>
+                        <i class="fas fa-search" style="color: blue;"></i>
                     </td> 
                     <td>
                         <input type="text">
@@ -111,7 +111,7 @@
                     <td>거래처</td>
                     <td>
                         <input type="text"">
-                        <button>+</button>
+                        <i class="fas fa-search" style="color: blue;"></i>
                     </td>
                     <td>
                         <input type="text"">
