@@ -37,23 +37,23 @@
                 <ul id="lnb">
                     <li><a href="#" id="side1">영업관리</a>
                         <ul id="l_sub1">
-                            <li><a href="http://localhost:8090/pro27/member/regsalesplan.do">판매계획등록</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/regestimate.do">견적등록</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/regorder.do#">수주등록</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/regforreq.do#">출고의뢰등록</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/forwarding.do#">출고처리</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/transactionissue.do#">거래명세서발행</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/regsalesplan.do">판매계획등록</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/regestimate.do">견적등록</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/regorder.do#">수주등록</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/regforreq.do#">출고의뢰등록</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/forwarding.do#">출고처리</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/transactionissue.do#">거래명세서발행</a></li>
                         </ul></li>
                     <li><a href="#" id="side2">영업현황</a>
                         <ul id="l_sub2">
-                            <li><a href="http://localhost:8090/pro27/member/quotationstatus.do#">견적현황</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/salesplanstat.do#">판매계획현황</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/salesplancont.do#">판매계획대비출고현황</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/quotationcont.do#">견적대비수주현황</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/orderstat.do#">수주현황</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/ordercontrast.do#">수주대비출고현황</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/releasestat.do#">출고현황</a></li>
-                            <li><a href="http://localhost:8090/pro27/member/relreturnstat.do#">출고반품현황</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/quotationstatus.do#">견적현황</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/salesplanstat.do#">판매계획현황</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/salesplancont.do#">판매계획대비출고현황</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/quotationcont.do#">견적대비수주현황</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/orderstat.do#">수주현황</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/ordercontrast.do#">수주대비출고현황</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/releasestat.do#">출고현황</a></li>
+                            <li><a href="http://localhost:8090/webERP/member/relreturnstat.do#">출고반품현황</a></li>
                         </ul></li>
                 </ul>
             </div>

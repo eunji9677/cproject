@@ -233,24 +233,24 @@
         </header>
         <nav id = nav1>
             <ul id="gnb">
-                <li><a href="http://localhost:8090/pro27/member/systemmain.do">시스템관리</a>
+                <li><a href="http://localhost:8090/webERP/member/systemmain.do">시스템관리</a>
                     <ul id="sub" >
                         <li><a href="#">회사등록정보</a></li>
                         <li><a href="#">기초정보관리</a></li>
                     </ul></li>
-                <li><a href="http://localhost:8090/pro27/member/businessmain.do">영업관리</a>
+                <li><a href="http://localhost:8090/webERP/member/businessmain.do">영업관리</a>
                     <ul id="sub" style="left: -101%;">
                         <li><a href="#">영업관리</a></li>
                         <li><a href="#">영업현황</a></li>
                     </ul></li>
-                <li><a href="http://localhost:8090/pro27/member/purchasemain.do">구매/자재관리</a>
+                <li><a href="http://localhost:8090/webERP/member/purchasemain.do">구매/자재관리</a>
                     <ul id="sub" style="left: -202%;">
                         <li><a href="#">구매관리</a></li>
                         <li><a href="#">재고관리</a></li>
                         <li><a href="#">재고수불현황</a></li>
                         <li><a href="#">기초정보관리</a></li>
                     </ul></li>
-                <li><a href="http://localhost:8090/pro27/member/productionmain.do">생산관리공통</a>
+                <li><a href="http://localhost:8090/webERP/member/productionmain.do">생산관리공통</a>
                     <ul id="sub" style="left: -303%;">
                         <li><a href="#">생산관리</a></li>
                         <li><a href="#">외주관리</a></li>
