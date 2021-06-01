@@ -96,7 +96,10 @@ hs_err_pid*
 ### Java-Web ###
 ## ignoring target file
 target/
+
+##임의 추가한 내용임
 m2e-wtp/
+
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -462,5 +465,12 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 *.tlog
+
+### Code-Java ###
+# Language Support for Java(TM) by Red Hat extension for Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=redhat.java
+
+.project
+.classpath
+factoryConfiguration.json
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java,java-web,visualstudio
