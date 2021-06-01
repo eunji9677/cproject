@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component("CommitOperationInstructionVO")
 public class CommitOperationInstructionVO {
-	private int NO;
 	private String itemNumber;
 	private String itemName;
 	private String standard;
@@ -21,8 +20,7 @@ public class CommitOperationInstructionVO {
 		
 	}
 	
-	public CommitOperationInstructionVO(int NO, String itemNumber, String itemName, String standard, String unit, int dailyProduction, int sequence, Date scheduled, int quantity, String note) {
-		this.NO = NO;
+	public CommitOperationInstructionVO(String itemNumber, String itemName, String standard, String unit, int dailyProduction, int sequence, Date scheduled, int quantity, String note) {
 		this.itemNumber = itemNumber;
 		this.itemName = itemName;
 		this.standard = standard;
@@ -34,13 +32,6 @@ public class CommitOperationInstructionVO {
 		this.note = note;
 	}
 
-	public int getNO() {
-		return NO;
-	}
-
-	public void setNO(int nO) {
-		NO = nO;
-	}
 
 	public String getItemNumber() {
 		return itemNumber;

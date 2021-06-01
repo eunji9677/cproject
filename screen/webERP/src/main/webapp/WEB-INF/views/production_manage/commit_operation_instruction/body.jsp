@@ -117,6 +117,7 @@
                     </thead>
                     <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                     <tbody>
+                    <tr>
                         <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
@@ -131,6 +132,7 @@
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -152,6 +154,9 @@
                     </thead>
                     <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                     <tbody>
+                    <tr>
+                    </tr>
+                    <tr>
                         <td><input type="checkbox" value = "check" id="check" name="content2"/></td>
                         <td><input type="date"/></td>
                         <td><input type="text"/></td>
@@ -162,6 +167,7 @@
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

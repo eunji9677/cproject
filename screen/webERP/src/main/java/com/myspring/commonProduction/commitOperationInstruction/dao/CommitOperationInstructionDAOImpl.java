@@ -17,7 +17,7 @@ public class CommitOperationInstructionDAOImpl implements CommitOperationInstruc
 	@Override
 	public List selectAllProductionPlanInfo() throws DataAccessException {
 		List<CommitOperationInstructionVO> infoList = null;
-		infoList = sqlSession.selectList("mapper.member.selectAllProductionPlanInfo");
+		infoList = sqlSession.selectList("mappers.productionPlan.selectAllProductionPlanInfo");
 		return infoList;
 	}
 }
