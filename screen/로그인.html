@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
     <style>
+
 *{
     padding: 0;
     margin: 0;
@@ -28,13 +29,12 @@
     -moz-box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
     box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
 }
-/* .shadow-light{
+.shadow-light{
     -webkit-box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
     -moz-box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
     box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
-} */
+}
 .login-form-container{
- 
     background:#f5f5f5 ;
     width:860px;
     height: 540px;
@@ -53,19 +53,19 @@
     justify-content: center;
     align-items: center;
     color: white;
-    background-image: 
-  radial-gradient(ellipse farthest-corner at 0 140%, #5d9dff 0%, #2178ff 70%, #3585ff 70%);
+    background-image: radial-gradient(ellipse farthest-corner at 0 140%, 
+                    #5d9dff 0%, #2178ff 70%, #3585ff 70%);
 }
 .login-form-right-side h1{
     color: white;
     width:100%;
-    text-align: right;
+    text-align: left;
     opacity: 0.9;
-
-}
+    font-size: 80px;
+    }
 .login-form-right-side p{
     padding-top: 50px;
-    font-size:20px;
+    font-size: 20px;
     text-align: right;
     opacity: 0.8;
 }
@@ -73,12 +73,12 @@
     width: 50%;
     border-radius: 0px 10px 10px 0px;
     display: flex;
-
     flex-direction: column;
     align-items: center;
     padding:40px;
     background: rgb(255,255,255);
-    background: linear-gradient(287deg, rgba(255,255,255,1) 0%, rgba(243,244,244,1) 0%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(287deg, rgba(255,255,255,1) 0%, 
+                rgba(243,244,244,1) 0%, rgba(255,255,255,1) 100%);
 }
 .login-form-left-side .login-top-wrap{
     display: flex;
@@ -92,15 +92,16 @@
     padding-right:20px;
 
 }
-.login-form-left-side .login-top-wrap .create-account-btn {
-    background: white;
+.login-form-left-side .login-top-wrap .enviroment-setting-btn {
+    background: rgb(105,163,255);
+    background: linear-gradient(162deg, rgba(105,163,255,1) 0%, 
+                rgba(43,125,254,1) 50%, rgba(43,125,254,1) 100%);;
     border:  0;
     width:85px;
     height: 35px;
     font-size: 11px;
-    color: #2178ff;
+    color: white;
     border-radius: 3px;
-
 }
 .login-input-container{
     padding-top:20px;
@@ -112,13 +113,11 @@
     margin-top: 20px;
     border-radius: 2px;
     border-bottom: solid 2px #2178ff;
-   
 }
 .login-input-container .login-input-wrap i{
     color: #2178ff;
     line-height: 45px;
 }
-
 .login-input-container .login-input-wrap input{
     background: none;
    
@@ -142,9 +141,9 @@
     color:white;
     border: 0;
     border-radius: 4px;
-
     background: rgb(105,163,255);
-background: linear-gradient(162deg, rgba(105,163,255,1) 0%, rgba(43,125,254,1) 50%, rgba(43,125,254,1) 100%);
+    background: linear-gradient(162deg, rgba(105,163,255,1) 0%, 
+                rgba(43,125,254,1) 50%, rgba(43,125,254,1) 100%);
 }
 .login-btn-wrap a{
     margin-top:10px;
@@ -162,32 +161,34 @@ background: linear-gradient(162deg, rgba(105,163,255,1) 0%, rgba(43,125,254,1) 5
                     
                 </div>
                 <h1>aespa</h1>
-                <p>는 나야 둘이 될순 없어</p>
+                <p>to the Next Level</p>
             </div>
             <div class="login-form-left-side">
                 <div class="login-top-wrap">
                     <span>Web ERP Program ver 1.0</span>
-                    <button class="create-account-btn shadow-light">Environment setting</button>
+                    <button class="enviroment-setting-btn shadow-light">Environment setting</button>
                 </div>
                 <div class="login-input-container">
-                    <div class="login-input-wrap input-id">
-                        <i class="far fa-envelope"></i>
+                    <div class="login-input-wrap input-ccode" id="ccode">
+                        <!-- <i class="far fa-envelope"></i> -->
+                        <i class="fas fa-search"></i>
                         <input placeholder="회사코드" type="text">
                     </div>
-                    <div class="login-input-wrap input-id">
-                        <i class="far fa-envelope"></i>
+                    <div class="login-input-wrap input-cname">
+                        <!-- <i class="far fa-envelope"></i> -->
                         <input placeholder="회사명" type="text">
                     </div>
-                    <div class="login-input-wrap input-id">
-                        <i class="far fa-envelope"></i>
+                    <div class="login-input-wrap input-ecode" id="ecode">
+                        <!-- <i class="far fa-envelope"></i> -->
+                        <i class="fas fa-search"></i>
                         <input placeholder="사원코드" type="text">
                     </div>
-                    <div class="login-input-wrap input-id">
-                        <i class="far fa-envelope"></i>
+                    <div class="login-input-wrap input-ename">
+                        <!-- <i class="far fa-envelope"></i> -->
                         <input placeholder="사원명" type="text">
                     </div>
                     <div class="login-input-wrap input-password">
-                        <i class="fas fa-key"></i>
+                        <!-- <i class="fas fa-key"></i> -->
                         <input placeholder="사원암호"  type="password">
                     </div>
                 </div>
