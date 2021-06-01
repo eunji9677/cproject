@@ -369,6 +369,25 @@ values ( '00008', '(주)삼주전자', '일반' , '102-81-66319' , '670327-17932
 insert into SM_BIM_Gen_Cus_Reg --안들어감
 values ( '00009', '(주)포스코전자', '일반' , '102-81-66320' , '670328-179321' , '이지훈',
 '도, 소매', '전자제품 외', '120806' , '서울특별시 서대문구' , '02-2293-9487' , NULL);
+--------------------------------------------------------------------
+--품목군 등록
+create table SM_BIM_Ite_gro_Reg (
+Item_Group_Code varchar2(12) PRIMARY KEY, --품목군코드
+Item_Group_Name varchar2(50) NOT NULL, --품목군명
+Use_Status varchar2(10) DEFAULT '사용', -- 사용여부
+Explanation varchar2(200) -- 품목군설명
+);
+
+insert into SM_BIM_Ite_gro_Reg values ( 'CA10' , '케이스', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'BOARD' , '메인보드', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'CPU' , 'CPU', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'RAM' , 'RAM', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'GPU' , 'GPU', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'SSD' , 'SSD', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'HD' , 'HD', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'POWER' , 'POWER', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'PR10' , '프린터', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'PC10' , '데스크탑PC', 1 , NULL);
 
 ------------------------------------------------------------------
 
@@ -390,89 +409,71 @@ Length varchar2(100), --길이
 Height varchar2(100), --높이
 Cost number(15), --원가
 Item_Group_Code varchar2(12), -- 품목군등록
+dailyProduction number(5) not null,--일 생산량
 Notes varchar2(200)
 );
 
 
 insert into SM_BIM_Ite_Reg VALUES
-('CASE01','슬림형본체',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, '210mm' ,'395mm' , '475mm' , 300000 ,'CA10', NULL); 
+('CASE01','슬림형본체',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, '210mm' ,'395mm' , '475mm' , 300000 ,'CA10',300, NULL); 
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'CASE02' , '토너' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 30000 ,'CA10', NULL);
+( 'CASE02' , '토너' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 30000 ,'CA10',500, NULL);
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'CASE03' , 'ABKO NCORE' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '210mm' , '390mm' , '461mm' , 50000 ,'CA10', NULL);
+( 'CASE03' , 'ABKO NCORE' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '210mm' , '390mm' , '461mm' , 50000 ,'CA10',1000, NULL);
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'HD01' , 'WD BLUE 7200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 60000 ,'HD', '1T/SATA3');
+( 'HD01' , 'WD BLUE 7200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 60000 ,'HD',100, '1T/SATA3');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'HD02' , 'Seagate BarraCuda 7200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 80000 ,'HD', '1T/SATA3');
+( 'HD02' , 'Seagate BarraCuda 7200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 80000 ,'HD',1100, '1T/SATA3');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'SSD01' , '삼성전자 980 PRO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'SSD', NULL);
+( 'SSD01' , '삼성전자 980 PRO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'SSD',700, NULL);
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'SSD02' , '삼성전자 970 EVO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'SSD', NULL);
+( 'SSD02' , '삼성전자 970 EVO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'SSD',200, NULL);
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'SSD03' , '삼성전자 870 EVO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'SSD', NULL);
+( 'SSD03' , '삼성전자 870 EVO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'SSD',400, NULL);
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'GPU01' , '지포스 RTX 3060' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1000000 ,'GPU', 'MSI/1837MHz/550W/276mm');
+( 'GPU01' , '지포스 RTX 3060' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1000000 ,'GPU', 800,'MSI/1837MHz/550W/276mm');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'GPU02' , '지포스 RTX 3070' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1200000 ,'GPU', 'MSI/1830MHz/650W/323mm');
+( 'GPU02' , '지포스 RTX 3070' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1200000 ,'GPU', 900,'MSI/1830MHz/650W/323mm');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'GPU03' , '지포스 RTX 2060' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 800000 ,'GPU', 'GIGAByte/1755MHz/500W/226mm');
+( 'GPU03' , '지포스 RTX 2060' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 800000 ,'GPU', 500,'GIGAByte/1755MHz/500W/226mm');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'GPU04' , '지포스 GTX1050 Ti' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'GPU', 'MSI/1341MHz/300W/177mm   ');
+( 'GPU04' , '지포스 GTX1050 Ti' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'GPU', 600,'MSI/1341MHz/300W/177mm   ');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'GPU05' , '갤럭시 GT1030' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'GPU', '갤럭시/1227MHz/180mm');
+( 'GPU05' , '갤럭시 GT1030' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'GPU', 700,'갤럭시/1227MHz/180mm');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'CPU01' , 'AMD 라이젠5' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'CPU', 'AMD/6코어/3.6GHZ');
+( 'CPU01' , 'AMD 라이젠5' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'CPU', 100,'AMD/6코어/3.6GHZ');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'CPU02' , 'core I5-10세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'CPU', '인텔/6코어/4.1GHz');
+( 'CPU02' , 'core I5-10세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'CPU',200, '인텔/6코어/4.1GHz');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'CPU03' , 'core I5-11세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 900000 ,'CPU', '인텔/6코어/2.6GHz');
+( 'CPU03' , 'core I5-11세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 900000 ,'CPU', 300,'인텔/6코어/2.6GHz');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'CPU04' , 'core I7-11세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1200000 ,'CPU', '인텔/8코어/3.6GHz');
+( 'CPU04' , 'core I7-11세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1200000 ,'CPU',800, '인텔/8코어/3.6GHz');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'CPU05' , 'AMD 라이젠3 Pro' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'CPU', 'AMD/4코어/3.8GHz');
+( 'CPU05' , 'AMD 라이젠3 Pro' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'CPU',700, 'AMD/4코어/3.8GHz');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'RAM01' , 'ADATA XPG DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'RAM', 'DDR4/3200MHz/16G');
+( 'RAM01' , 'ADATA XPG DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'RAM',600, 'DDR4/3200MHz/16G');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'RAM02' , 'KLEVV DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 400000 ,'RAM', 'DDR4/3200MHz/32G');
+( 'RAM02' , 'KLEVV DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 400000 ,'RAM',500, 'DDR4/3200MHz/32G');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'RAM03' , '삼성 DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'RAM', 'DDR4/3200MHz/8G');
+( 'RAM03' , '삼성 DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'RAM',400, 'DDR4/3200MHz/8G');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'BOARD01' , '박격포 MAG B560M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 300000 ,'BOARD', '인텔/DDR4/24.4x24.4cm');
+( 'BOARD01' , '박격포 MAG B560M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 300000 ,'BOARD',900, '인텔/DDR4/24.4x24.4cm');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'BOARD02' , 'ASRock B550M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 100000 ,'BOARD', 'AMD/DDR4/24.4x24.4cm');
+( 'BOARD02' , 'ASRock B550M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 100000 ,'BOARD',1000, 'AMD/DDR4/24.4x24.4cm');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'BOARD03' , 'GIGABYTE A320M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1500000 , 'BOARD','AMD/DDR4/24.4x19.5cm');
+( 'BOARD03' , 'GIGABYTE A320M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1500000 , 'BOARD',1500,'AMD/DDR4/24.4x19.5cm');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'POWER01' , '시소닉 A12 STD' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , '140mm' , '150mm' , 200000 ,'POWER', '500W');
+( 'POWER01' , '시소닉 A12 STD' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , '140mm' , '150mm' , 200000 ,'POWER',1200, '500W');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'POWER02' , 'ASUS POG Thor 850P' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '135mm' , '160mm' , 0 , 300000 ,'POWER', '852W');
+( 'POWER02' , 'ASUS POG Thor 850P' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '135mm' , '160mm' , 0 , 300000 ,'POWER',1300, '852W');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'POWER03' , '마이크로닉 Classic 2' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '120mm', '140mm' , 0 , 400000 , 'POWER','750W');
+( 'POWER03' , '마이크로닉 Classic 2' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '120mm', '140mm' , 0 , 400000 , 'POWER',1400,'750W');
 INSERT INTO SM_BIM_Ite_Reg VALUES 
-( 'PR01' , '레이저프린터' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 100000 ,'PR10', NULL);
+( 'PR01' , '레이저프린터' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 100000 ,'PR10', 400,NULL);
 
 --------------------------------------------------------------------
 
---품목군 등록
-create table SM_BIM_Ite_gro_Reg (
-Item_Group_Code varchar2(12) PRIMARY KEY, --품목군코드
-Item_Group_Name varchar2(50) NOT NULL, --품목군명
-Use_Status varchar2(10) DEFAULT '사용', -- 사용여부
-Explanation varchar2(200) -- 품목군설명
-);
 
-insert into SM_BIM_Ite_gro_Reg values ( 'CA10' , '케이스', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'BOARD' , '메인보드', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'CPU' , 'CPU', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'RAM' , 'RAM', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'GPU' , 'GPU', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'SSD' , 'SSD', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'HD' , 'HD', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'POWER' , 'POWER', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'PR10' , '프린터', 1 , NULL);
-insert into SM_BIM_Ite_gro_Reg values ( 'PC10' , '데스크탑PC', 1 , NULL);
-
------------------------------------------------------------------
 
 --창고등록
 
