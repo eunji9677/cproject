@@ -17,6 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+    	a{
+    		text-decoration:none;
+    	}
         #wrap{
             width: 300px;
             height: 400px;
@@ -34,6 +37,11 @@
         }
         #search{
             margin-left: 30px;
+        }
+        #view{
+        	width:100%;
+        	height:77%;
+        	overflow:scroll;
         }
     </style>
 </head>
@@ -58,13 +66,18 @@
         </div>
         <div id="view">
             <table style="width: 100%;">
-                <tr>
-                    <td>정보</td>
-                    <td>정보</td>
-                    <td>정보</td>
-                    <td>정보</td>
-                    <td>정보</td>
+                <tr align="center">
+                    <td>품목코드</td>
+                    <td>품명</td>
+                    <td>규격</td>
                 </tr>
+                <c:forEach var="bom" items="${itemView}" >     
+   <tr align="center">
+      <td><a href="#">${bom.itemNumber}</a></td>
+      <td><a href="#">${bom.itemName}</a></td>
+      <td><a href="#">${bom.standard}</a></td>
+    </tr>
+    </c:forEach> 
             </table>
         </div>
     </div>

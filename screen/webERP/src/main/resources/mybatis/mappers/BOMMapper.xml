@@ -17,11 +17,19 @@
 		<result property="endDate" column="endDate" />
 		<result property="note" column="note" />
 	</resultMap>
+	<resultMap id="popView" type="bomVO">
+		<result property="itemNumber" column="item_code" />
+		<result property="itemName" column="item_name" />
+		<result property="standard" column="standard" />
+	</resultMap>
 	
 	<select id="selectAllMemberList" resultMap="bomView">
 		<![CDATA[select * from CPM_BIM_BOM_REG]]>
 	</select>
 	
+	<select id="selectPopList" resultMap="popView">
+		<![CDATA[select * from CPM_BIM_BOM_REG]]>
+	</select>
 	<!-- <insert id="insertMember" parameterType="memberVO">
 		<![CDATA[insert into t_member(id,pwd,name,email) values(#{id}, #{pwd}, #{name}, #{email}]]>
 	</insert>
