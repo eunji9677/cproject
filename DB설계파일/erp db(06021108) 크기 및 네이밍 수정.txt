@@ -832,32 +832,32 @@ REFERENCES  SM_BIM_Hou_Reg(House_Code) ON DELETE CASCADE
 
 
 --데이터 등록(창고등록에서 창고코드를 가지고 왓을때)1
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000001','20210306','00001',null,'M100',null, '20210306',null);
 --데이터 등록2
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000002','20211102','00002',null,'M100',null, '20211102',null);
 --데이터 등록3
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000003','20210102','00003',null,'M100',null, '20210102',null);
 --데이터 등록4
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000004','20210704','00004',null,'M100',null, '20210704',null);
 --데이터 등록5
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000005','20210706','00005',null,'M100',null, '20210706',null);
 --데이터 등록6
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000006','20210901','00006',null,'M100',null, '20210901',null);
 --데이터 등록7
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000007','20210902','00007',null,'M100',null, '20210902',null);
 --데이터 등록8
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000008','20210202','00008',null,'M100',null, '20210902',null);
 
 --데이터 등록9
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000009','20210526','00009',null,'M100',null, '20210902',null);
 -----------------------------------------------------------------------------------
 
