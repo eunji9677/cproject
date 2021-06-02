@@ -6,4 +6,5 @@ import org.springframework.dao.DataAccessException;
 
 public interface BomViewService {
 	public List bomView() throws DataAccessException;
+	public List itemView() throws DataAccessException;
 }

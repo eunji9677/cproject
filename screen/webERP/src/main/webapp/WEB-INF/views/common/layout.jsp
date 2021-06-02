@@ -259,10 +259,10 @@
             </ul>
         </nav>
         <nav id="nav2">
-            <button id="delete" onclick="deletefunc()">삭제</button>
+            <button id="delete" onclick="">삭제</button>
             <button id="lookup">조회</button>
             <button id="save">저장</button>
-            <button id="lookup">코드도움</button>
+            <button id="lookup" onclick="opencodehelper()">코드도움</button>
         </nav>
         <div>
             <tiles:insertAttribute name="side"/>
@@ -283,6 +283,8 @@
         var num_box = document.getElementById('num');
         var save_button = document.getElementById('save');
         var delete_button = document.getElementById('delete');
+        var lookup_button = document.getElementById('lookup');
+        var itemcode = document.getElementById('itemcode');
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
             if(l_sub1.style.display == 'none' || l_sub1.style.display==''){
@@ -339,6 +341,13 @@
             checkbox.forEach((checkbox) => {
                 checkbox.checked = selectAll.checked;
             })
+        }
+        function openWindowPop(url, name){
+            var options = 'top=0, left=0, width=320, height=420, status=no, menubar=no, toolbar=no, resizable=no';
+            window.open(url, name, options);
+        }
+        function search1(){
+        	openWindowPop('http://localhost:8090/webERP/member/codehelper.do#','codehelper');
         }
     </script>
 </body>

@@ -23,6 +23,12 @@ public class bomViewDAOImpl implements bomViewDAO{
 		System.out.println("다오 종료 : " + bomList);
 		return bomList;
 	}
-	
 
+	@Override
+	public List viewPop() throws DataAccessException {
+		List<bomVO> popList = null;
+		popList = sqlSession.selectList("mappers.BOMMapper.selectPopList");
+		return popList;
+	}
+	
 }

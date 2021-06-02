@@ -78,7 +78,7 @@
                             <input type="text" name="factory" style="width: 120px; background-color: yellow;">
                         </Td>
                         <td>
-                            <a href=""><i class="fas fa-search" style="color: blue;"></i></a>
+                            <a href="javascript:search1()"><i class="fas fa-search" style="color: blue;"></i></a>
                         </td>
                         <td>
                             <input type="text" name="ckfactory" style="width: 120px;" disabled>
@@ -149,9 +149,9 @@
     </c:forEach> 
     <tr>
     <td><input type="checkbox" name="content"/></td>
-    	<td><input type="text" style="width:100%"/></td>
-    	<td><input type="text"/></td>
-    	<td><input type="text"/></td>
+    	<td><input type="text" style="width:100%" disabled/></td>
+    	<td><input type="text" id="itemcode" ondblclick="openWindowPop('http://localhost:8090/webERP/member/codehelper.do#','codehelper')"/></td>
+    	<td><input type="text" disabled/></td>
     	<td><input type="text"/></td>
     	<td><input type="text"/></td>
     	<td><input type="text"/></td>
