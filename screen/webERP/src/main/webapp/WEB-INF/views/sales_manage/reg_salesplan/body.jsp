@@ -116,14 +116,14 @@
 		<tbody>
 			<td style="width: 5%;"><input type="checkbox" value="check"
 				id="check" name="content" /></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="Plan_Item_Code" id=""></td>
+                    <td><input type="text" name="Plan_Item_Name" id=""></td>
+                    <td><input type="text" name="Plan_Item_Standard" id=""></td>
+                    <td><input type="text" name="Plan_Item_Unit" id=""></td>
+                    <td><input type="text" name="Plan_Item_Quantity" id=""></td>
+                    <td><input type="text" name="Plan_Unit_Price" id=""></td>
+                    <td><input type="text" name="Newplan_Item_Quantity" id=""></td>
+                    <td><input type="text" name="Newplan_Unit_Price" id=""></td>
 		</tbody>
 	</table>
 	</container2>

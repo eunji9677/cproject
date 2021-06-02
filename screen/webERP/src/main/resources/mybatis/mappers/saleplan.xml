@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="mapper.salesplan">
+
+	<resultMap id="salesplanResult" type="salesplanVO">
+		<result property="Plan_Item_Code" column="Plan_Item_Code" />
+        <result property="Plan_Item_Name" column="Plan_Item_Name" />
+        <result property="Plan_Item_Unit" column="Plan_Item_Unit" />
+        <result property="Plan_Item_Quantity" column="Plan_Item_Quantity" />
+        <result property="Newplan_Item_Quabtity" column="Newplan_Item_Quabtity" />
+        <result property="Newplan_Item_Unit_Price" column="Newplan_Item_Unit_Price" />
+	</resultMap> 
+	<!-- 
+	<resultMap id="planItemResult" type="java.util.HashMap">
+		<result property="Plan_Item_Code" column="Plan_Item_Code" />
+        <result property="Plan_Item_Name" column="Plan_Item_Name" />
+        <result property="Plan_Item_Unit" column="Plan_Item_Unit" />
+        <result property="Plan_Item_Quantity" column="Plan_Item_Quantity" />
+        <result property="Newplan_Item_Quabtity" column="Newplan_Item_Quabtity" />
+        <result property="Newplan_Item_Unit_Price" column="Newplan_Item_Unit_Price" />
+   </resultMap> -->
+	
+	<select id="selectAllSalesplanList" resultMap="planItemResult">
+      <![CDATA[
+         select Plan-Item_Code, Plan_Item_Name, Plan_Item_Unit, Plan_Item_Quantity from SM_BIM_Sal_Pla_Reg order by Plan_Item_Code desc	 	
+      ]]>
+	</select>
+
+	<select id="selectAllNewSalesplanList" resultMap="planItemResult">
+      <![CDATA[
+         select * from SM_BIM_Sal_Pla_Reg order by Plan_Item_Code desc	 	
+      ]]>
+	</select>
+    
+     <!-- <insert id="insertSalesplan"  parameterType="salesplanVO">
+		<![CDATA[
+		 insert into SM_BIM_Sal_Pla_Reg(Plan_Item_Code,Plan_Item_Name,Plan_Item_Unit, Plan_Item_Quantity,Plan_Uint_Price)
+		 values(#{Plan_Item_Code}, #{Plan_Item_Name}, #{Plan_Item_Unit}, #{Plan_Item_Quantity},#{Plan_Uint_Price})
+		]]>      
+	</insert>판매계획으로 인서트 가능
+	
+   
+   <update id="updateSalesplan"  parameterType="salesplanVO">
+     <![CDATA[
+	     update SM_BIM_Sal_Pla_Reg
+	     set Newplan_Item_Quabtity=#{Newplan_Item_Quabtity}, Newplan_Item_Unit_Price=#{Newplan_Item_Unit_Price}
+	     where
+	     Plan_Item_Code=#{Plan_Item_Code}
+      ]]>      
+   </update> 판매계획 수정만 업데이트 가능
+     
+   <delete id="deleteSalesplan"  parameterType="String">
+	<![CDATA[
+	   delete from  t_member
+	   where
+	   Plan_Item_Code=#{Plan_Item_Code}
+	]]>      
+  </delete>
+  <select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
+	<![CDATA[
+		select * from t_member	
+		where id=#{id} and pwd=#{pwd}		
+	]]> 
+  </select>-->
+</mapper>
