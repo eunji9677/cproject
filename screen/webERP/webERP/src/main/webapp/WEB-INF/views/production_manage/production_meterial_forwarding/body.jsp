@@ -1,0 +1,210 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+#contents1{
+            position: absolute;
+            padding: 10px;
+            right: 0;
+            top: 15%;
+            width: 85%;
+            height: 10%;
+            border: 1px solid black;
+            z-index: 1;
+        }
+        #contents2{
+            position: absolute;
+            right: 0;
+            top: 25%;
+            width: 85%;
+            height: 30%;
+            border: 1px solid black;
+            z-index: 1;
+        }
+        #contents3{
+            position: absolute;
+            right: 0;
+            top:55%;
+            width: 85%;
+            height: 40%;
+            border: 1px solid black;
+            z-index: 1;
+        }
+        .con1_search{
+            padding:0;
+            text-align: center;
+            /* position: absolute; 칸 모잘라서 지움*/
+            top: 25%;
+            left: 5%;
+        }
+        #searchForm {
+            height: 100%;
+            margin: 10px 20px;
+            padding:0;
+            text-align: center;
+        }
+
+        /* 테이블 css */
+        #MDTable,#MDDetailTable{
+            width: 100%;
+            text-align: center;
+            border: 1px solid black;
+        }
+        
+        /* 컨테이너 파트 */
+        #MDDetail {
+            width: 100%;
+            height: 100%;
+            overflow: scroll;
+        }
+        
+        #MDInfo{
+            width: 100%;
+            height: 80%;
+            overflow: scroll;
+        }
+
+        #pdcInfo::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        /* 출력부 스타일*/
+        #detailPrint1{
+            border: 1px solid;
+        }
+
+        #detailPrint2{
+            border: 1px solid;
+            height: 8%;
+        }
+
+</style>
+</head>
+<body>
+<container1 id = contents1>
+            <!-- 조회검색 폼 -->
+            <form id="searchForm">
+                <table class="con1_search">
+                    <tr>
+                        <td>사업장</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td colspan="3"><input type="text" name="" disabled style="width: 100%;"/></td>
+                        <td> <i class="fas fa-search" style="color: blue;"></i></td> 
+    
+                        <td colspan="5" style="width: 80px;">부서</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td> <i class="fas fa-search" style="color: blue;"></i></td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td>출고기간</td>
+                        <td colspan="2" style="width: 50px;"><input type="date" style="width: 100%; background-color: yellow;"/></td>
+                        <td>~</td>
+                        <td ><input type="date" style="width: 100%; background-color: yellow;"/></td>
+                        <td></td>
+    
+                        <td colspan="5" style="width: 80px;">사원</td>
+                        <td style="width: 80px;"><input type="text" style="width: 100%; background-color: yellow;"/></td>
+                        <td><input type="text" name="" disabled/></td>
+                        <td > <i class="fas fa-search" style="color: blue;"></i></td>
+
+                        <td>
+                            <input type="button" value="출고요청" style="padding: 5px; margin-left: 30px;"></input>
+                        </td>
+                        <td>
+                            <input type="button" value="일괄적용" style="padding: 5px;"></input>
+                        </td>
+                        <td>
+                            <input type="button" value="재고확인" style="padding: 5px;"></input>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </container1>
+
+        <container2 id="contents2">
+            <!-- 디테일부 -->
+            <div id="MDDetail">
+                <table id="MDDetailTable">
+                    <thead>
+                        <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
+                        <td>출고번호</td>
+                        <td>출고일자</td>
+                        <td>출고창고</td>
+                        <td>출고장소</td>
+                        <td>공정</td>
+                        <td>작업장</td>
+                        <td>비고</td>
+                    </thead>
+                    <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
+                    <tbody>
+                        <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="date"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                    </tbody>
+                </table>
+            </div>
+                <!-- 디테일부 종료 -->
+            </container2>
+            <container3 id="contents3">
+                <div id="MDInfo">
+                    <table id="MDTable">
+                        <thead>
+                            <td><input type="checkbox" name="content2" onclick="selectAll2(this)"/></td>
+                            <td>NO.</td>
+                            <td>품번</td>
+                            <td>품명</td>
+                            <td>규격</td>
+                            <td>단위</td>
+                            <td>정미수량</td>
+                            <td>LOSS(%)</td>
+                            <td>확정수량</td>
+                            <td>출고수량</td>
+                            <td>비고</td>
+                        </thead>
+                        <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
+                        <tbody>
+                            <td><input type="checkbox" value = "check1" id="check" name="content2"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                            <td><input type="text"/></td>
+                        </tbody>
+                    </table>
+                    <!-- 출력부 1 -->
+                </div>
+                    <div id="detailPrint1">
+                        관리구분 <input type="text" name="controlCondition" style="width: 75px;"><button>검</button><input type="text" name="ckfactory" style="width: 75px;" disabled>
+                        지시수량 <input type="text" name="printQuantity" disabled><br>
+                        모품목 <input type="text" name="parentItem" disabled><button>검</button>
+                        모품목명 <input type="text" name="parentItemName" disabled> 지시번호 <input type="text" name="num" disabled>
+                    </div>
+                    <!-- 출력부 1 종료 -->
+                    <!-- 출력부 2 -->
+            <div id="detailPrint2">
+                재고    사업장별 현재고 <input type="text" name="stockPerFactory">
+                창고/장소별 현재고 <input type="text" name="stockPerCargo">
+            </div>
+            <!-- 출력부 2 종료 -->
+        </container3>
+</body>
+</html>
