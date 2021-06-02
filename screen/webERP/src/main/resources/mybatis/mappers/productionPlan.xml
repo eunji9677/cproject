@@ -8,13 +8,8 @@
 		<result property="itemCode" column="Item_Code" />
 		<result property="itemName" column="Item_Name" />
 		<result property="standard" column="Standard" />
-<<<<<<< HEAD
 		<result property="inventoryUnit" column="Inventory_Unit" />
 		<result property="dailyProduction" column="DailyProduction" />
-=======
-		<result property="unit" column="Inventory_Unit" />
-		<!-- <result property="dailyProduction" column="DailyProduction" -->
->>>>>>> e9463e3a4429c93e83e8baee0c08941df06fb16e
 	</resultMap>
 	 
 	<select id="selectAllProductionPlanInfo" resultMap="SmBimResult">
