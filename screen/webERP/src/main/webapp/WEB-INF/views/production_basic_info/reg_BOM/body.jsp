@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR"    
+    isELIgnored="false"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
+<%
+  request.setCharacterEncoding("UTF-8");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +48,9 @@
             height: 97%;
             width: 100%;
         }
+        #workOrderTable{
+       		width:100%;
+       	}
         /* 합계 출력부 */
         #resultWindow{
             height: 3%;
@@ -52,6 +62,7 @@
             right: 10px;
             top: 10px;
         }
+
 
 </style>
 </head>
@@ -102,43 +113,56 @@
         <container2 id= contents2>
             <div id="workOrderInfo">
                 <table id="workOrderTable">
-                    <thead>
+                    <thead align="center" style="background-color:gray">
                         <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
-                        <td>순번</td>
+                        <td>No</td>
                         <td>품번코드</td>
                         <td>품명</td>
                         <td>규격</td>
                         <td>단위</td>
                         <td>정미수량</td>
                         <td>LOSS(%)</td>
-                        <td>필요수량</td>
-                        <td>표준원가</td>
+                        <!-- <td>필요수량</td> -->
                         <td>실제원가</td>
                         <td>외주단가</td>
                         <td>시작일자</td>
                         <td>종료일자</td>
-                        <td>외주구분</td>
-                        <td>사용여부</td>
+                        <td>비고</td>
                     </thead>
                     <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
-                    <tbody>
-                        <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="date"/></td>
-                        <td><input type="date"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                    </tbody>
+         <c:forEach var="bom" items="${bomView}" >     
+   <tr align="center">
+   	  <td><input type="checkbox" name="content"/></td>
+      <td>${bom.no}</td>
+      <td>${bom.itemNumber}</td>
+      <td>${bom.itemName}</td>
+      <td>${bom.standard}</td>
+      <td>${bom.unit}</td>
+      <td>${bom.precisionQuantity}</td>
+      <td>${bom.loss}</td>
+      <td>${bom.actualCost}</td>
+      <td>${bom.outSourcingUnitPrice}</td>
+      <td>${bom.startDate}</td>
+      <td>${bom.endDate}</td>
+      <td>${bom.note}</td>
+    </tr>
+    </c:forEach> 
+    <tr>
+    <td><input type="checkbox" name="content"/></td>
+    	<td><input type="text" style="width:100%"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    	<td><input type="text"/></td>
+    </tr>
+   
                 </table>
             </div>
             <!-- 합계 출력부 -->
