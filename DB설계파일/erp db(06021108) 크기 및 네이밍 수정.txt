@@ -147,7 +147,7 @@ INSERT INTO SM_CRI_Zip VALUES ( '120806' , '서울특별시 서대문구' , NULL
 --회사등록
 Create table SM_CRI_Com_Reg ( 
 Company_code varchar2(12) PRIMARY KEY,--회사코드,회사코드
-Company_Name varchar2(20) NOT NULL,--회사명,회사명
+Company_Name varchar2(50) NOT NULL,--회사명,회사명
 Sortation varchar2(10) NOT NULL,--구분
 Fiscal_Year_Number varchar2(3) NOT NULL,--회계연도_기수
 Fiscal_Year_Date date NOT NULL,--회계연도_날짜
@@ -157,7 +157,7 @@ Representatives_Name varchar2(50) NOT NULL ,--대표자성명
 Resident_Registration_Number varchar2(15) UNIQUE,--주민등록번호
 Main_Store_Postal_Code varchar2(5) NOT NULL,--본점우편번호
 Main_Store_Address varchar2(60) NOT NULL,--본점주소
-Main_Branch_Number varchar2(40) NOT NULL,--본점번지
+Main_Branch_Number varchar2(60) NOT NULL,--본점번지
 Main_Store_Tel varchar2(13),--본점전화번호
 Upstate varchar2(20) NOT NULL,--업태
 Industry varchar2(20) NOT NULL,--종목
@@ -203,7 +203,7 @@ Corporate_Registration_Number varchar2(15) UNIQUE ,--법인등록번호
 Representatives_Name varchar2(50) NOT NULL,--대표자성명 
 Workplace_Zipcode varchar2(5),--사업장우편번호 
 Workplace_Address varchar2(60) NOT NULL,--사업장주소
-Workplace_Number varchar2(40),--사업장번지
+Workplace_Number varchar2(60),--사업장번지
 Workplace_Tel varchar2(13), --사업장전화번호
 Upstate varchar2(20) NOT NULL, --업태 varchar2(20)으로 변경
 Insdustry varchar2(20) NOT NULL, --종목 varchar2(20)으로 변경
@@ -310,7 +310,7 @@ Environment_Element_Name varchar2(50) NOT NULL, --환경요소명
 Type_Classification varchar2(30) NOT NULL, --유형구분
 Type_Settings varchar2(2) NOT NULL, --유형설정
 Selection_Range varchar2(100) NOT NULL, --선택범위
-Note varchar2(200) --비고
+Note varchar2(1000) --비고
 );
 
 insert into SM_CRI_Sys_Env_set
@@ -410,7 +410,7 @@ Height varchar2(100), --높이
 Cost number(15), --원가
 Item_Group_Code varchar2(12), -- 품목군등록
 dailyProduction number(5) not null,--일 생산량
-Notes varchar2(200)
+Notes varchar2(1000)
 );
 
 
@@ -563,7 +563,7 @@ insert into SM_BIM_SET_Reg values ( 'PC10' , '데스크탑PC' , NULL , null );
 create table SM_BIM_Com_Reg (
 SET_Code varchar2(12), --셋트품 코드
 Components_Code varchar2(12) not null unique, --구성품 코드
-Components_Name varchar2(30) not null unique, --구성품 명
+Components_Name varchar2(50) not null unique, --구성품 명
 Components_Standard varchar2(20),
 Components_Unit varchar2(5) default 'EA',
 Components_Stock number(5)default '0',
@@ -749,7 +749,7 @@ ordersNum varchar2(12) PRIMARY KEY,
 --주문 일자
 ordersdate Date not null,
 --고객(FK)
-customerCode varchar2(20) not null,
+customerCode varchar2(12) not null,
 --부가세구분
 tax varchar2(20) not null,
 --비고
@@ -802,13 +802,13 @@ requestNum varchar2(12) PRIMARY KEY,
     --의뢰 일자
 requestDate Date not null,
     --고객(FK)
-customerCode varchar2(30) not null,
+customerCode varchar2(12) not null,
     --납품처
 deliveryPlace varchar2(50),
     --의뢰창고(FK)
-requestWarehouse varchar2(30) not null,
+House_Code varchar2(12) not null,
     --의뢰 담당자
-requestHead varchar2(30),
+requestHead varchar2(50),
     --요청마감일
 requestDeadLine Date not null,
     --비고
@@ -823,7 +823,7 @@ REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE,
 
 
 --(창고등록에서 창고코드를 가지고 왓을때)
-CONSTRAINT FKCSMSMREQREG_REQUESTWAREHOUSE FOREIGN KEY (requestWarehouse) 
+CONSTRAINT FKCSMSMREQREG_REQUESTWAREHOUSE FOREIGN KEY (House_Code) 
 REFERENCES  SM_BIM_Hou_Reg(House_Code) ON DELETE CASCADE
 
 );
@@ -832,32 +832,32 @@ REFERENCES  SM_BIM_Hou_Reg(House_Code) ON DELETE CASCADE
 
 
 --데이터 등록(창고등록에서 창고코드를 가지고 왓을때)1
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000001','20210306','00001',null,'M100',null, '20210306',null);
 --데이터 등록2
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000002','20211102','00002',null,'M100',null, '20211102',null);
 --데이터 등록3
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000003','20210102','00003',null,'M100',null, '20210102',null);
 --데이터 등록4
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000004','20210704','00004',null,'M100',null, '20210704',null);
 --데이터 등록5
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000005','20210706','00005',null,'M100',null, '20210706',null);
 --데이터 등록6
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000006','20210901','00006',null,'M100',null, '20210901',null);
 --데이터 등록7
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000007','20210902','00007',null,'M100',null, '20210902',null);
 --데이터 등록8
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000008','20210202','00008',null,'M100',null, '20210902',null);
 
 --데이터 등록9
-INSERT INTO CSM_SM_Req_Reg(requestNum,requestDate,customerCode,deliveryPlace,requestWarehouse,requestHead ,requestDeadLine,note)
+INSERT INTO CSM_SM_Req_Reg
 values ('IR2103000009','20210526','00009',null,'M100',null, '20210902',null);
 -----------------------------------------------------------------------------------
 
@@ -868,13 +868,13 @@ releaseNum Varchar2(12) PRIMARY KEY,
 --출고 일자
 releaseDate Date not null,
 --고객((FK)
-customerCode Varchar2(30) not null,
+customerCode Varchar2(12) not null,
 --출고 구분
 releaseOX Varchar2(10) not null,
 --마감,
 deadLine Varchar2(30) ,
 --비고
-note varchar2(10),
+note varchar2(1000),
 
 --FK
 
@@ -929,24 +929,24 @@ create table CSM_SM_COR_Reg(
 --품번(공통)(FK)
 productNum varchar2(12) not null,
 --품명(공통)(FK)
-productName varchar2(30) not null,
---규격(공통)(FK)
-standard varchar2(100) DEFAULT NULL,
---단위 (공통)(FK)
-unit varchar2(2) DEFAULT 'EA',
+productName varchar2(50) not null,
+--규격
+standard varchar2(20) DEFAULT NULL,
+--단위
+unit varchar2(5) DEFAULT 'EA',
 --납기일(견적, 수주, 출고의뢰)
 dueDate date not null,
 --주문 수량(공통)
 ordersQuantity Number(5) DEFAULT '0',
 --단가(견적, 수주, 출고처리)
 productPrice Number(15) DEFAULT '0',
---출하예정일(수주)(FK)
+--출하예정일(수주)
 expectedDate DATE not null,
---출고예정일(의뢰)(FK)
+--출고예정일(의뢰)
 releaseExpectedDate date not null,
---검사(의뢰, 수주)(FK)
+--검사(의뢰, 수주)
 inspection Varchar2(10) not null,
---출고구분(예외/주문)(출고처리)(FK)
+--출고구분(예외/주문)(출고처리)
 orderOX varchar2(20) not null,
 --모든 등록과 연결하기 위한 고객코드
 customerCode varchar2(12) not null,
@@ -1004,10 +1004,10 @@ VALUES ('POWER01' , '시소닉 A12 STD',null,'EA','20210526','80.00','700000.00'
 --주계획서작성(판매,주문)
 create table PMM_PM_MPS(
 plandate date primary key,--계획일
-Itemnumber varchar2(10) not null,--품번
+Itemnumber varchar2(12) not null,--품번
 Itemname varchar2(50) not null,--품명
 standard varchar2(20),--규격
-unit varchar2(3) not null,--단위
+unit varchar2(5) not null,--단위
 sequence number(5),--순서
 expected_Date date,--출하예정일
 Due_date date,--납기일
@@ -1046,11 +1046,11 @@ orderno varchar2(12),--주문번호
 sequence number(5),--순서
 orderdate date,--주문일자
 okeydate date,--승인일자
-buyer varchar2(20) not null,--회사명
-Itemnumber varchar2(10) not null,--품번
+buyer varchar2(50) not null,--회사명
+Itemnumber varchar2(12) not null,--품번
 ItemName varchar2(50) not null,--품명
 standard varchar2(20),--규격
-unit varchar2(3) not null,--단위
+unit varchar2(5) not null,--단위
 Order_quantity number(5),--주문수량
 apply_quantity number(5),--적용수량
 order_Balance number(5),--주문잔량
@@ -1095,10 +1095,10 @@ VALUES('S02103000005',SEQ_seq.NEXTVAL,'20210305','20210305','(주)삼화INC','PR
 --입고검사등록(리스트)
 create table PMM_PM_RIP_LIST(
 sequence number(5),--순서
-Itemnumber varchar2(10) not null,   --품번
-ItemName varchar2(30) not null,      --품명
+Itemnumber varchar2(12) not null,   --품번
+ItemName varchar2(50) not null,      --품명
 Standard varchar2(20) ,      --규격
-Unit varchar2(3),   --단위
+Unit varchar2(5),   --단위
 check_Quantity number(5),--검사수량
 check_type varchar2(15) not null,--검사유형
 check_division varchar2(15) not null,--검사구분
@@ -1134,12 +1134,12 @@ create table PMM_PM_ORDER(
 order_no varchar2(12)primary key,--발주번호
 order_date date unique,--발주일자
 code number(5),  --코드
-buyer varchar2(20) not null,--회사명
+buyer varchar2(50) not null,--회사명
 sequence number(5),--순서
-Itemnumber varchar2(10) not null,--품번   
-ItemName varchar2(30) not null,   --품명
+Itemnumber varchar2(12) not null,--품번   
+ItemName varchar2(50) not null,   --품명
 Standard varchar2(20),   --규격
-Unit varchar2(3)not null,      --단위
+Unit varchar2(5)not null,      --단위
 Order_quantity number(5),--발주수량
 order_Balance number(5),--발주잔량
 deadline varchar2(10) not null,--마감
@@ -1172,14 +1172,14 @@ VALUES('R02103000001','20210201',005,'(주)삼도전자',SEQ_seq.NEXTVAL,'SSD01'
 
 --소요량전개(주문,판매,생산)
 create table PMM_PM_MRP(
-Itemnumber varchar2(10) not null,--품번
+Itemnumber varchar2(12) not null,--품번
 ItemName varchar2(50) not null,--품명
 standard varchar2(20),--규격
 need_date date,--소요일자
 sequence number(5),--순서
 Expected_order date,--예정발주일
 Expected_Quantity number(5),--예정수량
-unit varchar2(3)not null, --단위
+unit varchar2(5)not null, --단위
 constraint fk_PMMPMMRP_need_date foreign key (need_date) references PMM_PM_MPS(plandate),
 constraint fk_PMMPMMRP_Expected_Quantity foreign key (Expected_Quantity) references PMM_PM_MPS(plan_Quantity),
 --constraint fk_PMMPMORDER_Expected_order foreign key (Expected_order) references PMM_PM_ORDER(order_date),
@@ -1223,13 +1223,13 @@ VALUES('C02103000005','20210201','구매','이상없음');
 --청구등록(리스트)
 create table PMM_PM_CM_LIST(
 sequence number(5),--순서
-itemNumber varchar2(10) not null,--품번
+itemNumber varchar2(12) not null,--품번
 ItemName varchar2(50) not null,--품명
 standard varchar2(20),--규격
 requestdate date,--요청일
-Inventory_Unit varchar2(3)not null,--재고단위
+Inventory_Unit varchar2(5)not null,--재고단위
 Inventory_qy number(5)not null,--재고단위수량
-claim_unit varchar2(3)not null,--청구단위
+claim_unit varchar2(5)not null,--청구단위
 claim_Quantity number(5),--청구단위수량
 Due_date date,--납기일
 receiving_date date,--입고예정일
@@ -1268,7 +1268,7 @@ VALUES(SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,'20210201','EA',80,'E
 create table PMM_PM_RP(
 receiving_no varchar2(12)PRIMARY key,--입고번호
 receiving_date date unique,  --입고일자
-buyer varchar2(20) not null,--거래처
+buyer varchar2(50) not null,--거래처
 deadline varchar2(7) not null,--마감
 note varchar2(1000) not null,--비고
 deadline_no varchar2(12) unique, --마감번호
@@ -1292,11 +1292,11 @@ VALUES('Q02103000001','20210202','(주)삼도전자','마감','이상없음','D0
 --입고처리(리스트)
 create table PMM_PM_RP_LIST(
 sequence number(5),--순서
-Itemnumber varchar2(10) not null, --품번   
-ItemName varchar2(30) not null,   --품명   
+Itemnumber varchar2(12) not null, --품번   
+ItemName varchar2(50) not null,   --품명   
 Standard varchar2(20),--규격
 order_Quantity number(5),--발주수량
-Unit varchar2(3)not null,--단위
+Unit varchar2(5)not null,--단위
 product_price Number(15),--단가
 Due_date date,--납기일
 receiving_date date,--입고예정일
@@ -1333,7 +1333,7 @@ VALUES(SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,80,'EA',400000.00,'20
 create table PMM_PM_RRR(
 request_no varchar2(12) primary key,--의뢰번호
 request_date date unique,--의뢰일자
-buyer varchar2(20)not null,--회사명
+buyer varchar2(50)not null,--회사명
 request_house varchar2(15)not null,--의뢰창고
 note varchar2(1000) not null,--비고
 check_no varchar2(12) unique,--검사번호
@@ -1450,7 +1450,7 @@ Mod_Num varchar2(12) primary key, --조정번호
 Mod_Date date NOT NULL, --조정일자
 Warehouse varchar2(12) NOT NULL, --창고
 Place varchar2(12) NOT NULL, --장소
-Customer varchar2(30), --거래처
+Customer varchar2(50), --거래처
 Kind varchar2(30) NOT NULL, --조정종류(기초,입고,출고)
 Note varchar2(200), --비고
 
@@ -1596,15 +1596,15 @@ values('smd002', '4' , 'GPU01' , '지포스 RTX 3060' , '규격', 'EA', 300);
 --생산계획등록
 create table CPM_PM_Pro_Pla_Reg(
     --NO
-    NO NUMBER(4) NOT NULL,
-    --품번(FK)
-    itemNumber varchar2(12) not null,
+    NO NUMBER(5) NOT NULL,
+ --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
     --품명(FK)
-    itemName varchar2(50) not null,
+    Item_Name varchar2(50) NOT NULL,
     --규격
-    standard varchar2(20),
-    --단위
-    unit varchar2(3) default 'EA' not null ,
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
     --일 생산량
     dailyProduction number(5) not null,
     --순서
@@ -1615,8 +1615,8 @@ create table CPM_PM_Pro_Pla_Reg(
     Quantity number(5),
     --비고
     note varchar2(1000) ,
-    CONSTRAINT CPMPMPROPLAREG_ITEMNUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMPMPROPLAREG_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMPMPROPLAREG_ITEMNUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMPMPROPLAREG_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
 );
 
 --생산계획등록 데이터
@@ -1695,21 +1695,21 @@ create table CPM_PM_Pro_Mat_For(
     --출고일자(UK)
     forwardingDate date UNIQUE,
     --출고창고(FK)
-    forwardingWarehouseCode varchar2(4) not null,
+    House_Code varchar2(12) not null,
     --출고장소(FK)
-    forwardingLocationCode varchar2(4) not null,
+    Location_Code varchar2(12) not null,
     --공정(FK)
-    workingProcessWarehouseCode varchar2(4) not null,
+    Process_Code varchar2(12) not null,
     --작업장(FK)
-    workplaceCode varchar2(4) not null,
+    Workplace_Code varchar2(12) not null,
     --비고
     note varchar2(1000),
     --조인데이터(fk)
     JOINID VARCHAR2(12) NOT NULL,
-    CONSTRAINT CPMPMPROMATFOR_houseCode_FK FOREIGN KEY(forwardingWarehouseCode) REFERENCES SM_BIM_Hou_Reg(House_Code),
-    CONSTRAINT CPMPMPROMATFOR_LocCode_FK FOREIGN KEY(forwardingLocationCode) REFERENCES SM_BIM_Wor_Reg(Location_Code),--테이블 추가 후 입력
-    CONSTRAINT CPMPMPROMATFOR_wphouseCode_FK FOREIGN KEY(workingProcessWarehouseCode) REFERENCES SM_BIM_Pro_Reg(Process_Code),
-    CONSTRAINT CPMPMPROMATFOR_wpCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code),--테이블 추가 후 입력
+    CONSTRAINT CPMPMPROMATFOR_houseCode_FK FOREIGN KEY(House_Code) REFERENCES SM_BIM_Hou_Reg(House_Code),
+    CONSTRAINT CPMPMPROMATFOR_LocCode_FK FOREIGN KEY(Location_Code) REFERENCES SM_BIM_Wor_Reg(Location_Code),--테이블 추가 후 입력
+    CONSTRAINT CPMPMPROMATFOR_wphouseCode_FK FOREIGN KEY(Process_Code) REFERENCES SM_BIM_Pro_Reg(Process_Code),
+    CONSTRAINT CPMPMPROMATFOR_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code),--테이블 추가 후 입력
     CONSTRAINT CPMPMPROMATFOR_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)
 );
 
@@ -1739,15 +1739,15 @@ VALUES ('MF2004000010','20200420','M100','M101','L200','L201',null,'JOIN00000010
 --생산자재출고 세부사항
 create table CPM_PM_Pro_Mat_For_Det(
     --순번(PK)
-    NO number(4) NOT NULL,
-    --품번(FK)
-    itemNumber varchar2(12) not null,
+    NO number(5) NOT NULL,
+ --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
     --품명(FK)
-    itemName varchar2(50) not null,
+    Item_Name varchar2(50) NOT NULL,
     --규격
-    standard varchar2(20),
-    --단위
-    unit varchar2(3) default 'EA' not null,
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
     --정미수량
     precisionQuantity number(5) not null,
     --LOSS
@@ -1758,10 +1758,10 @@ create table CPM_PM_Pro_Mat_For_Det(
     note varchar2(1000),
     JOINID VARCHAR2(12) NOT NULL,
     
-    CONSTRAINT CPMPMPROMATFORDET_INUMBER_FK  FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMPMPROPLAFORDET_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name),
-    --CONSTRAINT CPMPMPROPLAREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
-    --CONSTRAINT CPMPMPROPLAREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
+    CONSTRAINT CPMPMPROMATFORDET_INUMBER_FK  FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMPMPROPLAFORDET_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name),
+    --CONSTRAINT CPMPMPROPLAREG_STANDARD_FK FOREIGN KEY(Standard) REFERENCES SM_BIM_Ite_Reg(Standard),
+    --CONSTRAINT CPMPMPROPLAREG_UNIT_FK FOREIGN KEY(Inventory_Unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
      CONSTRAINT CPMPMPROMATFORDET_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)
 );
 
@@ -1801,9 +1801,9 @@ create table CPM_PM_Ope_Per_Reg_Det(
     --실적일
     performanceDate date not null,
     --공정(FK)
-    WPWarehouseCode  varchar2(4) not null,
+    Process_Code  varchar2(12) not null,
     --작업장(FK)
-    WorkplaceCode varchar2(4) not null,
+    Workplace_Code varchar2(12) not null,
     --구분
     sortation varchar2(10) not null,
     --실적수량
@@ -1814,8 +1814,8 @@ create table CPM_PM_Ope_Per_Reg_Det(
     note varchar2(1000),
     --조인 데이터
     JOINID VARCHAR(12) NOT NULL,
-    CONSTRAINT CPMPMDET_wPhouseCode_FK FOREIGN KEY(WPWarehouseCode) REFERENCES SM_BIM_Pro_Reg(Process_Code),
-    CONSTRAINT CPMPMDET_wpCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code),
+    CONSTRAINT CPMPMDET_wPhouseCode_FK FOREIGN KEY(Process_Code) REFERENCES SM_BIM_Pro_Reg(Process_Code),
+    CONSTRAINT CPMPMDET_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code),
     CONSTRAINT CPMPMDET_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)
 );
 
@@ -1868,19 +1868,19 @@ create table CPM_PM_Ope_Per_Reg(
     --자재출고상태
     MaterialForwardingStatus varchar2(20) not null,
     --작업장(FK)
-    WorkplaceCode varchar2(4) not null,
+    Workplace_Code varchar2(12) not null,
     --지시일
     instructionDate date not null,
     --납기일
     dueDate date not null,
-    --품번(FK)
-    itemNumber varchar2(12) not null,
+ --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
     --품명(FK)
-    itemName varchar2(50) not null,
+    Item_Name varchar2(50) NOT NULL,
     --규격
-    standard varchar2(20),
-    --단위
-    unit varchar2(3) default 'EA' not null,
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
     --지시수량
     indicatedQuantity number(5) not null,
      --실적수량
@@ -1895,11 +1895,11 @@ create table CPM_PM_Ope_Per_Reg(
     note varchar2(1000),
     --조인 데이터
     JOINID VARCHAR(12) NOT NULL,
-    CONSTRAINT CPMPMOPEPERREG_placeCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code),--테이블 추가 후 입력
-    CONSTRAINT CPMPMOPEPERREG_ITEMNUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMPMOPEPERREG_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name),
-    --CONSTRAINT CPMPMOPEPERREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
-    --CONSTRAINT CPMPMOPEPERREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
+    CONSTRAINT CPMPMOPEPERREG_placeCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code),--테이블 추가 후 입력
+    CONSTRAINT CPMPMOPEPERREG_ITEMNUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMPMOPEPERREG_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name),
+    --CONSTRAINT CPMPMOPEPERREG_STANDARD_FK FOREIGN KEY(Standard) REFERENCES SM_BIM_Ite_Reg(Standard),
+    --CONSTRAINT CPMPMOPEPERREG_UNIT_FK FOREIGN KEY(Inventory_Unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
     --CONSTRAINT CPMPMOPEPERREG_Quantity_FK FOREIGN KEY(performanceQuantity) REFERENCES CPM_PM_Ope_Per_Reg_Det(performanceQuantity),
     --CONSTRAINT CPMPMOPEPERREG_INSPECTION_FK FOREIGN KEY(inspection) REFERENCES CPM_PM_Ope_Per_Reg_Det(inspection)
     CONSTRAINT CPMPMOPEPERREG_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)
@@ -1936,19 +1936,19 @@ create table CPM_OM_Out_Mat_For(
     --출고일자
     forwardingDate date not null,
     --출고창고(FK)
-    forwardingWarehouseCode varchar2(4) not null,
+    House_Code varchar2(12) not null,
     --출고장소(FK)
-    forwardingLocationCode varchar2(4) not null,
+    Location_Code varchar2(12) not null,
     --공정(FK)
-    workingProcessWarehouseCode varchar2(4) not null,
+    Outsourcing_Code varchar2(12) not null,
     --작업장(FK)
-    WorkplaceCode varchar2(4) not null,
+    Workplace_Code varchar2(12) not null,
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMOMOUTMATFOR_houseCode_FK FOREIGN KEY(forwardingWarehouseCode) REFERENCES SM_BIM_Hou_Reg(House_Code),
-    CONSTRAINT CPMOMOUTMATFOR_LocCode_FK FOREIGN KEY(forwardingLocationCode) REFERENCES SM_BIM_Wor_Reg(Location_Code),--테이블 추가 후 입력
-    CONSTRAINT CPMOMOUTMATFOR_wPhouseCode_FK FOREIGN KEY(workingProcessWarehouseCode) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code),
-    CONSTRAINT CPMOMOUTMATFOR_wpCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)--테이블 추가 후 입력
+    CONSTRAINT CPMOMOUTMATFOR_houseCode_FK FOREIGN KEY(House_Code) REFERENCES SM_BIM_Hou_Reg(House_Code),
+    CONSTRAINT CPMOMOUTMATFOR_LocCode_FK FOREIGN KEY(Location_Code) REFERENCES SM_BIM_Wor_Reg(Location_Code),--테이블 추가 후 입력
+    CONSTRAINT CPMOMOUTMATFOR_wPhouseCode_FK FOREIGN KEY(Outsourcing_Code) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code),
+    CONSTRAINT CPMOMOUTMATFOR_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)--테이블 추가 후 입력
 );
 
 --외주관리 데이터
@@ -1980,15 +1980,15 @@ VALUES ('MV2004000010','20200430','M200','M201','P100','P105',null);
 --외주자재출고 세부사항
 create table CPM_OM_Out_Mat_For_Det(
     --순번(PK)
-    NO number(4) PRIMARY KEY,
-    --품번(FK)
-    itemNumber varchar2(12) not null,
+    NO number(5) PRIMARY KEY,
+ --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
     --품명(FK)
-    itemName varchar2(50) not null,
+    Item_Name varchar2(50) NOT NULL,
     --규격
-    standard varchar2(20),
-    --단위
-    unit varchar2(3) default 'EA' not null,
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
    --정미수량
     precisionQuantity number(5) not null,
     --LOSS
@@ -1997,8 +1997,8 @@ create table CPM_OM_Out_Mat_For_Det(
     forwardingQuantity number(5),
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMOMOUTMATFORDET_INUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMOMOUTMATFORDET_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMOMOUTMATFORDET_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMOMOUTMATFORDET_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
     --CONSTRAINT CPMOMOUTMATFORDET_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMOMOUTMATFORDET_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
 );
@@ -2039,9 +2039,9 @@ create table CPM_OM_Out_Per_Reg_Det(
     --실적일
     performanceDate date not null,
     --공정(FK)
-    WorkingProcessWarehouseCode  varchar2(4) not null,
+    Outsourcing_Code  varchar2(12) not null,
     --작업장(FK)
-    WorkplaceCode varchar2(4) not null,
+    Workplace_Code varchar2(12) not null,
     --구분
     sortation varchar2(10) not null,
     --실적수량
@@ -2050,8 +2050,8 @@ create table CPM_OM_Out_Per_Reg_Det(
     inspection varchar2(20) ,
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMOMOUTPERREGDET_houseCode_FK FOREIGN KEY(workingProcessWarehouseCode) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code),
-    CONSTRAINT CPMOMOUTPERREGDET_wpCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)--테이블 추가 후 입력
+    CONSTRAINT CPMOMOUTPERREGDET_houseCode_FK FOREIGN KEY(Outsourcing_Code) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code),
+    CONSTRAINT CPMOMOUTPERREGDET_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)--테이블 추가 후 입력
 );
 
 --외주실적등록 세부사항 데이터
@@ -2104,32 +2104,32 @@ create table CPM_OM_Out_Per_Reg(
     --자재출고상태
     MaterialForwardingStatus varchar2(20) not null,
     --외주처(FK)
-    WorkplaceCode varchar2(4) not null,
+    Workplace_Code varchar2(12) not null,
     --지시일
     instructionDate date not null,
     --완료일
     dueDate date not null,
-    --품번(FK)
-    itemNumber varchar2(10) not null,
+  --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
     --품명(FK)
-    itemName varchar2(50) not null,
+    Item_Name varchar2(50) NOT NULL,
     --규격
-    standard varchar2(20),
-    --단위
-    unit varchar2(3) default 'EA' not null,
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
     --지시수량
     indicatedQuantity number(5) not null,
     --단가
     unitPrice number(15) not null,
     --상태
     status varchar2(10) not null,
-    --검사(FK)
+    --검사
     inspection varchar2(20) not null,
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMOMOUTPERREG_wpCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code),--테이블 추가 후 입력
-    CONSTRAINT CPMOMOUTPERREG_INUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMOMOUTPERREG_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMOMOUTPERREG_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code),--테이블 추가 후 입력
+    CONSTRAINT CPMOMOUTPERREG_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMOMOUTPERREG_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
     --CONSTRAINT CPMOMOUTPERREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMOMOUTPERREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
     --CONSTRAINT CPMOMOUTPERREG_Quantity_FK FOREIGN KEY(performanceQuantity) REFERENCES CPM_OM_Out_Per_Reg_Det(performanceQuantity),
@@ -2166,13 +2166,13 @@ create table CPM_OM_Out_Fin(
     --마감일
     DeadlineDate date not null,
     --외주공정(FK)
-    WorkingProcessWarehouseCode  varchar2(4) not null,
+    Outsourcing_Code  varchar2(12) not null,
     --외주처(FK)
-    WorkplaceCode varchar2(4) not null,
+    Workplace_Code varchar2(12) not null,
     --비고
     note varchar2(1000),    
-    CONSTRAINT CPMOMOUTFIN_wphouseCode_FK FOREIGN KEY(workingProcessWarehouseCode) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code),
-    CONSTRAINT CPMOMOUTFIN_wpCode_FK FOREIGN KEY(WorkplaceCode) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)--테이블 추가 후 입력
+    CONSTRAINT CPMOMOUTFIN_wphouseCode_FK FOREIGN KEY(Outsourcing_Code) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code),
+    CONSTRAINT CPMOMOUTFIN_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)--테이블 추가 후 입력
 );
 
 --외주마감 데이터
@@ -2202,22 +2202,22 @@ VALUES ('OC200400010','20200430','P100','P105',null);
 create table CPM_OM_Out_Fin_Det(
     --순번(PK)
     NO number(4) PRIMARY KEY,
-    --품번(FK)
-    itemNumber varchar2(12) not null,
+   --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
     --품명(FK)
-    itemName varchar2(50) not null,
+    Item_Name varchar2(50) NOT NULL,
     --규격
-    standard varchar2(20),
-    --단위
-    unit varchar2(3) default 'EA' not null,
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
     --수량(FK)
     quantity number(5) not null,
      --단가(FK)
     unitPrice number(15) not null,
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMOMOUTFINDET_INUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMOMOUTFINDET_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMOMOUTFINDET_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMOMOUTFINDET_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
     --CONSTRAINT CPMOMOUTFINDET_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMOMOUTFINDET_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
     --CONSTRAINT CPMOMOUTFINDET_quantity_FK FOREIGN KEY(quantity) REFERENCES CPM_OM_Out_Per_Reg_Det(performanceQuantity)
@@ -2256,13 +2256,13 @@ create table CPM_BIM_BOM_Reg(
     --순번(PK)
     NO number(4) PRIMARY KEY,
     --품번(FK)
-    itemNumber varchar2(12) not null,
+    Item_Code varchar2(12) NOT NULL, 
     --품명(FK)
-    itemName varchar2(50) not null,
+    Item_Name varchar2(50) NOT NULL,
     --규격
-    standard varchar2(20),
-    --단위
-    unit varchar2(3) default 'EA' not null,
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
     --정미수량
     precisionQuantity number(5) not null,
     --LOSS
@@ -2277,8 +2277,8 @@ create table CPM_BIM_BOM_Reg(
     endDate date not null,
     --비고
     note varchar2(1000),
-    CONSTRAINT CPMBIMBOMREG_INUMBER_FK FOREIGN KEY(itemNumber) REFERENCES SM_BIM_Ite_Reg(Item_Code),
-    CONSTRAINT CPMBIMBOMREG_ITEMNAME_FK FOREIGN KEY(itemName) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    CONSTRAINT CPMBIMBOMREG_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code),
+    CONSTRAINT CPMBIMBOMREG_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
     --CONSTRAINT CPMBIMBOMREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
     --CONSTRAINT CPMBIMBOMREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
      --CONSTRAINT CPMBIMBOMREG_actualCost_FK FOREIGN KEY(actualCost) REFERENCES SM_BIM_Ite_Reg(Cost)
