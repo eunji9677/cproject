@@ -4,27 +4,22 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mappers.productionPlan">
-	<resultMap id="productionPlanResult" type="CommitOperationInstructionVO">
-		<result property="itemNumber" column="itemNumber" />
-		<result property="itemName" column="itemName" />
-		<result property="standard" column="standard" />
-		<result property="unit" column="unit" />
-		<result property="dailyProduction" column="DailyProduction" />
-		<result property="sequence" column="sequence" />
-		<result property="scheduled" column="scheduledDateOfOperation" />
-		<result property="quantity" column="Quantity" />
-		<result property="note" column="note" />
-	</resultMap>
-	<resultMap id="SmBimResult" type="CommitOperationInstrctionVO">
-		<result property="itemNumber" column="Item_Code" />
+	<resultMap id="SmBimResult" type="CommitOperationInstructionVO">
+		<result property="itemCode" column="Item_Code" />
 		<result property="itemName" column="Item_Name" />
 		<result property="standard" column="Standard" />
+<<<<<<< HEAD
+		<result property="inventoryUnit" column="Inventory_Unit" />
+		<result property="dailyProduction" column="DailyProduction" />
+=======
 		<result property="unit" column="Inventory_Unit" />
 		<!-- <result property="dailyProduction" column="DailyProduction" -->
+>>>>>>> e9463e3a4429c93e83e8baee0c08941df06fb16e
 	</resultMap>
-	
+	 
 	<select id="selectAllProductionPlanInfo" resultMap="SmBimResult">
-		<![CDATA[select Item_Code, Item_Name, Standard, Inventory_Unit, dailyProduction from SM_BIM_Ite_Reg]]>
+		<![CDATA[select Item_Code, Item_Name, Standard, Inventory_Unit, DailyProduction from SM_BIM_Ite_Reg]]>
 	</select>
+	
 </mapper>
  

@@ -18,8 +18,17 @@ public class bomViewDAOImpl implements bomViewDAO{
 	@Override
 	public List viewBOM() throws DataAccessException {
 		List<bomVO> bomList = null;
+		System.out.println("다오 시작 : " + bomList);
 		bomList = sqlSession.selectList("mappers.BOMMapper.selectAllMemberList");
+		System.out.println("다오 종료 : " + bomList);
 		return bomList;
+	}
+
+	@Override
+	public List viewPop() throws DataAccessException {
+		List<bomVO> popList = null;
+		popList = sqlSession.selectList("mappers.BOMMapper.selectPopList");
+		return popList;
 	}
 	
 }

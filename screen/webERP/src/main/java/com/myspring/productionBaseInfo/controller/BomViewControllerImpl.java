@@ -40,6 +40,14 @@ public class BomViewControllerImpl implements BomViewController {
 		mav.addObject("bomView", bomView);
 		return mav;
 	}
+	@RequestMapping(value="/member/codehelper.do" ,method = RequestMethod.GET)
+	public ModelAndView codeHelper(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		List itemView = viewService.itemView();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("itemView", itemView);
+		return mav;
+	}
 	private String getViewName(HttpServletRequest request) {
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");

@@ -78,7 +78,7 @@
                             <input type="text" name="factory" style="width: 120px; background-color: yellow;">
                         </Td>
                         <td>
-                            <a href=""><i class="fas fa-search" style="color: blue;"></i></a>
+                            <a href="javascript:search1()"><i class="fas fa-search" style="color: blue;"></i></a>
                         </td>
                         <td>
                             <input type="text" name="ckfactory" style="width: 120px;" disabled>

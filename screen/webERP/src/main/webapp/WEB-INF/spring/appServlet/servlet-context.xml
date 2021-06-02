@@ -44,7 +44,6 @@
   
 <mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/test/*.do"/>
 			<mvc:mapping path="/*/*.do"/>
 			<beans:bean class="com.myspring.commonProduction.Interceptor.ViewNameInterceptor"/>
 		</mvc:interceptor>

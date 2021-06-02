@@ -19,29 +19,30 @@
       <put-attribute name="body" value="" />
    </definition>
    
-
    <definition name="main" extends="baseLayout">
       <put-attribute name="title" value="메인페이지" />
       <put-attribute name="body" value="/WEB-INF/views/SystemAdmin/reg_company/body.jsp" />
 	  <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
    </definition>
 
-	
    <definition name="/member/listMembers" extends="baseLayout">
       <put-attribute name="title" value="회원목록창" />
       <put-attribute name="body" value="/WEB-INF/views/common/body.jsp" />
       <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
    </definition>
+   
    <definition name="/member/systemmain" extends="baseLayout">
       <put-attribute name="title" value="시스템관리메인" />
       <put-attribute name="body" value="" />
       <put-attribute name="side" value="/WEB-INF/views/SystemAdmin/side.jsp" />
    </definition>
+   
    <definition name="/member/businessmain" extends="baseLayout">
       <put-attribute name="title" value="영엽관리메인" />
       <put-attribute name="body" value="" />
       <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
    </definition>
+   
    <definition name="/member/purchasemain" extends="baseLayout">
       <put-attribute name="title" value="구매/자재관리메인" />
       <put-attribute name="body" value="" />
