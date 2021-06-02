@@ -149,9 +149,9 @@
     </c:forEach> 
     <tr>
     <td><input type="checkbox" name="content"/></td>
-    	<td><input type="text" style="width:100%"/></td>
-    	<td><input type="text"/></td>
-    	<td><input type="text"/></td>
+    	<td><input type="text" style="width:100%" disabled/></td>
+    	<td><input type="text" id="itemcode" ondblclick="openWindowPop('http://localhost:8090/webERP/member/codehelper.do#','codehelper')"/></td>
+    	<td><input type="text" disabled/></td>
     	<td><input type="text"/></td>
     	<td><input type="text"/></td>
     	<td><input type="text"/></td>

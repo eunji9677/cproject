@@ -20,7 +20,7 @@
 		<result property="itemName" column="Item_Name" />
 		<result property="standard" column="Standard" />
 		<result property="unit" column="Inventory_Unit" />
-		<result property="dailyProduction" column="DailyProduction"
+		<!-- <result property="dailyProduction" column="DailyProduction" -->
 	</resultMap>
 	
 	<select id="selectAllProductionPlanInfo" resultMap="SmBimResult">

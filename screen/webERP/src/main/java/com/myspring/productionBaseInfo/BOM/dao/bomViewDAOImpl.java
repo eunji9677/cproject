@@ -22,5 +22,4 @@ public class bomViewDAOImpl implements bomViewDAO{
 		return bomList;
 	}
 	
-
 }
