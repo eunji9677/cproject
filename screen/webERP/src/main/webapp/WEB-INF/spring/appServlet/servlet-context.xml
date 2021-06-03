@@ -21,11 +21,10 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
-	
+
 	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
-		<beans:property name="prefix" value="/WEB-INF/views/" /> 
-		<beans:property name="suffix" value=".jsp" /> 
-	</beans:bean> -->
+		<beans:property name="prefix" value="/WEB-INF/views/" /> <beans:property 
+		name="suffix" value=".jsp" /> </beans:bean> -->
 
 
 	<!-- 타일즈 실습 설정 -->
@@ -78,6 +77,6 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-<mvc:annotation-driven />
+	<mvc:annotation-driven />
 
 </beans:beans>

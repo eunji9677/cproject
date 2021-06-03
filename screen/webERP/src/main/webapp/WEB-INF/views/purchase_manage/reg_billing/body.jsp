@@ -55,6 +55,8 @@ request.setCharacterEncoding("UTF-8");
 	width: 100%;
 	text-align: center;
 	border: 1px solid black;
+	font-size: 15px;
+	overflow: scroll;
 }
 
 #total {
@@ -70,7 +72,7 @@ request.setCharacterEncoding("UTF-8");
 }
 
 #contents3 {
-	overflow: scroll;
+	/* overflow: scroll; */
 }
 
 #total td {
@@ -127,22 +129,12 @@ request.setCharacterEncoding("UTF-8");
 	<container2 id="contents2">
 	<table id="view1">
 		<thead align="center" style="background-color: gray">
-			<td><input type="checkbox" name="content"
-				onclick="selectAll(this)" /></td>
+			<td><input type="checkbox" name="content"/></td>
 			<td>청구번호</td>
 			<td>청구일자</td>
 			<td>청구구분</td>
 			<td>비고</td>
 		</thead>
-<!-- 		<tbody id="table1">
-			<td><input type="checkbox" value="check1" id="check"
-				name="content" /></td>
-			<td><input type="text" /></td>
-			<td><input type="date" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-		</tbody> -->
 		<c:forEach var="cm" items="${cmList}">
 			<tr align="center">
 				<td><input type="checkbox" name="content" /></td>
@@ -156,38 +148,40 @@ request.setCharacterEncoding("UTF-8");
 	</container2>
 	<container3 id="contents3">
 	<table id="view2">
-		<tr>
-			<td><input type="checkbox" value="check1" id="check"
-				name="content" /></td>
-			<td>no</td>
+				<thead align="center" style="background-color: gray">
+			<td><input type="checkbox" name="content"/></td>
+			<td>순서</td>
+			<td>품번</td>
 			<td>품명</td>
 			<td>규격</td>
-			<td>단위</td>
+			<td>요청일</td>
+			<td>재고단위</td>
+			<td>재고단위수량</td>
+			<td>청구단위</td>
+			<td>청구단위수량</td>
 			<td>납기일</td>
 			<td>입고예정일</td>
-			<td>발주수량</td>
-			<td>단가</td>
-			<td>공급가</td>
-			<td>부가세</td>
-			<td>합계</td>
+			<td>의뢰수량</td>
 			<td>검사</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" value="check1" id="check"
-				name="content" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td><input type="date" /></td>
-			<td><input type="date" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td><input type="text" /></td>
-		</tr>
+		</thead>
+		<c:forEach var="btm" items="${bottomList}">
+			<tr align="center">
+				<td><input type="checkbox" name="content" /></td>
+				<td>${btm.sequence}</td>
+					<td>${btm.itemNumber}</td>
+					<td>${btm.itemName}</td>
+					<td>${btm.standard}</td>
+					<td>${btm.requestdate}</td>
+					<td>${btm.inventory_unit}</td>
+					<td>${btm.inventory_qy}</td>
+					<td>${btm.claim_unit}</td>
+					<td>${btm.claim_quantity}</td>
+					<td>${btm.due_date}</td>
+					<td>${btm.receiving_date}</td>
+					<td>${btm.receiving_qy}</td>
+					<td>${btm.inspection}</td>
+			</tr>
+		</c:forEach>
 	</table>
 	<div id="total">
 		<table>

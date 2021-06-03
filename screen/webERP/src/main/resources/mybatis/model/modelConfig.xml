@@ -11,6 +11,7 @@
 		<typeAlias type="com.myspring.MainPlan.vo.MainPlanVO" alias="MainPlanVO" />
 		<typeAlias type="com.myspring.MainPlan.MpsOS.vo.MpsOSVO" alias="MpsOSVO" />
 		<typeAlias type="com.myspring.Billing.vo.BIllIngVO" alias="BIllIngVO" />
+ 		<typeAlias type="com.myspring.Billing.List.vo.ListVO" alias="ListVO" />
 		<typeAlias type="com.myspring.Requiredamount.vo.RequiredamountVO" alias="RequiredamountVO" />
 		<!-- BOM 모델 -->
 		<typeAlias type="com.myspring.productionBaseInfo.BOM.vo.bomVO" alias="bomVO" />
