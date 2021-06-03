@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
+<<<<<<< HEAD
     pageEncoding="EUC-KR" isELIgnored="false"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+=======
+    pageEncoding="EUC-KR"    
+    isELIgnored="false"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
+<%
+  request.setCharacterEncoding("UTF-8");
+%>    
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +166,6 @@
             <div id="pdcInfo">
                 <table id="pdcTable">
                     <thead>
-                        <td><input type="checkbox" name="content" onclick="selectAll(this)"/></td>
                         <td>품번</td>
                         <td>품명</td>
                         <td>규격</td>
@@ -166,6 +176,7 @@
                     <tbody>
                    	<c:forEach var="info" items="${infoList}" >   
                      <tr>
+<<<<<<< HEAD
                      	<td><input type="checkbox" value = "check1" id="check" name="content"/></td>
                      	<td>${infoList.itemNumber }</td>
                      	<td>${infoList.itemName }</td>
@@ -179,6 +190,15 @@
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
                      </tr>
+=======
+                     	<td>${info.itemCode }</td>
+                     	<td><a href="#">${info.itemName }</a></td>
+                     	<td>${info.standard }</td>
+                     	<td>${info.inventoryUnit }</td>
+                     	<td>${info.dailyProduction }</td>
+                     </tr>
+                     </c:forEach>
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
                     </tbody>
                 </table>
             </div>
@@ -212,7 +232,6 @@
             <div id="pdcDateInfo">
                 <table id="pdcDateTable">
                     <thead>
-                        <td><input type="checkbox" name="content3" onclick="selectAll3(this)"/></td>
                         <td>품번</td>
                         <td>품명</td>
                         <td>규격</td>
@@ -221,12 +240,15 @@
                     </thead>
                     <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                     <tbody>
-                        <td><input type="checkbox" value = "check1" id="check" name="content3"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
+                        	<c:forEach var="info" items="${infoList}" >   
+                     <tr>
+                     	<td>${info.itemCode }</td>
+                     	<td>${info.itemName }</td>
+                     	<td>${info.standard }</td>
+                     	<td>${info.inventoryUnit }</td>
+                     	<td>${info.dailyProduction }</td>
+                     </tr>
+                     </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -246,6 +268,18 @@
          })
      
      })
+      function selectAll2(selectAll){
+            const checkbox = document.getElementsByName('content2');
+            checkbox.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+         function selectAll3(selectAll){
+             const checkbox = document.getElementsByName('content3');
+             checkbox.forEach((checkbox) => {
+                 checkbox.checked = selectAll.checked;
+             })
+         }
      </script>
 </body>
 </html>

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 package com.myspring.commonProduction.commitOperationInstruction.vo;
 
 import java.util.Date;
@@ -7,10 +10,17 @@ import org.springframework.stereotype.Component;
 
 @Component("CommitOperationInstructionVO")
 public class CommitOperationInstructionVO {
+<<<<<<< HEAD
 	private String itemNumber;
 	private String itemName;
 	private String standard;
 	private String unit;
+=======
+	private String itemCode;
+	private String itemName;
+	private String standard;
+	private String inventoryUnit;
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 	private int dailyProduction;
 	private int sequence;
 	private Date scheduled;
@@ -18,6 +28,7 @@ public class CommitOperationInstructionVO {
 	private String note;
 	
 	public CommitOperationInstructionVO() {
+<<<<<<< HEAD
 		
 	}
 	
@@ -40,6 +51,17 @@ public class CommitOperationInstructionVO {
 
 	public void setItemNumber(String itemNumber) {
 		this.itemNumber = itemNumber;
+=======
+		super();
+	}
+
+	public String getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 	}
 
 	public String getItemName() {
@@ -58,12 +80,21 @@ public class CommitOperationInstructionVO {
 		this.standard = standard;
 	}
 
+<<<<<<< HEAD
 	public String getUnit() {
 		return unit;
 	}
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+=======
+	public String getInventoryUnit() {
+		return inventoryUnit;
+	}
+
+	public void setInventoryUnit(String inventoryUnit) {
+		this.inventoryUnit = inventoryUnit;
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 	}
 
 	public int getDailyProduction() {
@@ -105,6 +136,7 @@ public class CommitOperationInstructionVO {
 	public void setNote(String note) {
 		this.note = note;
 	}
+<<<<<<< HEAD
 	
 	
 }
@@ -179,3 +211,8 @@ public class CommitOperationInstructionVO {
  * }
  */
 >>>>>>> develop
+=======
+
+
+}
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c

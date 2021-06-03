@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO;
+<<<<<<< HEAD
+=======
+import com.myspring.commonProduction.operationRegist.vo.OperationRegistVO;
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 import com.myspring.commonProduction.service.CommonProductionService;
 
 
@@ -24,6 +28,11 @@ public class CommonProductionControllerImpl implements CommonProductionControlle
 	private CommonProductionService productionService;
 	@Autowired
 	private CommitOperationInstructionVO COIVO;
+<<<<<<< HEAD
+=======
+	@Autowired
+	private OperationRegistVO ORVO;
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 	
 	@Override
 	@RequestMapping(value="/member/proplanreg.do" ,method = RequestMethod.GET)
@@ -36,6 +45,20 @@ public class CommonProductionControllerImpl implements CommonProductionControlle
 		return mav;
 	}
 	
+<<<<<<< HEAD
+=======
+	@Override
+	@RequestMapping(value="/member/regoperins.do" ,method = RequestMethod.GET)
+	public ModelAndView listOpertaionInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		logger.debug("debug 레밸 : viewName = " + viewName);
+		List infoList = productionService.selectAllOperationInfo();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("infoList", infoList);
+		return mav;
+	}
+	
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");

@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.commonProduction.commitOperationInstruction.dao.CommitOperationInstructionDAO;
 import com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO;
+<<<<<<< HEAD
+=======
+import com.myspring.commonProduction.operationRegist.dao.OperationRegistDAO;
+import com.myspring.commonProduction.operationRegist.vo.OperationRegistVO;
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 
 
 @Service("CommonProductionService")
@@ -17,6 +22,11 @@ import com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperati
 public class CommonProductionServiceImpl implements CommonProductionService{
 	@Autowired
 	private CommitOperationInstructionDAO COIdao;
+<<<<<<< HEAD
+=======
+	@Autowired
+	private OperationRegistDAO ORdao;
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 	
 	@Override
 	public List<CommitOperationInstructionVO> selectAllProductionPlanInfo() throws DataAccessException {
@@ -24,4 +34,14 @@ public class CommonProductionServiceImpl implements CommonProductionService{
 		infolist = COIdao.selectAllProductionPlanInfo();
 		return infolist;
 	}
+<<<<<<< HEAD
+=======
+	
+	@Override
+	public List<OperationRegistVO> selectAllOperationInfo() throws DataAccessException{
+		List<OperationRegistVO> infolist = null;
+		infolist = ORdao.selectAllOperationInfo();
+		return infolist;
+	}
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
 }

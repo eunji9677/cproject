@@ -4,7 +4,22 @@
 
 <configuration>
 	<typeAliases>
+<<<<<<< HEAD
 		<typeAlias type="com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO" alias="CommitOperationInstructionVO" />
 	</typeAliases>
 </configuration>
 	 
+=======
+		<!-- 생산파트 -->
+		<typeAlias type="com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO" alias="CommitOperationInstructionVO" />
+		<typeAlias type="com.myspring.commonProduction.operationRegist.vo.OperationRegistVO" alias="OperationRegistVO" />
+		<!-- 물류 구매관리 파트 -->
+		<typeAlias type="com.myspring.MainPlan.vo.MainPlanVO" alias="MainPlanVO" />
+		<typeAlias type="com.myspring.MainPlan.MpsOS.vo.MpsOSVO" alias="MpsOSVO" />
+		<typeAlias type="com.myspring.Billing.vo.BIllIngVO" alias="BIllIngVO" />
+		<typeAlias type="com.myspring.Requiredamount.vo.RequiredamountVO" alias="RequiredamountVO" />
+		<!-- BOM 모델 -->
+		<typeAlias type="com.myspring.productionBaseInfo.BOM.vo.bomVO" alias="bomVO" />
+	</typeAliases>
+</configuration>	 
+>>>>>>> 9e4a2abb0c9580e94ecd18b28f305eb1db64850c
