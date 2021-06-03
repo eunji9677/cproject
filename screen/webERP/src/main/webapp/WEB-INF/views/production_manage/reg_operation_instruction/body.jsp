@@ -117,8 +117,8 @@
                      <tr>
                      	<td><input type="checkbox" value = "check1" id="check" name="content"/></td>
                      	<td>${info.workOrderNumber}</td>
-                     	<td>${info.instructionDate}</td>
-                     	<td>${info.dueDate}</td>
+                     	<td><input type="date" value="${info.instructionDate}"></td>
+                     	<td><input type="date" value="${info.dueDate}"></td>
                      	<td>${info.itemCode }</td>
                      	<td>${info.itemName}</td>
                      	<td>${info.standard}</td>
@@ -126,7 +126,7 @@
                      	<td>${info.indicated}</td>
                      	<td>${info.status}</td>
                      	<td>
-                     		<select name="inspection">
+                     		<select name="inspectionSelect">
                      		<option value="" selected disabled hidden>${info.inspection}</option>
                      		<option value="검사">검사</option>
                      		<option value="비검사">비검사</option>

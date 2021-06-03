@@ -19,7 +19,7 @@
 		<result property="itemName" column="Item_Name" />
 		<result property="standard" column="Standard" />
 		<result property="inventoryUnit" column="Inventory_Unit" />
-		<result property="indicated" column="Indicated" />
+		<result property="indicated" column="IndicatedQuantity" />
 		<result property="status" column="status" />
 		<result property="inspection" column="Inspection" />
 		<result property="note" column="note" />
