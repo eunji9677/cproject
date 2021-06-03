@@ -16,13 +16,13 @@ public class MainPlanDAOImpl implements MainPlanDAO{
 	
 	@Override
 	public List selectAllMainPlanList() throws Exception{
-		List<MainPlanVO>mainplanList = sqlSession.selectList("mapper.erp.selectAllMainPlanList");
+		List<MainPlanVO>mainplanList = sqlSession.selectList("mappers.erp.selectAllMainPlanList");
 		return mainplanList;
 	}
 	
 	@Override
 	public List selectAllMpsosList() throws Exception{
-		List<MpsOSVO>mpsosList = sqlSession.selectList("mapper.mainplan.selectAllMpsosList");
+		List<MpsOSVO>mpsosList = sqlSession.selectList("mappers.erp.selectAllMpsosList");
 		return mpsosList;
 	}
 }

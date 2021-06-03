@@ -7,8 +7,11 @@
 		<!-- 생산파트 -->
 		<typeAlias type="com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO" alias="CommitOperationInstructionVO" />
 		<typeAlias type="com.myspring.commonProduction.operationRegist.vo.OperationRegistVO" alias="OperationRegistVO" />
-		<!-- mainplan 모델 -->
+		<!-- 물류 구매관리 파트 -->
 		<typeAlias type="com.myspring.MainPlan.vo.MainPlanVO" alias="MainPlanVO" />
+		<typeAlias type="com.myspring.MainPlan.MpsOS.vo.MpsOSVO" alias="MpsOSVO" />
+		<typeAlias type="com.myspring.Billing.vo.BIllIngVO" alias="BIllIngVO" />
+		<typeAlias type="com.myspring.Requiredamount.vo.RequiredamountVO" alias="RequiredamountVO" />
 		<!-- BOM 모델 -->
 		<typeAlias type="com.myspring.productionBaseInfo.BOM.vo.bomVO" alias="bomVO" />
 	</typeAliases>

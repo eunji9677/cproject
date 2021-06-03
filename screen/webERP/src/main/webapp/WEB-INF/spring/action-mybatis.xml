@@ -39,8 +39,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 <!--  	<property name="configLocation" value="classpath:mybatis/model/mrpModelConfig.xml" />
  	<property name="mapperLocations" value="classpath:mybatis/mappers/mrp.xml" /> -->
  	
- 	<property name="configLocation" value="classpath:mybatis/model/billingModelConfig.xml" />
- 	<property name="mapperLocations" value="classpath:mybatis/mappers/billing.xml" />
+<!--  	<property name="configLocation" value="classpath:mybatis/model/billingModelConfig.xml" />
+ 	<property name="mapperLocations" value="classpath:mybatis/mappers/billing.xml" /> -->
 
 
  	<property name="mapperLocations" value="classpath:mybatis/mappers/erp.xml" />

@@ -15,7 +15,7 @@ public class BIllIngDAOImpl implements BIllIngDAO{
 	
 	@Override
 	public List selectAllcmList() throws Exception{
-		List<BIllIngVO>cmList = sqlSession.selectList("mapper.billing.selectAllcmList");
+		List<BIllIngVO>cmList = sqlSession.selectList("mappers.erp.selectAllcmList");
 		return cmList;
 }
 }

@@ -15,7 +15,7 @@ public class RequiredamountDAOImpl implements RequiredamountDAO{
 	
 	@Override
 	public List selectAllMrpList() throws Exception{
-		List<RequiredamountVO>mrpList = sqlSession.selectList("mapper.mrp.selectAllMrpList");
+		List<RequiredamountVO>mrpList = sqlSession.selectList("mappers.erp.selectAllMrpList");
 		return mrpList;
 }
 }
