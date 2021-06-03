@@ -8,3 +8,9 @@
 	</typeAliases>
 </configuration>
 	 -->
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.myspring.weberp.member.vo.MemberVO" alias="memberVO" />
+		<typeAlias type="com.myspring.weberp.salesmanage.salesplan.vo.SalesplanVO" alias="salesplanVO" />
+	</typeAliases>
+</configuration>
