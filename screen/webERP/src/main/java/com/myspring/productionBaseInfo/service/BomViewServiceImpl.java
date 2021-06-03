@@ -30,4 +30,18 @@ public class BomViewServiceImpl implements BomViewService{
 		return popList;
 	}
 
+	@Override
+	public List setText(String itemNumber) throws DataAccessException {
+		List searchList = null;
+		searchList = bomDAO.setText(itemNumber);
+		return searchList;
+	}
+
+	@Override
+	public List SearchView(String itemNumber) throws DataAccessException {
+		List searchList = null;
+		searchList = bomDAO.SearchView(itemNumber);
+		return searchList;
+	}
+
 }
