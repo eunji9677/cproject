@@ -48,10 +48,10 @@
 			<beans:bean class="com.myspring.commonProduction.Interceptor.ViewNameInterceptor"/>
 		</mvc:interceptor>
 		
-				<mvc:interceptor>
+			<!-- 	<mvc:interceptor>
 			<mvc:mapping path="/*/*.do"/>
 			<beans:bean class="com.myspring.MainPlan.interceptor.ViewNameInterceptor"/>
-		</mvc:interceptor>
+		</mvc:interceptor> -->
 	</mvc:interceptors>
 
 </beans:beans>
