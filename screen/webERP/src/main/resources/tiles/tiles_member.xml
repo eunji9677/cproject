@@ -125,7 +125,7 @@
    </definition>
    <definition name="/member/regsalesplan" extends="baseLayout">
       <put-attribute name="title" value="판매계획등록" />
-      <put-attribute name="body" value="/WEB-INF/views/sales_manage/reg_salesplan/body.jsp" />
+	<put-attribute name="body" value="/WEB-INF/views/sales_manage/reg_salesplan/body.jsp" />
 	  <put-attribute name="side" value="/WEB-INF/views/sales_manage/side.jsp" />
    </definition>
    <definition name="/member/regestimate" extends="baseLayout">
@@ -373,6 +373,7 @@
       <put-attribute name="body" value="/WEB-INF/views/production_basic_info/reg_defective_type/body.jsp" />
 	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
    </definition>
+
 <!-- 
    <definition name="/member/memberForm" extends="baseLayout">
       <put-attribute name="title" value="회원등록창" />

@@ -124,9 +124,9 @@
                      	<td>${info.standard}</td>
                      	<td>${info.inventoryUnit}</td>
                      	<td>${info.indicated}</td>
-                     	<td>${info.status}</td>
+                     	<td id="status">${info.status}</td>
                      	<td>
-                     		<select name="inspectionSelect">
+                     		<select id="inspectionSelector" name="inspectionSelect">
                      		<option value="" selected disabled hidden>${info.inspection}</option>
                      		<option value="검사">검사</option>
                      		<option value="비검사">비검사</option>
