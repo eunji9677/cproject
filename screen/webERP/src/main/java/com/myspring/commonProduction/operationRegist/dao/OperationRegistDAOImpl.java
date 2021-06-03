@@ -18,7 +18,7 @@ public class OperationRegistDAOImpl implements OperationRegistDAO{
 	@Override
 	public List selectAllOperationInfo() throws DataAccessException {
 		List<OperationRegistVO> infoList = null;
-		infoList = sqlSession.selectList("mappers.productionPlan.selectAllOperationRegistInfo");
+		infoList = sqlSession.selectList("mappers.erp.selectAllOperationRegistInfo");
 		return infoList;
 	}
 }
