@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="mapper.mainplan">
+	<resultMap id="mainplanResult" type="mainplanVO">
+		<result property="plandate" column="plandate" />
+		<result property="itemnumber" column="itemnumber" />
+		<result property="itemName" column="itemName" />
+		<result property="standard" column="standard" />
+		<result property="unit" column="unit" />
+		<result property="sequence" column="sequence" />
+		<result property="expected_date" column="expected_date" />
+		<result property="due_date" column="due_date" />
+		<result property="plan_quantity" column="plan_quantity" />
+		<result property="buyer" column="buyer" />
+		<result property="note" column="note" />
+	</resultMap>
+
+	<select id="selectAllMainPlanList" resultMap="mainplanResult">
+		<![CDATA[SELECT * from pmm_pm_mps]]>
+	</select>
+
+</mapper>

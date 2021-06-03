@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component("CommitOperationInstructionVO")
 public class CommitOperationInstructionVO {
-	private String itemNumber;
+	private String itemCode;
 	private String itemName;
 	private String standard;
-	private String unit;
+	private String inventoryUnit;
 	private int dailyProduction;
 	private int sequence;
 	private Date scheduled;
@@ -17,28 +17,15 @@ public class CommitOperationInstructionVO {
 	private String note;
 	
 	public CommitOperationInstructionVO() {
-		
-	}
-	
-	public CommitOperationInstructionVO(String itemNumber, String itemName, String standard, String unit, int dailyProduction, int sequence, Date scheduled, int quantity, String note) {
-		this.itemNumber = itemNumber;
-		this.itemName = itemName;
-		this.standard = standard;
-		this.unit = unit;
-		this.dailyProduction = dailyProduction;
-		this.sequence = sequence;
-		this.scheduled = scheduled;
-		this.quantity = quantity;
-		this.note = note;
+		super();
 	}
 
-
-	public String getItemNumber() {
-		return itemNumber;
+	public String getItemCode() {
+		return itemCode;
 	}
 
-	public void setItemNumber(String itemNumber) {
-		this.itemNumber = itemNumber;
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
 	}
 
 	public String getItemName() {
@@ -57,12 +44,12 @@ public class CommitOperationInstructionVO {
 		this.standard = standard;
 	}
 
-	public String getUnit() {
-		return unit;
+	public String getInventoryUnit() {
+		return inventoryUnit;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setInventoryUnit(String inventoryUnit) {
+		this.inventoryUnit = inventoryUnit;
 	}
 
 	public int getDailyProduction() {
@@ -104,6 +91,6 @@ public class CommitOperationInstructionVO {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
-	
+
+
 }

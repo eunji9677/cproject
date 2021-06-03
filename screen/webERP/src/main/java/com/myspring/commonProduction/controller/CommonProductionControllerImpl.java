@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO;
+import com.myspring.commonProduction.operationRegist.vo.OperationRegistVO;
 import com.myspring.commonProduction.service.CommonProductionService;
 
 
@@ -24,6 +25,8 @@ public class CommonProductionControllerImpl implements CommonProductionControlle
 	private CommonProductionService productionService;
 	@Autowired
 	private CommitOperationInstructionVO COIVO;
+	@Autowired
+	private OperationRegistVO ORVO;
 	
 	@Override
 	@RequestMapping(value="/member/proplanreg.do" ,method = RequestMethod.GET)
@@ -31,6 +34,17 @@ public class CommonProductionControllerImpl implements CommonProductionControlle
 		String viewName = (String)request.getAttribute("viewName");
 		logger.debug("debug 레밸 : viewName = " + viewName);
 		List infoList = productionService.selectAllProductionPlanInfo();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("infoList", infoList);
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/member/regoperins.do" ,method = RequestMethod.GET)
+	public ModelAndView listOpertaionInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		logger.debug("debug 레밸 : viewName = " + viewName);
+		List infoList = productionService.selectAllOperationInfo();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("infoList", infoList);
 		return mav;

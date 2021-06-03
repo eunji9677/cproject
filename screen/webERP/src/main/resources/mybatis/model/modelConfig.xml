@@ -2,9 +2,10 @@
 <!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 
+
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO" alias="CommitOperationInstructionVO" />
+		<typeAlias type="com.myspring.commonProduction.operationRegist.vo.OperationRegistVO" alias="OperationRegistVO" />
 	</typeAliases>
-</configuration>
-	 
+</configuration>	 
