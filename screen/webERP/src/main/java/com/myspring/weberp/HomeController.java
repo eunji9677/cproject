@@ -311,5 +311,10 @@ public class HomeController {
 	public String productionmain(Locale locale, Model model) {
 		return "/member/productionmain";
 	}
+	@RequestMapping(value = "/member/codehelper", method = RequestMethod.GET)
+	public String Popup(Locale locale, Model model) {
+		return "/member/codehelper";
+	}
+
 }
 

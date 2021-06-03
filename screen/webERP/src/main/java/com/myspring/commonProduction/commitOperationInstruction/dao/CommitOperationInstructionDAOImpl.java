@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO;
 
-@Repository("CommitOperationInstructionDAOImpl")
+@Repository("CommitOperationInstructionDAO")
 public class CommitOperationInstructionDAOImpl implements CommitOperationInstructionDAO{
 	@Autowired
 	private SqlSession sqlSession;
