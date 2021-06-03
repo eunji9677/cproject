@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR"    
+    isELIgnored="false"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<%
+  request.setCharacterEncoding("UTF-8");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,7 +103,7 @@
                         <td>지시일</td>
                         <td>납기일</td>
                         <td>품번</td>
-                        <td">품명</td>
+                        <td>품명</td>
                         <td>규격</td>
                         <td>단위</td>
                         <td>지시수량</td>
@@ -107,6 +113,29 @@
                     </thead>
                     <!-- 테스트용 데이터, 추후 표현식으로 수정필요 -->
                     <tbody>
+                    	<c:forEach var="info" items="${infoList}" >   
+                     <tr>
+                     	<td><input type="checkbox" value = "check1" id="check" name="content"/></td>
+                     	<td>${info.workOrderNumber}</td>
+                     	<td><input type="date" value="${info.instructionDate}"></td>
+                     	<td><input type="date" value="${info.dueDate}"></td>
+                     	<td>${info.itemCode }</td>
+                     	<td>${info.itemName}</td>
+                     	<td>${info.standard}</td>
+                     	<td>${info.inventoryUnit}</td>
+                     	<td>${info.indicated}</td>
+                     	<td>${info.status}</td>
+                     	<td>
+                     		<select name="inspectionSelect">
+                     		<option value="" selected disabled hidden>${info.inspection}</option>
+                     		<option value="검사">검사</option>
+                     		<option value="비검사">비검사</option>
+                     		</select>
+                     	</td>
+                     	<td>${info.note}</td>
+                     </tr>
+                     </c:forEach>
+                     <tr>
                         <td><input type="checkbox" value = "check1" id="check" name="content"/></td>
                         <td><input type="text"/></td>
                         <td><input type="date"/></td>
@@ -118,6 +147,8 @@
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
+                        <td><input type="text"/></td>
+                     </tr>
                     </tbody>
                 </table>
             </div>
