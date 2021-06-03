@@ -34,6 +34,15 @@ public class MainPlanControllerImpl implements MainPlanController{
 		return mav;
 	}
 	
+	@RequestMapping(value="member/applyorder.do", method=RequestMethod.GET)
+	public ModelAndView MpsOSList(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		List mpsosList = mainplanService.selectAllMpsosList();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("mpsosList", mpsosList);
+		return mav;
+	}
+	
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");

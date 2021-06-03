@@ -18,7 +18,11 @@
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="" />
    </definition>
-   
+    <definition name="PopupLayout1"  template="/WEB-INF/views/common/applyorder.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="" />
+   </definition>
    <definition name="main" extends="baseLayout">
       <put-attribute name="title" value="메인페이지" />
       <put-attribute name="body" value="/WEB-INF/views/SystemAdmin/reg_company/body.jsp" />
@@ -58,6 +62,12 @@
       <put-attribute name="body" value="" />
       <put-attribute name="side" value="" />
    </definition>
+      <definition name="/member/applyorder" extends="PopupLayout1">
+      <put-attribute name="title" value="팝업" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="side" value="" />
+   </definition>
+   
 
     
    <definition name="/member/regcompany" extends="baseLayout">

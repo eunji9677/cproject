@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.myspring.MainPlan.MpsOS.vo.MpsOSVO;
 import com.myspring.MainPlan.vo.MainPlanVO;
 
 @Repository("mainplanDAO")
@@ -17,5 +18,11 @@ public class MainPlanDAOImpl implements MainPlanDAO{
 	public List selectAllMainPlanList() throws Exception{
 		List<MainPlanVO>mainplanList = sqlSession.selectList("mapper.mainplan.selectAllMainPlanList");
 		return mainplanList;
+	}
+	
+	@Override
+	public List selectAllMpsosList() throws Exception{
+		List<MpsOSVO>mpsosList = sqlSession.selectList("mapper.mainplan.selectAllMpsosList");
+		return mpsosList;
 	}
 }

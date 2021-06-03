@@ -4,8 +4,7 @@
 	
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.myspring.MainPlan.vo.MainPlanVO" alias="MainPlanVO" />
-		<typeAlias type="com.myspring.MainPlan.MpsOS.vo.MpsOSVO" alias="MpsOSVO" />
+		<typeAlias type="com.myspring.Requiredamount.vo.RequiredamountVO" alias="RequiredamountVO" />
 	</typeAliases>
 </configuration>
 	

@@ -6,4 +6,6 @@ public interface MainPlanDAO {
 
 	List selectAllMainPlanList() throws Exception;
 
+	List selectAllMpsosList() throws Exception;
+
 }
