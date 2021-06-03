@@ -28,5 +28,18 @@ public class bomViewDAOImpl implements bomViewDAO{
 		popList = sqlSession.selectList("mappers.BOMMapper.selectPopList");
 		return popList;
 	}
+
+	@Override
+	public List setText(String itemNumber) throws DataAccessException {
+		List<bomVO> textList = null;
+		textList = sqlSession.selectList("mappers.BOMMapper.selectitem",itemNumber);
+		return textList;
+	}
+	@Override
+	public List SearchView(String itemNumber) throws DataAccessException{
+		List<bomVO> searchList = null;
+		searchList = sqlSession.selectList("mappers.BOMMapper.searchitem",itemNumber);
+		return searchList;
+	}
 	
 }

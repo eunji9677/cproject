@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.myspring.productionBaseInfo.BOM.vo.bomVO;
 public interface BomViewController {
@@ -18,4 +19,6 @@ public interface BomViewController {
                               HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception; 
 */
+
+
 }

@@ -31,15 +31,27 @@ public class BomViewControllerImpl implements BomViewController {
 	private BomViewService viewService;
 	@Autowired
 	private bomVO bomVO ;
+	
 	@Override
 	@RequestMapping(value="/member/regbom.do" ,method = RequestMethod.GET)
 	public ModelAndView viewBOM(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = null;
 		String viewName = getViewName(request);
-		List bomView = viewService.bomView();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("bomView", bomView);
+		String number = (String) request.getParameter("itemNumber");
+		if(number == null || number.length() == 0) {
+			mav = new ModelAndView(viewName);
+			return mav;
+		}
+		else {
+			List bomView = viewService.SearchView(number);
+			mav = new ModelAndView(viewName);
+			mav.addObject("bomView", bomView);
+		}
+			
+		System.out.println("숫자" + number);
 		return mav;
 	}
+	
 	@RequestMapping(value="/member/codehelper.do" ,method = RequestMethod.GET)
 	public ModelAndView codeHelper(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
@@ -48,6 +60,7 @@ public class BomViewControllerImpl implements BomViewController {
 		mav.addObject("itemView", itemView);
 		return mav;
 	}
+	
 	private String getViewName(HttpServletRequest request) {
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
@@ -78,6 +91,8 @@ public class BomViewControllerImpl implements BomViewController {
 		}
 		return viewName;
 	}
+
+	
 	
 	
 

@@ -26,7 +26,12 @@
 	<select id="selectAllMemberList" resultMap="bomView">
 		<![CDATA[select * from CPM_BIM_BOM_REG]]>
 	</select>
-	
+	<select id="searchitem" resultMap="bomView" parameterType="String">
+		<![CDATA[select * from CPM_BIM_BOM_REG where itemnumber = #{itemNumber}]]>
+	</select>
+	<select id="selectitem" resultMap="bomView" parameterType="String">
+		<![CDATA[select itemnumber,itemname from CPM_BIM_BOM_REG where itemnumber=#{itemNumber}]]>
+	</select>
 	<select id="selectPopList" resultMap="popView">
 		<![CDATA[select * from CPM_BIM_BOM_REG]]>
 	</select>
