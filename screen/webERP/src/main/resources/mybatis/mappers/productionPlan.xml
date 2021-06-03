@@ -11,9 +11,25 @@
 		<result property="inventoryUnit" column="Inventory_Unit" />
 		<result property="dailyProduction" column="DailyProduction" />
 	</resultMap>
+	<resultMap id="OpePerRegResult" type="OperationRegistVO">
+		<result property="workOrderNumber" column="workOrderNumber" />
+		<result property="instructionDate" column="InstructionDate" />
+		<result property="dueDate" column="dueDate" />
+		<result property="itemCode" column="Item_Code" />
+		<result property="itemName" column="Item_Name" />
+		<result property="standard" column="Standard" />
+		<result property="inventoryUnit" column="Inventory_Unit" />
+		<result property="indicated" column="Indicated" />
+		<result property="status" column="status" />
+		<result property="inspection" column="Inspection" />
+		<result property="note" column="note" />
+	</resultMap>
 	 
 	<select id="selectAllProductionPlanInfo" resultMap="SmBimResult">
 		<![CDATA[select Item_Code, Item_Name, Standard, Inventory_Unit, DailyProduction from SM_BIM_Ite_Reg]]>
+	</select>
+	<select id="selectAllOperationRegistInfo" resultMap="OpePerRegResult">
+		<![CDATA[select * from CPM_PM_Ope_Per_Reg]]>
 	</select>
 	
 </mapper>
