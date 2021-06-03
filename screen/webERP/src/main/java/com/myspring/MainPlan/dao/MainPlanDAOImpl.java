@@ -15,7 +15,7 @@ public class MainPlanDAOImpl implements MainPlanDAO{
 	
 	@Override
 	public List selectAllMainPlanList() throws Exception{
-		List<MainPlanVO>mainplanList = sqlSession.selectList("mapper.mainplan.selectAllMainPlanList");
+		List<MainPlanVO>mainplanList = sqlSession.selectList("mapper.erp.selectAllMainPlanList");
 		return mainplanList;
 	}
 }

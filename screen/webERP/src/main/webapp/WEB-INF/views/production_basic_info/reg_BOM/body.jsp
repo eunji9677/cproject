@@ -7,13 +7,14 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style>
-#contents1{
+		#contents1{
             position: absolute;
             left: 15%;
             top: 15%;
@@ -75,13 +76,13 @@
                             모품목
                         </td>
                         <Td>
-                            <input type="text" name="factory" style="width: 120px; background-color: yellow;">
+                            <input type="text" name="factory" value='${param.itemNumber }' style="width: 120px; background-color: yellow;">
                         </Td>
                         <td>
                             <a href="javascript:search1()"><i class="fas fa-search" style="color: blue;"></i></a>
                         </td>
                         <td>
-                            <input type="text" name="ckfactory" style="width: 120px;" disabled>
+                            <input type="text" name="ckfactory" value='${param.itemName }' style="width: 120px;" disabled>
                         </td>
                         <!-- 모품목 규격 -->
                         <td>
@@ -123,7 +124,7 @@
                         <td>정미수량</td>
                         <td>LOSS(%)</td>
                         <!-- <td>필요수량</td> -->
-                        <td>실제원가</td>
+                        <td>원가</td>
                         <td>외주단가</td>
                         <td>시작일자</td>
                         <td>종료일자</td>

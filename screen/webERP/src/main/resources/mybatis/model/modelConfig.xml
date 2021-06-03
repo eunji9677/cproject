@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
-	<!-- 
+
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.myspring.pro27.member.vo.MemberVO" alias="memberVO" />
+		<!-- 생산파트 -->
+		<typeAlias type="com.myspring.commonProduction.commitOperationInstruction.vo.CommitOperationInstructionVO" alias="CommitOperationInstructionVO" />
+		<typeAlias type="com.myspring.commonProduction.operationRegist.vo.OperationRegistVO" alias="OperationRegistVO" />
+		<!-- mainplan 모델 -->
+		<typeAlias type="com.myspring.MainPlan.vo.MainPlanVO" alias="MainPlanVO" />
+		<!-- BOM 모델 -->
+		<typeAlias type="com.myspring.productionBaseInfo.BOM.vo.bomVO" alias="bomVO" />
 	</typeAliases>
-</configuration>
-	 -->
-<configuration>
-	<typeAliases>
-		<typeAlias type="com.myspring.weberp.member.vo.MemberVO" alias="memberVO" />
-		<typeAlias type="com.myspring.weberp.salesmanage.salesplan.vo.SalesplanVO" alias="salesplanVO" />
-	</typeAliases>
-</configuration>
+</configuration>	 
