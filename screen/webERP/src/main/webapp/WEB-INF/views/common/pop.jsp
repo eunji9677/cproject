@@ -16,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <style>
     	a{
     		text-decoration:none;
@@ -46,21 +47,22 @@
     </style>
 </head>
 <body>
+<form name="popForm" method="get" action="${contextPath }/member/regbom" >
     <div id="wrap">
         <div id="searchBox">
             <table id="search">
                 <tr>
                     <td>검색1</td>
-                    <td><input type="text"/></td>
+                    <td><input type="text" id="code" /></td>
                 </tr>
                 <tr>
                     <td>검색2</td>
-                    <td><input type="text"/></td>
+                    <td><input type="text" id="name"/></td>
                 </tr>
             </table>
             <div id="button">
-                <button>버튼1</button>
-                <button>버튼2</button>
+                <button id="search">조회</button>
+                <button id="submit">적용</button>
                 <button>버튼3</button>
             </div>
         </div>
@@ -73,7 +75,7 @@
                 </tr>
                 <c:forEach var="bom" items="${itemView}" >     
    <tr align="center">
-      <td><a href="#">${bom.itemNumber}</a></td>
+      <td><a href="javascript:popFunction('${bom.itemNumber }','${bom.itemName }')">${bom.itemNumber}</a></td>
       <td><a href="#">${bom.itemName}</a></td>
       <td><a href="#">${bom.standard}</a></td>
     </tr>
@@ -82,5 +84,22 @@
         </div>
     </div>
     
+    <script>
+    var submit_button = document.getElementById("submit");
+    		var text_code = document.getElementById("code");
+    		var text_name = document.getElementById("name");
+    	function popFunction(code,name){
+    		text_code.value = code;
+    		text_name.value = name;
+    	}
+    	submit_button.onclick = function(){
+    		text_code.setAttribute("itemNumber",text_code.value);
+			text_name.setAttribute("itemName",text_name.value);
+    		opener.parent.location='${contextPath }/member/regbom.do?itemNumber='+text_code.value+'&&itemName='+text_name.value;
+
+    		window.close();
+    	}
+    </script>
+    </form>
 </body>
 </html>
