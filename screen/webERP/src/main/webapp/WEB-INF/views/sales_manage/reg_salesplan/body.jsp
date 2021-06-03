@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
  #contents1{
@@ -57,77 +57,7 @@
 	text-align: center;
 }
 </style>
-</head>
-<body>
-	<container1 id=contents1>
-	<table class="con1_search" id="view">
-		<tr>
-			<td align="center">»ç¾÷Àå</td>
-			<td><input type="text" name="" id="reqInput"></td>
-			<td><i class="fas fa-search" style="color: blue;"></i></td>
-			<td><input type="text" disabled></td>
-			<td align="right" colspan="2">´ë»ó³â¿ù</td>
-			<td colspan="2">
-				<button id="minus"><<</button> <input type="text" value="2021"
-				id="year"
-				style="background-color: rgb(255, 255, 149); width: 60px; text-align: center;">
-				<button id="plus">>></button> <select name="" id="reqInput">
-					<option value="1">1¿ù</option>
-					<option value="2">2¿ù</option>
-					<option value="3">3¿ù</option>
-					<option value="4">4¿ù</option>
-					<option value="5">5¿ù</option>
-					<option value="6">6¿ù</option>
-					<option value="7">7¿ù</option>
-					<option value="8">8¿ù</option>
-					<option value="9">9¿ù</option>
-					<option value="10">10¿ù</option>
-					<option value="11">11¿ù</option>
-					<option value="12">12¿ù</option>
-			</select>
-			</td>
-		</tr>
-		<tr>
-			<td align="center">°í°´</td>
-			<td><input type="text"></td>
-			<td><i class="fas fa-search" style="color: blue;"></i></td>
-			<td><input type="text" disabled></td>
-			<td align="center">Ç°¸ñ±º</td>
-			<td><input type="text"></td>
-			<td><i class="fas fa-search" style="color: blue;"></i></td>
-			<td><input type="text" disabled></td>
-		</tr>
-	</table>
-	</container1>
-	<container2 id="contents2">
-	<table id="view">
-		<thead>
-			<td style="width: 5%;"><input type="checkbox" name="content"
-				onclick="selectAll(this)"></td>
-			<td align="center">Ç°¹ø</td>
-			<td align="center">Ç°¸í</td>
-			<td align="center">±Ô°İ</td>
-			<td align="center">´ÜÀ§(°ü¸®)</td>
-			<td align="center">¼ö·®</td>
-			<td align="center">´Ü°¡</td>
-			<td align="center">¸ÅÃâ¿¹»ó±İ¾×</td>
-			<td align="center">ºñ°í</td>
-		</thead>
-		<tbody>
-			<td style="width: 5%;"><input type="checkbox" value="check"
-				id="check" name="content" /></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-			<td><input type="text" name="" id=""></td>
-		</tbody>
-	</table>
-	</container2>
-	<script>
+<script>
 		var plus_button = document.getElementById('plus');
 		var minus_button = document.getElementById('minus');
 
@@ -139,6 +69,88 @@
 			var year = document.getElementById('year');
 			year.value = Number(year.value) - 1;
 		}
-	</script>
+</script>
+</head>
+<body>
+	<container1 id=contents1>
+	<table class="con1_search" id="view">
+		<tr>
+	
+			<td align="center">í’ˆë²ˆ</td>
+			<td><input type="text" name="Plan_Item_Code" id="piCodeSearch"></td>
+			<td><i class="fas fa-search" style="color: blue;"></i></td>
+			<td><input type="text" disabled></td>
+			<form name="frmSearchDate" method="get"  action="${contextPath}/member/searchdate.do">
+			<td align="right" colspan="2">ëŒ€ìƒë…„ì›”</td>
+			<td colspan="2">
+				<button id="minus"> << </button> <input type="text" value="2021"
+				id="year"
+				style="background-color: rgb(255, 255, 149); width: 60px; text-align: center;">
+				<button id="plus"> >> </button> <select name="Plan_Date" id="reqInput">
+					<option value="1">1ì›”</option>
+					<option value="2">2ì›”</option>
+					<option value="3">3ì›”</option>
+					<option value="4">4ì›”</option>
+					<option value="5">5ì›”</option>
+					<option value="6">6ì›”</option>
+					<option value="7">7ì›”</option>
+					<option value="8">8ì›”</option>
+					<option value="9">9ì›”</option>
+					<option value="10">10ì›”</option>
+					<option value="11">11ì›”</option>
+					<option value="12">12ì›”</option>
+			</select>
+			</td>
+			</form>
+		</tr>
+		<tr>
+
+			<td align="center">í’ˆëª…</td>
+			<td><input type="text" name="Plan_Item_Name"></td>
+			<td><i class="fas fa-search" style="color: blue;"></i></td>
+			<td><input type="text" disabled></td>
+			<td align="center">íŒë§¤ ê³„íš ìˆ˜ëŸ‰</td>
+			<td><input type="text" name="Plan_Item_Quantity"></td>
+			<td><i class="fas fa-search" style="color: blue;"></i></td>
+			<td><input type="text" disabled></td>
+		</tr>
+	</table>
+	</container1>
+	<container2 id="contents2">
+	<form name="frmsalesplanList" method="post"  action="${contextPath}/member/addsalesplan.do">
+	<table id="view">
+		<thead>
+			<td style="width: 5%;"><input type="checkbox" name="content"
+				onclick="selectAll(this)"></td>
+			<td align="center">í’ˆë²ˆ</td>
+			<td align="center">í’ˆëª…</td>
+			<td align="center">ê·œê²©</td>
+			<td align="center">ë‹¨ìœ„(ê´€ë¦¬)</td>
+			<td align="center">íŒë§¤ ê³„íš ìˆ˜ëŸ‰</td>
+			<td align="center">íŒë§¤ ê³„íšë‹¨ê°€</td>
+			<td align="center">íŒë§¤ ê³„íš ê¸ˆì•¡</td>
+			<td align="center">ê³„íš ìˆ˜ì • ìˆ˜ëŸ‰</td>
+			<td align="center">ê³„íš ìˆ˜ì • ë‹¨ê°€</td>
+			<td align="center">ê³„íš ìˆ˜ì • ê¸ˆì•¡</td>
+			
+			
+		</thead>
+		<tbody>
+			<td style="width: 5%;"><input type="checkbox" value="check"
+				id="check" name="content" /></td>
+                    <td><input type="text" name="Plan_Item_Code" id="piCodeInput"></td>
+                    <td><input type="text" name="Plan_Item_Name" id="piNameInput"></td>
+                    <td><input type="text" name="Plan_Item_Standard" id="piStandardInput"></td>
+                    <td><input type="text" name="Plan_Item_Unit" id="piUnitInput"></td>
+                    <td><input type="text" name="Plan_Item_Quantity" id="piQuanInput"></td>
+                    <td><input type="text" name="Plan_Unit_Price" id="unitPriceInput"></td>
+                    <td><input type="text" name="Plan_Sum_Price" id="sumPriceInput"></td>
+                    <td><input type="text" name="Newplan_Item_Quantity" id="piNewQuanInput"></td>
+                    <td><input type="text" name="Newplan_Unit_Price" id="newUnitPriceInput"></td>
+                    <td><input type="text" name="Newplan_Sum_Price" id="NewSumPriceInput"></td>
+		</tbody>
+	</table>
+	</form>
+	</container2>
 </body>
 </html>
