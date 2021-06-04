@@ -9,4 +9,6 @@ public interface BIllIngController {
 
 	ModelAndView cmList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	ModelAndView mrpamount(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }
