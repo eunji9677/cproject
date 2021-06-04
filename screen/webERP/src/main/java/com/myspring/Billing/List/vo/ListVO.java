@@ -15,17 +15,14 @@ public class ListVO {
 	private int inventory_qy;
 	private String claim_unit;
 	private int claim_quantity;
-	private Date due_date;
-	private Date receiving_date;
-	private int receiving_qy;
-	private String inspection;
+	private String buyer;
+
 
 	public ListVO() {
 	}
 
 	public ListVO(int sequence, String itemNumber, String itemName, String standard, Date requestdate,
-			String inventory_unit, int inventory_qy, String claim_unit, int claim_quantity, Date due_date,
-			Date receiving_date, int receiving_qy, String inspection) {
+			String inventory_unit, int inventory_qy, String claim_unit, int claim_quantity, String buyer) {
 		this.sequence = sequence;
 		this.itemNumber = itemNumber;
 		this.itemName = itemName;
@@ -35,10 +32,7 @@ public class ListVO {
 		this.inventory_qy = inventory_qy;
 		this.claim_unit = claim_unit;
 		this.claim_quantity=claim_quantity;
-		this.due_date = due_date;
-		this.receiving_date = receiving_date;
-		this.receiving_qy = receiving_qy;
-		this.inspection = inspection;
+		this.buyer=buyer;
 	}
 
 	public int getSequence() {return sequence;}
@@ -68,15 +62,6 @@ public class ListVO {
 	public int getClaim_quantity() {return claim_quantity;}
 	public void setClaim_quantity(int claim_quantity) {this.claim_quantity = claim_quantity;}
 
-	public Date getDue_date() {return due_date;}
-	public void setDue_date(Date due_date) {this.due_date = due_date;}
-
-	public Date getReceiving_date() {return receiving_date;}
-	public void setReceiving_date(Date receiving_date) {this.receiving_date = receiving_date;}
-
-	public int getReceiving_qy() {return receiving_qy;}
-	public void setReceiving_qy(int receiving_qy) {this.receiving_qy = receiving_qy;}
-
-	public String getInspection() {return inspection;}
-	public void setInspection(String inspection) {this.inspection = inspection;}
+	public String getBuyer() {return buyer;}
+	public void setBuyer(String buyer) {this.buyer = buyer;}
 }

@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
 	function func_Popup(){
 		var url = "applyorder.do";
 		var name = "applyorder";
-		var option = "width = 1000, height= 600, top = 100, left = 200"
+		var option = "width = 1500, height= 600, top = 100, left = 200"
 		window.open(url, name, option);
 	}
 </script>

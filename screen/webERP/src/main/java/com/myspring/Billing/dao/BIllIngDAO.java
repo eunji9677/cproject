@@ -10,4 +10,6 @@ public interface BIllIngDAO {
 
 	List<ListVO> selectAllBottomList() throws Exception;
 
+	List selectAllMrpaMount() throws Exception;
+
 }

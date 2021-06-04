@@ -11,6 +11,14 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script>
+	function func_Popup(){
+		var url = "mrpamount.do";
+		var name = "mrpamount";
+		var option = "width = 1500, height= 600, top = 100, left = 200"
+		window.open(url, name, option);
+	}
+</script>
 <style>
 #contents1 {
 	position: absolute;
@@ -55,8 +63,6 @@ request.setCharacterEncoding("UTF-8");
 	width: 100%;
 	text-align: center;
 	border: 1px solid black;
-	font-size: 15px;
-	overflow: scroll;
 }
 
 #total {
@@ -122,8 +128,7 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 	</table>
 	<div id="button">
-		<button>청구적용조회</button>
-		<button>청구일괄적용</button>
+		<input type="button" id="Popup" onclick="func_Popup();" value="소요량적용" />
 	</div>
 	</container1>
 	<container2 id="contents2">
@@ -159,10 +164,7 @@ request.setCharacterEncoding("UTF-8");
 			<td>재고단위수량</td>
 			<td>청구단위</td>
 			<td>청구단위수량</td>
-			<td>납기일</td>
-			<td>입고예정일</td>
-			<td>의뢰수량</td>
-			<td>검사</td>
+			<td>주거래처</td>
 		</thead>
 		<c:forEach var="btm" items="${bottomList}">
 			<tr align="center">
@@ -176,10 +178,7 @@ request.setCharacterEncoding("UTF-8");
 					<td>${btm.inventory_qy}</td>
 					<td>${btm.claim_unit}</td>
 					<td>${btm.claim_quantity}</td>
-					<td>${btm.due_date}</td>
-					<td>${btm.receiving_date}</td>
-					<td>${btm.receiving_qy}</td>
-					<td>${btm.inspection}</td>
+					<td>${btm.buyer}</td>
 			</tr>
 		</c:forEach>
 	</table>

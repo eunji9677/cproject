@@ -32,6 +32,15 @@ public class BIllIngControllerImpl implements BIllIngController{
 		mav.addObject("bottomList", bottomList);
 		return mav;
 	}
+	@Override
+	@RequestMapping(value="member/mrpamount.do", method=RequestMethod.GET)
+	public ModelAndView mrpamount(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		List mrpamount = billingService.selectAllMrpaMount();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("mrpamount", mrpamount);
+		return mav;
+	}
 		
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
