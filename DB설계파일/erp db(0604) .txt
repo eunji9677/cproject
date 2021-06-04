@@ -1,0 +1,2596 @@
+drop user erp_admin cascade;
+DROP TABLESPACE ERP_DB INCLUDING CONTENTS AND DATAFILES;
+
+CREATE TABLESPACE ERP_DB DATAFILE 'ERP_DB' 
+SIZE 2048M AUTOEXTEND ON NEXT 4M MAXSIZE UNLIMITED 
+LOGGING PERMANENT EXTENT MANAGEMENT LOCAL AUTOALLOCATE 
+BLOCKSIZE 8K SEGMENT SPACE MANAGEMENT MANUAL 
+FLASHBACK ON;
+--Tablespace의 이름을 ERP_DB, 크기를 2G로 설정, 2G 초과시 자동으로 4M 씩 자동 확장 생성한다.
+
+create user erp_admin identified by erp_admin;
+grant DBA, resource, connect to erp_admin WITH ADMIN OPTION;
+conn erp_admin/erp_admin;
+
+drop table CPM_PM_Pro_Pla_Reg;
+drop table CPM_PM_Pro_Mat_For;
+drop table CPM_PM_Pro_Mat_For_Det;
+drop table CPM_PM_Ope_Per_Reg;
+drop table CPM_OM_Out_Fin;
+drop table CPM_OM_Out_Fin_Det;
+drop table CPM_OM_Out_Mat_For;
+drop table CPM_OM_Out_Mat_For_Det;
+drop table CPM_OM_Out_Per_Reg;
+drop table CPM_OM_Out_Per_Reg_Det;
+drop table CPM_BIM_BOM_Reg;
+drop table CPM_BIM_Def_Typ_Reg;
+
+--입고의뢰등록(입고검사등록 같이사용)/입고검사 입고의뢰적용시에도 사용/입고처리 입고,검사의뢰시사용
+DROP TABLE PMM_PM_RRR;
+--입고처리(국내발주)리스트창(매입마감,발주등록 에도 사용)
+DROP TABLE PMM_PM_RP_LIST;
+--입고처리(국내발주)/ 반품,반품정보매입마감,매입마감에도 사용
+DROP TABLE PMM_PM_RP;
+--청구등록(리스트)/입고의뢰등록시 칼럼사용,발주등록(청구적용조회시)
+DROP TABLE PMM_PM_CM_LIST;
+--청구등록(발주등록 청구적용조회시 칼럼사용)
+DROP TABLE PMM_PM_CM;
+--소요량전개(주문,판매,생산)/청구등록 소요량전개 사용시 칼럼사용
+DROP TABLE PMM_PM_MRP;
+--발주마감처리/발주등록(입고의뢰등록 발주적용조회시 사용)
+DROP TABLE PMM_PM_ORDER;
+--입고검사등록리스트
+DROP TABLE PMM_PM_RIP_LIST;
+--주계획서작성(판매,주문계획)
+DROP TABLE PMM_PM_MPS_OS;
+ --주계획서작성(판매,주문)
+DROP TABLE PMM_PM_MPS;
+
+drop table CSM_SM_COR_Reg;
+drop table CSM_SM_Rel_Pro;
+drop table CSM_SM_Req_Reg;
+drop table CSM_SM_Ord_Reg;
+drop table CSM_SM_Est_Reg;
+drop table PM_SM_Ite_Pri;
+drop table PM_SM_Set_Man_Sub;
+drop table PM_SM_Set_Man_Main;
+drop table PM_SM_Sto_Adj_Sub;
+drop table PM_SM_Sto_Adj_Main;
+drop table PM_SM_Sto_Mov_Sub;
+drop table PM_SM_Sto_Mov_Main;
+DROP TABLE SM_CRI_Emp_Reg;
+DROP TABLE SM_CRI_Com_Reg;
+drop table SM_CRI_Dep_Reg;
+drop table SM_BIM_Gen_Cus_Reg;
+drop table SM_BIM_Ins_Typ;
+drop table SM_BIM_Ite_gro_Reg;
+drop table SM_BIM_Log_Man;
+drop table SM_BIM_Out_Item_Cus_IN;
+drop table SM_BIM_Out_Item_Cus;
+drop table SM_BIM_Out_Wor_Reg;
+DROP TABLE SM_BIM_Com_Reg;
+drop table SM_BIM_SET_Reg;
+drop table SM_BIM_Ite_Reg;
+drop table SM_BIM_Sal_Pla_Reg;
+drop table SM_CRI_Sec_Reg;
+drop table SM_CRI_Sys_Env_set;
+DROP TABLE SM_CRI_Wor_Reg;
+drop table SM_CRI_Zip;
+drop table CPM_PM_Ope_Per_Reg_Det;
+drop table SM_BIM_Hou_Reg;
+drop table SM_BIM_Pro_Reg;
+drop table SM_BIM_Out_Reg;
+drop table SM_BIM_Wor_Reg;
+drop table SM_BIM_Pro_Wor_Reg;
+DROP TABLE JOINDATA;
+
+
+DROP SEQUENCE NO_seq;
+DROP SEQUENCE SEQ_seq;
+
+drop trigger trg_operation_nodml;
+drop trigger trg_outsourcing_nodml;
+
+drop function  func_hou_reg;
+drop function  func_Wor_Reg;
+drop function  func_pro_reg;
+drop function  func_Pro_Wor_Reg;
+drop function  func_Out_Reg;
+drop function  func_Out_Wor_Reg;
+drop function  func_Ite_Reg;
+
+
+--NO 자동생성 시퀀스
+CREATE SEQUENCE NO_seq START WITH 1 INCREMENT BY 1 MAXVALUE 10000 minvalue 0 CYCLE NOCACHE;
+-- 예시 INSERT INTO tmp values(tmp_seq.NEXTVAL, 'tmptmp');
+--순번 sequence 자동생성 시퀀스
+CREATE SEQUENCE SEQ_seq START WITH 1 INCREMENT BY 1 MAXVALUE 1000 minvalue 0 CYCLE NOCACHE;
+
+ALTER SEQUENCE no_seq INCREMENT BY -1;
+SELECT no_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE no_seq INCREMENT BY 1;
+
+CREATE TABLE JOINDATA(
+JOINID VARCHAR2(12) PRIMARY KEY
+);
+
+INSERT INTO JOINDATA VALUES('JOIN00000001');
+INSERT INTO JOINDATA VALUES('JOIN00000002');
+INSERT INTO JOINDATA VALUES('JOIN00000003');
+INSERT INTO JOINDATA VALUES('JOIN00000004');
+INSERT INTO JOINDATA VALUES('JOIN00000005');
+INSERT INTO JOINDATA VALUES('JOIN00000006');
+INSERT INTO JOINDATA VALUES('JOIN00000007');
+INSERT INTO JOINDATA VALUES('JOIN00000008');
+INSERT INTO JOINDATA VALUES('JOIN00000009');
+INSERT INTO JOINDATA VALUES('JOIN00000010');
+INSERT INTO JOINDATA VALUES('JOIN00000011');
+INSERT INTO JOINDATA VALUES('JOIN00000012');
+INSERT INTO JOINDATA VALUES('JOIN00000013');
+INSERT INTO JOINDATA VALUES('JOIN00000014');
+INSERT INTO JOINDATA VALUES('JOIN00000015');
+INSERT INTO JOINDATA VALUES('JOIN00000016');
+INSERT INTO JOINDATA VALUES('JOIN00000017');
+INSERT INTO JOINDATA VALUES('JOIN00000018');
+INSERT INTO JOINDATA VALUES('JOIN00000019');
+INSERT INTO JOINDATA VALUES('JOIN00000020');
+
+
+--우편번호
+create table SM_CRI_Zip (
+Zipcode varchar2(12) PRIMARY KEY, --우편번호
+Road_Address varchar2(60) NOT NULL, 
+Lot_Address varchar2(60) 
+);
+
+insert into SM_CRI_Zip (
+Zipcode, Road_Address, Lot_Address)
+values ( 
+'07252' , '서울특별시 영등포구 영등포로53길 21', '서울특별시 영등포구 영등포동2가 208' );
+INSERT INTO SM_CRI_Zip VALUES ( '21354' , '인청광역시 부평구 신트리로 8번길 15' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '04706' , '서울특별시 성동구 마장로23길 11-14(홍익동)' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '04705' , '서울특별시 성동구 마장로22길(홍익동)' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '21352' , '인천광역시 부평구' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '614012' , '부산광역시 부산진구 중앙동' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '689841' , '울산광역시 울주군' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '135802' , '서울특별시 강남구' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '157804' , '서울특별시 강서구' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '136857' , '서울특별시 강북구' , NULL);
+INSERT INTO SM_CRI_Zip VALUES ( '120806' , '서울특별시 서대문구' , NULL);
+
+--회사등록
+Create table SM_CRI_Com_Reg ( 
+Company_code varchar2(12) PRIMARY KEY,--회사코드,회사코드
+Company_Name varchar2(50) NOT NULL,--회사명,회사명
+Sortation varchar2(10) NOT NULL,--구분
+Fiscal_Year_Number varchar2(3) NOT NULL,--회계연도_기수
+Fiscal_Year_Date date NOT NULL,--회계연도_날짜
+Company_Registration_Number varchar2(13) NOT NULL UNIQUE,--사업자등록번호
+Corporate_Registration_Number varchar2(15) UNIQUE,--법인등록번호
+Representatives_Name varchar2(50) NOT NULL ,--대표자성명
+Resident_Registration_Number varchar2(15) UNIQUE,--주민등록번호
+Main_Store_Postal_Code varchar2(5) NOT NULL,--본점우편번호
+Main_Store_Address varchar2(60) NOT NULL,--본점주소
+Main_Branch_Number varchar2(60) NOT NULL,--본점번지
+Main_Store_Tel varchar2(13),--본점전화번호
+Upstate varchar2(20) NOT NULL,--업태
+Industry varchar2(20) NOT NULL,--종목
+Date_Of_Establishment date NOT NULL, --설립년월일
+Whether_To_Use_Status varchar2(10),--사용여부
+CONSTRAINT FK_Com_Reg FOREIGN KEY(Main_Store_Postal_Code)
+REFERENCES SM_CRI_Zip(Zipcode) on delete cascade
+);
+
+--외국인여부 삭제,본점FAX번호 삭제
+insert into SM_CRI_Com_Reg (
+Company_code,--회사코드
+Company_Name,--회사명
+Sortation,--구분
+Fiscal_Year_Number,--회계연도_기수
+Fiscal_Year_Date,--회계연도_날짜
+Company_Registration_Number,--사업자등록번호
+Corporate_Registration_Number,--법인등록번호
+Representatives_Name,--대표자성명
+Resident_Registration_Number,--주민등록번호
+Main_Store_Postal_Code,
+Main_Store_Address,--본점주소
+Main_Branch_Number,--본점번지
+Main_Store_Tel,--본점전화번호
+Upstate,--업태
+Industry,--종목
+Date_Of_Establishment, --설립년월일
+Whether_To_Use_Status) --사용여부
+VALUES (7000, '킹덤컴퓨터', '법인', 9, '2021-05-19', '107-86-12344' , '110111-0921513',
+'서철민', '691028-1066939' , '07252' , '서울특별시 영등포구 영등포로53길 21','영등포동2가',
+'055-335-7506', '제조, 도소매', '전자제품외', '2013-03-01', '1.사용' );
+
+
+
+------------------------------------------------------------
+
+--사업장 등록
+create table SM_CRI_Wor_Reg ( 
+Workplace_Code varchar2(12) PRIMARY KEY,--사업장코드 
+Workplace_Name varchar2(50) NOT NULL UNIQUE,--사업장명
+Company_Registration_Number varchar2(13) NOT NULL UNIQUE,--사업자등록번호 
+Corporate_Registration_Number varchar2(15) UNIQUE ,--법인등록번호
+Representatives_Name varchar2(50) NOT NULL,--대표자성명 
+Workplace_Zipcode varchar2(5),--사업장우편번호 
+Workplace_Address varchar2(60) NOT NULL,--사업장주소
+Workplace_Number varchar2(60),--사업장번지
+Workplace_Tel varchar2(13), --사업장전화번호
+Upstate varchar2(20) NOT NULL, --업태 varchar2(20)으로 변경
+Insdustry varchar2(20) NOT NULL, --종목 varchar2(20)으로 변경
+Main_Store_Status varchar2(10), -- 본점여부 
+CONSTRAINT FK_Wor_Reg FOREIGN KEY(Workplace_Zipcode)
+REFERENCES SM_CRI_Zip(Zipcode) on delete cascade
+);
+
+--사업장 FAX번호, 관할세무서 삭제
+--사업장 FAX번호, 관할세무서 삭제
+INSERT INTO SM_CRI_Wor_Reg VALUES(
+'2000' , '(주)킹덤컴퓨터 인천지사' , '121-85-35555' , '110111-0921513' , '서질풍' , '21354' ,'인천광역시 부평구 신트리로 8번길 15',
+'(부평동)','051-153-5858','제조,도소매','전자제품외','2.부'
+);
+
+INSERT INTO SM_CRI_Wor_Reg VALUES (
+'1000' , '(주)킹덤컴퓨터 본사' , '107-86-12344' , '110111-1234567' , '김철민' , '07252' , '서울특별시 영등포구 영등포로53길 21' ,
+'(영등포동2가)' , '02-346-5126' , '제조,도소매' , '전자제품외' , '1.여'
+); 
+
+------------------------------------------------------------------
+--부문등록
+create table SM_CRI_Sec_Reg ( 
+Sector_Code varchar2(12) PRIMARY KEY, --부문코드 
+Sector_Name varchar2(50) NOT NULL  UNIQUE, --부문명
+UseDate date NOT NULL--사용기간
+);
+
+
+insert into SM_CRI_Sec_Reg values ( '1000' , '관리부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Sec_Reg values ( '2000' , '영업부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Sec_Reg values ( '3000' , '자재부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Sec_Reg values ( '4000' , '생산부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Sec_Reg values ( '5000' , '자재부문(인천지사)' , '2021-01-01' );
+insert into SM_CRI_Sec_Reg values ( '6000' , '생산부문(인천지사)' , '2021-01-01' );
+
+---------------------------------------------------------------
+--부서등록
+CREATE table SM_CRI_Dep_Reg (
+Department_Code varchar2(12) PRIMARY KEY, --부서코드
+Department_Name varchar2(50) NOT NULL ,--부서명 
+Workplace_Code varchar2(12) NOT NULL ,--사업장코드
+Workplace_Name varchar2(50) NOT NULL , --사업장명
+Sector_Code varchar2(12) NOT NULL, --부문코드 
+Sector_Name varchar2(50) NOT NULL, --부문명
+Usedate date NOT NULL,--사용기간
+CONSTRAINT SMCRIDepReg_WorkplaceCode_FK FOREIGN KEY(Workplace_Code)
+REFERENCES SM_CRI_Wor_Reg(Workplace_Code) on delete cascade,
+CONSTRAINT SMCRIDepReg_SectorCode_FK FOREIGN KEY(Sector_Code)
+REFERENCES SM_CRI_Sec_Reg(Sector_Code) on delete cascade
+);
+
+--부서등록
+insert into SM_CRI_Dep_Reg 
+VALUES ('1100' , '임원실' , '1000' , '(주)킹덤컴퓨터본사' , '1000' , '관리부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Dep_Reg 
+VALUES ('1200' , '관리부' , '1000' , '(주)킹덤컴퓨터본사' , '1000' , '관리부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Dep_Reg 
+VALUES ('2100' , '영업1부' , '1000' , '(주)킹덤컴퓨터본사' , '2000' , '영업부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Dep_Reg 
+VALUES ('2200' , '영업2부' , '1000' , '(주)킹덤컴퓨터본사' , '2000' , '영업부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Dep_Reg 
+VALUES ('2300' , '영업3부' , '1000' , '(주)킹덤컴퓨터본사' , '2000' , '영업부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Dep_Reg 
+VALUES ('3100' , '자재부' , '1000' , '(주)킹덤컴퓨터본사' , '3000' , '자재부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Dep_Reg 
+VALUES ('4100' , '생산부' , '1000' , '(주)킹덤컴퓨터본사' , '4000' , '관리부문(본사)' , '2021-01-01' );
+insert into SM_CRI_Dep_Reg 
+VALUES ('5100' , '자재부' , '1000' , '(주)킹덤컴퓨터본사' , '5000' , '자재부문(인천지사)' , '2021-01-01' );
+insert into SM_CRI_Dep_Reg 
+VALUES ('6100' , '관리부' , '1000' , '(주)킹덤컴퓨터본사' , '6000' , '생산부문(인천지사)' , '2021-01-01' );
+
+-----------------------------------------------------------------
+--사원등록
+create table SM_CRI_Emp_Reg (
+Employee_Code varchar2(12) PRIMARY KEY, --사원코드 
+Employee_Name varchar2(50) NOT NULL, --사원명 
+Department_Code varchar2(12) NOT NULL, --부서코드 
+Department_Name varchar2(50) NOT NULL, --부서명 
+JoinDate date NOT NULL, --입사일
+ResignationDate date, --퇴사일
+Emergency_Contact_Network varchar2(13) NOT NULL UNIQUE, --비상연락망
+CONSTRAINT FK_DeP_Code FOREIGN KEY(Department_Code)
+REFERENCES SM_CRI_Dep_Reg(Department_Code) on delete cascade
+);
+--사원명(영문) 삭제
+
+insert into SM_CRI_Emp_Reg (
+Employee_Code ,
+Employee_Name,
+Department_Code,
+Department_Name,
+JoinDate ,
+ResignationDate,
+Emergency_Contact_Network
+) values ( '20130302' , '유원규', '1200','관리부', '2013-03-01', NULL , '010-1546-8761');
+
+------------------------------------------------------------------
+--시스템 환경설정
+create table SM_CRI_Sys_Env_set (
+Division varchar2(10), --구분
+Code varchar2(12) PRIMARY KEY, --코드
+Environment_Element_Name varchar2(50) NOT NULL, --환경요소명
+Type_Classification varchar2(30) NOT NULL, --유형구분
+Type_Settings varchar2(2) NOT NULL, --유형설정
+Selection_Range varchar2(100) NOT NULL, --선택범위
+Note varchar2(1000) --비고
+);
+
+insert into SM_CRI_Sys_Env_set
+values ( '공통', '01', '본지점회계여부' , '여부' , '1' , '0.미사용 1.사용' , NULL );
+insert into SM_CRI_Sys_Env_set
+values ( '공통', '02', '수량소숫점자리수' , '자리수' , '2' , '선택범위:0~6' , NULL );
+insert into SM_CRI_Sys_Env_set
+values ( '공통', '05', '비율소숫점자리수' , '자리수' , '2' , '선택범위:0~6' , NULL );
+insert into SM_CRI_Sys_Env_set
+values ( '공통', '11', '비율%표시여부' , '여부' , '1' , '1.여 2.부' , NULL );
+
+--------------------------------------------------------
+
+--일반거래처등록
+Create table SM_BIM_Gen_Cus_Reg (
+General_Customer_Code varchar2(12) PRIMARY KEY, --거래처코드
+General_Customer_Name varchar2(50) NOT NULL unique, --거래처명
+General_Customer_Division varchar2(10) NOT NULL, --구분
+Company_Registration_Number varchar2(13) NOT NULL UNIQUE, --사업자등록번호 
+Resident_Registration_Number varchar2(15), --주민등록번호 
+Representativs_Name varchar2(50) NOT NULL, --대표자성명 
+Upstate varchar2(20) NOT NULL, --업태
+Industry varchar2(20) NOT NULL, --종목
+Zipcode varchar2(12) NOT NULL, --우편번호
+Workplace_Address varchar2(60) NOT NULL, --사업장주소
+GeneralCustomer_Tel varchar2(13) , --거래처전화번호
+Wholesale_Retail_Business_Code varchar2(12), --주류코드
+CONSTRAINT FK_Gen_Address FOREIGN KEY(Zipcode)
+REFERENCES SM_CRI_Zip(Zipcode) on delete cascade
+);
+
+insert into SM_BIM_Gen_Cus_Reg 
+values ( '00001', '(주)삼도전자', '일반' , '102-81-66312' , '670328-179321' , '서화풍',
+'도, 소매', '전자제품 외', '04706' , '서울특별시 성동구 마장로23길 11-14(홍익동)' , '02-2293-9488' , NULL);
+insert into SM_BIM_Gen_Cus_Reg 
+values ( '00002', '(주)오라클전자', '일반' , '102-81-66313' , '670321-179322' , '김바보',
+'도, 소매', '전자제품 외', '04705' , '서울특별시 성동구 마장로22길(홍익동)' , '02-2291-9486' , NULL);
+insert into SM_BIM_Gen_Cus_Reg 
+values ( '00003', '(주)디비컴퓨터', '일반' , '102-81-66314' , '670322-179323' , '미니언',
+'도, 소매', '컴퓨터', '21352' , '인천광역시 부평구' , '02-2292-9485' , NULL);
+insert into SM_BIM_Gen_Cus_Reg 
+values ( '00004', '더지글로직스', '일반' , '102-81-66315' , '670323-179324' , '박수건',
+'도, 소매', '전자제품 외', '614012' , '부산광역시 부산진구 중앙동' , '02-2294-9484' , NULL);
+insert into SM_BIM_Gen_Cus_Reg 
+values ( '00005', '(주)서울컴텍', '일반' , '102-81-66316' , '670324-179325' , '비전공',
+'도, 소매', '전자제품 외', '689841' , '울산광역시 울주군' , '02-2295-9483' , NULL);
+insert into SM_BIM_Gen_Cus_Reg 
+values ( '00006', '(주)씨네스', '일반' , '102-81-66317' , '670325-179326' , '박주영',
+'도, 소매', '전자제품 외', '135802' , '서울특별시 강남구' , '02-2296-9482' , NULL);
+insert into SM_BIM_Gen_Cus_Reg 
+values ( '00007', '(주)삼화INC', '일반' , '102-81-66318' , '670326-179327' , '오라정',
+'도, 소매', '전자제품 외', '157804' , '서울특별시 강서구' , '02-2297-9481' , NULL);
+insert into SM_BIM_Gen_Cus_Reg --안들어감
+values ( '00008', '(주)삼주전자', '일반' , '102-81-66319' , '670327-179328' , '공팔이',
+'도, 소매', '전자제품 외', '136857' , '서울특별시 강북구' , '02-2298-9480' , NULL);
+insert into SM_BIM_Gen_Cus_Reg --안들어감
+values ( '00009', '(주)포스코전자', '일반' , '102-81-66320' , '670328-179321' , '이지훈',
+'도, 소매', '전자제품 외', '120806' , '서울특별시 서대문구' , '02-2293-9487' , NULL);
+--------------------------------------------------------------------
+--품목군 등록
+create table SM_BIM_Ite_gro_Reg (
+Item_Group_Code varchar2(12) PRIMARY KEY, --품목군코드
+Item_Group_Name varchar2(50) NOT NULL, --품목군명
+Use_Status varchar2(10) DEFAULT '사용', -- 사용여부
+Explanation varchar2(200) -- 품목군설명
+);
+
+insert into SM_BIM_Ite_gro_Reg values ( 'CA10' , '케이스', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'BOARD' , '메인보드', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'CPU' , 'CPU', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'RAM' , 'RAM', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'GPU' , 'GPU', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'SSD' , 'SSD', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'HD' , 'HD', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'POWER' , 'POWER', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'PR10' , '프린터', 1 , NULL);
+insert into SM_BIM_Ite_gro_Reg values ( 'PC10' , '데스크탑PC', 1 , NULL);
+
+------------------------------------------------------------------
+--품목등록
+create table SM_BIM_Ite_Reg (
+Item_Code varchar2(12) PRIMARY KEY, --품목코드
+Item_Name varchar2(50) UNIQUE NOT NULL, --품목명
+Standard varchar2(20), --규격
+Inventory_Unit varchar2(5) DEFAULT 'EA', --재고단위
+Whether_LOT varchar2(10) DEFAULT '미사용', --LOT여부
+SET_Item varchar2(10) DEFAULT '1.부', --SET품목
+Inspection_Status varchar2(10) DEFAULT '1.부', --검사여부
+Use_Status varchar2(30), -- 사용여부
+LOT_Quantity number(5), --LOT수량 
+Drawing_Number varchar2(5), --도면번호 
+Hs_Code varchar2(12), --HSCODE
+Width varchar2(100), --폭
+Length varchar2(100), --길이
+Height varchar2(100), --높이
+Cost number(15), --원가
+Item_Group_Code varchar2(12), -- 품목군등록
+Division varchar2(20) not null, --완제품/반제품/부품 구분
+Notes varchar2(200),
+
+constraint SMBIMIteReg_ItemGroupCode_FK foreign key (Item_Group_Code) references SM_BIM_Ite_gro_Reg(Item_Group_Code)
+);
+--제품
+insert into SM_BIM_Ite_Reg VALUES
+('PCSET01','사무용컴퓨터',NULL,'SET', 1 , 1 , 1 , 1 , '0' , NULL, NULL, NULL ,NULL , NULL , 409000 ,'PC10' , ' 완제품 ' , NULL); 
+insert into SM_BIM_Ite_Reg VALUES
+('PCSET02','게이밍컴퓨터',NULL,'SET', 1 , 1 , 1 , 1 , '0' , NULL, NULL, NULL ,NULL , NULL , 3177600 ,'PC10' , ' 완제품 ' , NULL); 
+insert into SM_BIM_Ite_Reg VALUES
+('PCSET03','저사양컴퓨터',NULL,'SET', 1 , 1 , 1 , 1 , '0' , NULL, NULL, NULL ,NULL , NULL , 229000 ,'PC10' , ' 완제품 ' , NULL); 
+insert into SM_BIM_Ite_Reg VALUES
+('PCSET04','최고급컴퓨터',NULL,'SET', 1 , 1 , 1 , 1 , '0' , NULL, NULL, NULL ,NULL , NULL , 4159600 ,'PC10' , ' 완제품 ' , NULL); 
+
+--반제품
+insert into SM_BIM_Ite_Reg VALUES
+('MT01','27inch모니터',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, '611.70mm' ,'463mm' , '250.50mm' , 209000 ,'MONITER' , ' 반제품 ' , NULL); 
+insert into SM_BIM_Ite_Reg VALUES
+('MT02','32inch모니터',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, '714.30mm' ,'512.30mm' , '208.80mm' , 398890 ,'MONITER' , ' 반제품 ' , NULL);
+insert into SM_BIM_Ite_Reg VALUES
+('MT03','43inch모니터',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, '1080mm' ,'1100mm' , '250.50mm' , 649000 ,'MONITER' , ' 반제품 ' , NULL);
+insert into SM_BIM_Ite_Reg VALUES
+('DT01','피카소VEGA8',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, 'NULL' ,'NULL' , 'NULL' , 449900 ,'DESKTOP' , ' 반제품 ' , NULL);
+insert into SM_BIM_Ite_Reg VALUES
+('DT02','프리플로우ELITE',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, 'NULL' ,'NULL' , 'NULL' , 1189000 ,'DESKTOP' , ' 반제품 ' , NULL);
+insert into SM_BIM_Ite_Reg VALUES
+('DT03','게이밍본체PC',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, 'NULL' ,'NULL' , 'NULL' , 1487000 ,'DESKTOP' , ' 반제품 ' , NULL);
+insert into SM_BIM_Ite_Reg VALUES
+('DT04','EXKOREA',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, 'NULL' ,'NULL' , 'NULL' , 339900 ,'DESKTOP' , ' 반제품 ' , NULL);
+
+
+--부품
+insert into SM_BIM_Ite_Reg VALUES
+('CASE01','슬림형본체',NULL,'EA', 1 , 1 , 1 , 1 , '0' , NULL, NULL, '210mm' ,'395mm' , '475mm' , 300000 ,'CA10' , ' 부품 ' , NULL); 
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'CASE03' , 'ABKO NCORE' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '210mm' , '390mm' , '461mm' , 50000 ,'CA10', ' 부품 ' , NULL);
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'HD01' , 'WD BLUE 7200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , NULL , NULL, NULL ,60000 ,'HD','부품', '1T/SATA3');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'HD02' , 'Seagate BarraCuda 7200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 80000 ,'HD','부품', '1T/SATA3');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'SSD01' , '삼성전자 980 PRO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'SSD','부품', NULL);
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'SSD02' , '삼성전자 970 EVO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'SSD','부품', NULL);
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'SSD03' , '삼성전자 870 EVO' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'SSD', '부품',NULL);
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'GPU01' , '지포스 RTX 3060' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1000000 ,'GPU','부품', 'MSI/1837MHz/550W/276mm');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'GPU02' , '지포스 RTX 3070' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1200000 ,'GPU','부품', 'MSI/1830MHz/650W/323mm');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'GPU03' , '지포스 RTX 2060' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 800000 ,'GPU', '부품','GIGAByte/1755MHz/500W/226mm');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'GPU04' , '지포스 GTX1050 Ti' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'GPU','부품', 'MSI/1341MHz/300W/177mm   ');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'GPU05' , '갤럭시 GT1030' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'GPU', '부품','갤럭시/1227MHz/180mm');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'CPU01' , 'AMD 라이젠5' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'CPU','부품', 'AMD/6코어/3.6GHZ');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'CPU02' , 'core I5-10세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'CPU', '부품','인텔/6코어/4.1GHz');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'CPU03' , 'core I5-11세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 900000 ,'CPU', '부품','인텔/6코어/2.6GHz');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'CPU04' , 'core I7-11세대' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1200000 ,'CPU','부품', '인텔/8코어/3.6GHz');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'CPU05' , 'AMD 라이젠3 Pro' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 700000 ,'CPU', '부품','AMD/4코어/3.8GHz');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'RAM01' , 'ADATA XPG DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 500000 ,'RAM', '부품','DDR4/3200MHz/16G');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'RAM02' , 'KLEVV DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 400000 ,'RAM','부품', 'DDR4/3200MHz/32G');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'RAM03' , '삼성 DDR4-3200' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 600000 ,'RAM', '부품','DDR4/3200MHz/8G');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'BOARD01' , '박격포 MAG B560M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 300000 ,'BOARD','부품', '인텔/DDR4/24.4x24.4cm');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'BOARD02' , 'ASRock B550M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 100000 ,'BOARD','부품', 'AMD/DDR4/24.4x24.4cm');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'BOARD03' , 'GIGABYTE A320M' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , 0 , 0 , 1500000 , 'BOARD','부품','AMD/DDR4/24.4x19.5cm');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'POWER01' , '시소닉 A12 STD' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , 0 , '140mm' , '150mm' , 200000 ,'POWER', '부품','500W');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'POWER02' , 'ASUS POG Thor 850P' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '135mm' , '160mm' , 0 , 300000 ,'POWER','부품', '852W');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'POWER03' , '마이크로닉 Classic 2' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '120mm', '140mm' , 0 , 400000 , 'POWER','부품','750W');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'ADBOARD01' , '정면소켓형 AD 보드' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '105mm', '55mm' , 0 , 23000 , 'AD01','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'ADBOARD02' , '초소형 AD 보드' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '110mm', '27mm' , 0 , 15000 , 'AD01','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'ADBOARD03' , '2232GW AD 보드' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '117mm', '86mm' , 0 , 19000 , 'AD01','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'INVERTER01' , 'FIF1742-01A' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '155mm', '40mm' , 0 , 6500 , 'IVT','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'INVERTER02' , 'TWT-122K' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '160mm', '45mm' , 0 , 7000 , 'IVT','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'INVERTER03' , 'DS-1307WK' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '160mm', '26mm' , 0 , 8500 , 'IVT','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'SMPS01' , 'IDF060CV-S24V1' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '150mm', '50mm' , 0 , 7000 , 'SMPS','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'SMPS02' , 'IDF100CV-S24V1' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '170mm', '70mm' , 0 , 10000 , 'SMPS','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'SMPS03' , 'IDF600CV-S24V2' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '160mm', '60mm' , 0 , 15000 , 'SMPS','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'LIPSBOARD01' , 'LI01' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '147mm', '116mm' , 0 , 10000 , 'IPBOARD','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'LIPSBOARD02' , 'LI10' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '148mm', '135mm' , 0 , 17000 , 'IPBOARD','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'LIPSBOARD03' , 'LL01' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '151mm', '120mm' , 0 , 12000 , 'IPBOARD','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'BL01' , '32MB25VQ' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '559mm', '11mm' , 0 , 24000 , 'BACKLIGHT','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'BL02' , '32LF550B' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '559mm', '11mm' , 0 , 22000 , 'BACKLIGHT','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'BL03' , 'L32LX530H' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , '559mm', '11mm' , 0 , 23000 , 'BACKLIGHT','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'KB01' , 'COX-CK87' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , NULL , NULL , 0 , 49900 , 'KEYBOARD','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'KB02' , 'SPA-NKG2CUB' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , NULL , NULL , 0 , 72000 , 'KEYBOARD','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'KB03' , 'BUBBLE IR-K10' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , NULL , NULL , 0 , 14890 , 'KEYBOARD','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'MO01' , 'G102' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , NULL , NULL , 0 , 18150 , 'MOUSE','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'MO02' , 'G304' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , NULL , NULL , 0 , 37880 , 'MOUSE','부품','NULL');
+INSERT INTO SM_BIM_Ite_Reg VALUES 
+( 'MO03' , 'BEETLE' , 'NULL' , 'EA' , 1 , 1 , 1 , 1 , '0' , NULL , NULL , NULL , NULL , 0 , 9000 , 'MOUSE','부품','NULL');
+
+--------------------------------------------------------------------
+
+
+
+--창고등록
+
+create table SM_BIM_Hou_Reg (
+House_Code varchar2(12) PRIMARY KEY, --창고코드 등록 
+House_Name varchar2(50) UNIQUE NOT NULL, --창고명
+House_Location_IN varchar2(50), --입고기본위치 
+House_Location_OUT varchar2(50), --출고기본위치 
+House_Explanation varchar2(200), --창고 설명
+House_Status varchar2(10) DEFAULT '1.부'  --창고 사용여부
+);
+
+insert into SM_BIM_Hou_Reg values ( 'M100' , '제품창고' , '제품양품장소' , '제품양품장소' , null , '사용' );
+insert into SM_BIM_Hou_Reg values ( 'M200' , '부품창고' , null , null , null , '사용' );
+
+
+create table SM_BIM_Pro_Reg (
+Process_Code varchar2(12) PRIMARY KEY , --공정(생산)코드
+Process_Name varchar2(50) NOT NULL, --공정(생산)명
+Process_Location_IN varchar2(50), --입고기본위치
+Process_Location_OUT varchar2(50), --출고기본위치
+Process_Explanation varchar2(200), --공정설명
+Process_Status varchar2(10) DEFAULT '1.부'
+);
+
+insert into SM_BIM_Pro_Reg values ( 'L100' , '작업공정' , null , null , null , '사용' );
+insert into SM_BIM_Pro_Reg values ( 'L200' , '작업공정(조립)' , null , null , null , '사용' );
+
+create table SM_BIM_Out_Reg (
+Outsourcing_Code varchar2(12) PRIMARY KEY, --외주공정코드 
+Outsourcing_Name varchar2(50) NOT NULL, --외주공정명
+Outsourcing_Location_IN varchar2(50), --입고기본위치
+Outsourcing_Location_OUT varchar2(50), --출고기본위치
+Outsourcing_Explanation varchar2(200), --공정설명
+Outsourcing_Status varchar2(10) DEFAULT '1.부'
+);
+
+insert into SM_BIM_Out_Reg values ('P100' , '외주공정' , null , null , null , '사용');
+
+-------------------------------------------------------------------
+--물류관리내역등록
+
+create table SM_BIM_Log_Man (
+Logistics_IN_Code varchar2(12) PRIMARY KEY, --관리내역코드
+Logistics_IN_Name varchar2(50) NOT NULL, --관리항목명
+Explanation varchar2(200), --품목군설명
+Remarks varchar2(200) --비고200 새로만듬
+);
+
+insert into SM_BIM_Log_Man values ( 'AG','지역그룹구분', NULL, NULL);
+insert into SM_BIM_Log_Man values ( 'AM','지역관리구분', NULL, NULL);
+insert into SM_BIM_Log_Man values ( 'LA','재고조정구분', NULL, NULL);
+insert into SM_BIM_Log_Man values ( 'LE','수입 제비용 구분', NULL, NULL);
+insert into SM_BIM_Log_Man values ( 'LP','구매자재구분', NULL, NULL);
+insert into SM_BIM_Log_Man values ( 'LQ','품질검사구분', NULL, NULL);
+insert into SM_BIM_Log_Man values ( 'LS','영업관리구분', NULL, NULL);
+--------------------------------------------------------------------
+
+--검사유형등록
+create table SM_BIM_Ins_Typ (
+Inspection_Code varchar2(12) PRIMARY KEY, --검사유형코드 varchar2(12)
+Inspection_Name varchar2(50) NOT NULL, --검사유형명 varchar2(30)
+Inspection_Question varchar2(200), --검사유형질문
+Remarks varchar2(200) --비고 새로생성 
+);
+insert into SM_BIM_Ins_Typ values ( '10-1' ,'외관검사', '긁힘이나 손상된곳은 없는가?' , null);
+insert into SM_BIM_Ins_Typ values ( '10-2' ,'외관검사', '포장 상태는 양호한가' , null);
+insert into SM_BIM_Ins_Typ values ( '10-3' ,'외관검사', '얼룩이나 번짐현상은 없는가?' , null);
+
+
+
+-------------------------------------------------------------------
+--SET품 등록
+
+create table SM_BIM_SET_Reg(
+SET_Code varchar2(12) primary key, --셋트품 코드
+SET_Name varchar2(50) unique not null, --셋트품 명
+SET_Standard varchar2(20), --규격
+SET_Unit varchar2(5) default 'SET' --단위
+);
+
+
+insert into SM_BIM_SET_Reg values ( 'PC10' , '데스크탑PC' , NULL , null );
+
+------------------------------------------------------------------
+--SET품 구성품 등록
+create table SM_BIM_Com_Reg (
+SET_Code varchar2(12), --셋트품 코드
+Components_Code varchar2(12) not null unique, --구성품 코드
+Components_Name varchar2(30) not null unique, --구성품 명
+Components_Standard varchar2(20),
+Components_Unit varchar2(5) default 'EA',
+Components_Stock number(5)default '0',
+CONSTRAINT FK_SET_SETCode FOREIGN KEY(SET_Code)
+REFERENCES SM_BIM_SET_Reg(SET_Code),
+CONSTRAINT FK_SET_Item_Code FOREIGN KEY(Components_Code)
+REFERENCES SM_BIM_Ite_Reg(Item_Code),
+CONSTRAINT FK_SET_Item_Name FOREIGN KEY(Components_Name)
+REFERENCES SM_BIM_Ite_Reg(Item_Name)
+);
+
+insert into SM_BIM_Com_Reg values ( 'PC10' , 'SSD01' , '삼성전자 980 PRO' , null , null , null);
+insert into SM_BIM_Com_Reg values ( 'PC10' , 'GPU01' , '지포스 RTX 3060' , null , null , null);
+insert into SM_BIM_Com_Reg values ( 'PC10' , 'CPU01' , 'AMD 라이젠5' , null , null , null);
+insert into SM_BIM_Com_Reg values ( 'PC10' , 'POWER01' , '시소닉 A12 STD' , null , null , null);
+
+
+--------------------------------------------------------------------
+--고객별출력품목등록
+create table SM_BIM_Out_Item_Cus (
+Item_Code varchar2(12) PRIMARY KEY,  -- 품목품번
+Item_Name varchar2(50) NOT NULL, -- 품명
+Item_Standard varchar2(20), --규격
+CONSTRAINT FK_Cus_Item_CODE FOREIGN KEY(Item_Code)
+REFERENCES SM_BIM_Ite_Reg(Item_Code)
+);
+insert into SM_BIM_Out_Item_Cus values ( 'CASE01', '슬림형본체'  , null );
+insert into SM_BIM_Out_Item_Cus values ( 'GPU03' , '지포스 RTX 2060' , null );
+insert into SM_BIM_Out_Item_Cus values ('CPU05' , 'AMD 라이젠3 Pro' , null);
+insert into SM_BIM_Out_Item_Cus values ( 'RAM03', '삼성 DDR4-3200' , null);
+insert into SM_BIM_Out_Item_Cus values ( 'BOARD01' , '박격포 MAG B560M' , null);
+insert into SM_BIM_Out_Item_Cus values ('POWER03' , '마이크로닉 Classic 2' , null);
+
+--------------------------------------------------------------------------------------
+--고객별품목등록 정규화
+create table SM_BIM_Out_Item_Cus_IN (
+Customer_Code varchar2(12) PRIMARY KEY, --고객코드
+Customer_Name varchar2(50) NOT NULL, --고객명
+Output_Code varchar2(12) NOT NULL, --출력품번
+Output_Name varchar2(50) NOT NULL, --출력품명
+Output_Standard varchar2(20) --출력규격
+);
+insert into SM_BIM_Out_Item_Cus_IN values ('00001', '(주)삼도전자' , 'CASE01', '슬림형본체', NULL);
+insert into SM_BIM_Out_Item_Cus_IN values ('00002', '(주)오라클전자' , 'GPU03', '지포스 RTX 2060', NULL);
+insert into SM_BIM_Out_Item_Cus_IN values ('00003', '(주)디비컴퓨터' , 'CPU05',  'AMD 라이젠3 Pro', NULL);
+insert into SM_BIM_Out_Item_Cus_IN values ('00004', '더지글로직스' ,'RAM03', '삼성 DDR4-3200' , NULL);
+insert into SM_BIM_Out_Item_Cus_IN values ( '00005', '(주)서울컴텍', 'BOARD01' , '박격포 MAG B560M' , NULL);
+insert into SM_BIM_Out_Item_Cus_IN values ('00006', '(주)씨네스',  'POWER03' , '마이크로닉 Classic 2', NULL);
+
+
+-------------------------------------------------------------------
+--판매계획등록
+create table SM_BIM_Sal_Pla_Reg (
+Plan_Date date not null, --판매계획등록일자
+Plan_Item_Code varchar2(12) NOT NULL, --품번 
+Plan_Item_Name varchar2(50) NOT NULL, --품명
+Plan_Item_Standard varchar2(20), --규격
+Plan_Item_Unit varchar2(5) DEFAULT 'EA', --단위
+Plan_Item_Quantity number(5) DEFAULT '0', --수량 
+Plan_Unit_Price number(15) DEFAULT '0', --예상단가 
+Newplan_Item_Quantity number(5), --수정후 수량
+Newplan_Unit_Price number(15) DEFAULT '0' --수정후 예상단가
+);
+
+
+insert into SM_BIM_Sal_Pla_Reg values ( '2021-01-01','CPU05' , 'AMD 라이젠3 PRO' , null, 'EA' , 100 , 500000 ,120 , 500000 );
+insert into SM_BIM_Sal_Pla_Reg values ( '2021-01-01','RAM03' , '삼성 DDR4-3200' , null, 'EA' , 100 , 100000 ,120 , 100000 );
+insert into SM_BIM_Sal_Pla_Reg values ('2021-01-01' ,'POWER01' , '시소닉 A12 STD' , null, 'EA' , 100 , 400000 ,120 , 400000 );
+insert into SM_BIM_Sal_Pla_Reg values ( '2021-01-01','SSD01' , '삼성전자 980 PRO' , null, 'EA' , 100 , 200000 ,120 , 300000 );
+------------------------------------------------------------------
+--장소등록
+create table SM_BIM_Wor_Reg(
+Location_Code varchar2(12) primary key, --위치 코드
+Location_Name varchar2(50) not null, --위치명
+Location_Explanation varchar2(200), --위치설명
+Release_Code varchar2(12), --가출고 코드
+Release_Customer varchar2(50), --가출고 거래처명
+Suitability varchar2(10), --적합여부
+Availability varchar2(10), --가용재고여부
+Status varchar2(10) default '1.부'--사용여부
+);
+
+insert into SM_BIM_Wor_Reg values ('M101', '제품양품장소', NULL , NULL , NULL, '적합' , '1.여' , '사용' );
+insert into SM_BIM_Wor_Reg values ('M102', '제품불양품장소', NULL , NULL , NULL, '적합' , '2.부' , '사용' );
+insert into SM_BIM_Wor_Reg values ('M201', '부품양품장소', NULL , NULL , NULL, '적합' , '1.여' , '사용' );
+insert into SM_BIM_Wor_Reg values ('M202', '부품불양품장소', NULL , NULL , NULL, '적합' , '2.부' , '사용' );
+
+
+---------------------------------------------------------------------
+--생산작업장 등록
+create table SM_BIM_Pro_Wor_Reg(
+Workplace_Code varchar2(12) primary key,--작업장코드
+Workplace_Name varchar2(50) not null,--작업장명
+Workplace_Explanation varchar2(200),--작업장설명
+Suitability varchar2(10),--적합여부
+Process_Explanation varchar2(200),
+Status varchar2(10) default '1.부'--사용여부
+);
+
+insert into SM_BIM_Pro_Wor_Reg values ('L101', '제품작업장' , NULL, '적합',null , '사용');
+insert into SM_BIM_Pro_Wor_Reg values ('L102', '반제품작업장' , NULL, '적합',null , '사용');
+insert into SM_BIM_Pro_Wor_Reg values ('L201', '제품작업장(조립)' , NULL, '적합',null , '사용');
+
+--------------------------------------------------------------------------------
+--외주작업장 등록
+create table SM_BIM_Out_Wor_Reg(
+Workplace_Code varchar2(12) primary key, --작업장 코드
+Outcustomer varchar2(12) not null,--외주거래처 코드
+Workplace_Name varchar2(50), --작업장명
+Outcustomer_Name varchar2(50), --외주거래처명
+Workplace_Explanation varchar2(200), --작업장설명
+Suitability varchar2(10), --적합여부
+Status varchar2(10) default '1.부' --사용여부
+);
+
+
+insert into SM_BIM_Out_Wor_Reg values ('P101', '00001' , '(주)삼도전자' , '(주)삼도전자' , NULL , '적합' , '사용' );
+insert into SM_BIM_Out_Wor_Reg values ('P102', '00002' , '(주)오라클전자' , '(주)오라클전자',  NULL , '적합' , '사용' );
+insert into SM_BIM_Out_Wor_Reg values ('P103', '00003' , '(주)디비컴퓨터', '(주)디비컴퓨터',  NULL , '적합' , '사용' );
+insert into SM_BIM_Out_Wor_Reg values ('P104', '00004' , '더지글로직스',  '더지글로직스',  NULL , '적합' , '사용' );
+insert into SM_BIM_Out_Wor_Reg values ('P105', '00005' , '(주)서울컴텍', '(주)서울컴텍',  NULL , '적합' , '사용' );
+
+
+-----------------------------------------------------------------------------------견적등록
+
+--테이블 생성
+create table CSM_SM_Est_Reg(
+--견적 번호(PK)
+estimateNum varchar2(12) PRIMARY KEY,
+--견적 일자(uk)
+estimateDate date,
+--고객코드(FK)
+customerCode varchar2(12) not null,
+--부가세 구분
+tax varchar2(20) not null,
+--비고
+note varchar2(1000),
+
+--FK 
+CONSTRAINT FKCSMSMESTREG_BUYER FOREIGN KEY (customerCode) 
+REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE
+);
+
+--데이터 등록1
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000001','20210305','00001','부가세포함',null);
+
+--데이터 등록2
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000002','20211101','00002','부가세포함',null);
+--데이터 등록3
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000003','20210101','00003','부가세포함',null);
+--데이터 등록4
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000004','20210703','00004','부가세포함',null);
+--데이터 등록5
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000005','20210705','00005','부가세포함',null);
+--데이터 등록6
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000006','20210831','00006','부가세포함',null);
+--데이터 등록7
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000007','20210901','00007','부가세포함',null);
+
+--데이터 등록8
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000008','20210201','00008','부가세포함',null);
+--데이터 등록9
+INSERT INTO CSM_SM_Est_Reg(estimateNum,estimateDate,customerCode,tax,note)
+VALUES ('ES203000009','20210525','00009','부가세포함',null);
+
+-----------------------------------------------------------------------------------수주등록
+
+--테이블 생성
+create table CSM_SM_Ord_Reg(
+--주문 번호(PK)
+ordersNum varchar2(12) PRIMARY KEY,
+--주문 일자
+ordersdate Date not null,
+--고객(FK)
+customerCode varchar2(12) not null,
+--부가세구분
+tax varchar2(20) not null,
+--비고
+Note varchar2(1000),
+
+--FK
+
+--고객
+CONSTRAINT FK_CSMSMORDREG_BUYER FOREIGN KEY (customerCode) 
+REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE
+);
+
+
+--데이터 등록1
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000001','20210305','00001','부가세포함',null);
+--데이터 등록2
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000002','20211101','00002','부가세포함',null);
+--데이터 등록3
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000003','20210101','00003','부가세포함',null);
+--데이터 등록4
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000004','20210703','00004','부가세포함',null);
+--데이터 등록5
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000005','20210705','00005','부가세포함',null);
+--데이터 등록6
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000006','20210831','00006','부가세포함',null);
+--데이터 등록7
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000007','20210901','00007','부가세포함',null);
+--데이터 등록8
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000008','20210201','00008','부가세포함',null);
+--데이터 등록9
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000009','20210525','00009','부가세포함',null);
+--데이터 등록9
+INSERT INTO CSM_SM_Ord_Reg(ordersNum,ordersdate,customerCode,tax,Note)
+VALUES('S02103000010','20210525','00009','부가세포함',null);
+-----------------------------------------------------------------------------------출고의뢰등록
+
+--테이블 생성
+create table  CSM_SM_Req_Reg(
+    --의뢰 번호(PK)
+requestNum varchar2(12) PRIMARY KEY,
+    --의뢰 일자
+requestDate Date not null,
+    --고객(FK)
+customerCode varchar2(12) not null,
+    --납품처
+deliveryPlace varchar2(50),
+    --의뢰창고(FK)
+House_Code varchar2(12) not null,
+    --의뢰 담당자
+requestHead varchar2(50),
+    --요청마감일
+requestDeadLine Date not null,
+    --비고
+note varchar2(1000),
+
+
+--FK
+
+--고객
+CONSTRAINT FK_CSMSMREQREG_BUYER FOREIGN KEY (customerCode) 
+REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE,
+
+
+--(창고등록에서 창고코드를 가지고 왓을때)
+CONSTRAINT FKCSMSMREQREG_REQUESTWAREHOUSE FOREIGN KEY (House_Code) 
+REFERENCES  SM_BIM_Hou_Reg(House_Code) ON DELETE CASCADE
+
+);
+
+
+
+
+--데이터 등록(창고등록에서 창고코드를 가지고 왓을때)1
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000001','20210306','00001',null,'M100',null, '20210306',null);
+--데이터 등록2
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000002','20211102','00002',null,'M100',null, '20211102',null);
+--데이터 등록3
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000003','20210102','00003',null,'M100',null, '20210102',null);
+--데이터 등록4
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000004','20210704','00004',null,'M100',null, '20210704',null);
+--데이터 등록5
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000005','20210706','00005',null,'M100',null, '20210706',null);
+--데이터 등록6
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000006','20210901','00006',null,'M100',null, '20210901',null);
+--데이터 등록7
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000007','20210902','00007',null,'M100',null, '20210902',null);
+--데이터 등록8
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000008','20210202','00008',null,'M100',null, '20210902',null);
+
+--데이터 등록9
+INSERT INTO CSM_SM_Req_Reg
+values ('IR2103000009','20210526','00009',null,'M100',null, '20210902',null);
+-----------------------------------------------------------------------------------
+
+--테이블 생성
+create table CSM_SM_Rel_Pro(
+--출고 번호(PK)
+releaseNum Varchar2(12) PRIMARY KEY,
+--출고 일자
+releaseDate Date not null,
+--고객((FK)
+customerCode Varchar2(12) not null,
+--출고 구분
+releaseOX Varchar2(10) not null,
+--마감,
+deadLine Varchar2(30) ,
+--비고
+note varchar2(1000),
+
+--FK
+
+--고객
+CONSTRAINT FK_CSMSMRELREG_BUYER FOREIGN KEY (customerCode) 
+REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code) ON DELETE CASCADE
+);
+
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000001','20210306','00001','건별',null,null);
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000002','20211102','00002','건별',null,null);
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000003','20210102','00003','건별',null,null);
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000004','20210704','00004','건별',null,null);
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000005','20210901','00005','건별',null,null);
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000006','20210306','00006','건별',null,null);
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000007','20210902','00007','건별',null,null);
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000008','20210202','00008','건별',null,null);
+
+--데이터 등록
+INSERT INTO CSM_SM_Rel_Pro(releaseNum,releaseDate,customerCode,releaseOX,deadLine,note)
+VALUES('IS2103000009','20210526','00009','건별',null,null);
+
+
+
+------------------------------------------------------공통 주문 등록(common orders registration)
+
+--테이블 생성
+create table CSM_SM_COR_Reg(
+--품번(공통)(FK)
+productNum varchar2(12) not null,
+--품명(공통)(FK)
+productName varchar2(50) not null,
+--규격
+standard varchar2(20) DEFAULT NULL,
+--단위
+unit varchar2(5) DEFAULT 'EA',
+--납기일(견적, 수주, 출고의뢰)
+dueDate date not null,
+--주문 수량(공통)
+ordersQuantity Number(5) DEFAULT '0',
+--단가(견적, 수주, 출고처리)
+productPrice Number(15) DEFAULT '0',
+--출하예정일(수주)
+expectedDate DATE not null,
+--출고예정일(의뢰)
+releaseExpectedDate date not null,
+--검사(의뢰, 수주)
+inspection Varchar2(10) not null,
+--출고구분(예외/주문)(출고처리)
+orderOX varchar2(20) not null,
+--모든 등록과 연결하기 위한 고객코드
+customerCode varchar2(12) not null,
+
+
+--FK설정
+
+--품목코드
+CONSTRAINT FK_CSMSMCORREF_PRODUCTNUM FOREIGN KEY (productNum) 
+REFERENCES SM_BIM_Ite_Reg(Item_Code) ON DELETE CASCADE,
+--품목이름
+CONSTRAINT FK_CSMSMCORREG_PRODUCTNAME FOREIGN KEY (productName) 
+REFERENCES SM_BIM_Ite_Reg(Item_Name) ON DELETE CASCADE
+
+
+);
+
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg
+VALUES ('PR01','레이저프린터',null,'EA','20210306','20.00','300000.00','20210306','20210306','검사','주문출고','00001');
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg(productNum,productName,standard,unit,dueDate,ordersQuantity,productPrice,expectedDate,releaseExpectedDate,inspection,orderOX,customerCode)
+VALUES ( 'CPU05' , 'AMD 라이젠3 Pro' ,null,'EA','20211102','100.00','1000000.00','20211102','20211102','검사','주문출고','00002');
+
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg(productNum,productName,standard,unit,dueDate,ordersQuantity,productPrice,expectedDate,releaseExpectedDate,inspection,orderOX,customerCode)
+VALUES ( 'CPU05' , 'AMD 라이젠3 Pro',null,'EA','20210102','10.00','10000.00','20210102','20210102','검사','주문출고','00003');
+
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg(productNum,productName,standard,unit,dueDate,ordersQuantity,productPrice,expectedDate,releaseExpectedDate,inspection,orderOX,customerCode)
+VALUES ('PR01','레이저프린터' ,null,'EA','20210704','30.00','500000.00','20210704','20210704','검사','주문출고','00004');
+
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg(productNum,productName,standard,unit,dueDate,ordersQuantity,productPrice,expectedDate,releaseExpectedDate,inspection,orderOX,customerCode)
+VALUES ('RAM03' , '삼성 DDR4-3200',null,'EA','20210706','40.00','800000.00','20210706','20210706','검사','주문출고','00005');
+
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg(productNum,productName,standard,unit,dueDate,ordersQuantity,productPrice,expectedDate,releaseExpectedDate,inspection,orderOX,customerCode)
+VALUES ('RAM03' , '삼성 DDR4-3200',null,'EA','20210901','30.00','200000.00','20210901','20210901','검사','주문출고','00006');
+
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg(productNum,productName,standard,unit,dueDate,ordersQuantity,productPrice,expectedDate,releaseExpectedDate,inspection,orderOX,customerCode)
+VALUES ('POWER01' , '시소닉 A12 STD',null,'EA','20210902','50.00','300000.00','20210902','20210902','검사','주문출고','00007');
+
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg(productNum,productName,standard,unit,dueDate,ordersQuantity,productPrice,expectedDate,releaseExpectedDate,inspection,orderOX,customerCode)
+VALUES ( 'SSD01' , '삼성전자 980 PRO',null,'EA','20210202','80.00','400000.00','20210202','20210202','검사','주문출고','00008');
+
+--데이터 등록
+INSERT INTO CSM_SM_COR_Reg(productNum,productName,standard,unit,dueDate,ordersQuantity,productPrice,expectedDate,releaseExpectedDate,inspection,orderOX,customerCode)
+VALUES ('POWER01' , '시소닉 A12 STD',null,'EA','20210526','80.00','700000.00','20210526','20210526','검사','주문출고','00009');
+
+
+---------------------------------------------------------------------------------------------------------------------
+--주계획서작성(판매,주문)
+create table PMM_PM_MPS(
+plandate date primary key,--계획일
+Itemnumber varchar2(12) not null,--품번
+Itemname varchar2(50) not null,--품명
+standard varchar2(20),--규격
+unit varchar2(5) not null,--단위
+sequence number(5),--순서
+expected_Date date,--출하예정일
+Due_date date,--납기일
+plan_Quantity number(5)unique,--계획수량
+buyer varchar2(20) not null, --회사명
+note varchar2(1000) not null, --비고
+constraint fk_PMMPMMPS_Itemnumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code) on delete cascade,
+--constraint fk_PMMPMMPS_Itemname foreign key (Itemname) references SM_BIM_Ite_Reg(Item_Name),
+constraint fk_PMMPMMPS_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name)on delete cascade
+--constraint fk_PMMPMMPS_Due_date foreign key (Due_date) references CSM_SM_COR_Reg(dueDate),
+--constraint fk_PMMPMMPS_expected_Date foreign key (expected_Date) references CSM_SM_COR_Reg(expectedDate)
+);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
+VALUES('20210301','PR01','레이저프린터',NULL,'EA',SEQ_seq.NEXTVAL,'20210306','20210306',20,'(주)삼화INC','이상없음');
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
+VALUES('20211101','CPU05','AMD 라이젠3 Pro',NULL,'EA',SEQ_seq.NEXTVAL,'20211102','20211102',10,'(주)디비컴퓨터','이상없음');
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
+VALUES('20210901','RAM03','삼성 DDR4-3200',NULL,'EA',SEQ_seq.NEXTVAL,'20210901','20210901',30,'더지글로직스','이상없음');
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
+VALUES('20210902','POWER01','시소닉 A12 STD',NULL,'EA',SEQ_seq.NEXTVAL,'20210902','20210902',50,'(주)삼도전자','이상없음');
+INSERT INTO PMM_PM_MPS(PLANDATE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,SEQUENCE,EXPECTED_DATE,DUE_DATE,PLAN_QUANTITY,
+    BUYER,NOTE)
+VALUES('20210201','SSD01','삼성전자 980 PRO',NULL,'EA',SEQ_seq.NEXTVAL,'20210202','20210202',80,'(주)삼도전자','이상없음');
+
+--주계획서작성(판매,주문계획)
+create table PMM_PM_MPS_OS(
+orderno varchar2(12),--주문번호
+sequence number(5),--순서
+orderdate date,--주문일자
+okeydate date,--승인일자
+buyer varchar2(50) not null,--회사명
+Itemnumber varchar2(12) not null,--품번
+ItemName varchar2(50) not null,--품명
+standard varchar2(20),--규격
+unit varchar2(5) not null,--단위
+Order_quantity number(5),--주문수량
+apply_quantity number(5),--적용수량
+order_Balance number(5),--주문잔량
+expected_Date date,--출하예정일
+note varchar2(1000) not null,--비고
+supportd varchar2(7) not null,--조달구분
+account varchar2(7) not null,--계정구분
+plan_Quantity number(10) unique,--계획수량
+constraint fk_PMMPMMPSOS_Itemnumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code) on delete cascade,
+--constraint fk_PMMPMMPSOS_ItemName foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name),
+constraint fk_PMMPMMPSOS_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name) on delete cascade,
+--constraint fk_PMMPMMPSOS_expected_Date foreign key (expected_Date) references CSM_SM_COR_Reg(expectedDate),
+constraint fk_PMMPMMPSOS_orderno foreign key (orderno) references CSM_SM_Ord_Reg(ordersNum) on delete cascade
+--constraint fk_PMMPMMPSOS_orderdate foreign key (orderdate) references CSM_SM_Ord_Reg(ordersdate),
+--constraint fk_PMMPMMPSOS_Order_quantity foreign key (Order_quantity) references CSM_SM_COR_Reg(ordersQuantity)
+);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
+VALUES('S02103000001',SEQ_seq.NEXTVAL,'20210201','20210201','(주)삼도전자','SSD01','삼성전자 980 PRO',NULL,'EA',80.00,80,0,'20210202','이상없음'
+    ,'구매','상품',80);
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
+VALUES('S02103000002',SEQ_seq.NEXTVAL,'20210901','20210901','(주)삼도전자','POWER01','시소닉 A12 STD',NULL,'EA',50.00,50,0,'20210902','이상없음'
+    ,'구매','상품',50);
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
+VALUES('S02103000003',SEQ_seq.NEXTVAL,'20210901','20210901','더지글로직스','RAM03','삼성 DDR4-3200',NULL,'EA',30.00,30,0,'20210901','이상없음'
+    ,'구매','상품',30);
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
+VALUES('S02103000004',SEQ_seq.NEXTVAL,'20211101','20211101','(주)디비컴퓨터','CPU05','AMD 라이젠3 Pro',NULL,'EA',10.00,10,0,'20211102','이상없음'
+    ,'구매','상품',10);
+INSERT INTO PMM_PM_MPS_OS(ORDERNO,SEQUENCE,ORDERDATE,OKEYDATE,BUYER,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    APPLY_QUANTITY,ORDER_BALANCE,EXPECTED_DATE,NOTE,SUPPORTD,ACCOUNT,PLAN_QUANTITY)
+VALUES('S02103000005',SEQ_seq.NEXTVAL,'20210305','20210305','(주)삼화INC','PR01','레이저프린터',NULL,'EA',20.00,20,0,'20210306','이상없음'
+    ,'구매','상품',20);
+
+--입고검사등록(리스트)
+create table PMM_PM_RIP_LIST(
+sequence number(5),--순서
+Itemnumber varchar2(12) not null,   --품번
+ItemName varchar2(50) not null,      --품명
+Standard varchar2(20) ,      --규격
+Unit varchar2(5),   --단위
+check_Quantity number(5),--검사수량
+check_type varchar2(15) not null,--검사유형
+check_division varchar2(15) not null,--검사구분
+pass_Whether varchar2(10) not null,--합격여뷰
+pass number(5),--합격수량
+fail number(5),--불합격수량
+constraint fk_PMMPMRIPLIST_Item_Code foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code) on delete cascade
+--constraint fk_PMMPMRIPLIST_Item_Name foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name)
+);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+    PASS_WHETHER,PASS,FAIL)
+VALUES(SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,'EA',80,'외관검사','샘플검사','합격',80,0);
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+    PASS_WHETHER,PASS,FAIL)
+VALUES(SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,'EA',50,'외관검사','샘플검사','합격',50,0);
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+    PASS_WHETHER,PASS,FAIL)
+VALUES(SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,'EA',30,'외관검사','샘플검사','합격',30,0);
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+    PASS_WHETHER,PASS,FAIL)
+VALUES(SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,'EA',10,'외관검사','샘플검사','합격',10,0);
+INSERT INTO PMM_PM_RIP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,CHECK_QUANTITY,CHECK_TYPE,CHECK_DIVISION,
+    PASS_WHETHER,PASS,FAIL)
+VALUES(SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,'EA',20,'외관검사','샘플검사','합격',20,0);
+
+--발주,발주마감처리
+create table PMM_PM_ORDER(
+order_no varchar2(12)primary key,--발주번호
+order_date date unique,--발주일자
+code number(5),  --코드
+buyer varchar2(50) not null,--회사명
+sequence number(5),--순서
+Itemnumber varchar2(12) not null,--품번   
+ItemName varchar2(50) not null,   --품명
+Standard varchar2(20),   --규격
+Unit varchar2(5)not null,      --단위
+Order_quantity number(5),--발주수량
+order_Balance number(5),--발주잔량
+deadline varchar2(10) not null,--마감
+note varchar2(1000) not null, --비고
+constraint fk_PMMPMORDER_Order_quantity foreign key (Order_quantity) references PMM_PM_MPS(plan_Quantity) on delete cascade,
+--constraint fk_PMMPMORDER_order_Balance foreign key (order_Balance) references PMM_PM_RIP_LIST(fail),
+constraint fk_PMMPMORDER_Item_Code foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code) on delete cascade,
+--constraint fk_PMMPMORDER_Item_Name foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name),
+constraint fk_PMMPMORDER_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name) on delete cascade
+);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    ORDER_BALANCE,DEADLINE,NOTE)
+VALUES('R02103000005','20210305',001,'(주)삼화INC',SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,'EA',20,0,'마감','이상없음');
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    ORDER_BALANCE,DEADLINE,NOTE)
+VALUES('R02103000004','20211101',002,'(주)디비컴퓨터',SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,'EA',10,0,'마감','이상없음');
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    ORDER_BALANCE,DEADLINE,NOTE)
+VALUES('R02103000003','20210901',003,'더지글로직스',SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,'EA',30,0,'마감','이상없음');
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    ORDER_BALANCE,DEADLINE,NOTE)
+VALUES('R02103000002','20210902',004,'(주)삼도전자',SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,'EA',50,0,'마감','이상없음');
+INSERT INTO PMM_PM_ORDER(ORDER_NO,ORDER_DATE,CODE,BUYER,SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,UNIT,ORDER_QUANTITY,
+    ORDER_BALANCE,DEADLINE,NOTE)
+VALUES('R02103000001','20210201',005,'(주)삼도전자',SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,'EA',80,0,'마감','이상없음');
+
+--소요량전개(주문,판매,생산)
+create table PMM_PM_MRP(
+Itemnumber varchar2(12) not null,--품번
+ItemName varchar2(50) not null,--품명
+standard varchar2(20),--규격
+need_date date,--소요일자
+sequence number(5),--순서
+Expected_order date,--예정발주일
+Expected_Quantity number(5),--예정수량
+unit varchar2(5)not null, --단위
+constraint fk_PMMPMMRP_need_date foreign key (need_date) references PMM_PM_MPS(plandate) on delete cascade,
+constraint fk_PMMPMMRP_Expected_Quantity foreign key (Expected_Quantity) references PMM_PM_MPS(plan_Quantity) on delete cascade,
+--constraint fk_PMMPMORDER_Expected_order foreign key (Expected_order) references PMM_PM_ORDER(order_date),
+constraint fk_PMMPMMRP_Itemnumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code) on delete cascade
+--constraint fk_PMMPMMRP_ItemName foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name)
+);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+VALUES('PR01','레이저프린터',NULL,'20210301',SEQ_seq.NEXTVAL,'20210305',20,'EA');
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+VALUES('CPU05','AMD 라이젠3 Pro',NULL,'20211101',SEQ_seq.NEXTVAL,'20211101',10,'EA');
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+VALUES('RAM03','삼성 DDR4-3200',NULL,'20210901',SEQ_seq.NEXTVAL,'20210901',30,'EA');
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+VALUES('POWER01','시소닉 A12 STD',NULL,'20210902',SEQ_seq.NEXTVAL,'20210901',50,'EA');
+INSERT INTO PMM_PM_MRP(ITEMNUMBER,ITEMNAME,STANDARD,NEED_DATE,SEQUENCE,EXPECTED_ORDER,EXPECTED_QUANTITY,UNIT)
+VALUES('SSD01','삼성전자 980 PRO',NULL,'20210201',SEQ_seq.NEXTVAL,'20210201',80,'EA');
+
+--3 청구등록
+create table PMM_PM_CM(
+claim_no varchar2(12) PRIMARY KEY,--청구번호
+claim_date date,--청구일자
+claim_division varchar2(7)not null,--청구구분
+note varchar2(1000) not null--비고
+);
+
+
+INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
+VALUES('C02103000001','20210301','구매','이상없음');
+INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
+VALUES('C02103000002','20211101','구매','이상없음');
+INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
+VALUES('C02103000003','20210901','구매','이상없음');
+INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
+VALUES('C02103000004','20210902','구매','이상없음');
+INSERT INTO PMM_PM_CM(CLAIM_NO,CLAIM_DATE,CLAIM_DIVISION,NOTE)
+VALUES('C02103000005','20210201','구매','이상없음');
+--청구등록(리스트)
+create table PMM_PM_CM_LIST(
+sequence number(5),--순서
+itemNumber varchar2(12) not null,--품번
+ItemName varchar2(50) not null,--품명
+standard varchar2(20),--규격
+requestdate date,--요청일
+Inventory_Unit varchar2(5)not null,--재고단위
+Inventory_qy number(5)not null,--재고단위수량
+claim_unit varchar2(5)not null,--청구단위
+claim_Quantity number(5),--청구단위수량
+Due_date date,--납기일
+receiving_date date,--입고예정일
+receiving_qy number(5),--의뢰수량
+inspection varchar2(10) not null,--검사
+constraint fk_PMMPMCMLIST_requestdate foreign key (requestdate) references PMM_PM_MPS(plandate) on delete cascade,
+constraint fk_PMMPMCMLIST_Inventory_qy foreign key (Inventory_qy) references PMM_PM_MPS(plan_Quantity) on delete cascade,
+constraint fk_PMMPMCMLIST_claim_Quantity foreign key (claim_Quantity) references PMM_PM_MPS(plan_Quantity) on delete cascade,
+--constraint fk_PMMPMCMLIST_Due_date foreign key (Due_date) references CSM_SM_COR_Reg(dueDate),
+constraint fk_PMMPMCMLIST_itemNumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code) on delete cascade,
+--constraint fk_PMMPMCMLIST_ItemName foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name),
+constraint fk_PMMPMCMLIST_receiving_qy foreign key (receiving_qy) references PMM_PM_MPS(plan_Quantity)on delete cascade
+);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
+VALUES(SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,'20210301','EA',20,'EA',20,'20210306','20210306',20,'검사');
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
+VALUES(SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,'20211101','EA',10,'EA',10,'20211102','20211102',10,'검사');
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
+VALUES(SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,'20210901','EA',30,'EA',30,'20210901','20210901',30,'검사');
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
+VALUES(SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,'20210902','EA',50,'EA',50,'20210902','20210902',50,'검사');
+INSERT INTO PMM_PM_CM_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,REQUESTDATE,INVENTORY_UNIT,INVENTORY_Qy,
+    CLAIM_UNIT,CLAIM_QUANTITY,DUE_DATE,RECEIVING_DATE,RECEIVING_Qy,INSPECTION)
+VALUES(SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,'20210201','EA',80,'EA',80,'20210202','20210202',80,'검사');
+
+--입고처리
+create table PMM_PM_RP(
+receiving_no varchar2(12)PRIMARY key,--입고번호
+receiving_date date unique,  --입고일자
+buyer varchar2(50) not null,--거래처
+deadline varchar2(7) not null,--마감
+note varchar2(1000) not null,--비고
+deadline_no varchar2(12) unique, --마감번호
+deadline_date date unique,--마감일자
+constraint fk_PMMPMRP_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name)on delete cascade
+);
+
+
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000005','20210902','(주)삼도전자','마감','이상없음','D02103000005','20210902');
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000004','20210306','(주)삼화INC','마감','이상없음','D02103000004','20210306');
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000003','20211102','(주)디비컴퓨터','마감','이상없음','D02103000003','20211102');
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000002','20210901','더지글로직스','마감','이상없음','D02103000002','20210901');
+INSERT INTO PMM_PM_RP(RECEIVING_NO,RECEIVING_DATE,BUYER,DEADLINE,NOTE,DEADLINE_NO,DEADLINE_DATE)
+VALUES('Q02103000001','20210202','(주)삼도전자','마감','이상없음','D02103000001','20210202');
+
+
+--입고처리(리스트)
+create table PMM_PM_RP_LIST(
+sequence number(5),--순서
+Itemnumber varchar2(12) not null, --품번   
+ItemName varchar2(50) not null,   --품명   
+Standard varchar2(20),--규격
+order_Quantity number(5),--발주수량
+Unit varchar2(5)not null,--단위
+product_price Number(15),--단가
+Due_date date,--납기일
+receiving_date date,--입고예정일
+inspection varchar2(10) not null,--검사
+deadline_qy number(5),--마감수량
+constraint fk_PMMPMRPLIST_Order_quantity foreign key (Order_quantity) references PMM_PM_MPS(plan_Quantity)on delete cascade,
+constraint fk_PMMPMRPLIST_deadline_qy foreign key (deadline_qy) references PMM_PM_MPS(plan_Quantity) on delete cascade,
+constraint fk_PMMPMRPLIST_Itemnumber foreign key (Itemnumber) references SM_BIM_Ite_Reg(Item_Code) on delete cascade
+--constraint fk_PMMPMRPLIST_ItemName foreign key (ItemName) references SM_BIM_Ite_Reg(Item_Name)
+--constraint fk_PMMPMRPLIST_receiving_date foreign key (receiving_date) references CSM_SM_COR_Reg(expectedDate),
+--constraint fk_PMMPMRPLIST_Due_date foreign key (Due_date) references CSM_SM_COR_Reg(dueDate)
+);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -10;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
+VALUES(SEQ_seq.NEXTVAL,'PR01','레이저프린터',NULL,20,'EA',300000.00,'20210306','20210306','검사',20);
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
+VALUES(SEQ_seq.NEXTVAL,'CPU05','AMD 라이젠3 Pro',NULL,10,'EA',1000000.00,'20211102','20211102','검사',10);
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
+VALUES(SEQ_seq.NEXTVAL,'RAM03','삼성 DDR4-3200',NULL,30,'EA',800000.00,'20210901','20210901','검사',30);
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
+VALUES(SEQ_seq.NEXTVAL,'POWER01','시소닉 A12 STD',NULL,50,'EA',300000.00,'20210902','20210902','검사',50);
+INSERT INTO PMM_PM_RP_LIST(SEQUENCE,ITEMNUMBER,ITEMNAME,STANDARD,ORDER_QUANTITY,UNIT,PRODUCT_PRICE,
+DUE_DATE,RECEIVING_DATE,INSPECTION,DEADLINE_QY)
+VALUES(SEQ_seq.NEXTVAL,'SSD01','삼성전자 980 PRO',NULL,80,'EA',400000.00,'20210202','20210202','검사',80);
+
+--입고의뢰등록
+create table PMM_PM_RRR(
+request_no varchar2(12) primary key,--의뢰번호
+request_date date unique,--의뢰일자
+buyer varchar2(50)not null,--회사명
+request_house varchar2(15)not null,--의뢰창고
+note varchar2(1000) not null,--비고
+check_no varchar2(12) unique,--검사번호
+check_date date unique,--검사일자
+receiving_house varchar2(15) not null,--입고창고
+constraint fk_PMMPMRRR_buyer foreign key (buyer) references SM_BIM_Gen_Cus_Reg(General_Customer_Name) on delete cascade,
+constraint fk_PMMPMRRR_request_house foreign key (request_house) references SM_BIM_Hou_Reg(House_Name) on delete cascade,
+constraint fk_PMMPMRRR_receiving_house foreign key (receiving_house) references SM_BIM_Hou_Reg(House_Name) on delete cascade
+);
+
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000001','20210306','(주)삼화INC','제품창고','이상없음','C02103000001','20210306','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000002','20211102','(주)디비컴퓨터','제품창고','이상없음','C02103000002','20211102','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000003','20210901','더지글로직스','제품창고','이상없음','C02103000003','20210901','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000004','20210902','(주)삼도전자','제품창고','이상없음','C02103000004','20210902','부품창고');
+INSERT INTO PMM_PM_RRR(REQUEST_NO,REQUEST_DATE,BUYER,REQUEST_HOUSE,NOTE,CHECK_NO,CHECK_DATE,RECEIVING_HOUSE)
+VALUES('V02103000005','20200202','(주)삼도전자','제품창고','이상없음','C02103000005','20200202','부품창고');
+
+
+---------------------------------------------------------------------------------------------------------------------
+--재고관리
+
+create table PM_SM_Sto_Mov_Main( --재고이동 등록 메인
+Move_Num varchar2(12) primary key, --이동번호
+Move_Date date NOT NULL, --이동일자
+Output_Business varchar2(12) NOT NULL, --출고사업장
+Output_Warehouse varchar2(12) NOT NULL, --출고창고
+Output_Place varchar2(12) NOT NULL, --출고장소
+Input_Business varchar2(12) NOT NULL, --입고사업장
+Input_Warehouse varchar2(12) NOT NULL, --입고창고
+Input_Place varchar2(12) NOT NULL, --입고장소
+Note varchar2(200), --비고
+constraint fk_code_mov_bus_out FOREIGN KEY(Output_Business)
+REFERENCES SM_CRI_Wor_Reg(Workplace_Code) on delete cascade,
+constraint fk_code_mov_war_out FOREIGN KEY(Output_Warehouse)
+REFERENCES SM_BIM_Hou_Reg(House_Code) on delete cascade,
+constraint fk_code_mov_pla_out FOREIGN KEY(Output_Place)
+REFERENCES SM_BIM_Wor_Reg(Location_Code) on delete cascade,
+constraint fk_code_mov_bus_in FOREIGN KEY(Input_Business)
+REFERENCES SM_CRI_Wor_Reg(Workplace_Code) on delete cascade,
+constraint fk_code_mov_war_in FOREIGN KEY(Input_Warehouse)
+REFERENCES SM_BIM_Hou_Reg(House_Code) on delete cascade,
+constraint fk_code_mov_pla_in FOREIGN KEY(Input_Place)
+REFERENCES SM_BIM_Wor_Reg(Location_Code) on delete cascade
+);
+--담당자삭제
+
+insert into PM_SM_Sto_Mov_Main(
+Move_Num, --이동번호
+Move_Date, --이동일자
+Output_Business, --출고사업장
+Output_Warehouse, --출고창고
+Output_Place, --출고장소
+Input_Business, --입고사업장
+Input_Warehouse, --입고창고
+Input_Place, --입고장소
+Note) --비고
+values ('mv0001', '2021-05-20', '1000' , 'M200', 'M201', '2000' , 'M200','M201', '비고');
+insert into PM_SM_Sto_Mov_Main 
+values ('mv0002', '2021-05-21', '2000' , 'M100', 'M202', '1000' , 'M200','M201', '비고');
+insert into PM_SM_Sto_Mov_Main 
+values ('mv0003', '2021-05-21', '1000' , 'M200', 'M202', '2000' , 'M200','M201', '비고');
+insert into PM_SM_Sto_Mov_Main 
+values ('mv0004', '2021-05-21', '2000' , 'M100', 'M202', '1000' , 'M200','M201', '비고');
+insert into PM_SM_Sto_Mov_Main 
+values ('mv0005', '2021-05-21', '1000' , 'M200', 'M201', '1000' , 'M200','M201', '비고');
+
+create table PM_SM_Sto_Mov_Sub( --재고이동 등록 서브
+NO varchar2(12) primary key,
+Move_Num varchar2(12) NOT NULL, --이동번호
+Product_Num varchar2(12) NOT NULL, --품번
+Product_Name varchar2(50) NOT NULL, --품명
+Standard varchar2(20), --규격
+Unit varchar2(5), --단위
+Move_Quantity number(5) NOT NULL, --이동수량
+Move_Price number(10) NOT NULL, --이동단가
+Supply_Price number(10) NOT NULL, --공급가
+Tax number(10) NOT NULL, --부가세
+Total number(10) NOT NULL, --합계액
+
+constraint fk_code_mov_pro_num FOREIGN KEY(Move_Num)
+REFERENCES PM_SM_Sto_Mov_Main(Move_Num)on delete cascade
+);
+--LOT 삭제
+
+insert into PM_SM_Sto_Mov_Sub(
+NO,
+Move_Num, --이동번호
+Product_Num, --품번
+Product_Name, --품명
+Standard, --규격
+Unit, --단위
+Move_Quantity, --이동수량
+Move_Price, --이동단가
+Supply_Price, --공급가
+Tax, --부가세
+Total) --합계액
+values ( '1', 'mv0001', 'CASE01', '슬림형본체' , '규격' , 'EA', 20 , 1000, 100,10, 20000);
+insert into PM_SM_Sto_Mov_Sub
+values ( '2', 'mv0002', 'HD01 ', 'WD BLUE 7200' , '규격' , 'EA', 50 , 250, 1000,100, 250100);
+insert into PM_SM_Sto_Mov_Sub
+values ( '3', 'mv0003', 'SSD03', '삼성전자 870 EVO' , '규격' , 'EA', 100 , 200, 200,20, 40000);
+insert into PM_SM_Sto_Mov_Sub
+values ( '4', 'mv0003', 'GPU03', '지포스 RTX 2060' , '규격' , 'EA', 10 , 1000, 100,10, 10000);
+insert into PM_SM_Sto_Mov_Sub
+values ( '5', 'mv0004', 'RAM01', 'ADATA XPG DDR4-3200' , '규격' , 'EA', 300 , 3000, 1000,10, 350000);
+
+
+create table PM_SM_Sto_Adj_Main( --기초재고/재고조정등록 메인
+Mod_Num varchar2(12) primary key, --조정번호
+Mod_Date date NOT NULL, --조정일자
+Warehouse varchar2(12) NOT NULL, --창고
+Place varchar2(12) NOT NULL, --장소
+Customer varchar2(50), --거래처
+Kind varchar2(30) NOT NULL, --조정종류(기초,입고,출고)
+Note varchar2(200), --비고
+
+constraint fk_code_war FOREIGN KEY(Warehouse)
+REFERENCES SM_BIM_Hou_Reg(House_Code)on delete cascade,
+constraint fk_code_pla FOREIGN KEY(Place)
+REFERENCES SM_BIM_Wor_Reg(Location_Code)on delete cascade,
+constraint fk_code_cus FOREIGN KEY(Customer)
+REFERENCES SM_BIM_Gen_Cus_Reg(General_Customer_Code)on delete cascade
+);
+--담당자 삭제
+
+insert into PM_SM_Sto_Adj_Main(
+Mod_Num, --조정번호
+Mod_Date, --조정일자
+Warehouse, --창고
+Place, --장소
+Customer, --거래처
+Kind, --조정종류
+Note) --비고
+values('md001' , '2021-04-21' , 'M100', 'M201' , '00001' , '입고', '비고');
+insert into PM_SM_Sto_Adj_Main
+values('md002' , '2021-04-27' , 'M200', 'M202' , '00001' , '출고', '비고');
+insert into PM_SM_Sto_Adj_Main
+values('md003' , '2021-05-01' , 'M100', 'M202' , '00002' , '출고', '비고');
+insert into PM_SM_Sto_Adj_Main
+values('md004' , '2021-05-11' , 'M200', 'M202' , '00002' , '출고', '비고');
+insert into PM_SM_Sto_Adj_Main
+values('md005' , '2021-05-13' , 'M100', 'M201' , NULL , '기초', '비고');
+
+create table PM_SM_Sto_Adj_Sub( --기초재고/재고조정등록 서브
+No varchar2(12) primary key,
+Mod_Num varchar2(12) , --조정번호
+Product_Num varchar2(12) NOT NULL, --품번
+Product_Name varchar2(50) NOT NULL, --품명
+Standard varchar2(20), --규격
+Unit varchar2(5), --단위
+Mod_Quantity number(5) NOT NULL, --조정수량
+Price number(10) NOT NULL, --단가
+Total number(10) NOT NULL, --금액
+
+constraint fk_code_mod_num FOREIGN KEY(Mod_Num)
+REFERENCES PM_SM_Sto_Adj_Main(Mod_Num)on delete cascade,
+constraint fk_code_pro_num FOREIGN KEY(Product_Num)
+REFERENCES SM_BIM_Ite_Reg(Item_Code)on delete cascade
+);
+
+--LOT 삭제
+
+insert into PM_SM_Sto_Adj_Sub(
+No,
+Mod_Num, --조정번호
+Product_Num, --품번
+Product_Name, --품명
+Standard, --규격
+Unit, --단위
+Mod_Quantity, --조정수량
+Price, --단가
+Total) --금액
+values(1,'md001','CASE01', '슬림형본체' , '규격', 'EA', 10, 5000, 50000);
+insert into PM_SM_Sto_Adj_Sub
+values(2,'md001','RAM01', 'ADATA XPG DDR4-3200' , '규격', 'EA', 100, 45000, 4500000);
+insert into PM_SM_Sto_Adj_Sub
+values(3,'md002','BOARD03', 'GIGABYTE A320M' , '규격', 'EA', 5, 5000, 25000);
+insert into PM_SM_Sto_Adj_Sub
+values(4,'md003','POWER03', '마이크로닉 Classic 2' , '규격', 'EA', 50, 3000, 150000);
+insert into PM_SM_Sto_Adj_Sub
+values(5,'md004','GPU02', '지포스 RTX 3070' , '규격', 'EA', 200, 1000, 200000);
+
+create table PM_SM_Set_Man_Main( --SET품 수불조정등록 모품목
+Mod_Num varchar2(12) primary key, --조정번호
+Mod_Date date, --조정일자
+Set_Product_Num varchar2(12), --SET모품목 품번
+Product_Name varchar2(50), --품명
+Standard varchar2(20), --규격
+Unit varchar2(5), --단위
+Input_Quantity number(5), --입고조정수량
+Price number(10), --단가
+Total number(10), --금액
+
+constraint fk_code_set_pro_num FOREIGN KEY(Set_Product_Num)
+REFERENCES SM_BIM_SET_Reg (SET_Code)
+);
+
+
+insert into PM_SM_Set_Man_Main
+values('smd002', '2021-05-12', 'PC10', '데스크탑PC', '규격', 'SET', 300 , 15000, 4500000);
+
+
+create table PM_SM_Set_Man_Sub( --SET품 수불조정등록 자품목
+Mod_Num varchar2(12), --조정번호
+No varchar2(12) primary key,
+Component_Num varchar2(12), --SET자품목 품번
+Product_Name varchar2(50), --품명
+Standard varchar2(20), --규격
+Unit varchar2(5), --단위
+Output_Quantity number(5), --출고조정수량
+
+constraint fk_code_set_mod_num FOREIGN KEY(Mod_Num)
+REFERENCES PM_SM_Set_Man_Main(Mod_Num),
+constraint fk_code_set_com_num FOREIGN KEY(Component_Num)
+REFERENCES SM_BIM_Com_Reg(Components_Code)
+);  
+
+--LOT 삭제
+
+
+insert into PM_SM_Set_Man_Sub
+values('smd002', '3' ,'SSD01' , '삼성전자 980 PRO' , '규격', 'EA', 600);
+insert into PM_SM_Set_Man_Sub
+values('smd002', '4' , 'GPU01' , '지포스 RTX 3060' , '규격', 'EA', 300);
+
+create table PM_SM_Ite_Pri(  -- 품목단가등록
+No              varchar2(12) primary key, 
+Item_Code       varchar2(12), --품번
+Item_Name       varchar2(50), --품명
+Standard        varchar2(20), --규격
+Inventory_Unit  varchar2(5), --단위
+Kind            varchar2(4), --종류(구매,판매)  
+Purchase_Price  number(10), --구매 단가
+Sales_Price     number(10), --판매 단가   구매단가 입력시 NULL, 판매시 판매단가
+
+constraint PMSMItePri_ItemCode_FK FOREIGN KEY(Item_Code)
+REFERENCES SM_BIM_Ite_Reg(Item_Code));
+
+insert into PM_SM_Ite_Pri(
+No,
+Item_Code, --품번
+Item_Name, --품명
+Standard, --규격
+Inventory_Unit, --단위
+Kind, --종류(구매,판매)
+Purchase_Price, --구매 단가
+Sales_Price) --판매 단가
+values('1','GPU04', '지포스 GTX1050 Ti', '규격' , 'EA', '구매', 19200 , null);
+insert into PM_SM_Ite_Pri
+values('2','CPU03', 'core I5-11세대', '규격' , 'EA', '판매', 27200 , 38000);
+
+
+
+-----------------------------------------------------------------------------------------
+
+
+
+--생산관리 테이블
+
+--생산계획등록
+create table CPM_PM_Pro_Pla_Reg(
+    --NO
+    NO NUMBER(5) NOT NULL,
+ --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
+    --품명(FK)
+    Item_Name varchar2(50) NOT NULL,
+    --규격
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
+    --일 생산량
+    dailyProduction number(5) not null,
+    --순서
+    sequence number(5),
+    --작업예정일
+    scheduledDateOfOperation date,
+    --수량
+    Quantity number(5),
+    --비고
+    note varchar2(1000) ,
+    CONSTRAINT CPMPMPROPLAREG_ITEMNUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code)on delete cascade
+--    CONSTRAINT CPMPMPROPLAREG_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+);
+
+
+SELECT no_seq.CURRVAL FROM DUAL;
+SELECT SEQ_seq.CURRVAL FROM DUAL;
+SELECT no_seq.nextval FROM DUAL;
+SELECT SEQ_seq.nextVAL FROM DUAL;
+
+ALTER SEQUENCE no_seq INCREMENT BY -8;
+SELECT no_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE no_seq INCREMENT BY 1;
+
+ALTER SEQUENCE seq_seq INCREMENT BY -8;
+SELECT seq_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE seq_seq INCREMENT BY 1;
+
+--생산계획등록 데이터
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'CASE01','슬림형본체',NULL,'EA',300,SEQ_seq.NEXTVAL,sysdate,300,null);
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'CASE01','슬림형본체',NULL,'EA',300,SEQ_seq.NEXTVAL,sysdate,310,null);
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'CASE01','슬림형본체',NULL,'EA',300,SEQ_seq.NEXTVAL,sysdate,280,null);
+alter sequence SEQ_SEQ increment by -3;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'CASE02' , '토너' , NULL , 'EA',500,SEQ_seq.NEXTVAL,sysdate,500,null);
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'CASE02' , '토너' , NULL , 'EA',500,SEQ_seq.NEXTVAL,sysdate,500,null);
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'CASE02' , '토너' , NULL , 'EA',500,SEQ_seq.NEXTVAL,sysdate,500,null);
+alter sequence SEQ_SEQ increment by -3;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'PR01' , '레이저프린터' , NULL , 'EA',1000,SEQ_seq.NEXTVAL,sysdate,1000,null);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -1;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'CASE03' , 'ABKO NCORE' , NULL , 'EA',100,SEQ_seq.NEXTVAL,sysdate,100,null);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -1;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'HD01' , 'WD BLUE 7200' , NULL , 'EA',1100,SEQ_seq.NEXTVAL,sysdate,1100,null);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -1;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'HD02' , 'Seagate BarraCuda 7200' , NULL , 'EA',700,SEQ_seq.NEXTVAL,sysdate,700,null);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -1;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'SSD01' , '삼성전자 980 PRO'  , NULL , 'EA',200,SEQ_seq.NEXTVAL,sysdate,200,null);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -1;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL, 'SSD02' , '삼성전자 970 EVO' , NULL , 'EA',400,SEQ_seq.NEXTVAL,sysdate,400,null);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -1;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'SSD03' , '삼성전자 870 EVO' , NULL , 'EA',800,SEQ_seq.NEXTVAL,sysdate,800,null);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -1;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+INSERT INTO CPM_PM_Pro_Pla_Reg
+VALUES (NO_seq.NEXTVAL,'GPU01' , '지포스 RTX 3060' , NULL , 'EA',900,SEQ_seq.NEXTVAL,sysdate,900,null);
+ALTER SEQUENCE SEQ_seq INCREMENT BY -1;
+SELECT SEQ_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE SEQ_seq INCREMENT BY 1;
+
+--생산자재출고
+create table CPM_PM_Pro_Mat_For(
+    --출고번호(PK)
+    forwardingNumber varchar(12) PRIMARY KEY,
+    --출고일자(UK)
+    forwardingDate date UNIQUE,
+    --출고창고(FK)
+    House_Code varchar2(12) not null,
+    --출고장소(FK)
+    Location_Code varchar2(12) not null,
+    --공정(FK)
+    Process_Code varchar2(12) not null,
+    --작업장(FK)
+    Workplace_Code varchar2(12) not null,
+    --비고
+    note varchar2(1000),
+    --조인데이터(fk)
+    JOINID VARCHAR2(12) NOT NULL,
+    CONSTRAINT CPMPMPROMATFOR_houseCode_FK FOREIGN KEY(House_Code) REFERENCES SM_BIM_Hou_Reg(House_Code)on delete cascade,
+    CONSTRAINT CPMPMPROMATFOR_LocCode_FK FOREIGN KEY(Location_Code) REFERENCES SM_BIM_Wor_Reg(Location_Code)on delete cascade,
+    CONSTRAINT CPMPMPROMATFOR_wphouseCode_FK FOREIGN KEY(Process_Code) REFERENCES SM_BIM_Pro_Reg(Process_Code)on delete cascade,
+    CONSTRAINT CPMPMPROMATFOR_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code)on delete cascade,
+    CONSTRAINT CPMPMPROMATFOR_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)on delete cascade
+);
+
+
+--생산자재출고 데이터
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000001','20200401','M100','M101','L100','L101',null,'JOIN00000001');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000002','20200402','M100','M102','L100','L101',null,'JOIN00000002');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000003','20200405','M200','M201','L100','L101',null,'JOIN00000003');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000004','20200407','M200','M202','L100','L101',null,'JOIN00000004');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000005','20200410','M100','M101','L200','L201',null,'JOIN00000005');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000006','20200411','M100','M101','L100','L101',null,'JOIN00000006');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000007','20200412','M100','M102','L100','L101',null,'JOIN00000007');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000008','20200415','M200','M201','L100','L101',null,'JOIN00000008');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000009','20200417','M200','M202','L100','L101',null,'JOIN00000009');
+INSERT INTO CPM_PM_Pro_Mat_For
+VALUES ('MF2004000010','20200420','M100','M101','L200','L201',null,'JOIN00000010');
+
+--생산자재출고 세부사항
+create table CPM_PM_Pro_Mat_For_Det(
+    --순번(PK)
+    NO number(5) NOT NULL,
+ --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
+    --품명(FK)
+    Item_Name varchar2(50) NOT NULL,
+    --규격
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
+    --정미수량
+    precisionQuantity number(5) not null,
+    --LOSS
+    LOSS number(5),
+    --출고수량
+    forwardingQuantity number(5),
+    --비고
+    note varchar2(1000),
+    JOINID VARCHAR2(12) NOT NULL,
+    
+    CONSTRAINT CPMPMPROMATFORDET_INUMBER_FK  FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code)on delete cascade,
+--    CONSTRAINT CPMPMPROPLAFORDET_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name),
+    --CONSTRAINT CPMPMPROPLAREG_STANDARD_FK FOREIGN KEY(Standard) REFERENCES SM_BIM_Ite_Reg(Standard),
+    --CONSTRAINT CPMPMPROPLAREG_UNIT_FK FOREIGN KEY(Inventory_Unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
+     CONSTRAINT CPMPMPROMATFORDET_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)on delete cascade
+);
+
+
+ALTER SEQUENCE NO_seq INCREMENT BY -14;
+SELECT NO_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE NO_seq INCREMENT BY 1;
+--생산자재출고 세부사항 데이터
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,'CASE01','슬림형본체',NULL,'EA',300,0,300,null,'JOIN00000001');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,'CASE02' , '토너',NULL,'EA',500,10,550,null,'JOIN00000001');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'CASE03' , 'ABKO NCORE' ,NULL,'EA',1000,0,1000,null,'JOIN00000002');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'HD01' , 'WD BLUE 7200',NULL,'EA',100,20,120,null, 'JOIN00000002');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'HD02' , 'Seagate BarraCuda 7200' ,NULL,'EA',1100,10,1210,null,'JOIN00000003');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,  'SSD01' , '삼성전자 980 PRO' ,NULL,'EA',700,0,700,null, 'JOIN00000003');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,  'SSD02' , '삼성전자 970 EVO' ,NULL,'EA',200,0,200,null, 'JOIN00000004');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'SSD03' , '삼성전자 870 EVO' ,NULL,'EA',400,20,480,null, 'JOIN00000004');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,  'GPU01' , '지포스 RTX 3060' ,NULL,'EA',800,0,800,null, 'JOIN00000005');
+INSERT INTO CPM_PM_Pro_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'GPU02' , '지포스 RTX 3070' ,NULL,'EA',900,0,900,null, 'JOIN00000005');
+
+            
+--작업실적등록 세부사항
+create table CPM_PM_Ope_Per_Reg_Det(
+    --작업실적번호(PK)
+    OPNumber varchar2(12) PRIMARY KEY,
+    --자재사용유무
+    MaterialUseStatus varchar2(10) not null,
+    --실적일
+    performanceDate date not null,
+    --공정(FK)
+    Process_Code  varchar2(12) not null,
+    --작업장(FK)
+    Workplace_Code varchar2(12) not null,
+    --구분
+    sortation varchar2(10) not null,
+    --실적수량
+    performanceQuantity number(5),
+    --검사
+    inspection varchar2(20),
+    --비고
+    note varchar2(1000),
+    --조인 데이터
+    JOINID VARCHAR(12) NOT NULL,
+    CONSTRAINT CPMPMDET_wPhouseCode_FK FOREIGN KEY(Process_Code) REFERENCES SM_BIM_Pro_Reg(Process_Code)on delete cascade,
+    CONSTRAINT CPMPMDET_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code)on delete cascade,
+    CONSTRAINT CPMPMDET_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)on delete cascade
+);
+
+--작업실적등록 세부사항 데이터
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000001','유','20200401','L100','L101','입고', 150,'검사',null,'JOIN00000001');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000002','유','20200401','L100','L101','입고', 150,'검사',null,'JOIN00000001');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000003','유','20200402','L100','L101','입고', 300,'검사',null,'JOIN00000002');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000004','유','20200402','L100','L101','입고', 250,'검사',null,'JOIN00000002');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000005','유','20200405','L100','L101','입고', 800,'검사',null,'JOIN00000003');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000006','유','20200405','L100','L101','입고', 200,'검사',null,'JOIN00000003');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000007','유','20200407','L100','L101','입고', 60,'검사',null,'JOIN00000004');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000008','유','20200407','L100','L101','입고', 60,'검사',null,'JOIN00000004');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000009','유','20200410','L200','L201','입고', 500,'검사',null,'JOIN00000005');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000010','유','20200410','L200','L201','입고', 710,'검사',null,'JOIN00000005');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000011','유','20200411','L100','L101','입고', 300,'검사',null,'JOIN00000006');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000012','유','20200411','L100','L101','입고', 400,'검사',null,'JOIN00000006');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000013','유','20200412','L100','L101','입고', 100,'검사',null,'JOIN00000007');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000014','유','20200412','L100','L101','입고', 100,'검사',null,'JOIN00000007');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000015','유','20200415','L100','L101','입고', 80,'검사',null,'JOIN00000008');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000016','유','20200415','L100','L101','입고', 400,'검사',null,'JOIN00000008');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000017','유','20200417','L100','L101','입고', 100,'검사',null,'JOIN00000009');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000018','유','20200417','L100','L101','입고', 700,'검사',null,'JOIN00000009');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000019','유','20200420','L200','L201','입고', 500,'검사',null,'JOIN00000010');
+INSERT INTO CPM_PM_Ope_Per_Reg_Det
+VALUES ('RD2004000020','유','20200420','L200','L201','입고', 400,'검사',null,'JOIN00000010');
+      
+--작업실적등록
+create table CPM_PM_Ope_Per_Reg(
+    --작업지시번호(PK)
+    workOrderNumber varchar2(12) PRIMARY KEY,
+    --자재출고상태
+    MaterialForwardingStatus varchar2(20) not null,
+    --작업장(FK)
+    Workplace_Code varchar2(12) not null,
+    --지시일
+    instructionDate date not null,
+    --납기일
+    dueDate date not null,
+ --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
+    --품명(FK)
+    Item_Name varchar2(50) NOT NULL,
+    --규격
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
+    --지시수량
+    indicatedQuantity number(5) not null,
+     --실적수량
+    performanceQuantity number(5),
+     --실적잔량
+    remainingQuantity number(5),
+    --상태
+    status varchar2(10) not null,
+    --검사
+    inspection varchar2(20) not null,
+    --비고
+    note varchar2(1000),
+    --조인 데이터
+    JOINID VARCHAR(12) NOT NULL,
+    CONSTRAINT CPMPMOPEPERREG_placeCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Pro_Wor_Reg(Workplace_Code)on delete cascade,
+    CONSTRAINT CPMPMOPEPERREG_ITEMNUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code)on delete cascade,
+--    CONSTRAINT CPMPMOPEPERREG_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name),
+    --CONSTRAINT CPMPMOPEPERREG_STANDARD_FK FOREIGN KEY(Standard) REFERENCES SM_BIM_Ite_Reg(Standard),
+    --CONSTRAINT CPMPMOPEPERREG_UNIT_FK FOREIGN KEY(Inventory_Unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
+    --CONSTRAINT CPMPMOPEPERREG_Quantity_FK FOREIGN KEY(performanceQuantity) REFERENCES CPM_PM_Ope_Per_Reg_Det(performanceQuantity),
+    --CONSTRAINT CPMPMOPEPERREG_INSPECTION_FK FOREIGN KEY(inspection) REFERENCES CPM_PM_Ope_Per_Reg_Det(inspection)
+    CONSTRAINT CPMPMOPEPERREG_JOINID_FK FOREIGN KEY(JOINID) REFERENCES JOINDATA(JOINID)on delete cascade
+);
+
+--작업실적등록 데이터
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000001','출고완료','L101','20200101','20200401','CASE01','슬림형본체',NULL,'EA',300,300,null,'계획','검사',null,'JOIN00000001');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000002','출고대기','L101','20200101','20200401', 'CASE02' , '토너',NULL,'EA',500,500,null,'계획','검사',null,'JOIN00000002');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000003','출고대기','L101','20200101','20200401','CASE03' , 'ABKO NCORE',NULL,'EA',1000,1000,null,'계획','검사',null,'JOIN00000003');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000004','출고대기','L101','20200101','20200401','HD01' , 'WD BLUE 7200',NULL,'EA',100,100,null,'확정','검사',null,'JOIN00000004');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000005','출고완료','L101','20200101','20200401', 'HD02' , 'Seagate BarraCuda 7200' ,NULL,'EA',1100,1100,null,'확정','검사',null,'JOIN00000005');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000006','출고완료','L201','20200101','20200401','SSD01' , '삼성전자 980 PRO',NULL,'EA',700,700,null,'확정','검사',null,'JOIN00000006');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000007','출고완료','L201','20200101','20200401','SSD02' , '삼성전자 970 EVO',NULL,'EA',200,200,null,'확정','검사',null,'JOIN00000007');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000008','출고대기','L201','20200101','20200401','SSD03' , '삼성전자 870 EVO',NULL,'EA',400,400,null,'마감','검사',null,'JOIN00000008');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000009','출고대기','L201','20200101','20200401','GPU01' , '지포스 RTX 3060',NULL,'EA',800,800,null,'마감','검사',null,'JOIN00000009');
+INSERT INTO CPM_PM_Ope_Per_Reg
+VALUES ('W02004000010','출고완료','L201','20200101','20200401','GPU02' , '지포스 RTX 3070',NULL,'EA',900,900,null,'마감','검사',null,'JOIN00000010');
+
+create or replace trigger trg_operation_nodml
+after update of status or delete 
+on CPM_PM_Ope_Per_Reg
+for each row
+begin
+   if(:old.status = '마감' or :old.status = '확정') then
+    raise_application_error(-20000,'마감/확정상태에서는 변경불가.');
+    end if;
+end;
+/
+
+
+--외주관리 테이블
+--외주자재출고
+create table CPM_OM_Out_Mat_For(
+    --출고번호(PK)
+    forwardingNumber varchar(12) PRIMARY KEY,
+    --출고일자
+    forwardingDate date not null,
+    --출고창고(FK)
+    House_Code varchar2(12) not null,
+    --출고장소(FK)
+    Location_Code varchar2(12) not null,
+    --공정(FK)
+    Outsourcing_Code varchar2(12) not null,
+    --작업장(FK)
+    Workplace_Code varchar2(12) not null,
+    --비고
+    note varchar2(1000),
+    CONSTRAINT CPMOMOUTMATFOR_houseCode_FK FOREIGN KEY(House_Code) REFERENCES SM_BIM_Hou_Reg(House_Code)on delete cascade,
+    CONSTRAINT CPMOMOUTMATFOR_LocCode_FK FOREIGN KEY(Location_Code) REFERENCES SM_BIM_Wor_Reg(Location_Code)on delete cascade,
+    CONSTRAINT CPMOMOUTMATFOR_wPhouseCode_FK FOREIGN KEY(Outsourcing_Code) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code)on delete cascade,
+    CONSTRAINT CPMOMOUTMATFOR_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)on delete cascade
+);
+
+--외주관리 데이터
+--외주자재출고 데이터
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000001','20200418','M100','M101','P100','P101',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000002','20200419','M100','M101','P100','P101',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000003','20200420','M100','M101','P100','P102',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000004','20200422','M100','M101','P100','P102',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000005','20200423','M100','M101','P100','P103',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000006','20200424','M200','M201','P100','P103',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000007','20200426','M200','M201','P100','P104',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000008','20200427','M200','M201','P100','P104',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000009','20200428','M200','M201','P100','P105',null);
+INSERT INTO CPM_OM_Out_Mat_For
+VALUES ('MV2004000010','20200430','M200','M201','P100','P105',null);
+
+
+
+
+--외주자재출고 세부사항
+create table CPM_OM_Out_Mat_For_Det(
+    --순번(PK)
+    NO number(5) PRIMARY KEY,
+ --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
+    --품명(FK)
+    Item_Name varchar2(50) NOT NULL,
+    --규격
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
+   --정미수량
+    precisionQuantity number(5) not null,
+    --LOSS
+    LOSS number(5),
+    --출고수량
+    forwardingQuantity number(5),
+    --비고
+    note varchar2(1000),
+    CONSTRAINT CPMOMOUTMATFORDET_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code)on delete cascade
+--    CONSTRAINT CPMOMOUTMATFORDET_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    --CONSTRAINT CPMOMOUTMATFORDET_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
+    --CONSTRAINT CPMOMOUTMATFORDET_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
+);
+
+ALTER SEQUENCE NO_seq INCREMENT BY -10;
+SELECT NO_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE NO_seq INCREMENT BY 1;
+
+--외주자재출고 세부사항 데이터
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'CPU01' , 'AMD 라이젠5' , 'NULL' , 'EA',100,10,110,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'CPU02' , 'core I5-10세대', 'NULL' , 'EA',200,20,240,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'CPU03' , 'core I5-11세대'  , 'NULL' , 'EA',300,0,300,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'CPU04' , 'core I7-11세대' , 'NULL' , 'EA',800,10,880,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,'CPU05' , 'AMD 라이젠3 Pro' , 'NULL' , 'EA',700,0,700,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,'RAM01' , 'ADATA XPG DDR4-3200' , 'NULL' , 'EA',600,20,720,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL, 'RAM02' , 'KLEVV DDR4-3200' , 'NULL' , 'EA',500,0,500,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,'RAM03' , '삼성 DDR4-3200' , 'NULL' , 'EA',400,0,400,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,'BOARD01' , '박격포 MAG B560M' , 'NULL' , 'EA',900,0,900,null);
+INSERT INTO CPM_OM_Out_Mat_For_Det
+VALUES (NO_seq.NEXTVAL,'BOARD02' , 'ASRock B550M' , 'NULL' , 'EA',1000,0,1000,null);
+
+
+--외주실적등록 세부사항
+create table CPM_OM_Out_Per_Reg_Det(
+    --작업실적번호(PK)
+    operationPerformanceNumber varchar2(12) PRIMARY KEY,
+    --자재사용유무
+    MaterialUseStatus varchar2(10) not null,
+    --실적일
+    performanceDate date not null,
+    --공정(FK)
+    Outsourcing_Code  varchar2(12) not null,
+    --작업장(FK)
+    Workplace_Code varchar2(12) not null,
+    --구분
+    sortation varchar2(10) not null,
+    --실적수량
+    performanceQuantity number(5),
+    --검사
+    inspection varchar2(20) ,
+    --비고
+    note varchar2(1000),
+    CONSTRAINT CPMOMOUTPERREGDET_houseCode_FK FOREIGN KEY(Outsourcing_Code) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code)on delete cascade,
+    CONSTRAINT CPMOMOUTPERREGDET_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)on delete cascade
+);
+
+--외주실적등록 세부사항 데이터
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000001','유','20200418','P100','P101','입고', 50,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000002','유','20200418','P100','P101','입고', 50,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000003','유','20200419','P100','P101','입고', 100,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000004','유','20200419','P100','P101','입고', 100,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000005','유','20200420','P100','P102','입고', 100,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000006','유','20200420','P100','P102','입고', 200,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000007','유','20200422','P100','P102','입고', 500,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000008','유','20200422','P100','P102','입고', 300,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000009','유','20200423','P100','P103','입고', 300,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000010','유','20200423','P100','P103','입고', 400,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000011','유','20200424','P100','P103','입고', 300,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000012','유','20200424','P100','P103','입고', 300,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000013','유','20200426','P100','P104','입고', 100,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000014','유','20200426','P100','P104','입고', 400,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000015','유','20200427','P100','P104','입고', 200,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000016','유','20200427','P100','P104','입고', 200,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000017','유','20200428','P100','P105','입고', 400,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000018','유','20200428','P100','P105','입고', 500,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000019','유','20200430','P100','P105','입고', 600,'검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg_Det
+VALUES ('WR2004000020','유','20200430','P100','P105','입고', 400,'검사',null);
+
+
+--외주실적등록 -- 금액, 실적수량(외주실적등록 세부사항 데이터 SUM()), 실적잔량 뺌.
+create table CPM_OM_Out_Per_Reg(
+    --작업지시번호(PK)
+    workOrderNumber varchar2(12) PRIMARY KEY,
+    --자재출고상태
+    MaterialForwardingStatus varchar2(20) not null,
+    --외주처(FK)
+    Workplace_Code varchar2(12) not null,
+    --지시일
+    instructionDate date not null,
+    --완료일
+    dueDate date not null,
+  --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
+    --품명(FK)
+    Item_Name varchar2(50) NOT NULL,
+    --규격
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
+    --지시수량
+    indicatedQuantity number(5) not null,
+    --단가
+    unitPrice number(15) not null,
+    --상태
+    status varchar2(10) not null,
+    --검사
+    inspection varchar2(20) not null,
+    --비고
+    note varchar2(1000),
+    CONSTRAINT CPMOMOUTPERREG_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)on delete cascade,
+    CONSTRAINT CPMOMOUTPERREG_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code)on delete cascade
+--    CONSTRAINT CPMOMOUTPERREG_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    --CONSTRAINT CPMOMOUTPERREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
+    --CONSTRAINT CPMOMOUTPERREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
+    --CONSTRAINT CPMOMOUTPERREG_Quantity_FK FOREIGN KEY(performanceQuantity) REFERENCES CPM_OM_Out_Per_Reg_Det(performanceQuantity),
+    --CONSTRAINT CPMOMOUTPERREG_INSPECTION_FK FOREIGN KEY(inspection) REFERENCES CPM_PM_Ope_Per_Reg_Det(inspection)
+);
+
+--외주실적등록 데이터
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000001','출고중','P101','20200418','20200418','CPU01' , 'AMD 라이젠5' , NULL , 'EA',100,500000,'계획','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000002','출고중','P101','20200419','20200419','CPU02' , 'core I5-10세대' , NULL , 'EA',200,700000,'계획','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000003','출고완료','P102','20200420','20200420','CPU03' , 'core I5-11세대' , NULL , 'EA',300,900000,'계획','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000004','출고완료','P102','20200422','20200422','CPU04' , 'core I7-11세대' , NULL , 'EA',800,1200000,'확정','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000005','출고완료','P103','20200423','20200423','CPU05' , 'AMD 라이젠3 Pro' , NULL , 'EA',700,700000,'확정','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000006','출고완료','P103','20200424','20200424','RAM01' , 'ADATA XPG DDR4-3200' , NULL , 'EA',600,500000,'확정','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000007','출고완료','P104','20200426','20200426','RAM02' , 'KLEVV DDR4-3200' , NULL , 'EA',500,400000,'확정','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000008','출고완료','P104','20200427','20200427','RAM03' , '삼성 DDR4-3200' , NULL , 'EA',400,600000,'마감','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000009','출고중','P105','20200428','20200428','BOARD01' , '박격포 MAG B560M' , NULL , 'EA',900,300000,'마감','검사',null);
+INSERT INTO CPM_OM_Out_Per_Reg
+VALUES ('W02004000010','출고중','P105','20200430','20200430','BOARD02' , 'ASRock B550M' , NULL , 'EA',1000,100000,'마감','검사',null);
+
+
+
+create or replace trigger trg_outsourcing_nodml
+after update of status or delete 
+on cpm_om_out_per_reg 
+for each row
+begin
+   if(:old.status = '마감' or :old.status = '확정') then
+    raise_application_error(-20000,'마감/확정상태에서는 변경불가.');
+    end if;
+end;
+/
+
+
+
+--외주마감
+create table CPM_OM_Out_Fin(
+    --외주비마감번호(PK)
+    OutsourcingCostClosingNumber varchar2(12) PRIMARY KEY,
+    --마감일
+    DeadlineDate date not null,
+    --외주공정(FK)
+    Outsourcing_Code  varchar2(12) not null,
+    --외주처(FK)
+    Workplace_Code varchar2(12) not null,
+    --비고
+    note varchar2(1000),    
+    CONSTRAINT CPMOMOUTFIN_wphouseCode_FK FOREIGN KEY(Outsourcing_Code) REFERENCES SM_BIM_Out_Reg(Outsourcing_Code)on delete cascade,
+    CONSTRAINT CPMOMOUTFIN_wpCode_FK FOREIGN KEY(Workplace_Code) REFERENCES SM_BIM_Out_Wor_Reg(Workplace_Code)on delete cascade
+);
+
+--외주마감 데이터
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400001','20200418','P100','P101',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400002','20200419','P100','P101',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400003','20200420','P100','P102',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400004','20200422','P100','P102',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400005','20200423','P100','P103',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400006','20200424','P100','P103',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400007','20200426','P100','P104',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400008','20200427','P100','P104',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400009','20200428','P100','P105',null);
+INSERT INTO CPM_OM_Out_Fin
+VALUES ('OC200400010','20200430','P100','P105',null);
+
+
+--외주마감 세부사항
+create table CPM_OM_Out_Fin_Det(
+    --순번(PK)
+    NO number(4) PRIMARY KEY,
+   --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
+    --품명(FK)
+    Item_Name varchar2(50) NOT NULL,
+    --규격
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
+    --수량(FK)
+    quantity number(5) not null,
+     --단가(FK)
+    unitPrice number(15) not null,
+    --비고
+    note varchar2(1000),
+    CONSTRAINT CPMOMOUTFINDET_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code)on delete cascade
+--    CONSTRAINT CPMOMOUTFINDET_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    --CONSTRAINT CPMOMOUTFINDET_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
+    --CONSTRAINT CPMOMOUTFINDET_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit),
+    --CONSTRAINT CPMOMOUTFINDET_quantity_FK FOREIGN KEY(quantity) REFERENCES CPM_OM_Out_Per_Reg_Det(performanceQuantity)
+);
+
+
+ALTER SEQUENCE NO_seq INCREMENT BY -10;
+SELECT NO_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE NO_seq INCREMENT BY 1;
+--외주마감 세부사항 데이터
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'CPU01' , 'AMD 라이젠5'  , NULL , 'EA',100,500000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'CPU02' , 'core I5-10세대' , NULL , 'EA',200,700000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'CPU03' , 'core I5-11세대' , NULL , 'EA',300,900000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'CPU04' , 'core I7-11세대' , NULL , 'EA',800,1200000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'CPU05' , 'AMD 라이젠3 Pro' , NULL , 'EA',700,700000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'RAM01' , 'ADATA XPG DDR4-3200' , NULL , 'EA',600,500000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'RAM02' , 'KLEVV DDR4-3200' , NULL , 'EA',500,400000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'RAM03' , '삼성 DDR4-3200' , NULL , 'EA',400,600000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'BOARD01' , '박격포 MAG B560M' , NULL , 'EA',900,300000,null);
+INSERT INTO CPM_OM_Out_Fin_Det
+VALUES (NO_seq.NEXTVAL,'BOARD02' , 'ASRock B550M' , NULL , 'EA',1000,100000,null);
+
+
+--생산관리공통- 기초정보관리
+--BOM등록 --필요수량 삭제 필요수량 = 정미수량 * LOSS  -- 표준원가 삭제
+create table CPM_BIM_BOM_Reg(
+    --순번(PK)
+    NO number(4) PRIMARY KEY,
+    --품번(FK)
+    Item_Code varchar2(12) NOT NULL, 
+    --품명(FK)
+    Item_Name varchar2(50) NOT NULL,
+    --규격
+    Standard varchar2(20), 
+    --재고단위
+    Inventory_Unit varchar2(5) DEFAULT 'EA',
+    --정미수량
+    precisionQuantity number(5) not null,
+    --LOSS
+    LOSS number(5) not null,
+    --실제원가
+    actualCost number(15) not null,
+    --외주단가
+    outsourcingUnitPrice number(15) not null,
+    --시작일자
+    startDate date not null,
+    --종료일자
+    endDate date not null,
+    --비고
+    note varchar2(1000),
+    CONSTRAINT CPMBIMBOMREG_INUMBER_FK FOREIGN KEY(Item_Code) REFERENCES SM_BIM_Ite_Reg(Item_Code)on delete cascade
+--    CONSTRAINT CPMBIMBOMREG_ITEMNAME_FK FOREIGN KEY(Item_Name) REFERENCES SM_BIM_Ite_Reg(Item_Name)
+    --CONSTRAINT CPMBIMBOMREG_STANDARD_FK FOREIGN KEY(standard) REFERENCES SM_BIM_Ite_Reg(Standard),
+    --CONSTRAINT CPMBIMBOMREG_UNIT_FK FOREIGN KEY(unit) REFERENCES SM_BIM_Ite_Reg(Inventory_Unit)
+     --CONSTRAINT CPMBIMBOMREG_actualCost_FK FOREIGN KEY(actualCost) REFERENCES SM_BIM_Ite_Reg(Cost)
+);
+
+
+--생산관리공통- 기초정보관리 데이터
+
+ALTER SEQUENCE NO_seq INCREMENT BY -10;
+SELECT NO_seq.NEXTVAL FROM DUAL;
+ALTER SEQUENCE NO_seq INCREMENT BY 1;
+--BOM등록 데이터
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL,'CASE01','슬림형본체' , NULL , 'EA' ,300,0,300000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL,'CASE02' , '토너',NULL,'EA',500,10,30000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL,'CASE03' , 'ABKO NCORE' ,NULL,'EA',1000,0,50000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'HD01' , 'WD BLUE 7200',NULL,'EA',100,20,60000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'HD02' , 'Seagate BarraCuda 7200' ,NULL,'EA',1100,10,80000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'SSD01' , '삼성전자 980 PRO' ,NULL,'EA',700,0,700000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'SSD02' , '삼성전자 970 EVO' ,NULL,'EA',200,0,600000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'SSD03' , '삼성전자 870 EVO' ,NULL,'EA',400,20,500000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'GPU01' , '지포스 RTX 3060' ,NULL,'EA',800,0,1000000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'GPU02' , '지포스 RTX 3070' ,NULL,'EA',900,0,1200000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'CPU01' , 'AMD 라이젠5' , 'NULL' , 'EA',100,10,500000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'CPU02' , 'core I5-10세대', 'NULL' , 'EA',200,20,700000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'CPU03' , 'core I5-11세대'  , 'NULL' , 'EA',300,0,900000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'CPU04' , 'core I7-11세대' , 'NULL' , 'EA',800,10,1200000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'CPU05' , 'AMD 라이젠3 Pro' , 'NULL' , 'EA',700,0,700000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'RAM01' , 'ADATA XPG DDR4-3200' , 'NULL' , 'EA',600,20,500000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'RAM02' , 'KLEVV DDR4-3200' , 'NULL' , 'EA',500,0,400000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'RAM03' , '삼성 DDR4-3200' , 'NULL' , 'EA',400,0,60000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'BOARD01' , '박격포 MAG B560M' , 'NULL' , 'EA',900,0,300000,5500,'20180101','20201231',null);
+INSERT INTO CPM_BIM_BOM_Reg
+VALUES (NO_seq.NEXTVAL, 'BOARD02' , 'ASRock B550M'  , 'NULL' , 'EA',1000,0,100000,5500,'20180101','20201231',null);
+
+
+
+--불량유형등록
+create table CPM_BIM_Def_Typ_Reg(
+    --불량코드(PK)
+    DefectCode varchar2(12) PRIMARY KEY,
+    --불량유형명
+    DefectiveTypeName varchar2(50) not null,
+    --불량군
+    DefectiveItemGroup varchar2(20),
+    --사용여부
+    UsageStatus varchar2(20) not null,
+     --불량설명
+    DefectiveDescription varchar2(1000)  
+    
+);
+
+--불량유형등록 데이터
+INSERT INTO CPM_BIM_Def_Typ_Reg
+VALUES ('A01','램 불량','조립불량', '사용',null);
+INSERT INTO CPM_BIM_Def_Typ_Reg
+VALUES ('A02','CPU 불량','부품불량', '사용',null);
+INSERT INTO CPM_BIM_Def_Typ_Reg
+VALUES ('A03','메인보드 불량','조립불량', '사용',null);
+INSERT INTO CPM_BIM_Def_Typ_Reg
+VALUES ('A04','파워 불량','부품불량', '사용',null);
+INSERT INTO CPM_BIM_Def_Typ_Reg
+VALUES ('A05','SSD 불량','조립불량', '사용',null);
+
+---------------------------------------------------------------------
+-----창고코드 함수
+create or replace function func_hou_reg(
+    IN_House_Code IN SM_BIM_HOU_REG.House_Code%TYPE
+)
+return varchar2
+is
+    OUT_House_Name SM_BIM_Hou_Reg.House_Name%TYPE;
+begin
+SELECT House_Name into OUT_House_Name
+        FROM SM_BIM_HOU_REG
+        WHERE House_Code = IN_House_Code;
+return OUT_House_Name; 
+end func_hou_reg;
+/
+
+--select func_hou_reg('M100') from dual;
+select func_hou_reg(House_Code) from SM_BIM_HOU_REG;
+---------------------------------------------------------------------
+-----장소코드 함수
+create or replace function func_Wor_Reg(
+    IN_Location_Code  IN SM_BIM_Wor_Reg.Location_Code%TYPE
+)
+return varchar2
+is
+    OUT_Location_Name SM_BIM_Wor_Reg.Location_Name%TYPE;
+begin
+SELECT Location_Name into OUT_Location_Name
+        FROM SM_BIM_Wor_Reg
+        WHERE Location_Code  = IN_Location_Code ;
+return OUT_Location_Name; 
+end func_Wor_Reg;
+/
+
+--select func_Wor_Reg('M100') from dual;
+select func_Wor_Reg(Location_Code) from SM_BIM_Wor_Reg;
+
+---------------------------------------------------------------------
+-----생산공정코드 함수
+create or replace function func_pro_reg(
+    IN_Process_Code  IN SM_BIM_Pro_Reg.Process_Code%TYPE
+)
+return varchar2
+is
+    OUT_Process_Name SM_BIM_Pro_Reg.Process_Name%TYPE;
+begin
+SELECT Process_Name into OUT_Process_Name
+        FROM SM_BIM_Pro_Reg
+        WHERE Process_Code = IN_Process_Code;
+return OUT_Process_Name; 
+end func_pro_reg;
+/
+
+--select func_pro_reg('L100') from dual;
+select func_pro_reg(Process_Code ) from SM_BIM_Pro_Reg;
+---------------------------------------------------------------------
+-----생산작업장코드 함수
+create or replace function func_Pro_Wor_Reg(
+    IN_Workplace_Code   IN SM_BIM_Pro_Wor_Reg.Workplace_Code %TYPE
+)
+return varchar2
+is
+    OUT_Workplace_Name SM_BIM_Pro_Wor_Reg.Workplace_Name %TYPE;
+begin
+SELECT Workplace_Name  into OUT_Workplace_Name 
+        FROM SM_BIM_Pro_Wor_Reg
+        WHERE Workplace_Code  = IN_Workplace_Code ;
+return OUT_Workplace_Name ; 
+end func_Pro_Wor_Reg;
+/
+
+--select func_Pro_Wor_Reg('L101') from dual;
+select func_Pro_Wor_Reg(Workplace_Code) from SM_BIM_Pro_Wor_Reg;
+
+---------------------------------------------------------------------
+-----외주공정코드 함수
+create or replace function func_Out_Reg(
+    IN_Outsourcing_Code   IN SM_BIM_Out_Reg.Outsourcing_Code%TYPE
+)
+return varchar2
+is
+    OUT_Outsourcing_Name SM_BIM_Out_Reg.Outsourcing_Name%TYPE;
+begin
+SELECT Outsourcing_Name  into OUT_Outsourcing_Name 
+        FROM SM_BIM_Out_Reg 
+        WHERE Outsourcing_Code = IN_Outsourcing_Code;
+return OUT_Outsourcing_Name; 
+end func_Out_Reg;
+/
+
+--select func_Out_Reg('P100') from dual;
+select func_Out_Reg(Outsourcing_Code) from SM_BIM_Out_Reg;
+---------------------------------------------------------------------
+-----외주작업장코드 함수
+create or replace function func_Out_Wor_Reg(
+    IN_Workplace_Code IN SM_BIM_Out_Wor_Reg.Workplace_Code %TYPE
+)
+return varchar2
+is
+    OUT_Workplace_Name SM_BIM_Out_Wor_Reg.Workplace_Name %TYPE;
+begin
+SELECT Workplace_Name   into OUT_Workplace_Name 
+        FROM SM_BIM_Out_Wor_Reg 
+        WHERE Workplace_Code  = IN_Workplace_Code;
+return OUT_Workplace_Name; 
+end func_Out_Wor_Reg;
+/
+
+--select func_Out_Wor_Reg('P101') from dual;
+select func_Out_Wor_Reg(Workplace_Code) from SM_BIM_Out_Wor_Reg;
+
+
+commit;
+               
