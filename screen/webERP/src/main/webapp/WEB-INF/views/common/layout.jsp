@@ -336,9 +336,6 @@
         delete_button.onclick = function(){
             //dao에서 체크항목 삭제
         }
-        lookup_button.onclick = function(){
-        	
-        }
         function selectAll(selectAll){
             const checkbox = document.getElementsByName('content');
             checkbox.forEach((checkbox) => {
