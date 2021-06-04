@@ -1,4 +1,4 @@
-package com.myspring.weberp.outsourcing_manage.RegOutsourcing.service;
+package com.myspring.outsourcing_manage.RegOutsourcing.service;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.weberp.outsourcing_manage.RegOutsourcing.dao.RegOutsourcingDAO;
-import com.myspring.weberp.outsourcing_manage.RegOutsourcing.vo.RegOutsourcingVO;
+import com.myspring.outsourcing_manage.RegOutsourcing.dao.RegOutsourcingDAO;
+import com.myspring.outsourcing_manage.RegOutsourcing.vo.RegOutsourcingVO;
 
 @Service("RegOutsourcingService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -32,12 +32,5 @@ public class RegOutsourcingServiceImpl implements RegOutsourcingService {
 	@Override
 	public int removeOutsourcing(int workOrderNumber) throws DataAccessException{
 		return regOutsourcingDAO.deleteOutsourcing(workOrderNumber);
-	}
-	
-	@Override
-	public List itemView() throws DataAccessException {
-		List popList = null;
-		popList = regOutsourcingDAO.viewPop();
-		return popList;
 	}
 }

@@ -1,4 +1,4 @@
-package com.myspring.weberp.outsourcing_manage.RegOutsourcing.vo;
+package com.myspring.outsourcing_manage.RegOutsourcing.vo;
 
 import java.sql.Date;
 

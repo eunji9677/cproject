@@ -1,4 +1,4 @@
-package com.myspring.weberp.outsourcing_manage.RegOutsourcing.controller;
+package com.myspring.outsourcing_manage.RegOutsourcing.controller;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.myspring.weberp.outsourcing_manage.RegOutsourcing.service.RegOutsourcingService;
-import com.myspring.weberp.outsourcing_manage.RegOutsourcing.vo.RegOutsourcingVO;
+import com.myspring.outsourcing_manage.RegOutsourcing.service.RegOutsourcingService;
+import com.myspring.outsourcing_manage.RegOutsourcing.vo.RegOutsourcingVO;
 
 @Controller("RegOutsourcingController")
 public class RegOutsourcingControllerImpl implements RegOutsourcingController {
@@ -59,15 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(RegOutsourcingContr
 		ModelAndView mav = new ModelAndView("redirect:/member/removeOutsourcing.do");
 		return mav;
 	}
-	
-	@RequestMapping(value="/member/codehelper.do" ,method = RequestMethod.GET)
-	public ModelAndView codeHelper(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
-		List itemView = regOutsourcingService.itemView();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("itemView", itemView);
-		return mav;
-	}
+
 
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
