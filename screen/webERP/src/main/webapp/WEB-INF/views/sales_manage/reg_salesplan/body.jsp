@@ -69,6 +69,7 @@
 			var year = document.getElementById('year');
 			year.value = Number(year.value) - 1;
 		}
+		function sumPrice
 </script>
 </head>
 <body>

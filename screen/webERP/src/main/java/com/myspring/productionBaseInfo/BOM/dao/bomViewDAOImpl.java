@@ -18,9 +18,7 @@ public class bomViewDAOImpl implements bomViewDAO{
 	@Override
 	public List viewBOM() throws DataAccessException {
 		List<bomVO> bomList = null;
-		System.out.println("다오 시작 : " + bomList);
 		bomList = sqlSession.selectList("mappers.erp.selectAllMemberList");
-		System.out.println("다오 종료 : " + bomList);
 		return bomList;
 	}
 

@@ -1,47 +1,36 @@
-package com.myspring.MainPlan.controller;
+package com.myspring.Requiredamount.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.MainPlan.service.MainPlanService;
-import com.myspring.MainPlan.vo.MainPlanVO;
+import com.myspring.Requiredamount.service.RequiredamountService;
+import com.myspring.Requiredamount.vo.RequiredamountVO;
 
-@Controller("mainplanController")
-public class MainPlanControllerImpl implements MainPlanController{
-	private static final Logger logger = LoggerFactory.getLogger(MainPlanControllerImpl.class);
+@Controller("mrpController")
+public class RequiredamountControllerImpl implements RequiredamountController{
 	@Autowired
-	private MainPlanService mainplanService;
+	private RequiredamountService mrpService;
 	@Autowired
-	private MainPlanVO mainplanVO;
+	private RequiredamountVO mrpVO;
 	
 	@Override
-	@RequestMapping(value="member/mainplan.do", method = RequestMethod.GET)
-	public ModelAndView listMainPlan(HttpServletRequest request, HttpServletResponse response)throws Exception{
+	@RequestMapping(value="member/requiredamount.do", method = RequestMethod.GET)
+	public ModelAndView mrpList(HttpServletRequest request, HttpServletResponse response)throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		List mainplanList = mainplanService.selectAllMainPlanList();
+		List mrpList = mrpService.selectAllMrpList();
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("mainplanList", mainplanList);
+		mav.addObject("mrpList", mrpList);
 		return mav;
 	}
 	
-	@RequestMapping(value="member/applyorder.do", method=RequestMethod.GET)
-	public ModelAndView MpsOSList(HttpServletRequest request, HttpServletResponse response)throws Exception{
-		String viewName = (String)request.getAttribute("viewName");
-		List mpsosList = mainplanService.selectAllMpsosList();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("mpsosList", mpsosList);
-		return mav;
-	}
 	
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();

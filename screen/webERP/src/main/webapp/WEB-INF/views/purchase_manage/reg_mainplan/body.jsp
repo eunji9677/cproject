@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR" 
-	isELIgnored="false"%>
+	pageEncoding="EUC-KR" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -12,6 +11,14 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script>
+	function func_Popup(){
+		var url = "applyorder.do";
+		var name = "applyorder";
+		var option = "width = 1000, height= 600, top = 100, left = 200"
+		window.open(url, name, option);
+	}
+</script>
 <style>
 #contents1 {
 	position: absolute;
@@ -58,6 +65,9 @@ request.setCharacterEncoding("UTF-8");
 	background-color: rgb(255, 255, 149);
 	text-align: center;
 }
+#Popup{
+	float: right;
+}
 </style>
 </head>
 <body>
@@ -93,13 +103,14 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 	</table>
 	<div>
-		<button>주문적용</button>
+		<input type="button" id="Popup" onclick="func_Popup();" value="주문적용" />
 	</div>
 	</container1>
 	<container2 id=contents2>
 	<table id="view1">
 		<thead align="center" style="background-color: gray">
-			<td><input type="checkbox" name="content" onclick="selectAll(this)" /></td>
+			<td><input type="checkbox" name="content"
+				onclick="selectAll(this)" /></td>
 			<td>계획일</td>
 			<td>품번</td>
 			<td>품명</td>
