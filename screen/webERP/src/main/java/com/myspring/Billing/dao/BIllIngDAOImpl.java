@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.myspring.Billing.List.vo.ListVO;
 import com.myspring.Billing.vo.BIllIngVO;
-import com.myspring.MainPlan.MpsOS.vo.MpsOSVO;
+import com.myspring.Requiredamount.vo.RequiredamountVO;
 
 @Repository("billingDAO")
 public class BIllIngDAOImpl implements BIllIngDAO {
@@ -24,5 +24,10 @@ public class BIllIngDAOImpl implements BIllIngDAO {
 	public List<ListVO>selectAllBottomList()throws Exception{
 		List<ListVO>bottomList = sqlSession.selectList("mappers.erp.selectAllBottomList");
 		return bottomList;
+	}
+	@Override
+	public List selectAllMrpaMount() throws Exception{
+		List<RequiredamountVO>mrpamount = sqlSession.selectList("mappers.erp.selectAllMrpaMount");
+		return mrpamount;
 	}
 }

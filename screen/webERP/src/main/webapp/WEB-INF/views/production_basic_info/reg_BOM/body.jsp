@@ -79,7 +79,7 @@
                             <input type="text" name="factory" value='${param.itemNumber }' style="width: 120px; background-color: yellow;">
                         </Td>
                         <td>
-                            <a href="javascript:search1()"><i class="fas fa-search" style="color: blue;"></i></a>
+                            <a href="javascript:search1('1')"><i class="fas fa-search" style="color: blue;"></i></a>
                         </td>
                         <td>
                             <input type="text" name="ckfactory" value='${param.itemName }' style="width: 120px;" disabled>
@@ -98,7 +98,7 @@
                             기준일자
                         </td>
                         <td colspan="2">
-                            <input type="date" name="department" style="width: 120px; background-color: yellow;"><a href="#" onclick="showPopup();"></a>
+                            <input type="date" name="department" style="width: 120px;">
                         </td>
                         
                     </tr>
@@ -123,7 +123,7 @@
                         <td>단위</td>
                         <td>정미수량</td>
                         <td>LOSS(%)</td>
-                        <!-- <td>필요수량</td> -->
+                        <<td>필요수량</td>
                         <td>원가</td>
                         <td>외주단가</td>
                         <td>시작일자</td>
@@ -141,6 +141,7 @@
       <td>${bom.unit}</td>
       <td>${bom.precisionQuantity}</td>
       <td>${bom.loss}</td>
+      <td>${bom.precisionQuantity +bom.loss * 0.1 }</td>
       <td>${bom.actualCost}</td>
       <td>${bom.outSourcingUnitPrice}</td>
       <td>${bom.startDate}</td>
@@ -151,7 +152,7 @@
     <tr>
     <td><input type="checkbox" name="content"/></td>
     	<td><input type="text" style="width:100%" disabled/></td>
-    	<td><input type="text" id="itemcode" ondblclick="openWindowPop('http://localhost:8090/webERP/member/codehelper.do#','codehelper')"/></td>
+    	<td><input type="text" id="itemcode" ondblclick="search1('2')"/></td>
     	<td><input type="text" disabled/></td>
     	<td><input type="text"/></td>
     	<td><input type="text"/></td>
@@ -172,6 +173,17 @@
             </div>
             <!-- 합계 출력부 종료 -->
         </container2>
-      
+      <script>
+      function search1(num){
+    	  if(num == 1){
+      	openWindowPop('http://localhost:8090/webERP/member/codehelper.do?div='+1,'codehelper');
+    	  }
+    	  else if(num == 2){
+    	      	openWindowPop('http://localhost:8090/webERP/member/BOMcodehelper.do?div='+2,'codehelper');
+
+    	  }
+      }
+      	
+      </script>
 </body>
 </html>

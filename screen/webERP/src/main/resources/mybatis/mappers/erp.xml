@@ -124,11 +124,16 @@
 		<result column="inventory_qy" property="inventory_qy" />
 		<result column="claim_unit" property="claim_unit" />
 		<result column="claim_quantity" property="claim_quantity" />
-		<result column="due_date" property="due_date" />
-		<result column="receiving_date" property="receiving_date" />
-		<result column="receiving_qy" property="receiving_qy" />
-		<result column="inspection" property="inspection" />
-
+		<result column="buyer" property="buyer" />		
+	</resultMap>
+	<resultMap id="mrpamountResult" type="requiredamountVO">
+		<result property="need_date" column="need_date" />
+		<result property="expected_order" column="expected_order" />
+		<result property="itemnumber" column="itemnumber" />
+		<result property="itemname" column="itemname" />
+		<result property="standard" column="standard" />
+		<result property="unit" column="unit" />
+		<result property="expected_quantity" column="expected_quantity" />
 	</resultMap>
 
 	<select id="selectAllcmList" resultMap="billingResult">
@@ -137,6 +142,11 @@
 	
 	<select id="selectAllBottomList" resultMap="ListResult">
 		<![CDATA[select * from pmm_pm_cm_list]]>
+	</select>
+	
+	<select id="selectAllMrpaMount" resultMap="mrpamountResult">
+		<![CDATA[select need_date,expected_order,itemnumber,itemname,standard,unit,expected_quantity
+			from pmm_pm_mrp]]>
 	</select>
 
 	<!-- mrp파트 -->

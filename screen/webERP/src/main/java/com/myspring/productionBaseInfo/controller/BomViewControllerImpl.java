@@ -38,15 +38,24 @@ public class BomViewControllerImpl implements BomViewController {
 		ModelAndView mav = null;
 		String viewName = getViewName(request);
 		String number = (String) request.getParameter("itemNumber");
-		if(number == null || number.length() == 0) {
-			mav = new ModelAndView(viewName);
+		String submit = (String) request.getParameter("submit");
+		String itemCode = (String) request.getParameter("itemCode");
+		if(number == null || number.length() == 0 || submit.equals("0")) {
+			mav = new 
+					ModelAndView(viewName);
 			return mav;
 		}
-		else {
+		else if(submit.equals("1")){
 			List bomView = viewService.SearchView(number);
+			/* List bomInsert = viewService.selectPop(itemCode); */
 			mav = new ModelAndView(viewName);
 			mav.addObject("bomView", bomView);
+			System.out.println("코드:" + itemCode);
 		}
+		/*
+		 * else if(submit.equals("2")) { List bomView = viewService.SearchView(number);
+		 * mav = new ModelAndView(viewName); mav.addObject("bomView", bomView); }
+		 */
 			
 		System.out.println("숫자" + number);
 		return mav;
@@ -54,6 +63,14 @@ public class BomViewControllerImpl implements BomViewController {
 	
 	@RequestMapping(value="/member/codehelper.do" ,method = RequestMethod.GET)
 	public ModelAndView codeHelper(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		List itemView = viewService.itemView();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("itemView", itemView);
+		return mav;
+	}
+	@RequestMapping(value="/member/bomcodehelper.do" ,method = RequestMethod.GET)
+	public ModelAndView BOMcodeHelper(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		List itemView = viewService.itemView();
 		ModelAndView mav = new ModelAndView(viewName);
