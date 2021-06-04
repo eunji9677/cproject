@@ -13,6 +13,11 @@
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="" />
    </definition>
+   <definition name="baseLayout3"  template="/WEB-INF/views/common/layout2.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="" />
+   </definition>
    <definition name="PopupLayout"  template="/WEB-INF/views/common/pop.jsp">
       <put-attribute name="title" value="" />
       <put-attribute name="side" value="" />
@@ -379,9 +384,10 @@
       <put-attribute name="body" value="/WEB-INF/views/outsourcing_manage/outsourcing_closing/body.jsp" />
 	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
    </definition>
-	<definition name="/member/regbom" extends="baseLayout">
+	<definition name="/member/regbom" extends="baseLayout3">
       <put-attribute name="title" value="BOM등록" />
       <put-attribute name="body" value="/WEB-INF/views/production_basic_info/reg_BOM/body.jsp" />
+      <put-attribute name="body2" value="/WEB-INF/views/production_basic_info/reg_BOM/body2.jsp" />
 	  <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
    </definition>
 	<definition name="/member/rightbom" extends="baseLayout">
