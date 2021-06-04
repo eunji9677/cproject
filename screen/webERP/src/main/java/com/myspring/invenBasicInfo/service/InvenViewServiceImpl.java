@@ -9,22 +9,23 @@
 //import org.springframework.transaction.annotation.Propagation;
 //
 //import com.myspring.invenBasicInfo.regItemUnitPrice.dao.RegItemUnitPriceDAO;
+//
 //@Service("memberService")
 //@Transactional(propagation = Propagation.REQUIRED)
 //
-//public class RegItemUnitPriceViewServiceImpl implements RegItemUnitPriceViewService{
+//public class InvenViewServiceImpl implements InvenViewService{
 //	@Autowired
 //	private RegItemUnitPriceDAO regItemUnitPriceDAO;
 //	
 //	@Override
-//	public List viewRegItemUnitPrice() throws DataAccessException{
+//	public List invenView() throws DataAccessException{
 //		List regItemUnitPriceList = null;
 //		regItemUnitPriceList = regItemUnitPriceDAO.viewRegItemUnitPrice();
 //		return regItemUnitPriceList;
 //	}
 //	
 //	@Override
-//	public List viewPopRegItemUnitPrice() throws DataAccessException{
+//	public List popView() throws DataAccessException{
 //		List popRegItemUnitPriceList = null;
 //		popRegItemUnitPriceList = regItemUnitPriceDAO.viewPopRegItemUnitPrice();
 //		return popRegItemUnitPriceList;
