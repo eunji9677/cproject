@@ -82,7 +82,7 @@
     </tr>
     </c:forEach> 
             </table>
-            <input type="hidden" name="itemCode" value=${bom.itemNumber }>
+            
         </div>
     </div>
     
