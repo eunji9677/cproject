@@ -172,6 +172,8 @@
             </div>
             <!-- 합계 출력부 종료 -->
         </container2>
-      
+      <script>
+      	
+      </script>
 </body>
 </html>

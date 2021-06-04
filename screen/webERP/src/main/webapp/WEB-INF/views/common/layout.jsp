@@ -260,7 +260,7 @@
         </nav>
         <nav id="nav2">
             <button id="delete" onclick="">삭제</button>
-            <button id="lookup">조회</button>
+            <button id="view_button">조회</button>
             <button id="save">저장</button>
             <button id="lookup" onclick="opencodehelper()">코드도움</button>
         </nav>
@@ -284,6 +284,7 @@
         var save_button = document.getElementById('save');
         var delete_button = document.getElementById('delete');
         var lookup_button = document.getElementById('lookup');
+        var view_button = document.getElementById('view_button');
         var itemcode = document.getElementById('itemcode');
         side_button1.onclick = function(){
             var l_sub1 = document.getElementById('l_sub1');
@@ -349,7 +350,13 @@
         function search1(){
         	openWindowPop('http://localhost:8090/webERP/member/codehelper.do#','codehelper');
         }
-        
+		view_button.onclick = function(){
+			const URLSearch = new URLSearchParams(location.search);
+			  URLSearch.set('submit', '1');
+			  const newParam = URLSearch.toString();
+
+			  window.open(location.pathname + '?' + newParam, '_self');
+      	}
     </script>
 </body>
 </html>

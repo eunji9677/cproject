@@ -93,7 +93,7 @@
     		text_name.value = name;
     	}
     	submit_button.onclick = function(){
-    		opener.parent.location='${contextPath }/member/regbom.do?itemNumber='+text_code.value+'&&itemName='+text_name.value;
+    		opener.parent.location='${contextPath }/member/regbom.do?itemNumber='+text_code.value+'&&itemName='+text_name.value+'&&submit='+0;
     		window.close();
     	}
     </script>
