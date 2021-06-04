@@ -98,7 +98,7 @@
                             기준일자
                         </td>
                         <td colspan="2">
-                            <input type="date" name="department" style="width: 120px; background-color: yellow;"><a href="#" onclick="showPopup();"></a>
+                            <input type="date" name="department" style="width: 120px;">
                         </td>
                         
                     </tr>
