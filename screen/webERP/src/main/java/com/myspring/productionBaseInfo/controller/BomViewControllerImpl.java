@@ -61,6 +61,14 @@ public class BomViewControllerImpl implements BomViewController {
 		mav.addObject("itemView", itemView);
 		return mav;
 	}
+	@RequestMapping(value="/member/BOMcodehelper.do" ,method = RequestMethod.GET)
+	public ModelAndView BOMcodeHelper(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		List itemView = viewService.itemView();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("itemView", itemView);
+		return mav;
+	}
 	
 	private String getViewName(HttpServletRequest request) {
 		String contextPath = request.getContextPath();

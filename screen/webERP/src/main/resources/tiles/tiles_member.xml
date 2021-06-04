@@ -23,6 +23,11 @@
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="" />
    </definition>
+    <definition name="BOMPopupLayout"  template="WEB-INF/views/production_basic_info/reg_BOM/pop.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="" />
+   </definition>
    <definition name="PopupLayout2"  template="/WEB-INF/views/common/mrpamount.jsp">
       <put-attribute name="title" value="" />
       <put-attribute name="side" value="" />
@@ -63,6 +68,11 @@
       <put-attribute name="side" value="/WEB-INF/views/production_manage/side.jsp" />
    </definition>
    <definition name="/member/codehelper" extends="PopupLayout">
+      <put-attribute name="title" value="팝업" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="side" value="" />
+   </definition>
+   <definition name="/member/BOMcodehelper" extends="PopupLayout">
       <put-attribute name="title" value="팝업" />
       <put-attribute name="body" value="" />
       <put-attribute name="side" value="" />
