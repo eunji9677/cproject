@@ -63,6 +63,7 @@
             <div id="button">
                 <button id="search">조회</button>
                 <button id="submit">적용</button>
+                 
                 <button>버튼3</button>
             </div>
         </div>
@@ -81,6 +82,7 @@
     </tr>
     </c:forEach> 
             </table>
+            
         </div>
     </div>
     
@@ -94,7 +96,7 @@
     			text_name.value = name;
     	}
     	submit_button.onclick = function(){
-    		opener.parent.location='${contextPath }/member/regbom.do?itemNumber='+text_code.value+'&&itemName='+text_name.value+'&&submit='+0;
+    		opener.parent.location='${contextPath }/member/regbom.do?itemNumber='+text_code.value+'&&itemName='+text_name.value+'&&submit='+1;
     		window.close();
     	}
     </script>

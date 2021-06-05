@@ -29,8 +29,7 @@
 	<select id="selectAllProductionPlanInfo" resultMap="SmBimResult">
 		<![CDATA[select Item_Code, Item_Name, Standard, Inventory_Unit, DailyProduction from SM_BIM_Ite_Reg]]>
 	</select>
-	<select id="selectAllOperationRegistInfo"
-		resultMap="OpePerRegResult">
+	<select id="selectAllOperationRegistInfo" resultMap="OpePerRegResult">
 		<![CDATA[select * from CPM_PM_Ope_Per_Reg]]>
 	</select>
 	<!-- BOM 파트 -->
@@ -115,9 +114,39 @@
 		<result property="claim_division" column="claim_division" />
 		<result property="note" column="note" />
 	</resultMap>
+	<resultMap id="ListResult" type="listVO">
+		<result column="sequence" property="sequence" />
+		<result column="itemNumber" property="itemNumber" />
+		<result column="itemName" property="itemName" />
+		<result column="standard" property="standard" />
+		<result column="requestdate" property="requestdate" />
+		<result column="inventory_unit" property="inventory_unit" />
+		<result column="inventory_qy" property="inventory_qy" />
+		<result column="claim_unit" property="claim_unit" />
+		<result column="claim_quantity" property="claim_quantity" />
+		<result column="buyer" property="buyer" />		
+	</resultMap>
+	<resultMap id="mrpamountResult" type="requiredamountVO">
+		<result property="need_date" column="need_date" />
+		<result property="expected_order" column="expected_order" />
+		<result property="itemnumber" column="itemnumber" />
+		<result property="itemname" column="itemname" />
+		<result property="standard" column="standard" />
+		<result property="unit" column="unit" />
+		<result property="expected_quantity" column="expected_quantity" />
+	</resultMap>
 
 	<select id="selectAllcmList" resultMap="billingResult">
 		<![CDATA[SELECT * from PMM_PM_CM]]>
+	</select>
+	
+	<select id="selectAllBottomList" resultMap="ListResult">
+		<![CDATA[select * from pmm_pm_cm_list]]>
+	</select>
+	
+	<select id="selectAllMrpaMount" resultMap="mrpamountResult">
+		<![CDATA[select need_date,expected_order,itemnumber,itemname,standard,unit,expected_quantity
+			from pmm_pm_mrp]]>
 	</select>
 
 	<!-- mrp파트 -->
@@ -135,50 +164,80 @@
 	<select id="selectAllMrpList" resultMap="mrpResult">
 		<![CDATA[SELECT * from pmm_pm_mrp]]>
 	</select>
+	
+	<!-- 외주발주등록 파트 -->
+	<resultMap id="outsourcingView" type="RegOutsourcingVO">
+		<result property="workOrderNumber" column="workOrderNumber" />
+		<result property="instructionDate" column="instructionDate" />
+		<result property="dueDate" column="dueDate" />
+		<result property="Item_Code" column="Item_Code" />
+		<result property="Item_Name" column="Item_Name" />
+		<result property="Standard" column="Standard" />
+		<result property="Inventory_Unit" column="Inventory_Unit" />
+		<result property="indicatedQuantity" column="indicatedQuantity" />
+		<result property="unitPrice" column="unitPrice" />		
+		<result property="Price" column="indicatedQuantity*unitPrice" />		
+		<result property="status" column="status" />
+		<result property="inspection" column="inspection" />
+		<result property="note" column="note" />
+	</resultMap>
+	
+	
+	<select id="selectAllOutsourcingList" resultMap="outsourcingView">
+		<![CDATA[select workOrderNumber,instructionDate,dueDate,Item_Code,Item_Name,Standard,Inventory_Unit,indicatedQuantity,unitPrice,indicatedQuantity*unitPrice,status,inspection,note  from CPM_OM_Out_Per_Reg]]>
+	</select>
+	
+	
+	<insert id="insertOutsourcing" parameterType="regOutsourcingVO">
+		<![CDATA[insert into CPM_OM_Out_Per_Reg(id,pwd,name,email) values(#{id}, #{pwd}, #{name}, #{email}]]>
+	</insert>
+
+	
+	<delete id="deleteOutsourcing" parameterType="int">
+		<![CDATA[delete from t_member where id=#{id}]]>
+	</delete>
+
 
 	<!-- saleplan파트 -->
-	<!-- <resultMap id="salesplanResult" type="salesplanVO">
-		<result property="Plan_Item_Code" column="Plan_Item_Code" />
-		<result property="Plan_Item_Name" column="Plan_Item_Name" />
-		<result property="Plan_Item_Unit" column="Plan_Item_Unit" />
-		<result property="Plan_Item_Quantity"
-			column="Plan_Item_Quantity" />
-		<result property="Newplan_Item_Quabtity"
-			column="Newplan_Item_Quabtity" />
-		<result property="Newplan_Item_Unit_Price"
-			column="Newplan_Item_Unit_Price" />
-	</resultMap>
-	<resultMap id="planItemResult" type="java.util.HashMap"> <result property="Plan_Item_Code" 
-		column="Plan_Item_Code" /> <result property="Plan_Item_Name" column="Plan_Item_Name" 
-		/> <result property="Plan_Item_Unit" column="Plan_Item_Unit" /> <result property="Plan_Item_Quantity" 
-		column="Plan_Item_Quantity" /> <result property="Newplan_Item_Quabtity" column="Newplan_Item_Quabtity" 
-		/> <result property="Newplan_Item_Unit_Price" column="Newplan_Item_Unit_Price" 
-		/> </resultMap>
-
-	<select id="selectAllSalesplanList" resultMap="salesplanResult">
-      <![CDATA[
-               select Plan_Item_Code, Plan_Item_Name, Plan_Item_Unit, Plan_Item_Quantity, Newplan_Item_Quantity, Newplan_Unit_Price from SM_BIM_Sal_Pla_Reg order by Plan_Item_Code desc	
-      ]]>
-	</select>
-	<insert id="insertSalesplan" parameterType="salesplanVO">
-		<![CDATA[
-		 insert into SM_BIM_Sal_Pla_Reg(Plan_Date, Plan_Item_Code,Plan_Item_Name,Plan_Item_Unit, Plan_Item_Quantity,Plan_Uint_Price)
-		 values(#{Plan_Date}, #{Plan_Item_Code}, #{Plan_Item_Name}, #{Plan_Item_Unit}, #{Plan_Item_Quantity},#{Plan_Uint_Price})
+	<!-- <resultMap id="salesplanResult" type="salesplanVO"> 
+			<result property="Plan_Item_Code" column="Plan_Item_Code" /> 
+			<result property="Plan_Item_Name" column="Plan_Item_Name" /> 
+			<result property="Plan_Item_Unit" column="Plan_Item_Unit" /> 
+			<result property="Plan_Item_Quantity" column="Plan_Item_Quantity" /> 
+			<result property="Newplan_Item_Quabtity" column="Newplan_Item_Quabtity" /> 
+			<result property="Newplan_Item_Unit_Price" column="Newplan_Item_Unit_Price" /> 
+			</resultMap> 
+			<resultMap id="planItemResult" type="java.util.HashMap"> 
+				<result property="Plan_Item_Code" column="Plan_Item_Code" /> 
+				<result property="Plan_Item_Name" column="Plan_Item_Name" /> 
+				<result property="Plan_Item_Unit" column="Plan_Item_Unit" /> 
+				<result property="Plan_Item_Quantity" column="Plan_Item_Quantity" /> 
+				<result property="Newplan_Item_Quabtity" column="Newplan_Item_Quabtity" /> 
+				<result property="Newplan_Item_Unit_Price" column="Newplan_Item_Unit_Price" />
+			 </resultMap> 
+		<select id="selectAllSalesplanList" resultMap="salesplanResult"> 
+		<![CDATA[ 
+			select Plan_Item_Code, Plan_Item_Name, Plan_Item_Unit, Plan_Item_Quantity, 
+			Newplan_Item_Quantity, Newplan_Unit_Price from SM_BIM_Sal_Pla_Reg order by 
+			Plan_Item_Code desc 
+		]]> 
+		</select> 
+		<insert id="insertSalesplan" parameterType="salesplanVO"> 
+		<![CDATA[ insert into SM_BIM_Sal_Pla_Reg(Plan_Date, Plan_Item_Code,Plan_Item_Name,Plan_Item_Unit, 
+			Plan_Item_Quantity,Plan_Uint_Price) values(#{Plan_Date}, #{Plan_Item_Code}, 
+			#{Plan_Item_Name}, #{Plan_Item_Unit}, #{Plan_Item_Quantity},#{Plan_Uint_Price}) 
 		]]>
-	</insert>
-	<insert id="insertNewSalesplan" parameterType="salesplanVO">
-		<![CDATA[
-		 insert into SM_BIM_Sal_Pla_Reg(Newplan_Item_Quantity, Newplan_Unit_Price)
-		 values(#{Newplan_Item_Quantity},#{Newplan_Unit_Price})
+		 </insert> 
+		 <insert id="insertNewSalesplan" parameterType="salesplanVO"> 
+		 <![CDATA[ insert into SM_BIM_Sal_Pla_Reg(Newplan_Item_Quantity, Newplan_Unit_Price) 
+			values(#{Newplan_Item_Quantity},#{Newplan_Unit_Price}) 
 		]]>
-	</insert>
-	<delete id="deleteSalesplan" parameterType="String">
-	<![CDATA[
-	   delete from  t_member
-	   where
-	   Plan_Item_Code=#{Plan_Item_Code}
-	]]>
-	</delete>
-	<select id="loginById" resultType="memberVO" parameterType="memberVO" 
-		> <![CDATA[ select * from t_member where id=#{id} and pwd=#{pwd} ]]> </select> -->
+		 </insert> 
+		 <delete id="deleteSalesplan" parameterType="String"> 
+		 <![CDATA[ delete from t_member where Plan_Item_Code=#{Plan_Item_Code} ]]> 
+		 </delete> 
+		 
+		 <select id="loginById" resultType="memberVO" parameterType="memberVO" > 
+		 <![CDATA[ select * from t_member where id=#{id} and pwd=#{pwd} ]]> 
+		 </select> -->
 </mapper>
